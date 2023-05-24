@@ -22,6 +22,8 @@
     "Government consumption" G
     "Government consumption of goods" Cg
     "Government investment" Ig
+    Pg
+    PgG
 
     TRvat
     TRwf
@@ -249,7 +251,10 @@
     PcCg_NGDP = Pc * Cg / NGDP;
 
     "Definition of government consumption"
-    Pc*G = (PcCg_NGDP + WNg_NGDP) * NGDP;
+    PgG = (PcCg_NGDP + WNg_NGDP) * NGDP;
+
+    Pg = Pc;
+    PgG = Pg * G;
 
     "Definition of government wage bill to GDP ratio"
     WNg_NGDP = Wg * Ng / NGDP;

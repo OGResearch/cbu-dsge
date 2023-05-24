@@ -10,7 +10,7 @@
     "Nominal domestically produced investment goods" PidId
     "Nominal investment" PiI
     "Nominal private consumption" PcCh
-    "Nomianl government consumption" PcG
+    "Nominal government consumption" PcG
 
     "Exports to GDP ratio" PxX_NGDP
     "Imports to GDP Ratio" PmM_NGDP
@@ -65,7 +65,6 @@
     Q = Qx + Qy;
 
     "Investment goods produced locally"
-    %%% Id = Iy + PiIg_NGDP*NGDP/Pid + Ih + (1-gamma_Ij)*Ij + (1-gamma_Iz)*Iz;
     Id = Iy + PiIg_NGDP*NGDP/Pid + Ih + (1-gamma_Iz)*Iz;
 
     "Local production breakdown"
@@ -74,17 +73,13 @@
 
 % __Exports and imports__
 
-    %%% PxX = Pq*Qx + Pz*Z + Pj*J;
     PxX = Pq*Qx + Pz*Z;
 
-    %%% PmM = Pmy*My + Pmq*Mq + Pmz*Mz + gamma_Ij*Pmj*Ij + gamma_Iz*Pmz*Iz;
     PmM = Pmy*My + Pmq*Mq + Pmz*Mz + gamma_Iz*Pmz*Iz;
 
     PcCh = Pc*Ch;
     PcG = Pc*G;
     PidId = Pid*Id;
-
-    %%% PiI = Pid*Id + gamma_Ij*Pij*Ij + gamma_Iz*Piz*Iz;
     PiI = Pid*Id + gamma_Iz*Piz*Iz;
 
     PxX_NGDP = PxX / NGDP;
@@ -121,7 +116,6 @@
     "Gross rate of change in real investment"
     dI = ...
         + movavg(PidId/PiI, -2) * Id/Id{-1} ...
-        ... + movavg(gamma_Ij*Pij*Ij/PiI, -2) * Ij/Ij{-1} ...
         + movavg(gamma_Iz*Piz*Iz/PiI, -2) * Iz/Iz{-1} ...
     !! dI = ss_dA;
 
@@ -129,7 +123,6 @@
     "Gross rate of change in real exports"
     dX = ...
         + movavg(Pq*Qx/PxX, -2) * Qx/Qx{-1} ...
-        ... + movavg(Pj*J/PxX, -2) * J/J{-1} ...
         + movavg(Pz*Z/PxX, -2) * Z/Z{-1} ...
     !! dX = ss_dA;
 
@@ -139,7 +132,6 @@
         + movavg(Pmy*My/PmM, -2) * My/My{-1} ...
         + movavg(Pmq*Mq/PmM, -2) * Mq/Mq{-1} ...
         + movavg(Pmz*Mz/PmM, -2) * Mz/Mz{-1} ...
-        ... + movavg(gamma_Ij*Pmj*Ij/PmM, -2) * Ij/Ij{-1} ...
         + movavg(gamma_Iz*Pmz*Iz/PmM, -2) * Iz/Iz{-1} ...
     !! dM = ss_dA;
 
