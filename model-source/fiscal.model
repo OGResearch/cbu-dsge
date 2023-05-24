@@ -15,7 +15,7 @@
 
     "Government investment to public investment fund to GDP ratio" TFpif_NGDP
     PiIg_NGDP
-    PcG_NGDP
+    PgG_NGDP
     PcCg_NGDP
     WNg_NGDP
 
@@ -72,7 +72,7 @@
     TFpif_NGDP
     TX_NGDP
     PiIg_NGDP
-    PcG_NGDP
+    PgG_NGDP
     PcCg_NGDP
     WNg_NGDP
     PIEg_NGDP
@@ -210,7 +210,7 @@
         - TFpif_NGDP ...
         - TFh_NGDP ...
         - TFother_NGDP ...
-        - PcG_NGDP ...
+        - PgG_NGDP ...
         - PiIg_NGDP ...
     ;
 
@@ -237,7 +237,7 @@
     PiIg_NGDP = Pid*Ig / NGDP;
 
     "Government consumption expenditures"
-    PcG_NGDP = PcCg_NGDP + WNg_NGDP;
+    PgG_NGDP = PcCg_NGDP + WNg_NGDP;
 
     "Rule for government consumption of goods"
     log(Cg) = ...
