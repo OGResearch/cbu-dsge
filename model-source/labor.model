@@ -19,6 +19,8 @@
     "Labor in govt sectors to total labor ratio" Ng_N
     "Share of expat labor in total labor" Nhtm_N
     "Expat wage rate to optimizing household wage rate ratio" Whtm_Wopt
+    "Wage rate in nonprimary export sectors" Wz
+    "Wage rate in local sectors" Wy
 
 
 !parameters
@@ -52,9 +54,8 @@
         + (1-rho_Wopt) * log(Wopt_flex/Pc) ...
     !! Wopt = Wopt_flex;
 
-    N = Ny + Nz + Ng;
     Nopt = (1 - omega) * N;
-    WNopt_NGDP = (Wopt*(N0y + $NNy_opt$ + N0z + $NNz_opt$) + Wg*Ng) / NGDP;
+    WNopt_NGDP = Wopt * Nopt / NGDP;
 
     Whtm_flex = ss_Whtm_Wopt * Wopt_flex;
 
@@ -67,7 +68,10 @@
     WNhtm_NGDP = Whtm * Nhtm / NGDP;
 
     "Total labor"
-    % N = Nopt + Nhtm;
+    N = Ny + Nz + Ng;
+
+    Wy = Wopt;
+    Wz = Wopt;
 
     "Labor in private sectors"
     Np = N - Ng;

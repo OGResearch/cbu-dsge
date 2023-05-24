@@ -263,14 +263,14 @@
     N0y = ss_N0y;
 
     "Wage bill in local sectors"
-    WNy_NGDP = Wopt*Ny / NGDP;
+    WNy_NGDP = Wy*Ny / NGDP;
 
     "Stage T-3 production technology in local sectors"
     Y3 = Ky{-1}^(1-gamma_Ny) * (A*Ay*NNy)^gamma_Ny;
 
     "Demand for labor in local sectors"
-    gamma_Ny * Py3*Y3 = Wopt * NNy * (1 + $AdjNNy$) ...
-    !! gamma_Ny * Py3*Y3 = Wopt * NNy;
+    gamma_Ny * Py3*Y3 = Wy * NNy * (1 + $AdjNNy$) ...
+    !! gamma_Ny * Py3*Y3 = Wy * NNy;
 
     "Demand for capital in local sectors"
     (1-gamma_Ny)*Py3*Y3 = Prky*Ky{-1};
@@ -382,7 +382,7 @@
     PSIy * (Py*Y - PIEy_NGDP*NGDP) = Py*Y;
 
     "Profits of local producers to GDP ratio"
-    PIEy_NGDP = ((Py*Y - Wopt*Ny - Prky*Ky{-1} - Pmy*My - Pq*Qy) - TRinp*(Wopt*Ny + Pmy*My + Prky*Ky{-1})) / NGDP;
+    PIEy_NGDP = ((Py*Y - Wy*Ny - Prky*Ky{-1} - Pmy*My - Pq*Qy) - TRinp*(Wy*Ny + Pmy*My + Prky*Ky{-1})) / NGDP;
 
     "Share of overhead labor in local sectors"
     N0y_Ny = N0y / Ny;

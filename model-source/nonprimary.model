@@ -5,7 +5,6 @@
 
     "Price of invements in nonprimary export sectors" Piz
     "Stage T-1 marginal cost in nonprimary export sectors" Pz1
-    "Wage rate in nonprimary export sectors" Wz
     "Production capital in nonprimary export sectors" Kz, Kz_ref
     "Investment in nonprimary export sectors" Iz
 
@@ -98,9 +97,6 @@
 
     % Overhead labor
     N0z = ss_N0z_Kz * (Kz/A)^gamma_N0z;
-
-    "Wage rate in nonprimary export sectors"
-    Wz = Wopt; %%%(1 - upsilon_Z)*Wopt + upsilon_Z*Whtm;
 
     "Stage T-1 production function in nonprimary export sectors"
     Z1 = Kz{-1}^(1-gamma_Nz) * (AAz*NNz)^gamma_Nz;
