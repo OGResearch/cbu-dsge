@@ -210,7 +210,7 @@ m.ss_WNg_NGDP = 0.16;
 m.ss_Wg_Wopt = 1;
 
 % Government investment
-m.ss_PiIg_NGDP = 0.08;
+m.ss_PidIg_NGDP = 0.08;
 
 % Public investment fund
 m.ss_BWpif_NGDP = 0; %%%0.05;
@@ -319,7 +319,7 @@ m.ss_TFh_NGDP  = 0.01;  % Transfers and subsidies to households
 m.ss_TFhtm_TFh = 0.65;  % Share of transfers and subsidies to HTM households
 
 m.ss_PcG_NGDP   = 0.24; % Public consumtion to GDP 
-m.ss_PiIg_NGDP  = 0.08; % Public non-financial investment to GDP 
+m.ss_PidIg_NGDP  = 0.08; % Public non-financial investment to GDP 
 
 m.ss_WNg_NGDP   = 0.16; % Public sector wage bill to GDP
 m.ss_Wg_Wopt    = 1.50; % Public sector wages to private sector OPT wages

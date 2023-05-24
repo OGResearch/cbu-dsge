@@ -64,7 +64,7 @@
     Q = Qx + Qy;
 
     "Investment goods produced locally"
-    Id = Iy + PiIg_NGDP*NGDP/Pid + Ih + (1-gamma_Iz)*Iz;
+    Id = Iy + PidIg_NGDP*NGDP/Pid + Ih + (1-gamma_Iz)*Iz;
 
     "Local production breakdown"
     Y = Ch + PcCg_NGDP*NGDP/Pc + Id;
