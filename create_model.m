@@ -248,6 +248,7 @@ m.lambda_BCBg = 0.5;
 
 % Steady state parameters
 
+m.omega = 0.30;
 m.ss_Whtm_Wopt = 1; %%% 0.45;
 
 m.eta = 0;

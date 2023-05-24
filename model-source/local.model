@@ -116,7 +116,6 @@
     "Intercept in net worth utility component" nu0
     "Depreciation of production capital" delta_Ky
     "Depreciation of residential capital" delta_Kh
-    "Share of hand-to-mouth households" omega
     "Markup in final goods sectors" mu_CI
     "Markup over variable factors in local sectors" mu_Y2
     "Import Share of local sectors" gamma_My
