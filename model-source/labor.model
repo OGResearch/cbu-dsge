@@ -4,6 +4,7 @@
 !variables
 
     N
+    W
     "Optimal flexible wage rate of optimizing households" Wopt_flex
     "Average wage rate of optimizing households" Wopt
     "Per-household man-hours supplied by optimizing households to all sectors" Nopt
@@ -21,6 +22,7 @@
     "Expat wage rate to optimizing household wage rate ratio" Whtm_Wopt
     "Wage rate in nonprimary export sectors" Wz
     "Wage rate in local sectors" Wy
+    Wg
 
 
 !parameters
@@ -28,6 +30,7 @@
     "Share of hand-to-mouth households" omega
     "Inverse elasticity of labor supply curve for optimizing households" eta
     ss_Whtm_Wopt
+    "S/S Wage rate markup in government sectors" ss_Wg_Wopt
 
     rho_Wopt
     rho_Whtm
@@ -70,8 +73,11 @@
     "Total labor"
     N = Ny + Nz + Ng;
 
-    Wy = Wopt;
-    Wz = Wopt;
+    W*N = Wopt*Nopt + Whtm*Nhtm;
+
+    Wy = W;
+    Wz = W;
+    Wg = ss_Wg_Wopt * Wopt;
 
     "Labor in private sectors"
     Np = N - Ng;

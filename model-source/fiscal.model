@@ -51,7 +51,6 @@
 
     "Government non-tax revenues to GDP ratio" PIEg_NGDP
 
-    Wg
     Ng
 
     "Fwl growth adjustment factor" dNGDP_adj
@@ -125,8 +124,6 @@
     ss_TFh_NGDP
     ss_TFhtm_TFh
     ss_TXls_NGDP
-
-    "S/S Wage rate markup in government sectors" ss_Wg_Wopt
 
 
     % Dynamic parameters
@@ -264,9 +261,6 @@
         + lambda_Ng2*(ss_WNg_NGDP - WNg_NGDP{+1}) ...
         + shk_Ng ...
     !! WNg_NGDP = ss_WNg_NGDP;
-
-    "Government wage rate for optimizing households"
-    Wg = ss_Wg_Wopt * Wopt;
 
     % Government tax rates
     TRvat = ss_TRvat;
