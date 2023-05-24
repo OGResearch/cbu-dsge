@@ -102,7 +102,7 @@
     W0z = Wopt;
 
     "Marginal wage rate in nonprimary export sectors"
-    WWz = (1 - upsilon_Z)*Wopt + upsilon_Z*Whtm;
+    WWz = Wopt; %%%(1 - upsilon_Z)*Wopt + upsilon_Z*Whtm;
 
     "Stage T-1 production function in nonprimary export sectors"
     Z1 = Kz{-1}^(1-gamma_Nz) * (AAz*NNz)^gamma_Nz;

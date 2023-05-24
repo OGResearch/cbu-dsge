@@ -207,7 +207,7 @@ m.ss_TFhtm_TFh = 0; %%%0.65;
 % Government consumption
 m.ss_PcG_NGDP = 0.24;
 m.ss_WNg_NGDP = 0.16;
-m.ss_Wg_Wopt = 1.50;
+m.ss_Wg_Wopt = 1;
 
 % Government investment
 m.ss_PiIg_NGDP = 0.08;
