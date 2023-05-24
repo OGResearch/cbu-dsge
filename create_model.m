@@ -225,8 +225,8 @@ m.ss_TXls_NGDP = 0; %%%0.05; % to be reverse-engineered
 
 % Dynamic parameters
 
-m.lambda_Gg1 = 0.5;%0.1;
-m.lambda_Gg2 = 0.5; 
+m.lambda_Cg1 = 0.5;%0.1;
+m.lambda_Cg2 = 0.5; 
 
 m.lambda_Ng1 = 0.2;%0.1;
 m.lambda_Ng2 = 0.5; 
@@ -264,9 +264,9 @@ m.rho_Whtm = 0.3;
 
 %% Calculate generic steady state
 
-m.A = 1 + 1i*m.ss_dA;
-m.Pw_star = 1 + 1i*m.ss_dPw_star;
-m.S = m.ss_S + 1i;
+m.A = 1;
+m.Pw_star = 1;
+m.S = 1;
 
 m.Ky = 5;
 
@@ -431,7 +431,7 @@ rows = [
     "PIEg_NGDP"
     "TFh_NGDP"
     "PcG_NGDP"
-    "PcGg_NGDP"
+    "PcCg_NGDP"
     "PcC_NGDP"
     "PiI_NGDP"
     "PizIz_NGDP"

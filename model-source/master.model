@@ -72,7 +72,7 @@
     II = Iy + PiIg_NGDP*NGDP/Pi + Ih + (1-gamma_Iz)*Iz;
 
     "Local production breakdown"
-    Y = C + PcGg_NGDP*NGDP/Pc + II;
+    Y = C + PcCg_NGDP*NGDP/Pc + II;
 
 
 % __Exports and imports__
@@ -173,7 +173,7 @@
     "Nomial GDP excluding primary exports to nominal GDP ratio"
     NGDPX_NGDP * NGDP = NGDPX;
 
-    VAy_NGDP = (Pc*C + PcGg_NGDP*NGDP + Pi*II - Pmy*My) / NGDP;
+    VAy_NGDP = (Pc*C + PcCg_NGDP*NGDP + Pi*II - Pmy*My) / NGDP;
 
     VAy_PkyKy = VAy_NGDP / PkyKy_NGDP;
 
