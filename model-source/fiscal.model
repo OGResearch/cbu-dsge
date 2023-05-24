@@ -288,7 +288,7 @@
     TXinp_NGDP = TRinp * (Wy*Ny + Pmy*My + Prky*Ky{-1} + Wz*Nz + Pmz*Mz)/NGDP;
 
     "Government tax revenues from windfall taxes"
-    TXwf_NGDP = TRwf * Pq * Q / NGDP;
+    TXwf_NGDP = TRwf * Pq * Qx / NGDP;
 
     "Government tax revenues from lump-sum taxes"
     TXls_NGDP = ...

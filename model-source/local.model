@@ -23,7 +23,6 @@
     "Profit margins in local sectors" PSIy
     "Profits in local sectors to GDP ratio" PIEy_NGDP
     "Share of overhead labor in local sectors" N0y_Ny
-    "Commodities inputs in local sectors to commodity production ratio" Qy_Q
 
     Kh
     "Private residential (housing) investment" Ih
@@ -395,7 +394,4 @@
 
     "Private residential investment to GDP ratio"
     PiIh_NGDP = Pid*Ih / NGDP;
-
-    "Commodities inputs in local sectors to commodity production ratio"
-    Qy_Q = Qy / Q;
 

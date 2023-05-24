@@ -18,6 +18,7 @@
     "Primary production maintenance services to GDP ratio" PmqMq_NGDP
     "Transfers to households from primary producers to GDP ratio"  TFq_NGDP
 
+    "Commodities inputs in local sectors to commodity production ratio" Qy_Q
 
 !parameters
 
@@ -53,14 +54,21 @@
 
 % __Primary exports__
 
-    Q = Aq * A;
+    "Commodities inputs in local sectors to commodity production ratio"
+    Qy_Q = Qy / Q;
+
+    "Primary output breakdown"
+    Q = Qx + Qy;
+
+    Qx = Aq * A;
+
 
     log(Aq) = ...
         + rho_Aq*log(Aq{-1}) ...
         + (1-rho_Aq)*(log(ss_Aq) + shk_Aq) ...
     !! Aq = ss_Aq;
 
-    Mq = gamma_Mq*Q;
+    Mq = gamma_Mq*Qx;
 
 
 % __Transfers to households__
@@ -70,8 +78,8 @@
 
 % __Profits and value added__
 
-    PIEq_NGDP*NGDP = Pq*Q*(1 - TRwf) - Pmq*Mq - TFq_NGDP*NGDP;
-    VAq_NGDP = (Pq*Q - Pmq*Mq) / NGDP;
+    PIEq_NGDP*NGDP = Pq*Qx*(1 - TRwf) - Pmq*Mq - TFq_NGDP*NGDP;
+    VAq_NGDP = (Pq*Qx - Pmq*Mq) / NGDP;
 
 
 % __World prices__
@@ -91,8 +99,8 @@
         + (1-rho_Pq_Pw)*log(ss_Pq_Pw) + shk_Pq_Pw ...
     !! Pq_Pw = ss_Pq_Pw;
 
-    PmqMq_PqQ = Pmq*Mq / (Pq*Q);
+    PmqMq_PqQ = Pmq*Mq / (Pq*Qx);
 
-    PqQ_NGDP*NGDP = Pq*Q;
+    PqQ_NGDP*NGDP = Pq*Qx;
     PmqMq_NGDP*NGDP = Pmq*Mq;
 

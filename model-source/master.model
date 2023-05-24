@@ -59,9 +59,6 @@
 
 % __Market clearing and aggregation__
 
-    "Primary output breakdown"
-    %%% Q = Qx + Qy + Qj;
-    Q = Qx + Qy;
 
     "Investment goods produced locally"
     Id = Iy + PidIg_NGDP*NGDP/Pid + Ih + (1-gamma_Iz)*Iz;
@@ -147,7 +144,7 @@
     "Gross rate of change in real GDP exluding primary value added"
     dGDPX = ...
         + movavg(NGDP/NGDPX, -2) * dGDP ...
-        - movavg(VAq_NGDP*NGDP/NGDPX, -2) * Q/Q{-1} ...
+        - movavg(VAq_NGDP*NGDP/NGDPX, -2) * Qx/Qx{-1} ...
     !! dGDPX = ss_dA;
 
 
