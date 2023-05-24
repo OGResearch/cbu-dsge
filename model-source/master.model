@@ -9,7 +9,7 @@
     "Domestically produced investment goods" II
     "Nominal domestically produced investment goods" PiII
     "Nominal investment" PiI
-    "Nominal private consumption" PcC 
+    "Nominal private consumption" PcCh
     "Nomianl government consumption" PcG
 
     "Exports to GDP ratio" PxX_NGDP
@@ -24,7 +24,7 @@
     "Gross rate of change in real GDP" dGDP
     "Gross rate of change in real GDP excluding commodity sector" dGDPX
 
-    "Consumption to GDP ratio" PcC_NGDP
+    "Private consumption to GDP ratio" PcCh_NGDP
     "Investment to GDP ratio" PiI_NGDP
     "Wage bill to GDP ratio" WN_NGDP
 
@@ -44,7 +44,7 @@
     NGDPX_NGDP
     NIP_NGDP
     NIP_NGDP_adj
-    PcC_NGDP
+    PcCh_NGDP
     PiI_NGDP
     PmM_NGDP
     PxX_NGDP
@@ -80,7 +80,7 @@
     %%% PmM = Pmy*My + Pmq*Mq + Pmz*Mz + gamma_Ij*Pmj*Ij + gamma_Iz*Pmz*Iz;
     PmM = Pmy*My + Pmq*Mq + Pmz*Mz + gamma_Iz*Pmz*Iz;
 
-    PcC = Pc*Ch;
+    PcCh = Pc*Ch;
     PcG = Pc*G;
     PiII = Pi*II;
 
@@ -111,7 +111,7 @@
 % __Nominal GDP__
 
     "Nominal GDP"
-    NGDP = PcC + PcG + PiI + PxX - PmM;
+    NGDP = PcCh + PcG + PiI + PxX - PmM;
 
 
     "Nominal GDP excluding primary value added"
@@ -146,7 +146,7 @@
 
     "Gross rate of change in real GDP"
     dGDP = ...
-        + movavg(PcC/NGDP, -2) * Ch/Ch{-1} ...
+        + movavg(PcCh/NGDP, -2) * Ch/Ch{-1} ...
         + movavg(PcG/NGDP, -2) * G/G{-1} ...
         + movavg(PiI/NGDP, -2) * dI ...
         + movavg(PxX/NGDP, -2) * dX ...
@@ -161,7 +161,7 @@
     !! dGDPX = ss_dA;
 
 
-    PcC_NGDP = PcC / NGDP;
+    PcCh_NGDP = PcCh / NGDP;
 
     PiI_NGDP = PiI / NGDP;
 

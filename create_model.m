@@ -289,7 +289,7 @@ return
 SS = struct();
 
 % National accounts
-SS.PcC_NGDP    = 0.42; % Private consumption share to GDP based on National Accounts data
+SS.PcCh_NGDP    = 0.42; % Private consumption share to GDP based on National Accounts data
 SS.PiIh_NGDP   = 0.04; % Private investment to real estate based on National Accounts data
 SS.PxX_NGDP    = 0.35; % Export share to GDP based on National Accounts data
 SS.PjJ_NGDP    = 0.065; % Size of petro chemical sector, based on trade statistics (w/o oil and natural resources related)
@@ -363,7 +363,7 @@ swap = [
     "Rg_Rw"          "zeta_Rg0"
     "Copt_Vh_nu0"    "nu0"
     "PSIy"           "mu_Y2"
-    "PcC_NGDP"       "gamma_Ny"
+    "PcCh_NGDP"       "gamma_Ny"
     "PiIh_NGDP"      "ss_Kh_Ky"
     "Qy_Q"           "gamma_Qy"
     "Nhtm_Np"        "ss_N0y"
@@ -432,7 +432,7 @@ rows = [
     "TFh_NGDP"
     "PcG_NGDP"
     "PcCg_NGDP"
-    "PcC_NGDP"
+    "PcCh_NGDP"
     "PiI_NGDP"
     "PizIz_NGDP"
     "PIEz_NGDP"
