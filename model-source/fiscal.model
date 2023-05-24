@@ -272,7 +272,7 @@
     TX_NGDP = TXvat_NGDP + TXinp_NGDP + TXexp_NGDP  + TXwf_NGDP + TXls_NGDP;
 
     "Government tax revenues from value-added tax"
-    TXvat_NGDP = TRvat/(1+TRvat) * (Pc*C/NGDP + PcCg_NGDP);
+    TXvat_NGDP = TRvat/(1+TRvat) * (Pc*Ch/NGDP + PcCg_NGDP);
 
     "Government tax revenues from expat taxes"
     TXexp_NGDP = TRexp * Whtm * Nhtm / NGDP;

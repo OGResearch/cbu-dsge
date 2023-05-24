@@ -64,15 +64,12 @@
     %%% Q = Qx + Qy + Qj;
     Q = Qx + Qy;
 
-    "Private consumption"
-    C = Copt + Chtm;
-
     "Investment goods produced locally"
     %%% II = Iy + PiIg_NGDP*NGDP/Pi + Ih + (1-gamma_Ij)*Ij + (1-gamma_Iz)*Iz;
     II = Iy + PiIg_NGDP*NGDP/Pi + Ih + (1-gamma_Iz)*Iz;
 
     "Local production breakdown"
-    Y = C + PcCg_NGDP*NGDP/Pc + II;
+    Y = Ch + PcCg_NGDP*NGDP/Pc + II;
 
 
 % __Exports and imports__
@@ -83,7 +80,7 @@
     %%% PmM = Pmy*My + Pmq*Mq + Pmz*Mz + gamma_Ij*Pmj*Ij + gamma_Iz*Pmz*Iz;
     PmM = Pmy*My + Pmq*Mq + Pmz*Mz + gamma_Iz*Pmz*Iz;
 
-    PcC = Pc*C;
+    PcC = Pc*Ch;
     PcG = Pc*G;
     PiII = Pi*II;
 
@@ -149,7 +146,7 @@
 
     "Gross rate of change in real GDP"
     dGDP = ...
-        + movavg(PcC/NGDP, -2) * C/C{-1} ...
+        + movavg(PcC/NGDP, -2) * Ch/Ch{-1} ...
         + movavg(PcG/NGDP, -2) * G/G{-1} ...
         + movavg(PiI/NGDP, -2) * dI ...
         + movavg(PxX/NGDP, -2) * dX ...
@@ -173,7 +170,7 @@
     "Nomial GDP excluding primary exports to nominal GDP ratio"
     NGDPX_NGDP * NGDP = NGDPX;
 
-    VAy_NGDP = (Pc*C + PcCg_NGDP*NGDP + Pi*II - Pmy*My) / NGDP;
+    VAy_NGDP = (Pc*Ch + PcCg_NGDP*NGDP + Pi*II - Pmy*My) / NGDP;
 
     VAy_PkyKy = VAy_NGDP / PkyKy_NGDP;
 

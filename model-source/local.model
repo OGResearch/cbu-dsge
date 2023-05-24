@@ -6,7 +6,7 @@
     My_Y2, Y3_Y2
 
     "Shadow Price of Optimizing Household Budget" LAMBDA
-    "Total Private Consumption" C
+    "Total Private Consumption" Ch
     "Consumption of Optimizing Households" Copt
     "Private residential investment to GDP ratio" PiIh_NGDP
 
@@ -223,6 +223,12 @@
 
     "Demand for consumption by optimizing households"
     Chtm = DLIhtm;
+
+
+% __Total private consumption__
+
+    "Total private consumption"
+    Ch = Copt + Chtm;
 
 
 % __Residential (housing) investment__
