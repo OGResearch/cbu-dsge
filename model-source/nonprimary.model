@@ -5,8 +5,7 @@
 
     "Price of invements in nonprimary export sectors" Piz
     "Stage T-1 marginal cost in nonprimary export sectors" Pz1
-    "Overhead wage rate in nonprimary export sectors" W0z
-    "Variable wage rate in nonprimary export sectors" WWz
+    "Wage rate in nonprimary export sectors" Wz
     "Production capital in nonprimary export sectors" Kz, Kz_ref
     "Investment in nonprimary export sectors" Iz
 
@@ -99,17 +98,16 @@
 
     % Overhead labor
     N0z = ss_N0z_Kz * (Kz/A)^gamma_N0z;
-    W0z = Wopt;
 
-    "Marginal wage rate in nonprimary export sectors"
-    WWz = Wopt; %%%(1 - upsilon_Z)*Wopt + upsilon_Z*Whtm;
+    "Wage rate in nonprimary export sectors"
+    Wz = Wopt; %%%(1 - upsilon_Z)*Wopt + upsilon_Z*Whtm;
 
     "Stage T-1 production function in nonprimary export sectors"
     Z1 = Kz{-1}^(1-gamma_Nz) * (AAz*NNz)^gamma_Nz;
 
     "Demand for labor in nonprimary export sectors"
-    gamma_Nz * Pz1 * Z1 = WWz * NNz * (1 + $AdjNNz$) * (1 + TRinp) ...
-    !! gamma_Nz * Pz1 * Z1 = WWz * NNz * (1 + TRinp);
+    gamma_Nz * Pz1 * Z1 = Wz * NNz * (1 + $AdjNNz$) * (1 + TRinp) ...
+    !! gamma_Nz * Pz1 * Z1 = Wz * NNz * (1 + TRinp);
 
     AAz = Az * A^(1-gamma_Kz) * Kz{-1}^gamma_Kz;
 
@@ -177,7 +175,7 @@
     PzZ_NGDP = Pz*Z / NGDP;
 
     % Nonprimary exporters profits including capital income
-    WNz_NGDP = (W0z*N0z + WWz*NNz) / NGDP;
+    WNz_NGDP = (Wz*N0z + Wz*NNz) / NGDP;
     PIEz_NGDP*NGDP = Pz*Z - WNz_NGDP*NGDP - Pmz*Mz - (WNz_NGDP*NGDP + Pmz*Mz)*TRinp - PizIz_NGDP*NGDP;
     VAz_NGDP = (Pz*Z - Pmz*Mz) / NGDP;
     PkzKz_NGDP = Pkz*Kz / NGDP;

@@ -284,7 +284,7 @@
     TXexp_NGDP = TRexp * Whtm * Nhtm / NGDP;
 
     "Government tax revenues from production input taxes"
-    TXinp_NGDP = TRinp * (Wopt*Ny + Pmy*My + Prky*Ky{-1} + W0z*N0z + WWz*NNz + Pmz*Mz)/NGDP;
+    TXinp_NGDP = TRinp * (Wopt*Ny + Pmy*My + Prky*Ky{-1} + Wz*Nz + Pmz*Mz)/NGDP;
 
     "Government tax revenues from windfall taxes"
     TXwf_NGDP = TRwf * Pq * Q / NGDP;

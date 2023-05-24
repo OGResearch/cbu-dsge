@@ -51,6 +51,7 @@
         + (1-rho_Wopt) * log(Wopt_flex/Pc) ...
     !! Wopt = Wopt_flex;
 
+    N = Ny + Nz + Ng;
     Nopt = N0y + $NNy_opt$ + Ng + N0z + $NNz_opt$;
     WNopt_NGDP = (Wopt*(N0y + $NNy_opt$ + N0z + $NNz_opt$) + Wg*Ng) / NGDP;
 
@@ -65,7 +66,7 @@
     WNhtm_NGDP = Whtm * Nhtm / NGDP;
 
     "Total labor"
-    N = Nopt + Nhtm;
+    % N = Nopt + Nhtm;
 
     "Labor in private sectors"
     Np = N - Ng;
