@@ -6,8 +6,8 @@
     "Net Investment Position to GDP Ratio" NIP_NGDP
     "Net investment position to GDP ratio adjusted for equity flows" NIP_NGDP_adj
     "Real commodity exports" Qx
-    "Domestically produced investment goods" II
-    "Nominal domestically produced investment goods" PiII
+    "Domestically produced investment goods" Id
+    "Nominal domestically produced investment goods" PidId
     "Nominal investment" PiI
     "Nominal private consumption" PcCh
     "Nomianl government consumption" PcG
@@ -65,11 +65,11 @@
     Q = Qx + Qy;
 
     "Investment goods produced locally"
-    %%% II = Iy + PiIg_NGDP*NGDP/Pi + Ih + (1-gamma_Ij)*Ij + (1-gamma_Iz)*Iz;
-    II = Iy + PiIg_NGDP*NGDP/Pi + Ih + (1-gamma_Iz)*Iz;
+    %%% Id = Iy + PiIg_NGDP*NGDP/Pid + Ih + (1-gamma_Ij)*Ij + (1-gamma_Iz)*Iz;
+    Id = Iy + PiIg_NGDP*NGDP/Pid + Ih + (1-gamma_Iz)*Iz;
 
     "Local production breakdown"
-    Y = Ch + PcCg_NGDP*NGDP/Pc + II;
+    Y = Ch + PcCg_NGDP*NGDP/Pc + Id;
 
 
 % __Exports and imports__
@@ -82,10 +82,10 @@
 
     PcCh = Pc*Ch;
     PcG = Pc*G;
-    PiII = Pi*II;
+    PidId = Pid*Id;
 
-    %%% PiI = Pi*II + gamma_Ij*Pij*Ij + gamma_Iz*Piz*Iz;
-    PiI = Pi*II + gamma_Iz*Piz*Iz;
+    %%% PiI = Pid*Id + gamma_Ij*Pij*Ij + gamma_Iz*Piz*Iz;
+    PiI = Pid*Id + gamma_Iz*Piz*Iz;
 
     PxX_NGDP = PxX / NGDP;
     PmM_NGDP = PmM / NGDP;
@@ -120,7 +120,7 @@
 
     "Gross rate of change in real investment"
     dI = ...
-        + movavg(PiII/PiI, -2) * II/II{-1} ...
+        + movavg(PidId/PiI, -2) * Id/Id{-1} ...
         ... + movavg(gamma_Ij*Pij*Ij/PiI, -2) * Ij/Ij{-1} ...
         + movavg(gamma_Iz*Piz*Iz/PiI, -2) * Iz/Iz{-1} ...
     !! dI = ss_dA;
@@ -170,7 +170,7 @@
     "Nomial GDP excluding primary exports to nominal GDP ratio"
     NGDPX_NGDP * NGDP = NGDPX;
 
-    VAy_NGDP = (Pc*Ch + PcCg_NGDP*NGDP + Pi*II - Pmy*My) / NGDP;
+    VAy_NGDP = (Pc*Ch + PcCg_NGDP*NGDP + Pid*Id - Pmy*My) / NGDP;
 
     VAy_PkyKy = VAy_NGDP / PkyKy_NGDP;
 

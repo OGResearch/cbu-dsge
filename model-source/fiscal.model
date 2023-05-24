@@ -232,7 +232,7 @@
     !! PiIg_NGDP = ss_PiIg_NGDP;
 
     "Definitin of government investment to GDP ratio"
-    PiIg_NGDP = Pi*Ig / NGDP;
+    PiIg_NGDP = Pid*Ig / NGDP;
 
     "Government consumption expenditures"
     PcG_NGDP = PcCg_NGDP + WNg_NGDP;

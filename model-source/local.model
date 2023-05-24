@@ -45,7 +45,7 @@
     "Marginal cost of local intermediate goods" Py1
     "Markuped marginal cost in local sectors" Py
     "Price of Local Intermediate Goods without Commodity costs" Py2
-    "Investment Goods Prices" Pi
+    "Investment Goods Prices" Pid
     "Consumer Goods Prices" Pc
     "Consumer Goods Prices w/o VAT" Pcx
     "Price of Capital in Local Production" Pky
@@ -150,19 +150,19 @@
 
 !substitutions
 
-    % Auxiliary Constant to Make MUC equal 1/C^sigma in Steady State
+    % Auxiliary Constant to Make MUC equal 1/C in steady state
     chi_DLI0 := (1-chi_dli*&DLIopt_Copt-chi_c);
 
-    % Investment Adjustment Cost Term in Local Production
+    % Investment adjustment cost term in local production
     xi_Iy0 := ((1-phi_Y)*log(ss_dA - (1-delta_Ky)) + phi_Y*log(ss_dA));
     AdjIy0 := xi_Iy*[ log(Iy)-(1-phi_Y)*log(Ky{-1})-phi_Y*log(Iy{-1}) - $xi_Iy0$ ];
     AdjIy1 := xi_Iy*[ log(Iy{+1})-(1-phi_Y)*log(Ky)-phi_Y*log(Iy) - $xi_Iy0$ ];
 
-    % Consumer Price Adjustment Cost Term
+    % Consumer price adjustment cost term
     AdjPc0 := xi_Pc*[ log(dPcx) - log(dPcx{-1}) ];
     AdjPc1 := xi_Pc*[ log(dPcx{+1}) - log(dPcx) ];
 
-    % Investment Price Adjustment Cost Term
+    % Investment price adjustment cost term
     AdjPi0 := xi_Pi*[ log(dPi) - log(dPi{-1}) ];
     AdjPi1 := xi_Pi*[ log(dPi{+1}) - log(dPi) ];
 
@@ -196,8 +196,8 @@
     Copt_Vh_nu0 = Copt/Vh - nu0;
 
     "Price of production capital for local sectors"
-    Pky = Pi*(1 + $AdjIy0$ - beta*phi_Y*$AdjIy1$) ...
-    !! Pky = Pi;
+    Pky = Pid*(1 + $AdjIy0$ - beta*phi_Y*$AdjIy1$) ...
+    !! Pky = Pid;
 
     "Creation of production capital for local sectors"
     LAMBDA*Pky = ...
@@ -253,8 +253,8 @@
     Pc = Pcx * (1 + TRvat);
 
     % Final Investment Price Setting
-    Py = Pi*[1 + (mu_CI-1)*($AdjPi0$ - beta*$AdjPi1$)] ...
-    !! Pi = Py;
+    Py = Pid*[1 + (mu_CI-1)*($AdjPi0$ - beta*$AdjPi1$)] ...
+    !! Pid = Py;
 
 
 % __Production for Local Markets__
@@ -371,15 +371,15 @@
 
     dPc = Pc/Pc{-1};
     dPcx = Pcx/Pcx{-1};
-    dPi = Pi/Pi{-1};
+    dPi = Pid/Pid{-1};
     dNGDP = NGDP/NGDP{-1};
     dS = S/S{-1};
 
 
 % __Reporting and calibration ratios__
 
-    PiIy_NGDP*NGDP = Pi*Iy;
-    PiIy_PkyKy = Pi*Iy / (Pky*Ky);
+    PiIy_NGDP*NGDP = Pid*Iy;
+    PiIy_PkyKy = Pid*Iy / (Pky*Ky);
     DLIopt_Copt = DLIopt / Copt;
     PcVh_NGDP*NGDP = Pc*Vh;
     PkyKy_NGDP*NGDP = Pky*Ky;
@@ -394,7 +394,7 @@
     N0y_Ny = N0y / Ny;
 
     "Private residential investment to GDP ratio"
-    PiIh_NGDP = Pi*Ih / NGDP;
+    PiIh_NGDP = Pid*Ih / NGDP;
 
     "Commodities inputs in local sectors to commodity production ratio"
     Qy_Q = Qy / Q;
