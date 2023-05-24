@@ -1,0 +1,87 @@
+% Labor supply
+
+
+!variables
+
+    N
+    "Optimal flexible wage rate of optimizing households" Wopt_flex
+    "Average wage rate of optimizing households" Wopt
+    "Per-household man-hours supplied by optimizing households to all sectors" Nopt
+    "Labor income of optimizing households to GDP ratio" WNopt_NGDP
+
+    Whtm_flex
+    "Average Wage Rate of HTM Households" Whtm
+    "Per-household man-hours supplied by HTM households to all sectors" Nhtm
+    "Labor income of HTM households to GDP ratio" WNhtm_NGDP
+    Np
+    "Share of expat labor in labor in private sectors" Nhtm_Np
+    "Wage bill in private sectors to GDP ratio" WNp_NGDP
+    "Labor in govt sectors to total labor ratio" Ng_N
+    "Share of expat labor in total labor" Nhtm_N
+    "Expat wage rate to optimizing household wage rate ratio" Whtm_Wopt
+
+
+!parameters
+
+    "Inverse elasticity of labor supply curve for optimizing households" eta
+    ss_Whtm_Wopt
+
+    rho_Wopt
+    rho_Whtm
+
+
+!log-variables !all-but
+
+    WNopt_NGDP
+    WNhtm_NGDP
+    Nhtm_Np
+    Ng_N
+    Nhtm_N
+    Whtm_Wopt
+
+
+!equations
+
+    "Optimal flexible wage rate of optimizing households"
+    Wopt_flex * LAMBDA = Nopt^eta;
+
+    "Private-sector wage rate for optimizing households"
+    log(Wopt/Pc) = ...
+        + rho_Wopt * log(ss_dA*Wopt{-1}/Pc{-1}) ...
+        + (1-rho_Wopt) * log(Wopt_flex/Pc) ...
+    !! Wopt = Wopt_flex;
+
+    Nopt = N0y + $NNy_opt$ + Ng + N0z + $NNz_opt$;
+    WNopt_NGDP = (Wopt*(N0y + $NNy_opt$ + N0z + $NNz_opt$) + Wg*Ng) / NGDP;
+
+    Whtm_flex = ss_Whtm_Wopt * Wopt_flex;
+
+    log(Whtm/Pc) = ...
+        + rho_Whtm * log(ss_dA*Whtm{-1}/Pc{-1}) ...
+        + (1-rho_Whtm) * log(Whtm_flex/Pc) ...
+    !! Whtm = Whtm_flex;
+
+    Nhtm = $NNy_htm$ + $NNz_htm$;
+    WNhtm_NGDP = Whtm * Nhtm / NGDP;
+
+    "Total labor"
+    N = Nopt + Nhtm;
+
+    "Labor in private sectors"
+    Np = N - Ng;
+
+    "Share of expats in labor in private sectors"
+    Nhtm_Np = Nhtm / Np;
+
+    "Wage bill in private sectors to GDP ratio"
+    WNp_NGDP = WNy_NGDP + WNz_NGDP;
+
+    "Labor in govt sectors to total labor ratio"
+    Ng_N = Ng / N;
+
+    "Expat labor to total labor ratio"
+    Nhtm_N = Nhtm / N;
+
+    "Expat wage rate to optimizing household wage rate ratio"
+    Whtm_Wopt = Whtm / Wopt;
+

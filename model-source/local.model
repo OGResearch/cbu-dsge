@@ -1,0 +1,396 @@
+%% Local economy
+
+!variables
+
+    Y1, Y2, Y3, Py3
+    My_Y2, Y3_Y2
+
+    "Shadow Price of Optimizing Household Budget" LAMBDA
+    "Total Private Consumption" C
+    "Consumption of Optimizing Households" Copt
+    "Private residential investment to GDP ratio" PiIh_NGDP
+
+    "Consumption of Hand-to-Mouth Households" Chtm
+    "Auxiliary Variable for Consumption to Net Worth Ratio" Copt_Vh_nu0
+    "Disposable Labor Income of Optimizing Households" DLIopt
+    % "Total disposable labor income to GDP ratio" PcDLI_NGDP
+    "Household real net worth" Vh
+    "Disposable labor income of hand-to-mouth households" DLIhtm
+    "Hours worked in local sectors" Ny
+    "Wage bill in local sectors to GDP ratio" WNy_NGDP
+    "Physical investment in local sectors" Iy
+
+    "Profit margins in local sectors" PSIy
+    "Profits in local sectors to GDP ratio" PIEy_NGDP
+    "Share of overhead labor in local sectors" N0y_Ny
+    "Commodities inputs in local sectors to commodity production ratio" Qy_Q
+
+    Kh
+    "Private residential (housing) investment" Ih
+
+    "Variable hours worked in local sectors" NNy
+    "Overhead hours worked in local sectors" N0y
+    "Imported inputs to local sectors" My
+    "Production capital in local sectors" Ky
+    "Local production of intermediate goods" Y
+    "Overall technology" A
+    "Relative technology in local sectors" Ay
+
+    "Commodities used locally" Qy
+
+    "Household net worth to GDP ratio" PcVh_NGDP
+    "Capital in local sectors to GDP ratio" PkyKy_NGDP
+    "Remittances from HTM households to GDP ratio" TFw_NGDP
+
+    "Marginal cost of local intermediate goods" Py1
+    "Markuped marginal cost in local sectors" Py
+    "Price of Local Intermediate Goods without Commodity costs" Py2
+    "Investment Goods Prices" Pi
+    "Consumer Goods Prices" Pc
+    "Consumer Goods Prices w/o VAT" Pcx
+    "Price of Capital in Local Production" Pky
+    "Rental Price of Capital in Local Production" Prky
+
+    "Import Prices in Local Production" Pmy
+    "World Prices in Local Currency" Pw
+    "Nominal Exchange Rate" S
+    "Gross Rate of Change in Nominal Exchange Rate" dS
+
+    "Government local-currency debt rate" Rg
+    "Government foreign-currency debt rate" Rg_star
+    "Household shadow interest rate" Rh
+    "Government-world spread" Rg_Rw
+
+    "Gross Rate of Change in Consumer Prices" dPc
+    "Gross Rate of Change in Consumer Prices w/o VAT" dPcx
+    "Gross Rate of Change in Investment Prices" dPi
+    "Gross Rate of Change in Nominal GDP" dNGDP
+
+    "Private Investment in Local Production to GDP Ratio" PiIy_NGDP
+    "Investment to Capital Ratio in Local Production" PiIy_PkyKy
+    "Household NFA to GDP Ratio"  BWh_NGDP
+    "Auxiliary Variable for Disposable Labor Income to Consumption Ratio" DLIopt_Copt
+
+    % "Wage bill of HTM households to GDP ratio" WhtmNhtm_NGDP
+
+
+!log-variables !all-but
+
+    PiIh_NGDP
+    Copt_Vh_nu0
+    PiIy_NGDP
+    PiIy_PkyKy
+    BWh_NGDP
+    PcVh_NGDP
+    PkyKy_NGDP
+    DLIopt_Copt
+    TFw_NGDP
+    My_Y2
+    Y3_Y2
+    PIEy_NGDP
+    N0y_Ny
+    Qy_Q
+    PSIy
+
+
+!shocks
+
+    "Shock to overall productivity" shk_A
+    "Shock to relative sector productivity in local sectors" shk_Ay
+    "Shock to exchange rate parity" shk_S
+    shk_My_Y2
+    shk_Y3_Y2
+
+
+!parameters
+
+    rho_My_Y2
+    rho_Y3_Y2
+
+    "Share of expats in variable labor in local sectors" upsilon_Y
+
+    % Steady-state parameters
+    "Discount Factor" beta
+    "Current Income Sensitivity of Intertemporally Optimizing Households" chi_dli
+    "Sensitivity of utility to net worth" nu
+    "Intercept in net worth utility component" nu0
+    "Depreciation of production capital" delta_Ky
+    "Depreciation of residential capital" delta_Kh
+    "Share of hand-to-mouth households" omega
+    "Markup in final goods sectors" mu_CI
+    "Markup over variable factors in local sectors" mu_Y2
+    "Import Share of local sectors" gamma_My
+    "Labor Share of local sectors" gamma_Ny
+
+    "Intercept in government spread" zeta_Rg0
+    "Sensitivity of government spread to debt" zeta_Rg1
+    "Intercept in household spread" zeta_Rh0
+    "Sensitivity of household spread to debt" zeta_Rh1
+    "Share of primary inputs used in local sectors" gamma_Qy;
+
+    % Directly calibrated ratios and rates
+    "S/S Remittances from HTM households to HTM wage bill" ss_TFw_WNhtm
+    "S/S Private Residential (Housing) Investment to Investment in Local Production Ratio" ss_Kh_Ky
+    "S/S Rate of Change in Overall Productivity" ss_dA
+    "Inflation Target" ss_dPc
+    "S/S Relative Sectoral Productivity in Local Production" ss_Ay
+    "S/S Overhead Labor in Local Production" ss_N0y
+    "S/S Exchange rate target" ss_S
+
+    % Transitory Parameters
+    "Habit in consumption" chi_c
+    "Capital versus investment adjustment cost" phi_Y
+    "Intensity of capital or investment adjustment cost" xi_Iy
+    "Consumer Price Adjustment Cost" xi_Pc
+    "Investment price adjustment cost" xi_Pi
+    "Cost of hiring-firing variable labor in local sectors" xi_NNy
+    "Autoregression in overall productivity" rho_A
+    "Autoregression in relative sectoral productivity in local production" rho_Ay
+    "Residential (housing) investment reaction to private investment to GDP ratio" lambda_Ih1
+
+
+!substitutions
+
+    % Auxiliary Constant to Make MUC equal 1/C^sigma in Steady State
+    chi_DLI0 := (1-chi_dli*&DLIopt_Copt-chi_c);
+
+    % Investment Adjustment Cost Term in Local Production
+    xi_Iy0 := ((1-phi_Y)*log(ss_dA - (1-delta_Ky)) + phi_Y*log(ss_dA));
+    AdjIy0 := xi_Iy*[ log(Iy)-(1-phi_Y)*log(Ky{-1})-phi_Y*log(Iy{-1}) - $xi_Iy0$ ];
+    AdjIy1 := xi_Iy*[ log(Iy{+1})-(1-phi_Y)*log(Ky)-phi_Y*log(Iy) - $xi_Iy0$ ];
+
+    % Consumer Price Adjustment Cost Term
+    AdjPc0 := xi_Pc*[ log(dPcx) - log(dPcx{-1}) ];
+    AdjPc1 := xi_Pc*[ log(dPcx{+1}) - log(dPcx) ];
+
+    % Investment Price Adjustment Cost Term
+    AdjPi0 := xi_Pi*[ log(dPi) - log(dPi{-1}) ];
+    AdjPi1 := xi_Pi*[ log(dPi{+1}) - log(dPi) ];
+
+    AdjNNy := xi_NNy*[ log(NNy/NNy{-1}) - beta*log(NNy{+1}/NNy) ];
+
+    NNy_opt := (NNy * (1 - upsilon_Y));
+    NNy_htm := (NNy * upsilon_Y);
+
+    gamma_Y2 := (gamma_My^gamma_My * (1-gamma_My)^(1-gamma_My));
+
+
+!equations
+
+% __Optimizing households__
+
+    "Intertemporal choice by optimizing households"
+    LAMBDA = ...
+        + beta*LAMBDA{+1}*Rh ...
+        + nu*(Copt/Vh - nu0)/(Pc*Copt);
+
+    "Demand for consumption by optimizing households"
+    LAMBDA*Pc*(Copt - chi_dli*DLIopt - chi_c*ss_dA*Copt{-1}) = 1;
+
+    "Net worth of optimizing households"
+    Pc*Vh = Pky*Ky + (BWh_NGDP + BGh_NGDP)*NGDP;
+
+    "Real current income of optimizing households"
+    Pc*DLIopt = (WNopt_NGDP + TFopt_NGDP + TFq_NGDP)*NGDP;
+
+    "Calibration of net worth utility component"
+    Copt_Vh_nu0 = Copt/Vh - nu0;
+
+    "Price of production capital for local sectors"
+    Pky = Pi*(1 + $AdjIy0$ - beta*phi_Y*$AdjIy1$) ...
+    !! Pky = Pi;
+
+    "Creation of production capital for local sectors"
+    LAMBDA*Pky = ...
+        beta*LAMBDA{+1}*[ ...
+            Pky{+1}*(1-delta_Ky) + Prky{+1} + Pky{+1}*(1-phi_Y)*&PiIy_PkyKy*ss_dA*$AdjIy1$ ...
+        ] + nu*(Copt/Vh - nu0)*Pky/(Pc*Copt) ...
+    !! LAMBDA*Pky = beta*LAMBDA{+1}*[ ...
+            Pky{+1}*(1-delta_Ky) + Prky{+1} ...
+        ] + nu*(Copt/Vh - nu0)*Pky/(Pc*Copt) ...
+    ;
+
+    "Stock-flow capital-investment for local sectors"
+    Ky = (1-delta_Ky)*Ky{-1} + Iy;
+
+
+% __Hand-to-mouth households__
+
+    "Real current income of hand-to-mouth households"
+    Pc*DLIhtm = (WNhtm_NGDP*(1 - TRexp) + TFhtm_NGDP - (TFw_NGDP + TXexp_NGDP))*NGDP;
+
+    "Remittances from hand-to-mouth households"
+    TFw_NGDP = ss_TFw_WNhtm * WNhtm_NGDP*(1 - TRexp);
+
+    "Demand for consumption by optimizing households"
+    Chtm = DLIhtm;
+
+
+% __Residential (housing) investment__
+
+    log(Ih) = log(ss_dA*Ih{-1}) + lambda_Ih1*log(Ky{+1}*ss_Kh_Ky/Kh{+1}) ...
+    !! Kh = ss_Kh_Ky * Ky;
+
+    Kh = (1-delta_Kh)*Kh{-1} + Ih;
+
+
+% __Local Distribution of Consumer and Investment Goods__
+
+    % Staget T-0 in local sectors: Distribution
+    Y = Y1;
+    Py = mu_CI*Py1;
+
+    % Final Consumer Price Setting
+    Py = Pcx*[1 + (mu_CI-1)*($AdjPc0$ - beta*$AdjPc1$)] ...
+    !! Pcx = Py;
+
+    % VAT tax applied on consumer goods
+    Pc = Pcx * (1 + TRvat);
+
+    % Final Investment Price Setting
+    Py = Pi*[1 + (mu_CI-1)*($AdjPi0$ - beta*$AdjPi1$)] ...
+    !! Pi = Py;
+
+
+% __Production for Local Markets__
+
+
+    % Stage T-3 in local sectors: Domestic inputs
+
+    "Breakdown of total labor into overhead and variable in local sectors"
+    Ny = N0y + NNy;
+
+    "Overhead labor in local sectors"
+    N0y = ss_N0y;
+
+    "Wage bill in local sectors"
+    WNy_NGDP = Wopt*Ny / NGDP;
+
+    "Stage T-3 production technology in local sectors"
+    Y3 = Ky{-1}^(1-gamma_Ny) * (A*Ay*NNy)^gamma_Ny;
+
+    "Demand for labor in local sectors"
+    gamma_Ny * Py3*Y3 = Wopt * NNy * (1 + $AdjNNy$) ...
+    !! gamma_Ny * Py3*Y3 = Wopt * NNy;
+
+    "Demand for capital in local sectors"
+    (1-gamma_Ny)*Py3*Y3 = Prky*Ky{-1};
+
+
+    % Stage T-2 in local sectors: Nonprimary import
+
+    "Stage T-2 production technology in local sectors"
+    Py2*Y2 = mu_Y2*(Pmy*My + Py3*Y3)*(1+TRinp) ...
+    !if LongCobbDouglas
+        !! Y2 = (1/$gamma_Y2$) * My^gamma_My * Y3^(1-gamma_My) ...
+    !else
+        !! Py2*Y2 = mu_Y2*(Pmy*My + Py3*Y3)*(1+TRinp) ...
+    !end
+    ;
+
+    "Demand for nonprimary imports in local sectors"
+    My = My_Y2 * Y2 ...
+    !if LongCobbDouglas
+        !! gamma_My*Py2*Y2 = mu_Y2*Pmy*My*(1+TRinp) ...
+    !else
+        !! My = gamma_My * Y2 ...
+    !end 
+    ;
+
+    "Demand for local input in local sectors"
+    Y3 = Y3_Y2 * Y2 ...
+    !if LongCobbDouglas
+        !! (1-gamma_My)*Py2*Y2 = mu_Y2*Py3*Y3*(1+TRinp) ...
+    !else
+        !! Y3 = (1-gamma_My) * Y2 ...
+    !end
+    ;
+
+    "Real nonprimary import share of stage T-2 output in local sectors"
+    My_Y2 = ...
+        + rho_My_Y2 * (My_Y2{-1}) ...
+        + (1 - rho_My_Y2) * (&My / &Y2) ...
+        + shk_My_Y2 ...
+    !! My_Y2 = &My / &Y2;
+
+    "Real domestic input share of stage T-2 output in local sectors"
+    Y3_Y2 = ...
+        + rho_Y3_Y2 * (Y3_Y2{-1}) ...
+        + (1 - rho_Y3_Y2) * (&Y3 / &Y2) ...
+        + shk_Y3_Y2 ...
+    !! Y3_Y2 = &Y3 / &Y2;
+
+
+    % Stage T-1 in local sectors: Primary inputs
+
+    Y1 = Y2 / (1 - gamma_Qy);
+    Y1 = Qy / gamma_Qy;
+    Py1 = (1 - gamma_Qy)*Py2 + gamma_Qy*Pq;
+
+
+% __Productivity (Technology)__
+
+    % Overall Productivity
+    log(A/A{-1}) = rho_A*log(A{-1}/A{-2}) + (1-rho_A)*(log(ss_dA) + shk_A) ...
+    !! A = ss_dA*A{-1};
+
+    % Relative Sector-Specific Productivity
+    log(Ay) = rho_Ay*log(Ay{-1}) + (1-rho_Ay)*(log(ss_Ay) + shk_Ay) ...
+    !! Ay = ss_Ay;
+
+
+% __Monetary policy__
+
+    % Exchange rate peg
+    log(S) = log(S{-1}) + shk_S;
+
+
+% __World prices in local currency__
+
+    Pmy = Pw;
+    Pw = S * Pw_star;
+
+
+% __Interest rate structure__
+
+    Rg_star = Rw_star * exp( zeta_Rg1*(-NIP_NGDP_adj + zeta_Rg0) );
+
+    Rg = Rg_star * S{+1}/S;
+
+    Rg_Rw = Rg_star / Rw_star;
+
+    Rh = Rg * exp( zeta_Rh1*(-BWh_NGDP + zeta_Rh0) );
+
+
+% __Growth rates__
+
+    dPc = Pc/Pc{-1};
+    dPcx = Pcx/Pcx{-1};
+    dPi = Pi/Pi{-1};
+    dNGDP = NGDP/NGDP{-1};
+    dS = S/S{-1};
+
+
+% __Reporting and calibration ratios__
+
+    PiIy_NGDP*NGDP = Pi*Iy;
+    PiIy_PkyKy = Pi*Iy / (Pky*Ky);
+    DLIopt_Copt = DLIopt / Copt;
+    PcVh_NGDP*NGDP = Pc*Vh;
+    PkyKy_NGDP*NGDP = Pky*Ky;
+
+    "Profit margins (excluding adjustment costs, excluding input tax) in local production"
+    PSIy * (Py*Y - PIEy_NGDP*NGDP) = Py*Y;
+
+    "Profits of local producers to GDP ratio"
+    PIEy_NGDP = ((Py*Y - Wopt*Ny - Prky*Ky{-1} - Pmy*My - Pq*Qy) - TRinp*(Wopt*Ny + Pmy*My + Prky*Ky{-1})) / NGDP;
+
+    "Share of overhead labor in local sectors"
+    N0y_Ny = N0y / Ny;
+
+    "Private residential investment to GDP ratio"
+    PiIh_NGDP = Pi*Ih / NGDP;
+
+    "Commodities inputs in local sectors to commodity production ratio"
+    Qy_Q = Qy / Q;
+

@@ -1,0 +1,190 @@
+%% Nonprimary exports (Z)
+
+
+!variables
+
+    "Price of invements in nonprimary export sectors" Piz
+    "Stage T-1 marginal cost in nonprimary export sectors" Pz1
+    "Overhead wage rate in nonprimary export sectors" W0z
+    "Variable wage rate in nonprimary export sectors" WWz
+    "Production capital in nonprimary export sectors" Kz, Kz_ref
+    "Investment in nonprimary export sectors" Iz
+
+    "Total labor in nonprimary exports" Nz
+    "Variable labor in nonprimary exports" NNz
+    "Overhead labor in nonprimary exports" N0z
+    "Imported inputs to nonprimary exports" Mz
+    "Imported inputs to nonprimary exports to GDP ratio" PmzMz_NGDP
+    "Nonprimary exports" Z
+    "Reference level for nonprimary exports" Zref
+    "Stage T-1 production in nonprimary exports" Z1
+    "Nominal marginal cost in nonprimary exports" Pz0
+    "Import prices in nonprimary exports" Pmz
+    "Price of nonprimary exports" Pz
+    "Nonprimary export specific technology" Az
+    "Auxiliary term for total export technology" AAz
+    "Relative price of imported inputs in exports to local imports" Pmz_Pmy
+    "Relative price of nonprimary exports to imported inputs" Pz_Pmz
+    "Profits including capital income in nonprimary exports" PIEz_NGDP
+    "Physical capital in nonprimary exports to GDP ratio" PkzKz_NGDP
+    "Value added created in nonprimary exports to GDP ratio" VAz_NGDP
+    "Value added created in nonprimary exports per capital" VAz_PkzKz
+    "Nominal cost of investment in nonprimary exports to GDP ratio" PizIz_NGDP
+    "Replacement cost of capital in nonprimary export sector" Pkz
+    "Wage bill in nonprimary exports to GDP ratio" WNz_NGDP
+    "Wage bill to value-added ratio in nonprimary exports" WNz_VAz
+    "Nonprimary export to GDP ratio" PzZ_NGDP
+    "Share of overhead labor in nonprimary exports" N0z_Nz
+
+
+!parameters
+
+    ss_Zref_Az
+    "Share of expats in variable labor in nonprimary export sectors" upsilon_Z
+    delta_Kz
+    "Markup over factor cost of nonprimary exporters" mu_Z
+    "Capital share of nonprimary exports" gamma_Kz
+    "Import share of nonprimary exports" gamma_Mz
+    "Labor share of nonprimary exports" gamma_Nz
+    "Overhead labour elasticity on capital"      gamma_N0z
+    "Direct import intesity of investment in nonprimary exports" gamma_Iz
+
+    "S/s overhead labor to capital ratio" ss_N0z_Kz
+    "S/s overhead labor" ss_N0z
+    "S/s nonprimary export specific technology" ss_Az
+    "S/s share of capital in nonprimary export technology" ss_Kz_A
+    "S/s relative price of imported inputs in nonprimary exports to local imports" ss_Pmz_Pmy
+    "S/s relative price of nonprimary exports to imported inputs" ss_Pz_Pmz
+    "Scale parameter in nonprimary export production function" alpha_Z
+
+    "Cost of hiring-firing variable labor in nonprimary export sectors" xi_NNz
+    "Output adjustment cost in nonprimary exports" xi_Z
+
+    "Autoregression in nonprimary export technology" rho_Az
+    "Adjustment parameter in nonprimary export capital" lambda_Kz
+    lambda_Zref
+
+
+!shocks
+
+    "Shock to nonprimary export specific technology" shk_Az
+    "Shock to capital volume used by nonprimary exporters" shk_Kz
+    shk_Zref
+
+
+!log_variables !all_but
+
+    PIEz_NGDP
+    PkzKz_NGDP
+    PmzMz_NGDP
+    N0z_Nz
+    VAz_NGDP
+    VAz_PkzKz
+    PizIz_NGDP
+    %WzNz_VAz
+    PzZ_NGDP
+
+
+!substitutions
+
+    AdjNNz := xi_NNz*[ log(NNz/NNz{-1}) - beta*log(NNz{+1}/NNz) ];
+
+    NNz_opt := (NNz * (1 - upsilon_Z));
+    NNz_htm := (NNz * upsilon_Z);
+
+!equations
+
+    "Breakdown of total labor input in nonprimary export sectors"
+    Nz = N0z + NNz;
+
+    % Overhead labor
+    N0z = ss_N0z_Kz * (Kz/A)^gamma_N0z;
+    W0z = Wopt;
+
+    "Marginal wage rate in nonprimary export sectors"
+    WWz = (1 - upsilon_Z)*Wopt + upsilon_Z*Whtm;
+
+    "Stage T-1 production function in nonprimary export sectors"
+    Z1 = Kz{-1}^(1-gamma_Nz) * (AAz*NNz)^gamma_Nz;
+
+    "Demand for labor in nonprimary export sectors"
+    gamma_Nz * Pz1 * Z1 = WWz * NNz * (1 + $AdjNNz$) * (1 + TRinp) ...
+    !! gamma_Nz * Pz1 * Z1 = WWz * NNz * (1 + TRinp);
+
+    AAz = Az * A^(1-gamma_Kz) * Kz{-1}^gamma_Kz;
+
+    "Nominal marginal cost in nonprimary export sectors"
+    Pz0 = mu_Z * (gamma_Mz*Pmz*(1 + TRinp) + (1-gamma_Mz)*Pz1);
+
+    "Demand for imported inputs in nonprimary export sectors"
+    Mz = gamma_Mz * Z;
+
+    "Demand for domestic inputs in nonprimary export sectors"
+    Z1 = (1 - gamma_Mz) * Z;
+
+    "Marginal cost equals final price in export sectors"
+    Pz = Pz0*[1 + xi_Z*log(Z / Zref)] ...
+    !! Pz = Pz0;
+
+    % Reference level for nonprimary export production
+    log(Zref) = ...
+        + log(Zref{-1} * ss_dA) ...
+        + lambda_Zref * (log(A * Az * &Z / (&A * &Az)) - log(Zref)) ...
+        + shk_Zref ...
+    !! Zref = Z;
+
+
+% __Autonomous capital supply to nonprimary export sectors__
+
+    "Capital supply to nonprimary export sectors"
+    log(Iz) = ...
+        + log(Iz{-1} * ss_dA) ...
+        + lambda_Kz * log(Kz_ref / Kz) ...
+        + shk_Kz ...
+    !! Kz = ss_Kz_A * A;
+
+    "Reference capital stock in nonprimary export sectors"
+    Kz_ref = ss_Kz_A * A{+1} / ss_dA^1;
+
+    "Stock-flow capital in nonprimary export sectors"
+    Kz = (1-delta_Kz)*Kz{-1} + Iz;
+    Piz = gamma_Iz*Pmz + (1-gamma_Iz)*Pi;
+    PizIz_NGDP*NGDP = Piz*Iz;
+
+    "Replacement cost of capital in nonprimary export sectors"
+    Pkz = Piz;
+
+    "Relative productivity in nonprimary export sectors"
+    log(Az) = ...
+        + rho_Az * log(Az{-1}) ...
+        + (1-rho_Az) * log(ss_Az) ...
+        + (1-rho_Az) * shk_Az ...
+    !! Az = ss_Az;
+
+
+% __International prices__
+
+    Pmz = Pmz_Pmy * Pmy;
+    Pmz_Pmy = ss_Pmz_Pmy;
+
+    Pz = Pz_Pmz * Pmz;
+    Pz_Pmz = ss_Pz_Pmz;
+
+
+% __Reporting and calibration ratios__
+
+    PmzMz_NGDP*NGDP = Pmz*Mz;
+    PzZ_NGDP = Pz*Z / NGDP;
+
+    % Nonprimary exporters profits including capital income
+    WNz_NGDP = (W0z*N0z + WWz*NNz) / NGDP;
+    PIEz_NGDP*NGDP = Pz*Z - WNz_NGDP*NGDP - Pmz*Mz - (WNz_NGDP*NGDP + Pmz*Mz)*TRinp - PizIz_NGDP*NGDP;
+    VAz_NGDP = (Pz*Z - Pmz*Mz) / NGDP;
+    PkzKz_NGDP = Pkz*Kz / NGDP;
+    VAz_PkzKz = VAz_NGDP / PkzKz_NGDP;
+    WNz_VAz = WNz_NGDP / VAz_NGDP;
+
+    "Share of overhead labor in nonprimary exports"
+    N0z_Nz = N0z/Nz;
+
+

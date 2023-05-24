@@ -1,0 +1,186 @@
+% Clearing within local economy and with rest of world
+
+
+!variables
+
+    "Net Investment Position to GDP Ratio" NIP_NGDP
+    "Net investment position to GDP ratio adjusted for equity flows" NIP_NGDP_adj
+    "Real commodity exports" Qx
+    "Domestically produced investment goods" II
+    "Nominal domestically produced investment goods" PiII
+    "Nominal investment" PiI
+    "Nominal private consumption" PcC 
+    "Nomianl government consumption" PcG
+
+    "Exports to GDP ratio" PxX_NGDP
+    "Imports to GDP Ratio" PmM_NGDP
+    "Nominal GDP" NGDP
+    "Nominal GDP excluding commodity sector" NGDPX
+    "Nominal Imports" PmM
+    "Nominal Exports" PxX
+    "Gross rate of change in real investment" dI
+    "Gross rate of change in real exports" dX
+    "Gross rate of change in real imports" dM
+    "Gross rate of change in real GDP" dGDP
+    "Gross rate of change in real GDP excluding commodity sector" dGDPX
+
+    "Consumption to GDP ratio" PcC_NGDP
+    "Investment to GDP ratio" PiI_NGDP
+    "Wage bill to GDP ratio" WN_NGDP
+
+    "Value Added in Local Production Sector to GDP Ratio" VAy_NGDP
+    "Value added in local production sector per capital" VAy_PkyKy
+    "Wage bill to value-added ratio in local sector" WNy_VAy
+    "Trade Balance to GDP Ratio" TB_NGDP
+
+    "Nominal GDP excluding primary exports to nominal GDP ratio" NGDPX_NGDP
+
+    "Consumer Real Exchange Rate" RER
+
+
+
+!log-variables !all-but
+
+    NGDPX_NGDP
+    NIP_NGDP
+    NIP_NGDP_adj
+    PcC_NGDP
+    PiI_NGDP
+    PmM_NGDP
+    PxX_NGDP
+    TB_NGDP
+    VAy_NGDP
+    VAy_PkyKy
+    WN_NGDP
+    WNy_VAy
+
+
+
+!equations
+
+% __Market clearing and aggregation__
+
+    "Primary output breakdown"
+    %%% Q = Qx + Qy + Qj;
+    Q = Qx + Qy;
+
+    "Private consumption"
+    C = Copt + Chtm;
+
+    "Investment goods produced locally"
+    %%% II = Iy + PiIg_NGDP*NGDP/Pi + Ih + (1-gamma_Ij)*Ij + (1-gamma_Iz)*Iz;
+    II = Iy + PiIg_NGDP*NGDP/Pi + Ih + (1-gamma_Iz)*Iz;
+
+    "Local production breakdown"
+    Y = C + PcGg_NGDP*NGDP/Pc + II;
+
+
+% __Exports and imports__
+
+    %%% PxX = Pq*Qx + Pz*Z + Pj*J;
+    PxX = Pq*Qx + Pz*Z;
+
+    %%% PmM = Pmy*My + Pmq*Mq + Pmz*Mz + gamma_Ij*Pmj*Ij + gamma_Iz*Pmz*Iz;
+    PmM = Pmy*My + Pmq*Mq + Pmz*Mz + gamma_Iz*Pmz*Iz;
+
+    PcC = Pc*C;
+    PcG = Pc*G;
+    PiII = Pi*II;
+
+    %%% PiI = Pi*II + gamma_Ij*Pij*Ij + gamma_Iz*Piz*Iz;
+    PiI = Pi*II + gamma_Iz*Piz*Iz;
+
+    PxX_NGDP = PxX / NGDP;
+    PmM_NGDP = PmM / NGDP;
+
+
+% __International investment position / BOP__
+
+    NIP_NGDP = BWh_NGDP + BWcb_NGDP + BWpif_NGDP - BGw_NGDP;
+    NIP_NGDP_adj = NIP_NGDP + BWjz_NGDP;
+
+    BWh_NGDP + BWcb_NGDP + BWpif_NGDP - BGw_NGDP = ...
+        + Rw_star{-1}*S/S{-1}*BWh_NGDP{-1}/dNGDP ...
+        + Rw_star{-1}*S/S{-1}*BWcb_NGDP{-1}/dNGDP ...
+        + Rw_star{-1}*S/S{-1}*BWpif_NGDP{-1}/dNGDP ...
+        - Rg_star{-1}*S/S{-1}*BGw_NGDP{-1}/dNGDP ...
+        - TFw_NGDP ...
+        - PIEw_NGDP ...
+        + PxX_NGDP ...
+        - PmM_NGDP ...
+    ;
+
+
+% __Nominal GDP__
+
+    "Nominal GDP"
+    NGDP = PcC + PcG + PiI + PxX - PmM;
+
+
+    "Nominal GDP excluding primary value added"
+    NGDPX = NGDP - VAq_NGDP*NGDP;
+
+
+    "Gross rate of change in real investment"
+    dI = ...
+        + movavg(PiII/PiI, -2) * II/II{-1} ...
+        ... + movavg(gamma_Ij*Pij*Ij/PiI, -2) * Ij/Ij{-1} ...
+        + movavg(gamma_Iz*Piz*Iz/PiI, -2) * Iz/Iz{-1} ...
+    !! dI = ss_dA;
+
+
+    "Gross rate of change in real exports"
+    dX = ...
+        + movavg(Pq*Qx/PxX, -2) * Qx/Qx{-1} ...
+        ... + movavg(Pj*J/PxX, -2) * J/J{-1} ...
+        + movavg(Pz*Z/PxX, -2) * Z/Z{-1} ...
+    !! dX = ss_dA;
+
+
+    "Gross rate of change in real imports"
+    dM = ...
+        + movavg(Pmy*My/PmM, -2) * My/My{-1} ...
+        + movavg(Pmq*Mq/PmM, -2) * Mq/Mq{-1} ...
+        + movavg(Pmz*Mz/PmM, -2) * Mz/Mz{-1} ...
+        ... + movavg(gamma_Ij*Pmj*Ij/PmM, -2) * Ij/Ij{-1} ...
+        + movavg(gamma_Iz*Pmz*Iz/PmM, -2) * Iz/Iz{-1} ...
+    !! dM = ss_dA;
+
+
+    "Gross rate of change in real GDP"
+    dGDP = ...
+        + movavg(PcC/NGDP, -2) * C/C{-1} ...
+        + movavg(PcG/NGDP, -2) * G/G{-1} ...
+        + movavg(PiI/NGDP, -2) * dI ...
+        + movavg(PxX/NGDP, -2) * dX ...
+        - movavg(PmM/NGDP, -2) * dM ...
+    !! dGDP = ss_dA;
+
+
+    "Gross rate of change in real GDP exluding primary value added"
+    dGDPX = ...
+        + movavg(NGDP/NGDPX, -2) * dGDP ...
+        - movavg(VAq_NGDP*NGDP/NGDPX, -2) * Q/Q{-1} ...
+    !! dGDPX = ss_dA;
+
+
+    PcC_NGDP = PcC / NGDP;
+
+    PiI_NGDP = PiI / NGDP;
+
+    WN_NGDP = WNy_NGDP + WNz_NGDP + WNg_NGDP;
+
+    "Nomial GDP excluding primary exports to nominal GDP ratio"
+    NGDPX_NGDP * NGDP = NGDPX;
+
+    VAy_NGDP = (Pc*C + PcGg_NGDP*NGDP + Pi*II - Pmy*My) / NGDP;
+
+    VAy_PkyKy = VAy_NGDP / PkyKy_NGDP;
+
+    WNy_VAy = WNy_NGDP / VAy_NGDP;
+
+    TB_NGDP = (PxX - PmM) / NGDP;
+
+    "Consumer real exchange rate"
+    RER = S*Pw_star / Pc;
+

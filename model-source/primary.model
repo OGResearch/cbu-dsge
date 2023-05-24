@@ -1,0 +1,98 @@
+%% Primary exports
+
+!variables
+
+    "Production of primary commodity" Q
+    "Foreign price of primary commodity" Pq_star
+    "Foreign unit cost of primary production maintenance services" Pmq_star
+    "Price of primary commodity" Pq
+    "Unit cost of primary production maintenance services" Pmq
+    "Primary production specific technology" Aq
+    "Real world price of primary commodity" Pq_Pw
+    "Real world price of maintenance services" Pmq_Pw
+    "Primary production maintenance services" Mq
+    "Share of primary production maintenance services to primary production revenues" PmqMq_PqQ
+    "Profits in primary production to GDP ratio" PIEq_NGDP
+    "Value added in primary production to GDP ratio" VAq_NGDP
+    "Primary production to GDP ratio" PqQ_NGDP
+    "Primary production maintenance services to GDP ratio" PmqMq_NGDP
+    "Transfers to households from primary producers to GDP ratio"  TFq_NGDP
+
+
+!parameters
+
+    % Directly Calibrated Ratios and Rates
+    "S/S Primary Production Specific Technology" ss_Aq
+    "S/S Real World Price of Primary Commodity" ss_Pq_Pw
+    "S/S Real World Price of Imports to Primary Sector" ss_Pmq_Pw
+    "S/S Transfers to Households from Primary Producers"   ss_TFq_PqQ
+    "S/S Import intensity of Primary Production" gamma_Mq
+
+    % Transitory Parameters
+    "Autoregression in Relative Sectoral Productivity in Primary Production" rho_Aq
+    "Autoregression in Real World Price of Primary Commodity" rho_Pq_Pw
+
+
+!log-variables !all-but
+
+    PIEq_NGDP
+    PmqMq_PqQ
+    PmqMq_NGDP
+    PqQ_NGDP
+    TFq_NGDP
+    VAq_NGDP
+
+
+!shocks
+
+    'Shock to Primary Export Specific Technology' shk_Aq
+    'Shock to World Price of Oil' shk_Pq_Pw
+
+
+!equations
+
+% __Primary exports__
+
+    Q = Aq * A;
+
+    log(Aq) = ...
+        + rho_Aq*log(Aq{-1}) ...
+        + (1-rho_Aq)*(log(ss_Aq) + shk_Aq) ...
+    !! Aq = ss_Aq;
+
+    Mq = gamma_Mq*Q;
+
+
+% __Transfers to households__
+
+    TFq_NGDP = ss_TFq_PqQ * PqQ_NGDP * (1 - TRwf);
+
+
+% __Profits and value added__
+
+    PIEq_NGDP*NGDP = Pq*Q*(1 - TRwf) - Pmq*Mq - TFq_NGDP*NGDP;
+    VAq_NGDP = (Pq*Q - Pmq*Mq) / NGDP;
+
+
+% __World prices__
+
+    Pq_star = Pq_Pw * Pw_star;
+    Pmq_star = Pmq_Pw* Pw_star;
+
+    Pq  = S * Pq_star;
+    Pmq = S * Pmq_star;
+    Pmq_Pw = ss_Pmq_Pw;
+
+
+% __Real world price of primary commodity__
+
+    log(Pq_Pw) = ...
+        + rho_Pq_Pw*log(Pq_Pw{-1}) ...
+        + (1-rho_Pq_Pw)*log(ss_Pq_Pw) + shk_Pq_Pw ...
+    !! Pq_Pw = ss_Pq_Pw;
+
+    PmqMq_PqQ = Pmq*Mq / (Pq*Q);
+
+    PqQ_NGDP*NGDP = Pq*Q;
+    PmqMq_NGDP*NGDP = Pmq*Mq;
+
