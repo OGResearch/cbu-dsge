@@ -10,7 +10,6 @@
     "Nominal domestically produced investment goods" PidId
     "Nominal investment" PiI
     "Nominal private consumption" PcCh
-    "Nominal government consumption" PcG
 
     "Exports to GDP ratio" PxX_NGDP
     "Imports to GDP Ratio" PmM_NGDP
@@ -78,7 +77,6 @@
     PmM = Pmy*My + Pmq*Mq + Pmz*Mz + gamma_Iz*Pmz*Iz;
 
     PcCh = Pc*Ch;
-    PcG = Pc*G;
     PidId = Pid*Id;
     PiI = Pid*Id + gamma_Iz*Piz*Iz;
 
@@ -106,7 +104,7 @@
 % __Nominal GDP__
 
     "Nominal GDP"
-    NGDP = PcCh + PcG + PiI + PxX - PmM;
+    NGDP = PcCh + PgG + PiI + PxX - PmM;
 
 
     "Nominal GDP excluding primary value added"
@@ -139,7 +137,7 @@
     "Gross rate of change in real GDP"
     dGDP = ...
         + movavg(PcCh/NGDP, -2) * Ch/Ch{-1} ...
-        + movavg(PcG/NGDP, -2) * G/G{-1} ...
+        + movavg(PgG/NGDP, -2) * G/G{-1} ...
         + movavg(PiI/NGDP, -2) * dI ...
         + movavg(PxX/NGDP, -2) * dX ...
         - movavg(PmM/NGDP, -2) * dM ...
