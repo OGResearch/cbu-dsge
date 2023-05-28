@@ -262,6 +262,19 @@ m.A = 1;
 m.Pw_star = 1;
 m.Pc = 1;
 
+
+m.A = 0.5;
+
+
+m = steady( ...
+    m ...
+    , "fixLevel", ["A", "Pw_star", "Pc"] ...
+    , "blocks", true ...
+);
+
+checkSteady(m);
+
+
 swap = string.empty(0, 2);
 
 % Net investment position
@@ -273,14 +286,9 @@ swap = [swap; "NIP_NGDP", "zeta_Rg0"];
 m.PidIg_NGDP = 0.08;
 swap = [swap; "PidIg_NGDP", "ss_Kg_A"];
 
-
-% Convergence helpers
-%m.Ky = 1;
-
-m.A = 0.5;
-m1 = m;
-
-
+% Energy volume
+m.PjJ_NGDP = 0.04;
+swap = [swap; "PjJ_NGDP", "gamma_J"];
 
 m = steady( ...
     m ...

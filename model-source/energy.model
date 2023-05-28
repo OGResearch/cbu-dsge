@@ -6,12 +6,14 @@
     "Price of energy" Pj
     "Price of energy, Y/Y" dPj
     "Energy inputs" J
-    "Value added in energy sector" VAj_NGDP
+    "Value added in energy sector to GDP" VAj_NGDP
+    "Energy volume to GDP" PjJ_NGDP
 
 
 !log-variables !all-but
 
     VAj_NGDP
+    PjJ_NGDP
 
 
 !shocks
@@ -40,5 +42,9 @@
 
     "Price of energy, Y/Y"
     dPj = Pj / Pj{-1};
+
+
+    "Energy volume to GDP"
+    PjJ_NGDP = Pj * J / NGDP;
 
 
