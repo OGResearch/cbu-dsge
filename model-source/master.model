@@ -6,7 +6,8 @@
     "Net Investment Position to GDP Ratio" NIP_NGDP
     "Net investment position to GDP ratio adjusted for equity flows" NIP_NGDP_adj
     "Real commodity exports" Q
-    "Investment" I
+    "Total demand for investment goods" I
+    "Total demand for consumption goods" C
     "Nominal investment" PiI
     "Nominal private consumption" PcCh
 
@@ -57,11 +58,14 @@
 % __Market clearing and aggregation__
 
 
-    "Investment goods produced locally"
-    I = Iy + PiIg_NGDP*NGDP/Pi + Ih + Iz;
+    "Total demand for investment goods"
+    I = Iy + Ig + Ih + Iz;
+
+    "Total demand for consumption goods"
+    C = Ch + Cg;
 
     "Local production breakdown"
-    Y = Ch + PcCg_NGDP*NGDP/Pc + I;
+    Y = C + I;
 
 
 % __Exports and imports__
