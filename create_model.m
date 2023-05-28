@@ -192,7 +192,6 @@ m.ss_Bgw_Bg = 1 - 0.14; %%%0.5;
 
 % Transfers
 m.ss_TFgh_NGDP = 0; %%%0.01;
-m.ss_TFhtm_TFh = 0; %%%0.65;
 
 % Government consumption
 m.ss_PcG_NGDP = 0.24;
@@ -228,7 +227,6 @@ m.lambda_TXls2 = 0.5;
 
 m.lambda_Ig1 = 1.5;%0.5; 
 
-m.lambda_TFopt = 0.6;
 m.lambda_Bg_NGDP_tar = 0.93;
 m.lambda_Bwf = 0.05; 
 m.lambda_BWjz = 0.05;

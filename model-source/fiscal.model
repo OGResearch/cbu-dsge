@@ -32,8 +32,8 @@
     TXls_NGDP
 
     TFgh_NGDP
-    TFopt_NGDP
-    TFhtm_NGDP
+    TFgopt_NGDP
+    TFghtm_NGDP
 
     "Balancing net government transfers to GDP ratio" TFother_NGDP
 
@@ -67,8 +67,8 @@
     TXls_NGDP
 
     TFgh_NGDP
-    TFopt_NGDP
-    TFhtm_NGDP
+    TFgopt_NGDP
+    TFghtm_NGDP
     TFother_NGDP
 
     IntBgh_NGDP
@@ -100,7 +100,7 @@
     ss_WNg_NGDP
     ss_TRvat
     ss_TFgh_NGDP
-    ss_TFhtm_TFh
+    ss_TFghtm_TFh
     ss_TXls_NGDP
 
 
@@ -108,7 +108,6 @@
 
     "Smoothing of target for government debt to GDP ratio" lambda_Bg_NGDP_tar
     "Smoothing of government reserve deposit" lambda_BCBg
-    "Smoothing of government transfers to households" lambda_TFopt
     "Government investment reaction to government investment to consumption ratio" lambda_Ig1
     lambda_Cg1
     lambda_Cg2
@@ -123,12 +122,12 @@
     "Shock to government reserve at the central bank" shk_Bg_NGDP_tar
     "Shock to government external debt" shk_Bgw
     "Shock to government reserve deposit" shk_BCBg
-    "Shock to government transfers for optimizing households" shk_TFopt
+    "Shock to government transfers for optimizing households" shk_TFgopt
     "Shock to government investment" shk_Ig
     "Shock to government wage bill to GDP ratio" shk_WNg_NGDP
     "Shock to government consumption of goods" shk_Cg
     "Shock to government employment" shk_Ng
-    shk_TFhtm_NGDP
+    shk_TFghtm_NGDP
     shk_TXls
     "Shock to government PIF transfers to GDP" shk_TFfg_NGDP
 
@@ -249,11 +248,11 @@
     !! TXls_NGDP = ss_TXls_NGDP;
 
     "Governments transfers to households"
-    TFgh_NGDP = TFopt_NGDP + TFhtm_NGDP;
+    TFgh_NGDP = TFgopt_NGDP + TFghtm_NGDP;
 
     TFgh_NGDP = ss_TFgh_NGDP;
 
-    TFhtm_NGDP = omega_TFgh * TFgh_NGDP;
+    TFghtm_NGDP = omega_TFgh * TFgh_NGDP;
 
     "Balancing net government transfers to GDP ratio"
     TFother_NGDP = &TFother_NGDP ...

@@ -41,7 +41,6 @@
 
     "Household net worth to GDP ratio" PcVh_NGDP
     "Capital in local sectors to GDP ratio" PkyKy_NGDP
-    "Remittances to GDP ratio" TFwh_NGDP
 
     "Marginal cost of local intermediate goods" Py1
     "Markuped marginal cost in local sectors" Py
@@ -85,7 +84,6 @@
     PcVh_NGDP
     PkyKy_NGDP
     DLIopt_Copt
-    TFwh_NGDP
     My_Y2
     Y3_Y2
     PIEy_NGDP
@@ -198,7 +196,7 @@
     Pc*Vh = Pky*(Ky + Kh) + (Bgh_NGDP - Bhw_NGDP)*NGDP;
 
     "Real current income of optimizing households"
-    Pc*DLIopt = (WNopt_NGDP + TFopt_NGDP)*NGDP;
+    Pc*DLIopt = (WNopt_NGDP + TFgopt_NGDP)*NGDP;
 
     "Calibration of net worth utility component"
     Copt_Vh_nu0 = Copt/Vh - nu0;
@@ -224,10 +222,7 @@
 % __Hand-to-mouth households__
 
     "Real current income of hand-to-mouth households"
-    Pc*DLIhtm = (WNhtm_NGDP + TFhtm_NGDP - omega_TFwh*TFwh_NGDP)*NGDP;
-
-    "Remittances from hand-to-mouth households"
-    TFwh_NGDP = ss_TFwh_NGDP;
+    Pc*DLIhtm = (WNhtm_NGDP + TFghtm_NGDP - omega_TFwh*TFwh_NGDP)*NGDP;
 
     "Demand for consumption by optimizing households"
     Chtm = DLIhtm;

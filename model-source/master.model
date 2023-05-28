@@ -8,6 +8,7 @@
     "Total demand for investment goods" I
     "Total demand for consumption goods" C
 
+    "Remittances to GDP ratio" TFwh_NGDP
     "Exports to GDP ratio" PxX_NGDP
     "Imports to GDP Ratio" PmM_NGDP
     "Nominal GDP" NGDP
@@ -38,6 +39,7 @@
     NIP_NGDP
     PcCh_NGDP
     PiI_NGDP
+    TFwh_NGDP
     PmM_NGDP
     PxX_NGDP
     TB_NGDP
@@ -68,6 +70,10 @@
     PmM_NGDP*NGDP = Pmy*My + Pmz*Mz;
 
     PxX_NGDP*NGDP = (Pq*Q + Pz*Z);
+
+
+    "Remittances from abroad to households"
+    TFwh_NGDP = ss_TFwh_NGDP;
 
 % __International investment position / BOP__
 
