@@ -188,7 +188,7 @@ m.kappa_dS = 1;
 
 % Government debt
 m.ss_Bg_NGDP = 0; %%%0.2; 
-m.ss_Bgw_BG = 0; %%%0.5;
+m.ss_Bgw_Bg = 0; %%%0.5;
 
 % Transfers
 m.ss_TFh_NGDP = 0; %%%0.01;
@@ -230,7 +230,6 @@ m.lambda_TFopt = 0.6;
 m.lambda_Bg_NGDP_tar = 0.93;
 m.lambda_Bwf = 0.05; 
 m.lambda_BWjz = 0.05;
-m.lambda_Bgw = 1; 
 m.lambda_BCBg = 0.5;
 
 
@@ -373,8 +372,8 @@ m.ss_PiIg_NGDP = 0.08; % Public non-financial investment to GDP
 m.ss_WNg_NGDP = 0.16; % Public sector wage bill to GDP
 m.ss_Wg_Wopt = 1.50; % Public sector wages to private sector OPT wages
 
-m.ss_Bg_NGDP = 0.2;  % Total public gross debt
-m.ss_Bgw_BG = 0.5;  % Share of external debt in Total public gross debt
+m.ss_Bg_NGDP = 0.40;  % Total public gross debt
+m.ss_Bgw_Bg = 1-0.14;;  % Share of external debt in Total public gross debt
 m.ss_BCBg_NGDP = 0.15; % Gvmt reserve at SAMA
 m.ss_BWcbX_NGDP = 0.35; % SAMA FX met reserves (w/o Gvmt reserve)
 m.ss_Bwf_NGDP = 0.05; % PIF external assets to GDP

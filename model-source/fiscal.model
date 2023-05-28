@@ -89,7 +89,7 @@
 
     % Steady-state parameters
 
-    "S/S Share of foreign govt debt in total govt debt" ss_Bgw_BG
+    "S/S Share of foreign govt debt in total govt debt" ss_Bgw_Bg
     "S/S Government gross debt to GDP ratio" ss_Bg_NGDP
 
     "Depreciation of public infrastructure capital" delta_Kg
@@ -112,7 +112,6 @@
 
     % Dynamic parameters
 
-    "Smoothing of external government debt" lambda_Bgw
     "Smoothing of target for government debt to GDP ratio" lambda_Bg_NGDP_tar
     "Smoothing of government reserve deposit" lambda_BCBg
     "Smoothing of government transfers to households" lambda_TFopt
@@ -185,10 +184,7 @@
     ;
 
     "Rule for external government debt"
-    Bgw_NGDP*NGDP/S = Bgw_NGDP{-1}*NGDP{-1}/S{-1}*dNGDP{+4}/dS{+1} ...
-        + lambda_Bgw*(ss_Bgw_BG * Bg_NGDP{+1} - Bgw_NGDP{+1})*NGDP/S ...
-        + shk_Bgw*NGDP/S ...
-    !! Bgw_NGDP = ss_Bgw_BG * ss_Bg_NGDP;
+    Bgw_NGDP = ss_Bgw_Bg * ss_Bg_NGDP;
 
 
     % Public infrastructure
