@@ -49,7 +49,7 @@
 !equations
 
     "Optimal flexible wage rate of optimizing households"
-    Wopt_flex * LAMBDA = Nopt^eta;
+    Wopt_flex * Lambda = Nopt^eta;
 
     "Private-sector wage rate for optimizing households"
     log(Wopt/Pc) = ...
