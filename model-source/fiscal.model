@@ -1,8 +1,6 @@
 
 !variables
 
-    BWcbX_NGDP
-
     BG_NGDP
     "Target for gross government debt to GDP ratio" BG_NGDP_tar
     BGh_NGDP
@@ -57,7 +55,6 @@
 
 !log-variables !all-but
 
-    BWcbX_NGDP
     BG_NGDP
     BG_NGDP_tar
     BGh_NGDP
@@ -160,11 +157,6 @@
 
 
 !equations
-
-
-% __Central bank foreign assets__
-
-    BWcbX_NGDP = ss_BWcbX_NGDP;
 
 % __Government budget__
 
