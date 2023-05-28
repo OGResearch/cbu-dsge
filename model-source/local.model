@@ -3,7 +3,7 @@
 
 !variables
 
-    AA
+    "Public infrastructure auxiliary variable" AA
     Y1, Y2, Y3, Py3
     My_Y2, Y3_Y2
     "Monetary policy reaction term" React
@@ -350,6 +350,7 @@
         + (1 - rho_A) * (log(ss_dA) + shk_A) ...
     !! A = ss_dA*A{-1};
 
+    "Public infrastructure augmented productivity"
     AA = A + iota*Kg;
 
     "Relative productivity in local sectors"

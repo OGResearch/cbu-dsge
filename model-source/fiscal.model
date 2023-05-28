@@ -5,7 +5,7 @@
     "Target for gross government debt to GDP" BG_NGDP_tar
     BGh_NGDP
     BGw_NGDP
-    BWpif_NGDP
+    Bwf_NGDP
 
     "Government Deficit to GDP Ratio" DEF_NGDP
 
@@ -47,7 +47,7 @@
 
     IntBGh_NGDP
     IntBGw_NGDP
-    IntBWpif_NGDP
+    IntBwf_NGDP
 
     "Government non-tax revenues to GDP ratio" PIEg_NGDP
 
@@ -62,7 +62,7 @@
     BG_NGDP_tar
     BGh_NGDP
     BGw_NGDP
-    BWpif_NGDP
+    Bwf_NGDP
     DEF_NGDP
     TFpif_NGDP
     TX_NGDP
@@ -91,7 +91,7 @@
 
     IntBGh_NGDP
     IntBGw_NGDP
-    IntBWpif_NGDP
+    IntBwf_NGDP
 
 
 !parameters
@@ -109,8 +109,8 @@
     "Distribution of commodity processing industry profits to foreign investors" psi_jw
     "Distribution of commodity processing industry profits to government" psi_jg
 
-    "Smoothing of PIF balance" lambda_BWpif
-    "S/S External position of the public investment fund to GDP ratio" ss_BWpif_NGDP
+    "Smoothing of PIF balance" lambda_Bwf
+    "S/S External position of the public investment fund to GDP ratio" ss_Bwf_NGDP
     "S/S Government consumption to GDP ratio" ss_PcG_NGDP
     "S/S Government investment to GDP ratio" ss_PidIg_NGDP
     ss_WNg_NGDP
@@ -313,20 +313,20 @@
 
 % __Public investment fund__
 
-    BWpif_NGDP = ...
-        + BWpif_NGDP{-1}*S/S{-1}/dNGDP ...
-        + IntBWpif_NGDP ...
+    Bwf_NGDP = ...
+        + Bwf_NGDP{-1}*S/S{-1}/dNGDP ...
+        + IntBwf_NGDP ...
         + TFpif_NGDP ...
         + psi_zg*PIEz_NGDP ...
         ... + psi_jg*PIEj_NGDP ...
     ;
 
-    IntBWpif_NGDP = (Rw_star{-1} - 1)*S/S{-1} * BWpif_NGDP{-1}/dNGDP;
+    IntBwf_NGDP = (Rw_star{-1} - 1)*S/S{-1} * Bwf_NGDP{-1}/dNGDP;
 
     TFpif_NGDP = ...
         + TFpif_NGDP{-1} * dNGDP_adj ...
-        + lambda_BWpif*(ss_BWpif_NGDP - BWpif_NGDP{+1}) + shk_TFpif_NGDP ...
-    !! BWpif_NGDP = ss_BWpif_NGDP;
+        + lambda_Bwf*(ss_Bwf_NGDP - Bwf_NGDP{+1}) + shk_TFpif_NGDP ...
+    !! Bwf_NGDP = ss_Bwf_NGDP;
 
 
 % __Fwl growth adjustment factor__

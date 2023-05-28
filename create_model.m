@@ -208,7 +208,7 @@ m.ss_Kg_A = 1;
 m.iota = 0.1;
 
 % Public investment fund
-m.ss_BWpif_NGDP = 0; %%%0.05;
+m.ss_Bwf_NGDP = 0; %%%0.05;
 
 % Tax rates
 m.ss_TRvat = 0; % to be reverse-engineered 
@@ -233,7 +233,7 @@ m.lambda_Ig1 = 1.5;%0.5;
 
 m.lambda_TFopt = 0.6;
 m.lambda_BG_NGDP_tar = 0.93;
-m.lambda_BWpif = 0.05; 
+m.lambda_Bwf = 0.05; 
 m.lambda_BWjz = 0.05;
 m.lambda_BGw = 1; 
 m.lambda_BCBg = 0.5;
@@ -348,7 +348,7 @@ m.ss_BG_NGDP    = 0.2;  % Total public gross debt
 m.ss_BGw_BG     = 0.5;  % Share of external debt in Total public gross debt
 m.ss_BCBg_NGDP  = 0.15; % Gvmt reserve at SAMA
 m.ss_BWcbX_NGDP = 0.35; % SAMA FX met reserves (w/o Gvmt reserve)
-m.ss_BWpif_NGDP = 0.05; % PIF external assets to GDP
+m.ss_Bwf_NGDP = 0.05; % PIF external assets to GDP
 
 
 % Financial markets
