@@ -1,0 +1,44 @@
+%% Local energy sector (J)
+
+
+!variables
+
+    "Price of energy" Pj
+    "Price of energy, Q/Q" dPj
+    "Energy inputs" J
+    "Value added in energy sector" VAj_NGDP
+
+
+!log-variables !all-but
+
+    VAj_NGDP
+
+
+!shocks
+
+    "Shock to price of energy" shk_Pj
+
+
+!parameters
+
+    "Adjustment coefficient in price of energy"  lambda_Pj
+
+
+!equations
+
+    "Price of energy"
+    log(dPj) = ...
+        + log(dPj{-1}) ...
+        + lambda_Pj * log(S * Pj_star / Pj) ...
+        + shk_Pj ...
+    !! Pj  = S * Pj_star;
+
+
+    "Value added in energy sector"
+    VAj_NGDP = Pj * J / NGDP;
+
+
+    "Price of energy, Q/Q"
+    dPj = Pj / Pj{-1};
+
+
