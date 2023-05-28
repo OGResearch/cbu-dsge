@@ -14,7 +14,6 @@ modelFiles = [
     "model-source/local.model"
     "model-source/fiscal.model"
     "model-source/primary.model"
-    ... "model-source/processing.model"
     "model-source/nonprimary.model"
     "model-source/foreign.model"
     "model-source/labor.model"
@@ -82,7 +81,7 @@ m.lambda_Ih1 = 0.05;
 
 % Steady state for exogenous variables
 m.ss_dA = 1.02;
-m.ss_dPc = 1.025;
+m.ss_dPc = 1.04;
 m.ss_Ay = 1;
 m.ss_S = 1;
 
@@ -166,6 +165,11 @@ m.psi_zw = 0; % share of foreign-owned equity in nonprimary export sectors
 m.psi_zg = 0; % share of PIF-owned equity nonprimary export sectors
 
 
+% __Monetary policy__
+
+m.rho_Rg = 0.5;
+m.kappa_dPc = 3;
+
 
 % __Fiscal__
 
@@ -246,6 +250,7 @@ m.rho_Whtm = 0.3;
 m.A = 1;
 m.Pw_star = 1;
 m.S = 1;
+m.Pc = 1;
 
 m.Ky = 5;
 

@@ -4,6 +4,7 @@
 
     Y1, Y2, Y3, Py3
     My_Y2, Y3_Y2
+    "Monetary policy reaction term" React
 
     "Shadow Price of Optimizing Household Budget" LAMBDA
     "Total Private Consumption" Ch
@@ -88,6 +89,7 @@
     PIEy_NGDP
     N0y_Ny
     PSIy
+    React
 
 
 !shocks
@@ -100,6 +102,9 @@
 
 
 !parameters
+
+    "Monetary policy reaction to inflation" kappa_dPc
+    "A/R Monetary policy rate" rho_Rg
 
     rho_My_Y2
     rho_Y3_Y2
@@ -343,8 +348,16 @@
 
 % __Monetary policy__
 
-    % Exchange rate peg
-    log(S) = log(S{-1}) + shk_S;
+    "Monetary policy reaction function"
+    log(Rg) = ...
+        rho_Rg * log(Rg{-1}) ...
+        + (1 - rho_Rg) * (log(&Rg) + React) ...
+    !! S = S{-1} * (ss_dPc / ss_dPw_star);
+
+
+    "Monetary policy reaction term"
+    React = kappa_dPc * log(dPc{+1}/ss_dPc) ...
+    !! React = 0;
 
 
 % __World prices in local currency__

@@ -4,7 +4,7 @@
 !variables
 
     "Price of energy" Pj
-    "Price of energy, Q/Q" dPj
+    "Price of energy, Y/Y" dPj
     "Energy inputs" J
     "Value added in energy sector" VAj_NGDP
 
@@ -38,7 +38,7 @@
     VAj_NGDP = Pj * J / NGDP;
 
 
-    "Price of energy, Q/Q"
+    "Price of energy, Y/Y"
     dPj = Pj / Pj{-1};
 
 

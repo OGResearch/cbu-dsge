@@ -4,7 +4,8 @@
 !variables
 
     "Foreign-currency risk-free world rate" Rw_star
-    "Foreign price level" Pw_star
+    "World prices" Pw_star
+    "World prices, Y/Y" dPw_star
     Pj_star
 
     "Profits of foreigners to GDP ratio" PIEw_NGDP
@@ -39,9 +40,9 @@
 !equations
 
     "World prices"
-    log(Pw_star/Pw_star{-1}) = ...
-        + rho_Pw_star*log(Pw_star{-1}/Pw_star{-2}) ...
-        + (1-rho_Pw_star)*log(ss_dPw_star) 
+    log(dPw_star) = ...
+        + rho_Pw_star * log(dPw_star{-1}) ...
+        + (1 - rho_Pw_star) * log(ss_dPw_star) ...
         + shk_dPw_star ...
     !! Pw_star = ss_dPw_star*Pw_star{-1};
 
@@ -66,4 +67,6 @@
     "World price of energy"
     Pj_star = ss_Pj_start_Pw_star * Pw_star;
 
+    "World prices, Y/Y"
+    dPw_star = Pw_star / Pw_star{-1};
 

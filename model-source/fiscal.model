@@ -42,9 +42,9 @@
     "Balancing net government transfers to GDP ratio" TFother_NGDP
 
 
-    IntrBGh_NGDP
-    IntrBGw_NGDP
-    IntrBWpif_NGDP
+    IntBGh_NGDP
+    IntBGw_NGDP
+    IntBWpif_NGDP
 
     "Government non-tax revenues to GDP ratio" PIEg_NGDP
 
@@ -86,9 +86,9 @@
     TFhtm_NGDP
     TFother_NGDP
 
-    IntrBGh_NGDP
-    IntrBGw_NGDP
-    IntrBWpif_NGDP
+    IntBGh_NGDP
+    IntBGw_NGDP
+    IntBWpif_NGDP
 
 
 !parameters
@@ -170,16 +170,16 @@
     BG_NGDP = BGh_NGDP + BGw_NGDP;
 
     "Interest on local government debt to GDP ratio"
-    IntrBGh_NGDP = (Rg{-1} - 1) * BGh_NGDP{-1}/dNGDP;
+    IntBGh_NGDP = (Rg{-1} - 1) * BGh_NGDP{-1}/dNGDP;
 
     "Interest on external government debt to GDP ratio"
-    IntrBGw_NGDP = (Rg_star{-1} - 1)*S/S{-1} * BGw_NGDP{-1}/dNGDP;
+    IntBGw_NGDP = (Rg_star{-1} - 1)*S/S{-1} * BGw_NGDP{-1}/dNGDP;
 
 
     "Dynamic budget constraint for government finance"
     0 - BGh_NGDP - BGw_NGDP = ...
         + (0 - BGh_NGDP{-1} - BGw_NGDP{-1}*S/S{-1})/dNGDP ...
-        + 0 - IntrBGh_NGDP - IntrBGw_NGDP ...
+        + (- IntBGh_NGDP - IntBGw_NGDP) ...
         + TX_NGDP ...
         + PIEg_NGDP ...
         - TFpif_NGDP ...
@@ -301,13 +301,13 @@
 
     BWpif_NGDP = ...
         + BWpif_NGDP{-1}*S/S{-1}/dNGDP ...
-        + IntrBWpif_NGDP ...
+        + IntBWpif_NGDP ...
         + TFpif_NGDP ...
         + psi_zg*PIEz_NGDP ...
         ... + psi_jg*PIEj_NGDP ...
     ;
 
-    IntrBWpif_NGDP = (Rw_star{-1} - 1)*S/S{-1} * BWpif_NGDP{-1}/dNGDP;
+    IntBWpif_NGDP = (Rw_star{-1} - 1)*S/S{-1} * BWpif_NGDP{-1}/dNGDP;
 
     TFpif_NGDP = ...
         + TFpif_NGDP{-1} * dNGDP_adj ...
