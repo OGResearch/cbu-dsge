@@ -187,17 +187,19 @@ m.kappa_dS = 1;
 % Steady-state parameters
 
 % Government debt
-m.ss_Bg_NGDP = 0; %%%0.2; 
-m.ss_Bgw_Bg = 0; %%%0.5;
+m.ss_Bg_NGDP = 0.40;
+m.ss_Bgw_Bg = 1 - 0.14; %%%0.5;
 
 % Transfers
-m.ss_TFh_NGDP = 0; %%%0.01;
+m.ss_TFgh_NGDP = 0; %%%0.01;
 m.ss_TFhtm_TFh = 0; %%%0.65;
 
 % Government consumption
 m.ss_PcG_NGDP = 0.24;
 m.ss_WNg_NGDP = 0.16;
 m.ss_Wg_Wopt = 1;
+
+m.omega_TFgh = 0.50;
 
 % Government investment
 m.ss_PiIg_NGDP = 0.08;

@@ -19,6 +19,7 @@
     "Public infrastructure capital" Kg
     "Target public infrastructure capital" Kg0
     "Public infrastructure investment" Ig
+
     Pg
     PgG
 
@@ -85,6 +86,9 @@
     "Depreciation of public infrastructure capital" delta_Kg
     "S/S Public infrastructure to productivity" ss_Kg_A
 
+    ss_PiIq_NGDP
+    omega_TFgh
+
     "Distribution of non-primary export profits to government" psi_zg
     "Distribution of nonprimary export profits to foreign investors" psi_zw
     "Distribution of commodity processing industry profits to government" psi_jg
@@ -95,7 +99,7 @@
     "S/S Government investment to GDP ratio" ss_PiIg_NGDP
     ss_WNg_NGDP
     ss_TRvat
-    ss_TFh_NGDP
+    ss_TFgh_NGDP
     ss_TFhtm_TFh
     ss_TXls_NGDP
 
@@ -187,6 +191,7 @@
     "Government investment to GDP"
     PiIg_NGDP = Pi*Ig / NGDP;
 
+
     "Government consumption expenditures"
     PgG_NGDP = PcCg_NGDP + WNg_NGDP;
 
@@ -246,15 +251,9 @@
     "Governments transfers to households"
     TFh_NGDP = TFopt_NGDP + TFhtm_NGDP;
 
-    "Government transfers to optimizing households to GDP ratio"
-    TFopt_NGDP = ...
-        + TFopt_NGDP{-1} / dNGDP ...
-        + lambda_TFopt*(ss_TFh_NGDP - TFh_NGDP{+1}) ...
-        + shk_TFopt ...
-    !! TFh_NGDP = ss_TFh_NGDP;
+    TFh_NGDP = ss_TFgh_NGDP;
 
-    "Government transfers to HTM households to GDP ratio"
-    TFhtm_NGDP = ss_TFhtm_TFh * TFh_NGDP + shk_TFhtm_NGDP;
+    TFhtm_NGDP = omega_TFgh * TFh_NGDP;
 
     "Balancing net government transfers to GDP ratio"
     TFother_NGDP = &TFother_NGDP ...
