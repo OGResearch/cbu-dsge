@@ -123,7 +123,6 @@ m.ss_Pq_Pw      = 1;
 m.ss_Pmq_Pw     = 1;
 m.gamma_Mq      = 0.15; % if non-primary exporters disabled, use m.gamma_Mq  = 0.29 in read_model
 m.ss_TRwf       = 0.5;
-m.ss_TFq_PqQ    = 0.05;
 m.gamma_J      = 0.07;
 
 % Autoregression Parameters
