@@ -1,8 +1,8 @@
 
 !variables
 
-    BG_NGDP
-    "Target for gross government debt to GDP ratio" BG_NGDP_tar
+    "Government debt to GDP" BG_NGDP
+    "Target for gross government debt to GDP" BG_NGDP_tar
     BGh_NGDP
     BGw_NGDP
     BWpif_NGDP
@@ -21,7 +21,7 @@
     Pg
     PgG
 
-    TRvat
+    "Value added tax rate" TRvat
     TRwf
     TRexp
     TRinp
