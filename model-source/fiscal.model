@@ -30,8 +30,6 @@
     TXvat_NGDP
     TXls_NGDP
 
-    "Total government primary revenues to GDP ratio" REV_NGDP
-
     TFh_NGDP
     TFopt_NGDP
     TFhtm_NGDP
@@ -42,8 +40,6 @@
     IntBgh_NGDP
     IntBgw_NGDP
     IntBwf_NGDP
-
-    "Government non-tax revenues to GDP ratio" PIEg_NGDP
 
     Ng
 
@@ -64,8 +60,6 @@
     PgG_NGDP
     PcCg_NGDP
     WNg_NGDP
-    PIEg_NGDP
-    REV_NGDP
 
     TRvat
 
@@ -166,7 +160,6 @@
         + (Bgh_NGDP{-1} + Bgw_NGDP{-1}*S/S{-1})/dNGDP ...
         + IntBgh_NGDP + IntBgw_NGDP ...
         - TX_NGDP ...
-        - PIEg_NGDP ...
         + TFfg_NGDP ...
         + TFh_NGDP ...
         + TFother_NGDP ...
@@ -234,7 +227,7 @@
     TRvat = ss_TRvat;
 
     "Government tax revenues to GDP ratio"
-    TX_NGDP = TXvat_NGDP + TXq_NGDP + TXls_NGDP;
+    TX_NGDP = TXvat_NGDP + TXq_NGDP + TXj_NGDP + TXls_NGDP;
 
     "Government tax revenues from value-added tax"
     TXvat_NGDP = TRvat/(1+TRvat) * (Pc*Ch/NGDP + PcCg_NGDP);
@@ -252,12 +245,6 @@
         + lambda_TXls2*(ss_TXls_NGDP - TXls_NGDP) ...
         + shk_TXls ...
     !! TXls_NGDP = ss_TXls_NGDP;
-
-    "Government non-tax revenues to GDP ratio"
-    PIEg_NGDP = PIEq_NGDP;
-
-    "Total government primary revenues to GDP ratio"
-    REV_NGDP = TX_NGDP + PIEg_NGDP;
 
     "Governments transfers to households"
     TFh_NGDP = TFopt_NGDP + TFhtm_NGDP;
