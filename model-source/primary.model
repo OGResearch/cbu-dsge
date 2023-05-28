@@ -57,11 +57,10 @@
     VAq_NGDP = Pq*Q / NGDP;
 
 
-% __World prices__
-
-    Pq_star = Pq_Pw * Pw_star;
+% __World price of primary commodities__
 
     Pq  = S * Pq_star;
+    Pq_star = Pq_Pw * Pw_star;
 
 
 % __Real world price of primary commodity__

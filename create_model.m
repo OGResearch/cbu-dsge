@@ -35,7 +35,7 @@ m = Model.fromFile( ...
 % Steady-state parameters
 
 m.ss_Rw_star = 1.030;
-m.ss_dPw_star = 1.025;
+m.ss_dPw_star = 1.03;
 m.ss_BWjz_NGDP = 0;
 m.ss_Pj_Pw = 1;
 
@@ -48,7 +48,7 @@ m.rho_Pw_star = 0.3;
 
 % Steady-state parameters
 
-m.beta = 0.97; 
+m.beta = 0.95; 
 m.delta_Ky = 0.20;
 m.delta_Kh = 0.20;
 
@@ -91,8 +91,8 @@ m.ss_Kh_Ky = 0.30; % to be reverse-engineered
 m.lambda_Ih1 = 0.05;
 
 % Steady state for exogenous variables
-m.ss_dA = 1.02;
-m.ss_dPc = 1.04;
+m.ss_dA = 1.04;
+m.ss_dPc = 1.05;
 m.ss_Ay = 1;
 
 % Transitory parameters
