@@ -22,14 +22,14 @@
     "Investment to GDP ratio" PiI_NGDP
     "Wage bill to GDP ratio" WN_NGDP
 
-    "Value Added in Local Production Sector to GDP Ratio" VAy_NGDP
+    "Value added in local production sector to GDP ratio" VAy_NGDP
     "Value added in local production sector per capital" VAy_PkyKy
     "Wage bill to value-added ratio in local sector" WNy_VAy
-    "Trade Balance to GDP Ratio" TB_NGDP
+    "Trade balance to GDP ratio" TB_NGDP
 
     "Nominal GDP excluding primary exports to nominal GDP ratio" NGDPx_NGDP
 
-    "Consumer Real Exchange Rate" RER
+    "Consumer real exchange rate" RER
 
 
 
