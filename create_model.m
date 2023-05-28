@@ -206,7 +206,7 @@ m.ss_Kg_A = 1;
 m.iota = 0.1;
 
 % Public investment fund
-m.ss_Bwf_NGDP = 0; %%%0.05;
+m.ss_Bwf_NGDP = 0.10;
 
 % Tax rates
 m.ss_TRvat = 0; % to be reverse-engineered 
