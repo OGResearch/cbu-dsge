@@ -9,7 +9,7 @@
 
     "Government Deficit to GDP Ratio" DEF_NGDP
 
-    "Government investment to public investment fund to GDP ratio" TFpif_NGDP
+    "Government investment to public investment fund to GDP ratio" TFfg_NGDP
     PidIg_NGDP
     PgG_NGDP
     PcCg_NGDP
@@ -27,12 +27,10 @@
     "Value added tax rate" TRvat
     TRwf
     TRexp
-    TRinp
 
     "Government tax revenues to GDP Ratio" TX_NGDP
     TXvat_NGDP
     TXexp_NGDP
-    TXinp_NGDP
     TXwf_NGDP 
     TXls_NGDP
 
@@ -64,7 +62,7 @@
     BGw_NGDP
     Bwf_NGDP
     DEF_NGDP
-    TFpif_NGDP
+    TFfg_NGDP
     TX_NGDP
     PidIg_NGDP
     PgG_NGDP
@@ -76,11 +74,9 @@
     TRvat
     TRwf
     TRexp
-    TRinp
 
     TXvat_NGDP
     TXexp_NGDP
-    TXinp_NGDP
     TXwf_NGDP 
     TXls_NGDP
 
@@ -117,7 +113,6 @@
     ss_TRvat
     ss_TRwf
     ss_TRexp
-    ss_TRinp
     ss_TFh_NGDP
     ss_TFhtm_TFh
     ss_TXls_NGDP
@@ -149,10 +144,9 @@
     "Shock to government consumption of goods" shk_Cg
     "Shock to government employment" shk_Ng
     shk_TRexp
-    shk_TRinp
     shk_TFhtm_NGDP
     shk_TXls
-    "Shock to government PIF transfers to GDP" shk_TFpif_NGDP
+    "Shock to government PIF transfers to GDP" shk_TFfg_NGDP
 
 
 !substitutions
@@ -186,7 +180,7 @@
         + (- IntBGh_NGDP - IntBGw_NGDP) ...
         + TX_NGDP ...
         + PIEg_NGDP ...
-        - TFpif_NGDP ...
+        - TFfg_NGDP ...
         - TFh_NGDP ...
         - TFother_NGDP ...
         - PgG_NGDP ...
@@ -260,21 +254,17 @@
 
     % Government tax rates
     TRvat = ss_TRvat;
-    TRinp = ss_TRinp + shk_TRinp;
     TRwf = ss_TRwf;
     TRexp = ss_TRexp + shk_TRexp;
 
     "Government tax revenues to GDP ratio"
-    TX_NGDP = TXvat_NGDP + TXinp_NGDP + TXexp_NGDP  + TXwf_NGDP + TXls_NGDP;
+    TX_NGDP = TXvat_NGDP + TXexp_NGDP  + TXwf_NGDP + TXls_NGDP;
 
     "Government tax revenues from value-added tax"
     TXvat_NGDP = TRvat/(1+TRvat) * (Pc*Ch/NGDP + PcCg_NGDP);
 
     "Government tax revenues from expat taxes"
     TXexp_NGDP = TRexp * Whtm * Nhtm / NGDP;
-
-    "Government tax revenues from production input taxes"
-    TXinp_NGDP = TRinp * (Wy*Ny + Pmy*My + Prky*Ky{-1} + Wz*Nz + Pmz*Mz)/NGDP;
 
     "Government tax revenues from windfall taxes"
     TXwf_NGDP = TRwf * Pq * Qx / NGDP;
@@ -316,16 +306,15 @@
     Bwf_NGDP = ...
         + Bwf_NGDP{-1}*S/S{-1}/dNGDP ...
         + IntBwf_NGDP ...
-        + TFpif_NGDP ...
+        - TFfg_NGDP ...
         + psi_zg*PIEz_NGDP ...
-        ... + psi_jg*PIEj_NGDP ...
     ;
 
     IntBwf_NGDP = (Rw_star{-1} - 1)*S/S{-1} * Bwf_NGDP{-1}/dNGDP;
 
-    TFpif_NGDP = ...
-        + TFpif_NGDP{-1} * dNGDP_adj ...
-        + lambda_Bwf*(ss_Bwf_NGDP - Bwf_NGDP{+1}) + shk_TFpif_NGDP ...
+    TFfg_NGDP = ...
+        + TFfg_NGDP{-1} * dNGDP_adj ...
+        - lambda_Bwf*(ss_Bwf_NGDP - Bwf_NGDP{+1}) + shk_TFfg_NGDP ...
     !! Bwf_NGDP = ss_Bwf_NGDP;
 
 

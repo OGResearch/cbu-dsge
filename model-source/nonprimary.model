@@ -103,14 +103,14 @@
     Z1 = Kz{-1}^(1 - gamma_Nz) * (AAz * NNz)^gamma_Nz;
 
     "Demand for labor in nonprimary export sectors"
-    gamma_Nz * Pz1 * Z1 = Wz * NNz * (1 + $AdjNNz$) * (1 + TRinp) ...
-    !! gamma_Nz * Pz1 * Z1 = Wz * NNz * (1 + TRinp);
+    gamma_Nz * Pz1 * Z1 = Wz * NNz * (1 + $AdjNNz$) ...
+    !! gamma_Nz * Pz1 * Z1 = Wz * NNz;
 
     %AAz = Az * A^(1-gamma_Kz) * Kz{-1}^gamma_Kz;
     AAz = Az * AA;
 
     "Nominal marginal cost in nonprimary export sectors"
-    Pz0 = mu_Z * (gamma_Mz*Pmz*(1 + TRinp) + (1-gamma_Mz)*Pz1);
+    Pz0 = mu_Z * (gamma_Mz*Pmz + (1-gamma_Mz)*Pz1);
 
     "Demand for imported inputs in nonprimary export sectors"
     Mz = gamma_Mz * Z;
@@ -177,7 +177,7 @@
 
     % Nonprimary exporters profits including capital income
     WNz_NGDP = (Wz*N0z + Wz*NNz) / NGDP;
-    PIEz_NGDP*NGDP = Pz*Z - WNz_NGDP*NGDP - Pmz*Mz - (WNz_NGDP*NGDP + Pmz*Mz)*TRinp - PizIz_NGDP*NGDP;
+    PIEz_NGDP*NGDP = Pz*Z - WNz_NGDP*NGDP - Pmz*Mz - PizIz_NGDP*NGDP;
     VAz_NGDP = (Pz*Z - Pmz*Mz) / NGDP;
     PkzKz_NGDP = Pkz*Kz / NGDP;
     VAz_PkzKz = VAz_NGDP / PkzKz_NGDP;

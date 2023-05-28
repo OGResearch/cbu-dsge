@@ -211,7 +211,6 @@ m.ss_Bwf_NGDP = 0; %%%0.05;
 
 % Tax rates
 m.ss_TRvat = 0; % to be reverse-engineered 
-m.ss_TRinp = 0; % to be reverse-engineered 
 m.ss_TRexp = 0; % to be reverse-engineered 
 % m.ss_TRwf = 0; % defined in Primary sector
 
@@ -278,9 +277,8 @@ checkSteady(m);
 swap = string.empty(0, 2);
 
 % Net investment position
-m.NIP_NGDP = -0.50;
+m.NIP_NGDP = -0.40;
 swap = [swap; "NIP_NGDP", "zeta_Rg0"];
-
 
 % Public infrastructure expenditures
 m.PidIg_NGDP = 0.08;
@@ -308,7 +306,17 @@ t = table( ...
 
 disp(t)
 
+m = solve(m);
+
 save mat/create_model.mat m
+
+
+
+
+
+
+
+
 
 
 return
