@@ -73,7 +73,7 @@
     "Household NFA to GDP Ratio"  BWh_NGDP
     "Auxiliary Variable for Disposable Labor Income to Consumption Ratio" DLIopt_Copt
 
-    % "Wage bill of HTM households to GDP ratio" WhtmNhtm_NGDP
+    PmyMy_NGDP
 
 
 !log-variables !all-but
@@ -93,6 +93,7 @@
     N0y_Ny
     PSIy
     React
+    PmyMy_NGDP
 
 
 !shocks
@@ -412,6 +413,8 @@
     DLIopt_Copt = DLIopt / Copt;
     PcVh_NGDP*NGDP = Pc*Vh;
     PkyKy_NGDP*NGDP = Pky*Ky;
+    PmyMy_NGDP*NGDP = Pmy*My;
+
 
     "Profit margins (excluding adjustment costs, excluding input tax) in local production"
     PSIy * (Py*Y - PIEy_NGDP*NGDP) = Py*Y;

@@ -15,7 +15,6 @@
     "Imports to GDP Ratio" PmM_NGDP
     "Nominal GDP" NGDP
     "Nominal GDP excluding commodity sector" NGDPX
-    "Nominal Imports" PmM
     "Nominal Exports" PxX
     "Gross rate of change in real investment" dI
     "Gross rate of change in real exports" dX
@@ -78,7 +77,6 @@
     PiI = Pid*Id;
 
     PxX_NGDP = PxX / NGDP;
-    PmM_NGDP = PmM / NGDP;
 
 
 % __International investment position / BOP__
@@ -122,8 +120,8 @@
 
     "Gross rate of change in real imports"
     dM = ...
-        + movavg(Pmy*My/PmM, -2) * My/My{-1} ...
-        + movavg(Pmz*Mz/PmM, -2) * Mz/Mz{-1} ...
+        + movavg(PmyMy_NGDP/PmM_NGDP, -2) * My/My{-1} ...
+        + movavg(PmzMz_NGDP/PmM_NGDP, -2) * Mz/Mz{-1} ...
     !! dM = ss_dA;
 
 
@@ -132,7 +130,7 @@
         + movavg(PcCh/NGDP, -2) * Ch/Ch{-1} ...
         + movavg(PgG/NGDP, -2) * G/G{-1} ...
         + movavg(PiI/NGDP, -2) * dI ...
-        + movavg(PxX/NGDP, -2) * dX ...
+        + movavg(PxX_NGDP, -2) * dX ...
         - movavg(PmM_NGDP, -2) * dM ...
     !! dGDP = ss_dA;
 
@@ -159,8 +157,9 @@
 
     WNy_VAy = WNy_NGDP / VAy_NGDP;
 
-    TB_NGDP = (PxX - PmM) / NGDP;
+    TB_NGDP = PxX_NGDP - PmM_NGDP;
 
     "Consumer real exchange rate"
     RER = S*Pw_star / Pc;
+
 
