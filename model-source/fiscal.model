@@ -17,7 +17,9 @@
 
     "Government consumption" G
     "Government consumption of goods" Cg
-    "Government investment" Ig
+
+    "Public infrastructure capital" Kg
+    "Public infrastructure investment" Ig
     Pg
     PgG
 
@@ -97,6 +99,8 @@
 
     "S/S Share of foreign govt debt in total govt debt" ss_BGw_BG
     "S/S Government gross debt to GDP ratio" ss_BG_NGDP
+
+    "Depreciation of public infrastructure capital" delta_Kg
 
     "Distribution of non-primary export profits to government" psi_zg
     "Distribution of nonprimary export profits to foreign investors" psi_zw
@@ -199,12 +203,15 @@
         + shk_BGw*NGDP/S ...
     !! BGw_NGDP = ss_BGw_BG * ss_BG_NGDP;
 
-    "Government investment"
+    "Public infrastructure investment"
     log(Ig) = ...
         + log(ss_dA * Ig{-1}) ...
         + lambda_Ig1*(ss_PidIg_NGDP - PidIg_NGDP{+1}) ...
         + shk_Ig ...
     !! PidIg_NGDP = ss_PidIg_NGDP;
+
+    "Public infrastructure capital"
+    Kg = (1 - delta_Kg) * Kg{-1} + Ig;
 
     "Definitin of government investment to GDP ratio"
     PidIg_NGDP = Pid*Ig / NGDP;

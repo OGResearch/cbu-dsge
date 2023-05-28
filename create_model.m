@@ -79,10 +79,12 @@ m.gamma_Ny = 0.37; % to be reverse-engineered
 m.ss_N0y = 0.65; % to be reverse-engineered 
 
 % Interest rate premia
-m.zeta_Rg0 = 0.88; % to be reverse-engineered 
-m.zeta_Rg1 = 0.015;
-m.zeta_Rh0 = 0.0; % to be reverse-engineered 
+m.zeta_Rg0 = 0; % to be reverse-engineered 
+m.zeta_Rg1 = 0.10; 0.015;
+m.zeta_Rh0 = 0; % to be reverse-engineered 
 m.zeta_Rh1 = 0.1;0.2;
+
+m.sigma = 0.7;
 
 % Directly calibrated ratios and rates
 
@@ -156,14 +158,14 @@ m.ss_N0z_Kz = 0.12; % to be reverse-engineered
 m.ss_N0z = 0.3; % to be reverse-engineered 
 m.alpha_Z = 1; 0.73; % to be reverse-engineered 
 
-m.ss_Zref_Az = 1;
+m.ss_Z0_Az = 1;
 
 % Transitory parameters
 
 % Autoregressive Coefficients
 m.rho_Az = 0.5;
 m.lambda_Kz = 0.5;
-m.lambda_Zref = 0.7;
+m.lambda_Z0 = 0.7;
 
 % Adjustment Costs
 m.xi_NNz = 0;
@@ -201,6 +203,7 @@ m.ss_Wg_Wopt = 1;
 
 % Government investment
 m.ss_PidIg_NGDP = 0.08;
+m.delta_Kg = 0.10;
 
 % Public investment fund
 m.ss_BWpif_NGDP = 0; %%%0.05;
@@ -258,12 +261,23 @@ m.A = 1;
 m.Pw_star = 1;
 m.Pc = 1;
 
+swap = string.empty(0, 2);
+
+% Net investment position
+m.NIP_NGDP = -0.50;
+swap = [swap; "NIP_NGDP", "zeta_Rg0"];
+
+
+% Convergence helpers
 m.Ky = 5;
+
 
 m = steady( ...
     m ...
     , "fixLevel", ["A", "Pw_star", "Pc"] ...
     , "blocks", true ...
+    , "exogenize", swap(:, 1) ...
+    , "endogenize", swap(:, 2) ...
 );
 
 

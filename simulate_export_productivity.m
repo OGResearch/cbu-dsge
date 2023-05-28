@@ -13,6 +13,7 @@ clear
 load mat/create_model.mat m
 
 m0 = m;
+checkSteady(m0);
 
 
 %% Create model with higher productivity
@@ -24,7 +25,6 @@ m1 = steady( ...
     m1 ...
     , "fixeLeveL", ["A", "Pw_star", "Pc"] ...
 );
-
 checkSteady(m1);
 m1 = solve(m1);
 
@@ -59,6 +59,7 @@ ch.Range = 0:40;
 ch.PlotSettings = {"marker", "s"};
 
 ch + ["Copt", "Chtm", "Iy", "Kz", "Iz"];
+ch + ["NIP_NGDP", "S", "dPc", "Rg", "W/Pc"];
 
 draw(ch, smc1);
 

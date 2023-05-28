@@ -15,7 +15,7 @@
     "Imported inputs to nonprimary exports" Mz
     "Imported inputs to nonprimary exports to GDP ratio" PmzMz_NGDP
     "Nonprimary exports" Z
-    "Reference level for nonprimary exports" Zref
+    "Reference level for nonprimary exports" Z0
     "Stage T-1 production in nonprimary exports" Z1
     "Nominal marginal cost in nonprimary exports" Pz0
     "Import prices in nonprimary exports" Pmz
@@ -38,7 +38,7 @@
 
 !parameters
 
-    ss_Zref_Az
+    ss_Z0_Az
     "Share of expats in variable labor in nonprimary export sectors" upsilon_Z
     delta_Kz
     "Markup over factor cost of nonprimary exporters" mu_Z
@@ -61,14 +61,14 @@
 
     "Autoregression in nonprimary export technology" rho_Az
     "Adjustment parameter in nonprimary export capital" lambda_Kz
-    lambda_Zref
+    lambda_Z0
 
 
 !shocks
 
     "Shock to nonprimary export specific technology" shk_Az
     "Shock to capital volume used by nonprimary exporters" shk_Kz
-    shk_Zref
+    shk_Z0
 
 
 !log_variables !all_but
@@ -100,13 +100,14 @@
     N0z = ss_N0z_Kz * (Kz/A)^gamma_N0z;
 
     "Stage T-1 production function in nonprimary export sectors"
-    Z1 = Kz{-1}^(1-gamma_Nz) * (AAz*NNz)^gamma_Nz;
+    Z1 = Kz{-1}^(1 - gamma_Nz) * (AAz * NNz)^gamma_Nz;
 
     "Demand for labor in nonprimary export sectors"
     gamma_Nz * Pz1 * Z1 = Wz * NNz * (1 + $AdjNNz$) * (1 + TRinp) ...
     !! gamma_Nz * Pz1 * Z1 = Wz * NNz * (1 + TRinp);
 
-    AAz = Az * A^(1-gamma_Kz) * Kz{-1}^gamma_Kz;
+    %AAz = Az * A^(1-gamma_Kz) * Kz{-1}^gamma_Kz;
+    AAz = Az * A;
 
     "Nominal marginal cost in nonprimary export sectors"
     Pz0 = mu_Z * (gamma_Mz*Pmz*(1 + TRinp) + (1-gamma_Mz)*Pz1);
@@ -118,15 +119,15 @@
     Z1 = (1 - gamma_Mz) * Z;
 
     "Marginal cost equals final price in export sectors"
-    Pz = Pz0*[1 + xi_Z*log(Z / Zref)] ...
+    Pz = Pz0*[1 + xi_Z*log(Z / Z0)] ...
     !! Pz = Pz0;
 
     % Reference level for nonprimary export production
-    log(Zref) = ...
-        + log(Zref{-1} * ss_dA) ...
-        + lambda_Zref * (log(A * Az * &Z / (&A * &Az)) - log(Zref)) ...
-        + shk_Zref ...
-    !! Zref = Z;
+    log(Z0) = ...
+        + log(Z0{-1} * ss_dA) ...
+        + lambda_Z0 * (log(A * Az * &Z / (&A * &Az)) - log(Z0)) ...
+        + shk_Z0 ...
+    !! Z0 = Z;
 
 
 % __Autonomous capital supply to nonprimary export sectors__
@@ -136,10 +137,13 @@
         + log(Iz{-1} * ss_dA) ...
         + lambda_Kz * log(Kz_tar / Kz) ...
         + shk_Kz ...
-    !! Kz = ss_Kz_A * A;
+    !! Kz = Kz_tar;
+
 
     "Target capital in nonprimary export sectors"
-    Kz_tar = ss_Kz_A * A{+1} / ss_dA^1;
+    Kz_tar = ss_Kz_A * AAz{+1} / ss_dA^1 ...
+    !! Kz_tar = ss_Kz_A * A * ss_Az;
+
 
     "Stock-flow capital in nonprimary export sectors"
     Kz = (1-delta_Kz)*Kz{-1} + Iz;
