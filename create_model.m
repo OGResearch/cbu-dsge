@@ -190,12 +190,12 @@ m.kappa_dS = 1;
 m.ss_Bg_NGDP = 0.40;
 m.ss_Bgw_Bg = 1 - 0.14; %%%0.5;
 
-% Transfers
-m.ss_TFgh_NGDP = 0; %%%0.01;
+% Government transfers to households
+m.ss_TFgh_NGDP = 0.05;
 
 % Government consumption
-m.ss_PcG_NGDP = 0.24;
-m.ss_WNg_NGDP = 0.16;
+m.ss_PcG_NGDP = 0.265;
+m.ss_WNg_NGDP = 0.10;
 m.ss_Wg_Wopt = 1;
 
 m.omega_TFgh = 0.50;
@@ -279,11 +279,8 @@ swap = string.empty(0, 2);
 m.NIP_NGDP = -0.40;
 swap = [swap; "NIP_NGDP", "zeta_Rg0"];
 
-% Government debt
-
-
 % Public infrastructure expenditures
-m.PiIg_NGDP = 0.08;
+m.PiIg_NGDP = 0.20;
 swap = [swap; "PiIg_NGDP", "ss_Kg_A"];
 
 % Primary export to GDP
@@ -297,6 +294,10 @@ swap = [swap; "PjJ_NGDP", "gamma_J"];
 % Import for energy sector
 m.TXj_NGDP = 0.03;
 swap = [swap; "TXj_NGDP", "psi_jw"];
+
+% Value added tax rate
+m.TXvat_NGDP = 0.07;
+swap = [swap; "TXvat_NGDP", "ss_TRvat"];
 
 
 m = steady( ...
