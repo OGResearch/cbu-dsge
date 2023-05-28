@@ -51,7 +51,6 @@ m.rho_Pw_star = 0.3;
 m.beta = 0.97; 
 m.delta_Ky = 0.20;
 m.delta_Kh = 0.20;
-m.omega = 0.30;
 
 
 % Households
@@ -66,8 +65,7 @@ m.chi_dli = 0;
 m.chi_c = 0.5;
 m.nu = 0;
 
-
-m.ss_TFw_WNhtm = 0.36; % to be reverse engineered
+m.ss_TFwh_NGDP = 0.05; % to be reverse engineered
 
 % Markups
 m.mu_CI = 1.25; % to be reverse-engineered 
@@ -239,7 +237,8 @@ m.lambda_BCBg = 0.5;
 
 % Steady state parameters
 
-m.omega = 0.30;
+m.omega_N = 0.30;
+m.omega_TFwh = 0.50;
 m.ss_Whtm_Wopt = 1; %%% 0.45;
 
 m.eta = 0;
@@ -248,8 +247,8 @@ m.upsilon_Z = 0.9;
 
 % Dynamic parameters
 
-m.rho_Wopt = 0.3;
-m.rho_Whtm = 0.3;
+m.rho_Wopt = 0.4;
+m.rho_Whtm = 0.4;
 
 
 
@@ -263,13 +262,13 @@ m.Pc = 1;
 m.A = 0.5;
 
 
-m = steady( ...
-    m ...
-    , "fixLevel", ["A", "Pw_star", "Pc"] ...
-    , "blocks", true ...
-);
-
-checkSteady(m);
+%m = steady( ...
+%    m ...
+%    , "fixLevel", ["A", "Pw_star", "Pc"] ...
+%    , "blocks", true ...
+%);
+%
+%checkSteady(m);
 
 
 % Reverse engineer parameters for steady-state ratios

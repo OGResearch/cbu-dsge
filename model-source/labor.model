@@ -27,7 +27,7 @@
 
 !parameters
 
-    "Share of hand-to-mouth households" omega
+    "Share of hand-to-mouth households" omega_N
     "Inverse elasticity of labor supply curve for optimizing households" eta
     ss_Whtm_Wopt
     "S/S Wage rate markup in government sectors" ss_Wg_Wopt
@@ -58,7 +58,6 @@
         + (1-rho_Wopt) * log(Wopt_flex/Pc) ...
     !! Wopt = Wopt_flex;
 
-    Nopt = (1 - omega) * N;
     WNopt_NGDP = Wopt * Nopt / NGDP;
 
     Whtm_flex = ss_Whtm_Wopt * Wopt_flex;
@@ -68,11 +67,12 @@
         + (1-rho_Whtm) * log(Whtm_flex/Pc) ...
     !! Whtm = Whtm_flex;
 
-    Nhtm = omega * N;
+    Nhtm = omega_N * N;
     WNhtm_NGDP = Whtm * Nhtm / NGDP;
 
 
     "Total labor"
+    N = Nopt + Nhtm;
     N = Ny + Nz + Ng;
 
     W*N = Wopt*Nopt + Whtm*Nhtm;

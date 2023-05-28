@@ -23,7 +23,6 @@
     "Wage bill in local sectors to GDP ratio" WNy_NGDP
     "Physical investment in local sectors" Iy
 
-    "Profit margins in local sectors" PSIy
     "Profits in local sectors to GDP ratio" PIEy_NGDP
     "Share of overhead labor in local sectors" N0y_Ny
 
@@ -42,7 +41,7 @@
 
     "Household net worth to GDP ratio" PcVh_NGDP
     "Capital in local sectors to GDP ratio" PkyKy_NGDP
-    "Remittances from HTM households to GDP ratio" TFw_NGDP
+    "Remittances to GDP ratio" TFwh_NGDP
 
     "Marginal cost of local intermediate goods" Py1
     "Markuped marginal cost in local sectors" Py
@@ -86,12 +85,11 @@
     PcVh_NGDP
     PkyKy_NGDP
     DLIopt_Copt
-    TFw_NGDP
+    TFwh_NGDP
     My_Y2
     Y3_Y2
     PIEy_NGDP
     N0y_Ny
-    PSIy
     React
     PmyMy_NGDP
 
@@ -107,7 +105,8 @@
 
 !parameters
 
-    iota
+    "Share of remmittances received by HTM househodls" omega_TFwh
+    "Efficiency of public infrastructure" iota
     "Monetary policy reaction to inflation" kappa_dPc
     "Monetary policy reaction to depreciation" kappa_dS
     "A/R Monetary policy rate" rho_Rg
@@ -137,7 +136,8 @@
     "Share of primary inputs used in local sectors" gamma_J;
 
     % Directly calibrated ratios and rates
-    "S/S Remittances from HTM households to HTM wage bill" ss_TFw_WNhtm
+    %"S/S Remittances from HTM households to HTM wage bill" ss_TFwh_WNhtm
+    "S/S Remittances from HTM households to HTM wage bill" ss_TFwh_NGDP
     "S/S Private Residential (Housing) Investment to Investment in Local Production Ratio" ss_Kh_Ky
     "S/S Rate of Change in Overall Productivity" ss_dA
     "Inflation Target" ss_dPc
@@ -224,10 +224,10 @@
 % __Hand-to-mouth households__
 
     "Real current income of hand-to-mouth households"
-    Pc*DLIhtm = (WNhtm_NGDP + TFhtm_NGDP - TFw_NGDP)*NGDP;
+    Pc*DLIhtm = (WNhtm_NGDP + TFhtm_NGDP - omega_TFwh*TFwh_NGDP)*NGDP;
 
     "Remittances from hand-to-mouth households"
-    TFw_NGDP = ss_TFw_WNhtm * WNhtm_NGDP;
+    TFwh_NGDP = ss_TFwh_NGDP;
 
     "Demand for consumption by optimizing households"
     Chtm = DLIhtm;
@@ -414,10 +414,6 @@
     PcVh_NGDP*NGDP = Pc*Vh;
     PkyKy_NGDP*NGDP = Pky*Ky;
     PmyMy_NGDP*NGDP = Pmy*My;
-
-
-    "Profit margins (excluding adjustment costs, excluding input tax) in local production"
-    PSIy * (Py*Y - PIEy_NGDP*NGDP) = Py*Y;
 
     "Profits of local producers to GDP ratio"
     PIEy_NGDP = (Py*Y - Wy*Ny - Prky*Ky{-1} - Pmy*My - Pj*J) / NGDP;
