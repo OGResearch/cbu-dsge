@@ -145,7 +145,6 @@ m.mu_Z = 1; % to be reverse-engineered
 m.gamma_Kz = 0.2;
 m.gamma_Mz = 0.45; %0.45/(0.45+0.1388);0.45;
 m.gamma_Nz = 0.40;0.29;
-m.gamma_Iz = 0.70; %Import content of capital ussed in the production
 m.gamma_N0z = 0.7;
 m.delta_Kz = 0.20;
 
@@ -276,7 +275,11 @@ swap = [swap; "PidIg_NGDP", "ss_Kg_A"];
 
 
 % Convergence helpers
-m.Ky = 5;
+%m.Ky = 1;
+
+m.A = 0.5;
+m1 = m;
+
 
 
 m = steady( ...
@@ -287,13 +290,11 @@ m = steady( ...
     , "endogenize", swap(:, 2) ...
 );
 
-
-
 checkSteady(m);
-m = solve(m);
+
 
 t = table( ...
-    m, ["steady-level", "steady-change", "form", "description"] ...
+    m, ["steady-level", "compare-steady-level", "steady-change", "form", "description"] ...
     , "writeTable", "tables/steady-state-baseline.xlsx" ...
 );
 
