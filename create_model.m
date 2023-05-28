@@ -464,7 +464,6 @@ t = table( ...
 );
 
 rows = [
-    "DEF_NGDP"
     "BCBg_NGDP"
     "Bg_NGDP"
     "BWh_NGDP"
