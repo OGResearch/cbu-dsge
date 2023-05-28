@@ -69,7 +69,7 @@
 
     "Private Investment in Local Production to GDP Ratio" PiIy_NGDP
     "Investment to Capital Ratio in Local Production" PiIy_PkyKy
-    "Household NFA to GDP Ratio"  BWh_NGDP
+    "Household NFA to GDP Ratio"  Bhw_NGDP
     "Auxiliary Variable for Disposable Labor Income to Consumption Ratio" DLIopt_Copt
 
     PmyMy_NGDP
@@ -81,7 +81,7 @@
     Copt_Vh_nu0
     PiIy_NGDP
     PiIy_PkyKy
-    BWh_NGDP
+    Bhw_NGDP
     PcVh_NGDP
     PkyKy_NGDP
     DLIopt_Copt
@@ -195,7 +195,7 @@
     Lambda*Pc*(Copt - chi_dli*DLIopt - chi_c*ss_dA*Copt{-1}) = 1;
 
     "Net worth of optimizing households"
-    Pc*Vh = Pky*Ky + (BWh_NGDP + Bgh_NGDP)*NGDP;
+    Pc*Vh = Pky*(Ky + Kh) + (Bgh_NGDP - Bhw_NGDP)*NGDP;
 
     "Real current income of optimizing households"
     Pc*DLIopt = (WNopt_NGDP + TFopt_NGDP)*NGDP;
@@ -394,7 +394,7 @@
 
     Rg_Rw = Rg_star / Rw_star;
 
-    Rh = Rg * exp( zeta_Rh1*(-BWh_NGDP + zeta_Rh0) );
+    Rh = Rg * exp( zeta_Rh1*(Bhw_NGDP + zeta_Rh0) );
 
 
 % __Growth rates__

@@ -261,7 +261,7 @@
     !! Bg_NGDP = ss_Bg_NGDP;
 
 
-% __Public investment fund__
+% __Fund for reconstruction and development__
 
     Bwf_NGDP = ...
         + Bwf_NGDP{-1}*S/S{-1}/dNGDP ...
