@@ -50,10 +50,10 @@
     "Price of Capital in Local Production" Pky
     "Rental Price of Capital in Local Production" Prky
 
-    "Import Prices in Local Production" Pmy
-    "World Prices in Local Currency" Pw
-    "Nominal Exchange Rate" S
-    "Gross Rate of Change in Nominal Exchange Rate" dS
+    "Price of imported inputs in local sectors" Pmy
+    "World prices in local currency" Pw
+    "Nominal exchange rate" S
+    "Nominal exchange rate, Y/Y" dS
 
     "Government local-currency debt rate" Rg
     "Government foreign-currency debt rate" Rg_star
@@ -104,6 +104,7 @@
 !parameters
 
     "Monetary policy reaction to inflation" kappa_dPc
+    "Monetary policy reaction to depreciation" kappa_dS
     "A/R Monetary policy rate" rho_Rg
 
     rho_My_Y2
@@ -136,7 +137,6 @@
     "Inflation Target" ss_dPc
     "S/S Relative Sectoral Productivity in Local Production" ss_Ay
     "S/S Overhead Labor in Local Production" ss_N0y
-    "S/S Exchange rate target" ss_S
 
     % Transitory Parameters
     "Habit in consumption" chi_c
@@ -350,13 +350,15 @@
 
     "Monetary policy reaction function"
     log(Rg) = ...
-        rho_Rg * log(Rg{-1}) ...
+        + rho_Rg * log(Rg{-1}) ...
         + (1 - rho_Rg) * (log(&Rg) + React) ...
-    !! S = S{-1} * (ss_dPc / ss_dPw_star);
+    !! dPc = ss_dPc;
 
 
     "Monetary policy reaction term"
-    React = kappa_dPc * log(dPc{+1}/ss_dPc) ...
+    React = ...
+        + kappa_dPc * log(dPc{+1}/ss_dPc) ...
+        + kappa_dS * log(dS{+1}/&dS) ...
     !! React = 0;
 
 

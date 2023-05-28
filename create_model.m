@@ -83,7 +83,6 @@ m.lambda_Ih1 = 0.05;
 m.ss_dA = 1.02;
 m.ss_dPc = 1.04;
 m.ss_Ay = 1;
-m.ss_S = 1;
 
 % Transitory parameters
 
@@ -169,6 +168,7 @@ m.psi_zg = 0; % share of PIF-owned equity nonprimary export sectors
 
 m.rho_Rg = 0.5;
 m.kappa_dPc = 3;
+m.kappa_dS = 1;
 
 
 % __Fiscal__
@@ -249,14 +249,13 @@ m.rho_Whtm = 0.3;
 
 m.A = 1;
 m.Pw_star = 1;
-m.S = 1;
 m.Pc = 1;
 
 m.Ky = 5;
 
 m = steady( ...
     m ...
-    , "fixLevel", ["A", "Pw_star", "S"] ...
+    , "fixLevel", ["A", "Pw_star", "Pc"] ...
     , "blocks", true ...
 );
 
