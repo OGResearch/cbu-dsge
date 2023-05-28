@@ -147,7 +147,7 @@
 
     "Stock-flow capital in nonprimary export sectors"
     Kz = (1-delta_Kz)*Kz{-1} + Iz;
-    Piz = Pid;
+    Piz = Pi;
     PizIz_NGDP*NGDP = Piz*Iz;
 
     "Replacement cost of capital in nonprimary export sectors"

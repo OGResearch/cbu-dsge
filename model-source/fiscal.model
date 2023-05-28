@@ -208,7 +208,7 @@
 
 
     "Definitin of government investment to GDP ratio"
-    PidIg_NGDP = Pid*Ig / NGDP;
+    PidIg_NGDP = Pi*Ig / NGDP;
 
     "Government consumption expenditures"
     PgG_NGDP = PcCg_NGDP + WNg_NGDP;
