@@ -96,7 +96,6 @@
 
     "Distribution of non-primary export profits to government" psi_zg
     "Distribution of nonprimary export profits to foreign investors" psi_zw
-    "Distribution of commodity processing industry profits to foreign investors" psi_jw
     "Distribution of commodity processing industry profits to government" psi_jg
 
     "Smoothing of PIF balance" lambda_Bwf

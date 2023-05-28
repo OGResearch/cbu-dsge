@@ -37,7 +37,7 @@ m = Model.fromFile( ...
 m.ss_Rw_star = 1.030;
 m.ss_dPw_star = 1.025;
 m.ss_BWjz_NGDP = 0;
-m.ss_Pj_start_Pw_star = 1;
+m.ss_Pj_Pw = 1;
 
 % Transitory parameters
 
@@ -173,6 +173,8 @@ m.xi_Z = 0.3;
 m.psi_zw = 0; % share of foreign-owned equity in nonprimary export sectors
 m.psi_zg = 0; % share of PIF-owned equity nonprimary export sectors
 
+m.psi_jw = 0.25;
+
 
 % __Monetary policy__
 
@@ -286,13 +288,18 @@ swap = [swap; "PidIg_NGDP", "ss_Kg_A"];
 m.PqQ_NGDP = 0.08;
 swap = [swap; "PqQ_NGDP", "ss_Aq"];
 
-% Import for primary export to GDP
+% Import for primary export
 m.PmqMq_NGDP = 0.02;
 swap = [swap; "PmqMq_NGDP", "gamma_Mq"];
 
 % Energy volume
 m.PjJ_NGDP = 0.04;
 swap = [swap; "PjJ_NGDP", "gamma_J"];
+
+% Import for energey sector
+m.PmjMj_NGDP = 0.01;
+swap = [swap; "PmjMj_NGDP", "psi_jw"];
+
 
 m = steady( ...
     m ...
