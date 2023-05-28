@@ -25,7 +25,6 @@
     PgG
 
     "Value added tax rate" TRvat
-    TRexp
 
     "Government tax revenues to GDP Ratio" TX_NGDP
     TXq_NGDP
@@ -71,7 +70,6 @@
     REV_NGDP
 
     TRvat
-    TRexp
 
     TXvat_NGDP
     TXls_NGDP
@@ -107,7 +105,6 @@
     "S/S Government investment to GDP ratio" ss_PidIg_NGDP
     ss_WNg_NGDP
     ss_TRvat
-    ss_TRexp
     ss_TFh_NGDP
     ss_TFhtm_TFh
     ss_TXls_NGDP
@@ -138,7 +135,6 @@
     "Shock to government wage bill to GDP ratio" shk_WNg_NGDP
     "Shock to government consumption of goods" shk_Cg
     "Shock to government employment" shk_Ng
-    shk_TRexp
     shk_TFhtm_NGDP
     shk_TXls
     "Shock to government PIF transfers to GDP" shk_TFfg_NGDP
@@ -249,7 +245,6 @@
 
     % Government tax rates
     TRvat = ss_TRvat;
-    TRexp = ss_TRexp + shk_TRexp;
 
     "Government tax revenues to GDP ratio"
     TX_NGDP = TXvat_NGDP + TXq_NGDP + TXls_NGDP;

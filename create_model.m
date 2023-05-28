@@ -209,8 +209,6 @@ m.ss_Bwf_NGDP = 0; %%%0.05;
 
 % Tax rates
 m.ss_TRvat = 0; % to be reverse-engineered 
-m.ss_TRexp = 0; % to be reverse-engineered 
-% m.ss_TRwf = 0; % defined in Primary sector
 
 m.ss_TXls_NGDP = 0; %%%0.05; % to be reverse-engineered
 
