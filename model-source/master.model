@@ -71,7 +71,7 @@
 
     PxX = Pq*Qx + Pz*Z;
 
-    PmM = Pmy*My + Pmq*Mq + Pmz*Mz;
+    PmM_NGDP*NGDP = Pmy*My + Pmz*Mz;
 
     PcCh = Pc*Ch;
     PidId = Pid*Id;
@@ -84,7 +84,7 @@
 % __International investment position / BOP__
 
     NIP_NGDP = BWh_NGDP + Bwf_NGDP - BGw_NGDP;
-    NIP_NGDP_adj = NIP_NGDP + BWjz_NGDP;
+    NIP_NGDP_adj = NIP_NGDP;
 
     BWh_NGDP + Bwf_NGDP - BGw_NGDP = ...
         + Rw_star{-1}*S/S{-1}*BWh_NGDP{-1}/dNGDP ...
@@ -100,7 +100,7 @@
 % __Nominal GDP__
 
     "Nominal GDP"
-    NGDP = PcCh + PgG + PiI + PxX - PmM;
+    NGDP = PcCh + PgG + PiI + PxX - PmM_NGDP*NGDP;
 
 
     "Nominal GDP excluding primary value added"
@@ -123,7 +123,6 @@
     "Gross rate of change in real imports"
     dM = ...
         + movavg(Pmy*My/PmM, -2) * My/My{-1} ...
-        + movavg(Pmq*Mq/PmM, -2) * Mq/Mq{-1} ...
         + movavg(Pmz*Mz/PmM, -2) * Mz/Mz{-1} ...
     !! dM = ss_dA;
 
@@ -134,7 +133,7 @@
         + movavg(PgG/NGDP, -2) * G/G{-1} ...
         + movavg(PiI/NGDP, -2) * dI ...
         + movavg(PxX/NGDP, -2) * dX ...
-        - movavg(PmM/NGDP, -2) * dM ...
+        - movavg(PmM_NGDP, -2) * dM ...
     !! dGDP = ss_dA;
 
 

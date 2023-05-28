@@ -8,8 +8,6 @@
     "World prices, Y/Y" dPw_star
 
     "Profits of foreigners to GDP ratio" PIEw_NGDP
-    "Foreign fund of retained earnings to GDP ratio" BWjz_NGDP
-    "Repatriation of retained earnings" TFjz_NGDP
 
 
 !parameters
@@ -18,6 +16,7 @@
     "S/S Foreign-Currency Risk-Free World Rate" ss_Rw_star
     "S/S Rate of Change in World Prices" ss_dPw_star
     psi_jw
+    psi_qw
 
     "Smoothing of foreign investors balancence" lambda_BWjz
     "A/R in foreign price rate of change" rho_Pw_star
@@ -31,8 +30,6 @@
 
 !log-variables !all-but
 
-    BWjz_NGDP
-    TFjz_NGDP
     PIEw_NGDP
 
 
@@ -48,19 +45,8 @@
     "World interest rates"
     Rw_star = ss_Rw_star;
 
-    "Foreign fund of retained earnings"
-    BWjz_NGDP = ...
-        + Rw_star{-1}*S/S{-1}*BWjz_NGDP{-1}/dNGDP ...
-        + PIEw_NGDP - TFjz_NGDP ...
-    ;
-
     "Profits of foreigners to GDP ratio"
     PIEw_NGDP = psi_jw * PIEj_NGDP;
-
-    "Repatriation of retained earnings"
-    TFjz_NGDP = TFjz_NGDP{-1}/dNGDP*dNGDP{+4} ...
-        + lambda_BWjz*(BWjz_NGDP{+1} - ss_BWjz_NGDP) + shk_TFjz ...
-    !! BWjz_NGDP = ss_BWjz_NGDP;
 
     "World prices, Y/Y"
     dPw_star = Pw_star / Pw_star{-1};

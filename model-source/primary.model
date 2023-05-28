@@ -61,8 +61,8 @@
 
 % __Profits and value added__
 
-    PIEq_NGDP*NGDP = Pq*Qx - Pmq*Mq;
-    VAq_NGDP = (Pq*Qx - Pmq*Mq) / NGDP;
+    PIEq_NGDP = Pq*Qx / NGDP;
+    VAq_NGDP = Pq*Qx / NGDP;
 
 
 % __World prices__
