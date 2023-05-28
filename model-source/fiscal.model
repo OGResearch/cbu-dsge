@@ -185,9 +185,7 @@
     "Public infrastructure capital"
     Kg = (1 - delta_Kg) * Kg{-1} + Ig;
 
-
-
-    "Definitin of government investment to GDP ratio"
+    "Government investment to GDP"
     PiIg_NGDP = Pi*Ig / NGDP;
 
     "Government consumption expenditures"
@@ -215,7 +213,7 @@
     "Definition of government wage bill to GDP ratio"
     WNg_NGDP = Wg * Ng / NGDP;
 
-    "Rule for government employment"
+    "Government employment"
     log(Ng) = ...
         + log(Ng{-1}) ...
         + lambda_Ng1*(Bg_NGDP_tar{+1} - Bg_NGDP{+1}) ...
@@ -223,7 +221,7 @@
         + shk_Ng ...
     !! WNg_NGDP = ss_WNg_NGDP;
 
-    % Government tax rates
+    "Value added tax rate"
     TRvat = ss_TRvat;
 
     "Government tax revenues to GDP ratio"
