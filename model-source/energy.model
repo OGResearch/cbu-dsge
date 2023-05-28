@@ -4,6 +4,7 @@
 !variables
 
     "Price of energy" Pj
+    "Marginal cost of energy" Pj0
     "Price of energy, Y/Y" dPj
     "Energy inputs" J
     "Value added in energy sector to GDP" VAj_NGDP
@@ -31,9 +32,13 @@
     "Price of energy"
     log(dPj) = ...
         + log(dPj{-1}) ...
-        + lambda_Pj * log(S * Pj_star / Pj) ...
+        + lambda_Pj * log(Pj0 / Pj) ...
         + shk_Pj ...
-    !! Pj  = S * Pj_star;
+    !! Pj  = Pj0;
+
+
+    "Marginal cost of energy"
+    Pj0 = S * Pj_star;
 
 
     "Value added in energy sector"
