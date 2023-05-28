@@ -8,7 +8,6 @@
     "Real commodity exports" Q
     "Total demand for investment goods" I
     "Total demand for consumption goods" C
-    "Nominal investment" PiI
     "Nominal private consumption" PcCh
 
     "Exports to GDP ratio" PxX_NGDP
@@ -75,7 +74,6 @@
     PmM_NGDP*NGDP = Pmy*My + Pmz*Mz;
 
     PcCh = Pc*Ch;
-    PiI = Pi*I;
 
     PxX_NGDP*NGDP = (Pq*Q + Pz*Z);
 
@@ -98,7 +96,7 @@
 % __Nominal GDP__
 
     "Nominal GDP"
-    NGDP = PcCh + PgG_NGDP*NGDP + PiI + PxX - PmM_NGDP*NGDP;
+    NGDP = (PcCh_NGDP + PgG_NGDP + PiI_NGDP + PxX_NGDP - PmM_NGDP)*NGDP;
 
     "Nominal GDP excluding primary value added"
     NGDPX = NGDP - VAq_NGDP*NGDP;
@@ -119,8 +117,8 @@
 
     "Gross rate of change in real GDP"
     dGDP = ...
-        + movavg(PcCh/NGDP, -2) * Ch/Ch{-1} ...
-        + movavg(PgG/NGDP, -2) * G/G{-1} ...
+        + movavg(PcCh_NGDP, -2) * Ch/Ch{-1} ...
+        + movavg(PgG_NGDP, -2) * G/G{-1} ...
         + movavg(PiI_NGDP, -2) * I/I{-1} ...
         + movavg(PxX_NGDP, -2) * dX ...
         - movavg(PmM_NGDP, -2) * dM ...
@@ -134,7 +132,7 @@
     !! dGDPX = ss_dA;
 
 
-    PcCh_NGDP = PcCh / NGDP;
+    PcCh_NGDP = Pc*Ch / NGDP;
 
     PiI_NGDP = Pi*I / NGDP;
 
