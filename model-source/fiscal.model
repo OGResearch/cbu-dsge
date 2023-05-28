@@ -253,7 +253,7 @@
     TXvat_NGDP = TRvat/(1+TRvat) * (Pc*Ch/NGDP + PcCg_NGDP);
 
     "Government tax revenues from primary export sectors"
-    TXq_NGDP = PIEq_NGDP;
+    TXq_NGDP = (1 - psi_qw) * PIEq_NGDP;
 
     "Government tax revenues from energy sector"
     TXj_NGDP = (1 - psi_jw) * PIEj_NGDP;

@@ -171,7 +171,9 @@ m.xi_Z = 0.3;
 m.psi_zw = 0; % share of foreign-owned equity in nonprimary export sectors
 m.psi_zg = 0; % share of PIF-owned equity nonprimary export sectors
 
+
 m.psi_jw = 0.25;
+m.psi_qw = 0.25;
 
 
 % __Monetary policy__

@@ -10,7 +10,6 @@
     "Real world price of primary commodity" Pq_Pw
     "Real world price of maintenance services" Pmq_Pw
     "Primary production maintenance services" Mq
-    "Share of primary production maintenance services to primary production revenues" PmqMq_PqQ
     "Profits in primary production to GDP ratio" PIEq_NGDP
     "Value added in primary production to GDP ratio" VAq_NGDP
     "Primary production to GDP ratio" PqQ_NGDP
@@ -33,7 +32,6 @@
 !log-variables !all-but
 
     PIEq_NGDP
-    PmqMq_PqQ
     PmqMq_NGDP
     PqQ_NGDP
     VAq_NGDP
@@ -82,7 +80,6 @@
         + (1-rho_Pq_Pw)*log(ss_Pq_Pw) + shk_Pq_Pw ...
     !! Pq_Pw = ss_Pq_Pw;
 
-    PmqMq_PqQ = Pmq*Mq / (Pq*Q);
 
     PqQ_NGDP*NGDP = Pq*Q;
     PmqMq_NGDP*NGDP = Pmq*Mq;

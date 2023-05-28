@@ -46,7 +46,10 @@
     Rw_star = ss_Rw_star;
 
     "Profits of foreigners to GDP ratio"
-    PIEw_NGDP = psi_jw * PIEj_NGDP;
+    PIEw_NGDP = ...
+        + psi_jw * PIEj_NGDP ...
+        + psi_qw * PIEq_NGDP ...
+    ;
 
     "World prices, Y/Y"
     dPw_star = Pw_star / Pw_star{-1};
