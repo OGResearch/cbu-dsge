@@ -107,7 +107,7 @@
     !! gamma_Nz * Pz1 * Z1 = Wz * NNz * (1 + TRinp);
 
     %AAz = Az * A^(1-gamma_Kz) * Kz{-1}^gamma_Kz;
-    AAz = Az * A;
+    AAz = Az * AA;
 
     "Nominal marginal cost in nonprimary export sectors"
     Pz0 = mu_Z * (gamma_Mz*Pmz*(1 + TRinp) + (1-gamma_Mz)*Pz1);
@@ -142,7 +142,7 @@
 
     "Target capital in nonprimary export sectors"
     Kz_tar = ss_Kz_A * AAz{+1} / ss_dA^1 ...
-    !! Kz_tar = ss_Kz_A * A * ss_Az;
+    !! Kz_tar = ss_Kz_A * AA * ss_Az;
 
 
     "Stock-flow capital in nonprimary export sectors"

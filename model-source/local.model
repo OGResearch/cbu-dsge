@@ -3,6 +3,7 @@
 
 !variables
 
+    AA
     Y1, Y2, Y3, Py3
     My_Y2, Y3_Y2
     "Monetary policy reaction term" React
@@ -105,6 +106,7 @@
 
 !parameters
 
+    iota
     "Monetary policy reaction to inflation" kappa_dPc
     "Monetary policy reaction to depreciation" kappa_dS
     "A/R Monetary policy rate" rho_Rg
@@ -348,13 +350,15 @@
         + (1 - rho_A) * (log(ss_dA) + shk_A) ...
     !! A = ss_dA*A{-1};
 
+    AA = A + iota*Kg;
+
     "Relative productivity in local sectors"
     log(Ay) = rho_Ay*log(Ay{-1}) + (1-rho_Ay)*(log(ss_Ay) + shk_Ay) ...
     !! Ay = ss_Ay;
 
     "Total productivity in local sectors"
-    AAy = A * Ay ...
-    !! AAy = A * ss_Ay;
+    AAy = AA * Ay ...
+    !! AAy = AA * ss_Ay;
 
 
 % __Monetary policy__

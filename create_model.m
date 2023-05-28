@@ -204,6 +204,8 @@ m.ss_Wg_Wopt = 1;
 % Government investment
 m.ss_PidIg_NGDP = 0.08;
 m.delta_Kg = 0.10;
+m.ss_Kg_A = 1;
+m.iota = 0.1;
 
 % Public investment fund
 m.ss_BWpif_NGDP = 0; %%%0.05;
@@ -266,6 +268,11 @@ swap = string.empty(0, 2);
 % Net investment position
 m.NIP_NGDP = -0.50;
 swap = [swap; "NIP_NGDP", "zeta_Rg0"];
+
+
+% Public infrastructure expenditures
+m.PidIg_NGDP = 0.08;
+swap = [swap; "PidIg_NGDP", "ss_Kg_A"];
 
 
 % Convergence helpers
