@@ -3,10 +3,10 @@
 
 !variables
 
-    N
-    W
-    "Optimal flexible wage rate of optimizing households" Wopt_flex
-    "Average wage rate of optimizing households" Wopt
+    "Total labor" N
+    "Average wage for total labor" W
+    "Optimal flexible wage of optimizing households" Wopt_flex
+    "Average wage of optimizing households" Wopt
     "Per-household man-hours supplied by optimizing households to all sectors" Nopt
     "Labor income of optimizing households to GDP ratio" WNopt_NGDP
 
@@ -19,7 +19,7 @@
     "Wage bill in private sectors to GDP ratio" WNp_NGDP
     "Labor in govt sectors to total labor ratio" Ng_N
     "Share of expat labor in total labor" Nhtm_N
-    "Expat wage rate to optimizing household wage rate ratio" Whtm_Wopt
+    "Expat wage to optimizing household wage ratio" Whtm_Wopt
     "Wage rate in nonprimary export sectors" Wz
     "Wage rate in local sectors" Wy
     Wg

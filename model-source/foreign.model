@@ -5,6 +5,7 @@
 
     "Foreign-currency risk-free world rate" Rw_star
     "Foreign price level" Pw_star
+    Pj_star
 
     "Profits of foreigners to GDP ratio" PIEw_NGDP
     "Foreign fund of retained earnings to GDP ratio" BWjz_NGDP
@@ -16,6 +17,7 @@
     "S/S External position of the Foreigners' Investment Fund to GDP Ratio" ss_BWjz_NGDP
     "S/S Foreign-Currency Risk-Free World Rate" ss_Rw_star
     "S/S Rate of Change in World Prices" ss_dPw_star
+    "S/S World price of energy" ss_Pj_start_Pw_star
 
     "Smoothing of foreign investors balancence" lambda_BWjz
     "A/R in foreign price rate of change" rho_Pw_star
@@ -60,5 +62,8 @@
     TFjz_NGDP = TFjz_NGDP{-1}/dNGDP*dNGDP{+4} ...
         + lambda_BWjz*(BWjz_NGDP{+1} - ss_BWjz_NGDP) + shk_TFjz ...
     !! BWjz_NGDP = ss_BWjz_NGDP;
+
+    "World price of energy"
+    Pj_star = ss_Pj_start_Pw_star * Pw_star;
 
 

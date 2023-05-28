@@ -18,6 +18,7 @@ modelFiles = [
     "model-source/nonprimary.model"
     "model-source/foreign.model"
     "model-source/labor.model"
+    "model-source/energy.model"
 ];
 
 m = Model.fromFile( ...
@@ -37,6 +38,7 @@ m = Model.fromFile( ...
 m.ss_Rw_star  = 1.030;
 m.ss_dPw_star = 1.025;
 m.ss_BWjz_NGDP = 0;
+m.ss_Pj_start_Pw_star = 1;
 
 % Transitory parameters
 
@@ -102,7 +104,7 @@ m.xi_Pi = 2.5; %0.5
 m.xi_NNy = 0;
 
 
-% __Primary__
+% __Primary export sector (Q)__
 
 % Steady State for Exogenous/External/Policy Variables
 m.ss_Aq         = 1;
@@ -111,11 +113,16 @@ m.ss_Pmq_Pw     = 1;
 m.gamma_Mq      = 0.15; % if non-primary exporters disabled, use m.gamma_Mq  = 0.29 in read_model
 m.ss_TRwf       = 0.5;
 m.ss_TFq_PqQ    = 0.05;
-m.gamma_Qy      = 0.07;
+m.gamma_J      = 0.07;
 
 % Autoregression Parameters
 m.rho_Aq    = 0.5;
 m.rho_Pq_Pw = 0.5;
+
+
+% __Local energy sector (J)__
+
+m.lambda_Pj = 1;
 
 
 % __Non-primary__
@@ -159,36 +166,8 @@ m.psi_zw = 0; % share of foreign-owned equity in nonprimary export sectors
 m.psi_zg = 0; % share of PIF-owned equity nonprimary export sectors
 
 
-% __Processing__
 
-% Steady-state parameters
-
-% Non-oil primary exports
-% m.gamma_Kj = 0.95;
-% m.gamma_Qj = 0.6154; % reverse-engineered
-% m.gamma_Ij = 0.70; %Import content of capital used in the production
-% m.delta_Kj = 0.20;
-
-% Steady state for exogenous/external variables
-% m.ss_mu_J = 1;
-% m.ss_Aj = 1;
-% m.ss_Kj_A = 0.22; % to be reverse-engineered 
-
-% m.ss_Pmj_Pmy = 1;
-
-% Transitory parameters
-
-% Autoregressive parameters
-% m.rho_Aj = 0.5;
-% m.rho_Kj = 0.8;
-
-%ownership of NP exporters. Note: local HH could also hold equity, i.e.
-%psi_jw&psi_jg doesn't necessery sum up to 1
-% m.psi_jw = m.psi_zw; % share of foreign owned equity at NP exporters
-% m.psi_jg = m.psi_zg; % share of PIF owned equity at NP exporters
-
-
-% __Public__
+% __Fiscal__
 
 % Steady-state parameters
 
@@ -281,6 +260,16 @@ m = steady( ...
 checkSteady(m);
 m = solve(m);
 
+t = table( ...
+    m, ["steady-level", "steady-change", "form", "description"] ...
+    , "writeTable", "tables/steady-state-baseline.xlsx" ...
+);
+
+disp(t)
+
+save mat/create_model.mat m
+
+
 return
 
 %% Exogenize some steady state values to reverse engineer respective parameters
@@ -302,8 +291,7 @@ SS.VAj_NGDP    = 0.025; % Value added of non-oil primary sector to GDP ratio, as
 SS.TFw_NGDP    = 0.05; % Remittance to GDP, based on BOP data
 
 % Production parameters
-SS.Qy_Q        = 0.15; % Locally consumed oil to total oil production 
-m.gamma_Qy     = 0.07; % Share of primary inputs used in local production sectors; (1 - m.gamma_Qy) is a share of local labor, capital and imports. 
+m.gamma_J     = 0.07; % Share of primary inputs used in local production sectors; (1 - m.gamma_J) is a share of local labor, capital and imports. 
 m.ss_TFq_PqQ   = 0.05; % Transfers to households from primary producers' revenues
 
 m.gamma_Nz     = 0.40; % Labor intensity of Z sector (Y-3 production stage)

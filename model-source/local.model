@@ -35,7 +35,6 @@
     "Overall technology" A
     "Relative technology in local sectors" Ay
 
-    "Commodities used locally" Qy
 
     "Household net worth to GDP ratio" PcVh_NGDP
     "Capital in local sectors to GDP ratio" PkyKy_NGDP
@@ -88,7 +87,6 @@
     Y3_Y2
     PIEy_NGDP
     N0y_Ny
-    Qy_Q
     PSIy
 
 
@@ -124,7 +122,7 @@
     "Sensitivity of government spread to debt" zeta_Rg1
     "Intercept in household spread" zeta_Rh0
     "Sensitivity of household spread to debt" zeta_Rh1
-    "Share of primary inputs used in local sectors" gamma_Qy;
+    "Share of primary inputs used in local sectors" gamma_J;
 
     % Directly calibrated ratios and rates
     "S/S Remittances from HTM households to HTM wage bill" ss_TFw_WNhtm
@@ -327,9 +325,9 @@
 
     % Stage T-1 in local sectors: Primary inputs
 
-    Y1 = Y2 / (1 - gamma_Qy);
-    Y1 = Qy / gamma_Qy;
-    Py1 = (1 - gamma_Qy)*Py2 + gamma_Qy*Pq;
+    Y1 = Y2 / (1 - gamma_J);
+    Y1 = J / gamma_J;
+    Py1 = (1 - gamma_J)*Py2 + gamma_J*Pj;
 
 
 % __Productivity (Technology)__
@@ -387,7 +385,7 @@
     PSIy * (Py*Y - PIEy_NGDP*NGDP) = Py*Y;
 
     "Profits of local producers to GDP ratio"
-    PIEy_NGDP = ((Py*Y - Wy*Ny - Prky*Ky{-1} - Pmy*My - Pq*Qy) - TRinp*(Wy*Ny + Pmy*My + Prky*Ky{-1})) / NGDP;
+    PIEy_NGDP = ((Py*Y - Wy*Ny - Prky*Ky{-1} - Pmy*My - Pj*J) - TRinp*(Wy*Ny + Pmy*My + Prky*Ky{-1})) / NGDP;
 
     "Share of overhead labor in local sectors"
     N0y_Ny = N0y / Ny;

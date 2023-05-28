@@ -2,7 +2,6 @@
 
 !variables
 
-    "Production of primary commodity" Q
     "Foreign price of primary commodity" Pq_star
     "Foreign unit cost of primary production maintenance services" Pmq_star
     "Price of primary commodity" Pq
@@ -18,7 +17,6 @@
     "Primary production maintenance services to GDP ratio" PmqMq_NGDP
     "Transfers to households from primary producers to GDP ratio"  TFq_NGDP
 
-    "Commodities inputs in local sectors to commodity production ratio" Qy_Q
 
 !parameters
 
@@ -53,12 +51,6 @@
 !equations
 
 % __Primary exports__
-
-    "Commodities inputs in local sectors to commodity production ratio"
-    Qy_Q = Qy / Q;
-
-    "Primary output breakdown"
-    Q = Qx + Qy;
 
     Qx = Aq * A;
 
