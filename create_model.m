@@ -289,15 +289,11 @@ swap = [swap; "PiIg_NGDP", "ss_Kg_A"];
 m.PqQ_NGDP = 0.08;
 swap = [swap; "PqQ_NGDP", "ss_Aq"];
 
-% Import for primary export
-m.PmqMq_NGDP = 0.02;
-swap = [swap; "PmqMq_NGDP", "gamma_Mq"];
-
 % Energy volume
 m.PjJ_NGDP = 0.04;
 swap = [swap; "PjJ_NGDP", "gamma_J"];
 
-% Import for energey sector
+% Import for energy sector
 m.TXj_NGDP = 0.03;
 swap = [swap; "TXj_NGDP", "psi_jw"];
 

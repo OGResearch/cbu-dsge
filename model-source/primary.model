@@ -13,7 +13,6 @@
     "Profits in primary production to GDP ratio" PIEq_NGDP
     "Value added in primary production to GDP ratio" VAq_NGDP
     "Primary production to GDP ratio" PqQ_NGDP
-    "Primary production maintenance services to GDP ratio" PmqMq_NGDP
 
 
 !parameters
@@ -32,7 +31,6 @@
 !log-variables !all-but
 
     PIEq_NGDP
-    PmqMq_NGDP
     PqQ_NGDP
     VAq_NGDP
 
@@ -82,5 +80,4 @@
 
 
     PqQ_NGDP*NGDP = Pq*Q;
-    PmqMq_NGDP*NGDP = Pmq*Mq;
 
