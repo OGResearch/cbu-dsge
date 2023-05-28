@@ -8,17 +8,15 @@
     "Real commodity exports" Q
     "Total demand for investment goods" I
     "Total demand for consumption goods" C
-    "Nominal private consumption" PcCh
 
     "Exports to GDP ratio" PxX_NGDP
     "Imports to GDP Ratio" PmM_NGDP
     "Nominal GDP" NGDP
-    "Nominal GDP excluding commodity sector" NGDPX
-    "Nominal Exports" PxX
+    "Nominal GDP excluding commodity sector" NGDPx
     "Gross rate of change in real exports" dX
     "Gross rate of change in real imports" dM
     "Gross rate of change in real GDP" dGDP
-    "Gross rate of change in real GDP excluding commodity sector" dGDPX
+    "Gross rate of change in real GDP excluding commodity sector" dGDPx
 
     "Private consumption to GDP ratio" PcCh_NGDP
     "Investment to GDP ratio" PiI_NGDP
@@ -29,7 +27,7 @@
     "Wage bill to value-added ratio in local sector" WNy_VAy
     "Trade Balance to GDP Ratio" TB_NGDP
 
-    "Nominal GDP excluding primary exports to nominal GDP ratio" NGDPX_NGDP
+    "Nominal GDP excluding primary exports to nominal GDP ratio" NGDPx_NGDP
 
     "Consumer Real Exchange Rate" RER
 
@@ -37,7 +35,7 @@
 
 !log-variables !all-but
 
-    NGDPX_NGDP
+    NGDPx_NGDP
     NIP_NGDP
     NIP_NGDP_adj
     PcCh_NGDP
@@ -69,11 +67,7 @@
 
 % __Exports and imports__
 
-    PxX = Pq*Q + Pz*Z;
-
     PmM_NGDP*NGDP = Pmy*My + Pmz*Mz;
-
-    PcCh = Pc*Ch;
 
     PxX_NGDP*NGDP = (Pq*Q + Pz*Z);
 
@@ -96,10 +90,11 @@
 % __Nominal GDP__
 
     "Nominal GDP"
-    NGDP = (PcCh_NGDP + PgG_NGDP + PiI_NGDP + PxX_NGDP - PmM_NGDP)*NGDP;
+    % NGDP = (PcCh_NGDP + PgG_NGDP + PiI_NGDP + PxX_NGDP - PmM_NGDP)*NGDP;
+    1 = PcCh_NGDP + PgG_NGDP + PiI_NGDP + PxX_NGDP - PmM_NGDP;
 
     "Nominal GDP excluding primary value added"
-    NGDPX = NGDP - VAq_NGDP*NGDP;
+    NGDPx = NGDP - VAq_NGDP*NGDP;
 
     "Gross rate of change in real exports"
     dX = ...
@@ -126,10 +121,10 @@
 
 
     "Gross rate of change in real GDP exluding primary value added"
-    dGDPX = ...
-        + movavg(NGDP/NGDPX, -2) * dGDP ...
-        - movavg(VAq_NGDP*NGDP/NGDPX, -2) * Q/Q{-1} ...
-    !! dGDPX = ss_dA;
+    dGDPx = ...
+        + movavg(NGDP/NGDPx, -2) * dGDP ...
+        - movavg(VAq_NGDP*NGDP/NGDPx, -2) * Q/Q{-1} ...
+    !! dGDPx = ss_dA;
 
 
     PcCh_NGDP = Pc*Ch / NGDP;
@@ -139,7 +134,7 @@
     WN_NGDP = WNy_NGDP + WNz_NGDP + WNg_NGDP;
 
     "Nomial GDP excluding primary exports to nominal GDP ratio"
-    NGDPX_NGDP * NGDP = NGDPX;
+    NGDPx_NGDP * NGDP = NGDPx;
 
     VAy_NGDP = (Pc*Ch + PcCg_NGDP*NGDP + Pi*I - Pmy*My) / NGDP;
 
@@ -147,6 +142,7 @@
 
     WNy_VAy = WNy_NGDP / VAy_NGDP;
 
+    "Trade balance to GDP"
     TB_NGDP = PxX_NGDP - PmM_NGDP;
 
     "Consumer real exchange rate"
