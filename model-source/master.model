@@ -5,7 +5,7 @@
 
     "Net Investment Position to GDP Ratio" NIP_NGDP
     "Net investment position to GDP ratio adjusted for equity flows" NIP_NGDP_adj
-    "Real commodity exports" Qx
+    "Real commodity exports" Q
     "Domestically produced investment goods" Id
     "Nominal domestically produced investment goods" PidId
     "Nominal investment" PiI
@@ -68,7 +68,7 @@
 
 % __Exports and imports__
 
-    PxX = Pq*Qx + Pz*Z;
+    PxX = Pq*Q + Pz*Z;
 
     PmM_NGDP*NGDP = Pmy*My + Pmz*Mz;
 
@@ -76,8 +76,8 @@
     PidId = Pid*Id;
     PiI = Pid*Id;
 
-    PxX_NGDP = PxX / NGDP;
-
+    %PxX_NGDP = PxX / NGDP;
+    PxX_NGDP*NGDP = (Pq*Q + Pz*Z);
 
 % __International investment position / BOP__
 
@@ -98,7 +98,7 @@
 % __Nominal GDP__
 
     "Nominal GDP"
-    NGDP = PcCh + PgG + PiI + PxX - PmM_NGDP*NGDP;
+    NGDP = PcCh + PgG_NGDP*NGDP + PiI + PxX - PmM_NGDP*NGDP;
 
 
     "Nominal GDP excluding primary value added"
@@ -113,8 +113,8 @@
 
     "Gross rate of change in real exports"
     dX = ...
-        + movavg(Pq*Qx/PxX, -2) * Qx/Qx{-1} ...
-        + movavg(Pz*Z/PxX, -2) * Z/Z{-1} ...
+        + movavg(PqQ_NGDP/PxX_NGDP, -2) * Q/Q{-1} ...
+        + movavg(PzZ_NGDP/PxX_NGDP, -2) * Z/Z{-1} ...
     !! dX = ss_dA;
 
 
@@ -138,7 +138,7 @@
     "Gross rate of change in real GDP exluding primary value added"
     dGDPX = ...
         + movavg(NGDP/NGDPX, -2) * dGDP ...
-        - movavg(VAq_NGDP*NGDP/NGDPX, -2) * Qx/Qx{-1} ...
+        - movavg(VAq_NGDP*NGDP/NGDPX, -2) * Q/Q{-1} ...
     !! dGDPX = ss_dA;
 
 
