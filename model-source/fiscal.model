@@ -1,7 +1,6 @@
 
 !variables
 
-    BCBg_NGDP
     BWcbX_NGDP
     BWcb_NGDP
 
@@ -46,7 +45,6 @@
     "Balancing net government transfers to GDP ratio" TFother_NGDP
 
 
-    "Interest on central bank reserves to GDP ratio" IntrBCBg_NGDP
     IntrBGh_NGDP
     IntrBGw_NGDP
     IntrBWpif_NGDP
@@ -60,7 +58,6 @@
 
 !log-variables !all-but
 
-    BCBg_NGDP
     BWcbX_NGDP
     BWcb_NGDP
     BG_NGDP
@@ -94,7 +91,6 @@
     TFhtm_NGDP
     TFother_NGDP
 
-    IntrBCBg_NGDP
     IntrBGh_NGDP
     IntrBGw_NGDP
     IntrBWpif_NGDP
@@ -171,11 +167,7 @@
 % __Central bank foreign assets__
 
     BWcbX_NGDP = ss_BWcbX_NGDP;
-    BWcb_NGDP = BCBg_NGDP + BWcbX_NGDP;
-
-    "Interest on central bank reserves to GDP ratio"
-    IntrBCBg_NGDP = (Rw_star{-1} - 1)*S/S{-1} * BCBg_NGDP{-1}/dNGDP;
-
+    BWcb_NGDP = 0 + BWcbX_NGDP;
 
 % __Government budget__
 
@@ -185,12 +177,6 @@
         + (1 - lambda_BG_NGDP_tar) * ss_BG_NGDP ...
         + shk_BG_NGDP_tar ...
     !! BG_NGDP_tar = ss_BG_NGDP;
-
-    "Rule for government reserve deposit"
-    BCBg_NGDP*NGDP/S = BCBg_NGDP{-1}*NGDP{-1}/S{-1}*dNGDP{+4}/dS{+1} ...
-        + lambda_BCBg*(ss_BCBg_NGDP - BCBg_NGDP{+1})*NGDP/S ...
-        + shk_BCBg*NGDP/S ...
-    !! BCBg_NGDP = ss_BCBg_NGDP;
 
     BG_NGDP = BGh_NGDP + BGw_NGDP;
 
@@ -202,9 +188,9 @@
 
 
     "Dynamic budget constraint for government finance"
-    BCBg_NGDP - BGh_NGDP - BGw_NGDP = ...
-        + (BCBg_NGDP{-1}*S/S{-1} - BGh_NGDP{-1} - BGw_NGDP{-1}*S/S{-1})/dNGDP ...
-        + IntrBCBg_NGDP - IntrBGh_NGDP - IntrBGw_NGDP ...
+    0 - BGh_NGDP - BGw_NGDP = ...
+        + (0 - BGh_NGDP{-1} - BGw_NGDP{-1}*S/S{-1})/dNGDP ...
+        + 0 - IntrBGh_NGDP - IntrBGw_NGDP ...
         + TX_NGDP ...
         + PIEg_NGDP ...
         - TFpif_NGDP ...
@@ -216,8 +202,8 @@
 
     "Government deficit to GDP ratio"
     DEF_NGDP = ...
-        + BCBg_NGDP - BGh_NGDP - BGw_NGDP ...
-        - (BCBg_NGDP{-1}*S/S{-1} - BGh_NGDP{-1} - BGw_NGDP{-1}*S/S{-1})/dNGDP ...
+        + 0 - BGh_NGDP - BGw_NGDP ...
+        - (0 - BGh_NGDP{-1} - BGw_NGDP{-1}*S/S{-1})/dNGDP ...
     ;
 
     "Rule for external government debt"
