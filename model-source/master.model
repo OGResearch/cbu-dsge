@@ -4,7 +4,6 @@
 !variables
 
     "Net Investment Position to GDP Ratio" NIP_NGDP
-    "Net investment position to GDP ratio adjusted for equity flows" NIP_NGDP_adj
     "Real commodity exports" Q
     "Total demand for investment goods" I
     "Total demand for consumption goods" C
@@ -37,7 +36,6 @@
 
     NGDPx_NGDP
     NIP_NGDP
-    NIP_NGDP_adj
     PcCh_NGDP
     PiI_NGDP
     PmM_NGDP
@@ -74,7 +72,6 @@
 % __International investment position / BOP__
 
     NIP_NGDP = Bwf_NGDP - Bhw_NGDP - Bgw_NGDP;
-    NIP_NGDP_adj = NIP_NGDP;
 
     Bwf_NGDP - Bhw_NGDP - Bgw_NGDP = ...
         + Rw_star{-1}*S/S{-1}*Bwf_NGDP{-1}/dNGDP ...

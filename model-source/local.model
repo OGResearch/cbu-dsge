@@ -387,7 +387,7 @@
 
 % __Interest rate structure__
 
-    Rg_star = Rw_star * exp( zeta_Rg1*(-NIP_NGDP_adj + zeta_Rg0) );
+    Rg_star = Rw_star * exp( -zeta_Rg1*(NIP_NGDP - zeta_Rg0) );
 
     Rg/Rg_star = (S{+1}/S) * (dS/&dS)^(-sigma) ...
     !! Rg = Rg_star * dS;
