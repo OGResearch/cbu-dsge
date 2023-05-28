@@ -1,8 +1,8 @@
 
 !variables
 
-    "Government debt to GDP" BG_NGDP
-    "Target for gross government debt to GDP" BG_NGDP_tar
+    "Government debt to GDP" Bg_NGDP
+    "Target for gross government debt to GDP" Bg_NGDP_tar
     BGh_NGDP
     BGw_NGDP
     Bwf_NGDP
@@ -54,8 +54,8 @@
 
 !log-variables !all-but
 
-    BG_NGDP
-    BG_NGDP_tar
+    Bg_NGDP
+    Bg_NGDP_tar
     BGh_NGDP
     BGw_NGDP
     Bwf_NGDP
@@ -90,7 +90,7 @@
     % Steady-state parameters
 
     "S/S Share of foreign govt debt in total govt debt" ss_BGw_BG
-    "S/S Government gross debt to GDP ratio" ss_BG_NGDP
+    "S/S Government gross debt to GDP ratio" ss_Bg_NGDP
 
     "Depreciation of public infrastructure capital" delta_Kg
     "S/S Public infrastructure to productivity" ss_Kg_A
@@ -113,7 +113,7 @@
     % Dynamic parameters
 
     "Smoothing of external government debt" lambda_BGw
-    "Smoothing of target for government debt to GDP ratio" lambda_BG_NGDP_tar
+    "Smoothing of target for government debt to GDP ratio" lambda_Bg_NGDP_tar
     "Smoothing of government reserve deposit" lambda_BCBg
     "Smoothing of government transfers to households" lambda_TFopt
     "Government investment reaction to government investment to consumption ratio" lambda_Ig1
@@ -127,7 +127,7 @@
 
 !shocks
 
-    "Shock to government reserve at the central bank" shk_BG_NGDP_tar
+    "Shock to government reserve at the central bank" shk_Bg_NGDP_tar
     "Shock to government external debt" shk_BGw
     "Shock to government reserve deposit" shk_BCBg
     "Shock to government transfers for optimizing households" shk_TFopt
@@ -150,13 +150,13 @@
 % __Government budget__
 
     "Target for gross government debt to GDP ratio"
-    BG_NGDP_tar = ...
-        + lambda_BG_NGDP_tar*BG_NGDP_tar{-1} ...
-        + (1 - lambda_BG_NGDP_tar) * ss_BG_NGDP ...
-        + shk_BG_NGDP_tar ...
-    !! BG_NGDP_tar = ss_BG_NGDP;
+    Bg_NGDP_tar = ...
+        + lambda_Bg_NGDP_tar*Bg_NGDP_tar{-1} ...
+        + (1 - lambda_Bg_NGDP_tar) * ss_Bg_NGDP ...
+        + shk_Bg_NGDP_tar ...
+    !! Bg_NGDP_tar = ss_Bg_NGDP;
 
-    BG_NGDP = BGh_NGDP + BGw_NGDP;
+    Bg_NGDP = BGh_NGDP + BGw_NGDP;
 
     "Interest on local government debt to GDP ratio"
     IntBGh_NGDP = (Rg{-1} - 1) * BGh_NGDP{-1}/dNGDP;
@@ -186,9 +186,9 @@
 
     "Rule for external government debt"
     BGw_NGDP*NGDP/S = BGw_NGDP{-1}*NGDP{-1}/S{-1}*dNGDP{+4}/dS{+1} ...
-        + lambda_BGw*(ss_BGw_BG * BG_NGDP{+1} - BGw_NGDP{+1})*NGDP/S ...
+        + lambda_BGw*(ss_BGw_BG * Bg_NGDP{+1} - BGw_NGDP{+1})*NGDP/S ...
         + shk_BGw*NGDP/S ...
-    !! BGw_NGDP = ss_BGw_BG * ss_BG_NGDP;
+    !! BGw_NGDP = ss_BGw_BG * ss_Bg_NGDP;
 
 
     % Public infrastructure
@@ -216,7 +216,7 @@
     "Rule for government consumption of goods"
     log(Cg) = ...
         + log(ss_dA * Cg{-1}) ...
-        + lambda_Cg1*(BG_NGDP_tar{+1} - BG_NGDP{+1}) ...
+        + lambda_Cg1*(Bg_NGDP_tar{+1} - Bg_NGDP{+1}) ...
         + lambda_Cg2*($ss_PcCg_NGDP$ - PcCg_NGDP{+1}) ...
         + shk_Cg ...
     !! PcCg_NGDP = $ss_PcCg_NGDP$;
@@ -238,7 +238,7 @@
     "Rule for government employment"
     log(Ng) = ...
         + log(Ng{-1}) ...
-        + lambda_Ng1*(BG_NGDP_tar{+1} - BG_NGDP{+1}) ...
+        + lambda_Ng1*(Bg_NGDP_tar{+1} - Bg_NGDP{+1}) ...
         + lambda_Ng2*(ss_WNg_NGDP - WNg_NGDP{+1}) ...
         + shk_Ng ...
     !! WNg_NGDP = ss_WNg_NGDP;
@@ -261,7 +261,7 @@
     "Government tax revenues from lump-sum taxes"
     TXls_NGDP = ...
         + TXls_NGDP{-1} ...
-        - lambda_TXls1*(BG_NGDP_tar{+1} - BG_NGDP{+1}) ...
+        - lambda_TXls1*(Bg_NGDP_tar{+1} - Bg_NGDP{+1}) ...
         + lambda_TXls2*(ss_TXls_NGDP - TXls_NGDP) ...
         + shk_TXls ...
     !! TXls_NGDP = ss_TXls_NGDP;
@@ -287,7 +287,7 @@
 
     "Balancing net government transfers to GDP ratio"
     TFother_NGDP = &TFother_NGDP ...
-    !! BG_NGDP = ss_BG_NGDP;
+    !! Bg_NGDP = ss_Bg_NGDP;
 
 
 % __Public investment fund__
