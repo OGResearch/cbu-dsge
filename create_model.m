@@ -34,7 +34,7 @@ m = Model.fromFile( ...
 
 % Steady-state parameters
 
-m.ss_Rw_star  = 1.030;
+m.ss_Rw_star = 1.030;
 m.ss_dPw_star = 1.025;
 m.ss_BWjz_NGDP = 0;
 m.ss_Pj_start_Pw_star = 1;
@@ -118,15 +118,14 @@ m.xi_NNy = 0;
 % __Primary export sector (Q)__
 
 % Steady State for Exogenous/External/Policy Variables
-m.ss_Aq         = 1;
-m.ss_Pq_Pw      = 1;
-m.ss_Pmq_Pw     = 1;
-m.gamma_Mq      = 0.15; % if non-primary exporters disabled, use m.gamma_Mq  = 0.29 in read_model
-m.ss_TRwf       = 0.5;
-m.gamma_J      = 0.07;
+m.ss_Aq = 1;
+m.ss_Pq_Pw = 1;
+m.ss_Pmq_Pw = 1;
+m.gamma_Mq = 0.25; % if non-primary exporters disabled, use m.gamma_Mq = 0.29 in read_model
+m.gamma_J = 0.07;
 
 % Autoregression Parameters
-m.rho_Aq    = 0.5;
+m.rho_Aq = 0.5;
 m.rho_Pq_Pw = 0.5;
 
 
@@ -273,6 +272,8 @@ m = steady( ...
 checkSteady(m);
 
 
+% Reverse engineer parameters for steady-state ratios
+
 swap = string.empty(0, 2);
 
 % Net investment position
@@ -282,6 +283,14 @@ swap = [swap; "NIP_NGDP", "zeta_Rg0"];
 % Public infrastructure expenditures
 m.PidIg_NGDP = 0.08;
 swap = [swap; "PidIg_NGDP", "ss_Kg_A"];
+
+% Primary export to GDP
+m.PqQ_NGDP = 0.08;
+swap = [swap; "PqQ_NGDP", "ss_Aq"];
+
+% Import for primary export to GDP
+m.PmqMq_NGDP = 0.02;
+swap = [swap; "PmqMq_NGDP", "gamma_Mq"];
 
 % Energy volume
 m.PjJ_NGDP = 0.04;
@@ -326,63 +335,63 @@ return
 SS = struct();
 
 % National accounts
-SS.PcCh_NGDP    = 0.42; % Private consumption share to GDP based on National Accounts data
-SS.PiIh_NGDP   = 0.04; % Private investment to real estate based on National Accounts data
-SS.PxX_NGDP    = 0.35; % Export share to GDP based on National Accounts data
-SS.PjJ_NGDP    = 0.065; % Size of petro chemical sector, based on trade statistics (w/o oil and natural resources related)
-SS.PzZ_NGDP    = 0.04; % Size of non-primary sector, based on trade statistics (w/o oil and natural resources related)
+SS.PcCh_NGDP = 0.42; % Private consumption share to GDP based on National Accounts data
+SS.PiIh_NGDP = 0.04; % Private investment to real estate based on National Accounts data
+SS.PxX_NGDP = 0.35; % Export share to GDP based on National Accounts data
+SS.PjJ_NGDP = 0.065; % Size of petro chemical sector, based on trade statistics (w/o oil and natural resources related)
+SS.PzZ_NGDP = 0.04; % Size of non-primary sector, based on trade statistics (w/o oil and natural resources related)
 
-SS.VAq_NGDP    = 0.285; % Value added of sector to GDP ratio based on NA statistics 
-SS.VAj_NGDP    = 0.025; % Value added of non-oil primary sector to GDP ratio, assumption
+SS.VAq_NGDP = 0.285; % Value added of sector to GDP ratio based on NA statistics 
+SS.VAj_NGDP = 0.025; % Value added of non-oil primary sector to GDP ratio, assumption
 
 % BoP
-SS.TFw_NGDP    = 0.05; % Remittance to GDP, based on BOP data
+SS.TFw_NGDP = 0.05; % Remittance to GDP, based on BOP data
 
 % Production parameters
-m.gamma_J     = 0.07; % Share of primary inputs used in local production sectors; (1 - m.gamma_J) is a share of local labor, capital and imports. 
-m.ss_TFq_PqQ   = 0.05; % Transfers to households from primary producers' revenues
+m.gamma_J = 0.07; % Share of primary inputs used in local production sectors; (1 - m.gamma_J) is a share of local labor, capital and imports. 
+m.ss_TFq_PqQ = 0.05; % Transfers to households from primary producers' revenues
 
-m.gamma_Nz     = 0.40; % Labor intensity of Z sector (Y-3 production stage)
-m.gamma_Mz     = 0.45; % Import intensity of Z sector (Y-2 production stage)
+m.gamma_Nz = 0.40; % Labor intensity of Z sector (Y-3 production stage)
+m.gamma_Mz = 0.45; % Import intensity of Z sector (Y-2 production stage)
 
 % Fiscal data
-SS.TXexp_NGDP  = 0.008; % Expat levy to GDP based on fiscal data
-SS.TXinp_NGDP  = 0.035 - SS.TXexp_NGDP; % Input(excise +import) tax to GDP based on 2019 budget
-SS.TXvat_NGDP  = 0.015; % Tax revenues from VAT to GDP based on 2019 budget
-SS.REV_NGDP    = 0.328; % Revenue to GDP based on 2019 budget
-m.ss_TRwf      = 0.5;   % Fiscal revenues from primary producers' VA
-m.ss_TFh_NGDP  = 0.01;  % Transfers and subsidies to households
+SS.TXexp_NGDP = 0.008; % Expat levy to GDP based on fiscal data
+SS.TXinp_NGDP = 0.035 - SS.TXexp_NGDP; % Input(excise +import) tax to GDP based on 2019 budget
+SS.TXvat_NGDP = 0.015; % Tax revenues from VAT to GDP based on 2019 budget
+SS.REV_NGDP = 0.328; % Revenue to GDP based on 2019 budget
+m.ss_TRwf = 0.5;   % Fiscal revenues from primary producers' VA
+m.ss_TFh_NGDP = 0.01;  % Transfers and subsidies to households
 m.ss_TFhtm_TFh = 0.65;  % Share of transfers and subsidies to HTM households
 
-m.ss_PcG_NGDP   = 0.24; % Public consumtion to GDP 
-m.ss_PidIg_NGDP  = 0.08; % Public non-financial investment to GDP 
+m.ss_PcG_NGDP = 0.24; % Public consumtion to GDP 
+m.ss_PidIg_NGDP = 0.08; % Public non-financial investment to GDP 
 
-m.ss_WNg_NGDP   = 0.16; % Public sector wage bill to GDP
-m.ss_Wg_Wopt    = 1.50; % Public sector wages to private sector OPT wages
+m.ss_WNg_NGDP = 0.16; % Public sector wage bill to GDP
+m.ss_Wg_Wopt = 1.50; % Public sector wages to private sector OPT wages
 
-m.ss_BG_NGDP    = 0.2;  % Total public gross debt
-m.ss_BGw_BG     = 0.5;  % Share of external debt in Total public gross debt
-m.ss_BCBg_NGDP  = 0.15; % Gvmt reserve at SAMA
+m.ss_BG_NGDP = 0.2;  % Total public gross debt
+m.ss_BGw_BG = 0.5;  % Share of external debt in Total public gross debt
+m.ss_BCBg_NGDP = 0.15; % Gvmt reserve at SAMA
 m.ss_BWcbX_NGDP = 0.35; % SAMA FX met reserves (w/o Gvmt reserve)
 m.ss_Bwf_NGDP = 0.05; % PIF external assets to GDP
 
 
 % Financial markets
-SS.BWh_NGDP     = 0.10;  % Household foreign investment position based on end-2018 data 
-SS.Rg_Rw        = 1.005; % Risk premium based on current interest rate differential vs U.S.
-m.ss_BWjz_NGDP  = 0;  % Foreign fund of retained earnings from jz sectors
+SS.BWh_NGDP = 0.10;  % Household foreign investment position based on end-2018 data 
+SS.Rg_Rw = 1.005; % Risk premium based on current interest rate differential vs U.S.
+m.ss_BWjz_NGDP = 0;  % Foreign fund of retained earnings from jz sectors
 
 % Labor market
-SS.Nhtm_Np     = 0.8;   % Share of expats in total employment, based on GOSI and GASTAT 
-SS.WNz_VAz     = 0.497; % Assuming larger wage bill to VA then in local sector.
-SS.N0z_Nz      = 0.5;   % Assumption about overhead labor to total labor in Non-primary production, assuming lower share then in local
+SS.Nhtm_Np = 0.8;   % Share of expats in total employment, based on GOSI and GASTAT 
+SS.WNz_VAz = 0.497; % Assuming larger wage bill to VA then in local sector.
+SS.N0z_Nz = 0.5;   % Assumption about overhead labor to total labor in Non-primary production, assuming lower share then in local
 m.ss_Whtm_Wopt = 0.45;  % Share of HTM vs. OPT wages in private sector 
 
 % Technical assumptions
 SS.Copt_Vh_nu0 = 0; % Set intercept to zero by default
-SS.PSIy        = 1.07; % Profit Margins in Local Production assumed at 10%
-SS.VAj_PkjKj   = 1/3; % Implicitly provides profil level PIEj
-SS.VAz_PkzKz   = 1/1.75; % Implicitly provides profil level PIEz
+SS.PSIy = 1.07; % Profit Margins in Local Production assumed at 10%
+SS.VAj_PkjKj = 1/3; % Implicitly provides profil level PIEj
+SS.VAz_PkzKz = 1/1.75; % Implicitly provides profil level PIEz
 
 
 

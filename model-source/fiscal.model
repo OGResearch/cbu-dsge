@@ -25,13 +25,12 @@
     PgG
 
     "Value added tax rate" TRvat
-    TRwf
     TRexp
 
     "Government tax revenues to GDP Ratio" TX_NGDP
+    TXq_NGDP
     TXvat_NGDP
     TXexp_NGDP
-    TXwf_NGDP 
     TXls_NGDP
 
     "Total government primary revenues to GDP ratio" REV_NGDP
@@ -64,6 +63,7 @@
     DEF_NGDP
     TFfg_NGDP
     TX_NGDP
+    TXq_NGDP
     PidIg_NGDP
     PgG_NGDP
     PcCg_NGDP
@@ -72,12 +72,10 @@
     REV_NGDP
 
     TRvat
-    TRwf
     TRexp
 
     TXvat_NGDP
     TXexp_NGDP
-    TXwf_NGDP 
     TXls_NGDP
 
     TFh_NGDP
@@ -111,7 +109,6 @@
     "S/S Government investment to GDP ratio" ss_PidIg_NGDP
     ss_WNg_NGDP
     ss_TRvat
-    ss_TRwf
     ss_TRexp
     ss_TFh_NGDP
     ss_TFhtm_TFh
@@ -254,20 +251,19 @@
 
     % Government tax rates
     TRvat = ss_TRvat;
-    TRwf = ss_TRwf;
     TRexp = ss_TRexp + shk_TRexp;
 
     "Government tax revenues to GDP ratio"
-    TX_NGDP = TXvat_NGDP + TXexp_NGDP  + TXwf_NGDP + TXls_NGDP;
+    TX_NGDP = TXvat_NGDP + TXq_NGDP + TXexp_NGDP + TXls_NGDP;
 
     "Government tax revenues from value-added tax"
     TXvat_NGDP = TRvat/(1+TRvat) * (Pc*Ch/NGDP + PcCg_NGDP);
 
+    "Government tax revenues from primary export sectors"
+    TXq_NGDP = PIEq_NGDP;
+
     "Government tax revenues from expat taxes"
     TXexp_NGDP = TRexp * Whtm * Nhtm / NGDP;
-
-    "Government tax revenues from windfall taxes"
-    TXwf_NGDP = TRwf * Pq * Qx / NGDP;
 
     "Government tax revenues from lump-sum taxes"
     TXls_NGDP = ...

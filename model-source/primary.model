@@ -51,7 +51,6 @@
 
     Qx = Aq * A;
 
-
     log(Aq) = ...
         + rho_Aq*log(Aq{-1}) ...
         + (1-rho_Aq)*(log(ss_Aq) + shk_Aq) ...
@@ -62,7 +61,7 @@
 
 % __Profits and value added__
 
-    PIEq_NGDP*NGDP = Pq*Qx*(1 - TRwf) - Pmq*Mq;
+    PIEq_NGDP*NGDP = Pq*Qx - Pmq*Mq;
     VAq_NGDP = (Pq*Qx - Pmq*Mq) / NGDP;
 
 
