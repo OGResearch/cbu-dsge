@@ -136,7 +136,7 @@
 
     PcCh_NGDP = PcCh / NGDP;
 
-    PiI_NGDP = PiI / NGDP;
+    PiI_NGDP = Pi*I / NGDP;
 
     WN_NGDP = WNy_NGDP + WNz_NGDP + WNg_NGDP;
 
