@@ -13,7 +13,7 @@
 !parameters
 
     "S/S External position of the Foreigners' Investment Fund to GDP Ratio" ss_BWjz_NGDP
-    "S/S Foreign-Currency Risk-Free World Rate" ss_Rw_star
+    "S/S World risk-free FCY real interest rate" ss_RRw_star
     "S/S Rate of Change in World Prices" ss_dPw_star
     psi_jw
     psi_qw
@@ -43,7 +43,7 @@
     !! Pw_star = ss_dPw_star*Pw_star{-1};
 
     "World interest rates"
-    Rw_star = ss_Rw_star;
+    Rw_star = ss_RRw_star * ss_dPw_star;
 
     "Profits of foreigners to GDP ratio"
     PIEw_NGDP = ...

@@ -34,7 +34,7 @@ m = Model.fromFile( ...
 
 % Steady-state parameters
 
-m.ss_Rw_star = 1.030;
+m.ss_RRw_star = 1.01;
 m.ss_dPw_star = 1.03;
 m.ss_BWjz_NGDP = 0;
 m.ss_Pj_Pw = 1;
