@@ -3,12 +3,9 @@
 !variables
 
     "Foreign price of primary commodity" Pq_star
-    "Foreign unit cost of primary production maintenance services" Pmq_star
     "Price of primary commodity" Pq
-    "Unit cost of primary production maintenance services" Pmq
     "Primary production specific technology" Aq
     "Real world price of primary commodity" Pq_Pw
-    "Real world price of maintenance services" Pmq_Pw
     "Primary production maintenance services" Mq
     "Profits in primary production to GDP ratio" PIEq_NGDP
     "Value added in primary production to GDP ratio" VAq_NGDP
@@ -20,7 +17,6 @@
     % Directly Calibrated Ratios and Rates
     "S/S Primary Production Specific Technology" ss_Aq
     "S/S Real World Price of Primary Commodity" ss_Pq_Pw
-    "S/S Real World Price of Imports to Primary Sector" ss_Pmq_Pw
     "S/S Import intensity of Primary Production" gamma_Mq
 
     % Transitory Parameters
@@ -64,11 +60,8 @@
 % __World prices__
 
     Pq_star = Pq_Pw * Pw_star;
-    Pmq_star = Pmq_Pw* Pw_star;
 
     Pq  = S * Pq_star;
-    Pmq = S * Pmq_star;
-    Pmq_Pw = ss_Pmq_Pw;
 
 
 % __Real world price of primary commodity__
@@ -77,7 +70,6 @@
         + rho_Pq_Pw*log(Pq_Pw{-1}) ...
         + (1-rho_Pq_Pw)*log(ss_Pq_Pw) + shk_Pq_Pw ...
     !! Pq_Pw = ss_Pq_Pw;
-
 
     PqQ_NGDP*NGDP = Pq*Q;
 

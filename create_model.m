@@ -118,7 +118,6 @@ m.xi_NNy = 0;
 % Steady State for Exogenous/External/Policy Variables
 m.ss_Aq = 1;
 m.ss_Pq_Pw = 1;
-m.ss_Pmq_Pw = 1;
 m.gamma_Mq = 0.25; % if non-primary exporters disabled, use m.gamma_Mq = 0.29 in read_model
 m.gamma_J = 0.07;
 
