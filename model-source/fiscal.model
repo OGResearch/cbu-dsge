@@ -95,8 +95,6 @@
 
     % Steady-state parameters
 
-    ss_BWcbX_NGDP
-    ss_BCBg_NGDP
     "S/S Share of foreign govt debt in total govt debt" ss_BGw_BG
     "S/S Government gross debt to GDP ratio" ss_BG_NGDP
 

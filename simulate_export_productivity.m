@@ -52,3 +52,14 @@ s1 = simulate( ...
 smc1 = databank.minusControl(m1, s1, d);
 
 
+%% Chart results
+
+ch = Chartpack();
+ch.Range = 0:40;
+ch.PlotSettings = {"marker", "s"};
+
+ch + ["Copt", "Chtm", "Iy", "Kz", "Iz"];
+
+draw(ch, smc1);
+
+

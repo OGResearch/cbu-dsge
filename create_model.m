@@ -46,15 +46,26 @@ m.rho_Pw_star = 0.3;
 
 % __Local__
 
-% Households
+% Steady-state parameters
+
 m.beta = 0.97; 
+m.delta_Ky = 0.20;
+m.delta_Kh = 0.20;
+m.omega = 0.30;
+
+
+% Households
+
 m.chi_dli = 0.20;
 m.chi_c = 0.3;
 m.nu = 0.05;
 m.nu0 = 0; % to be reverse-engineered
-m.delta_Ky = 0.20;
-m.delta_Kh = 0.20;
-m.omega = 0.30;
+
+% ----- Temporary -----
+m.chi_dli = 0;
+m.chi_c = 0.5;
+m.nu = 0;
+
 
 m.ss_TFw_WNhtm = 0.36; % to be reverse engineered
 
@@ -174,10 +185,6 @@ m.kappa_dS = 1;
 % __Fiscal__
 
 % Steady-state parameters
-
-% Central bank
-m.ss_BCBg_NGDP = 0; %%%0.15;
-m.ss_BWcbX_NGDP = 0; %%%0.35;
 
 % Government debt
 m.ss_BG_NGDP = 0; %%%0.2; 
