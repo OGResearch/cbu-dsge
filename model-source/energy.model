@@ -10,8 +10,6 @@
     "Value added in energy sector to GDP" VAj_NGDP
     "Energy volume to GDP" PjJ_NGDP
     "World price of energy" Pj_star
-    "Price of import for energy sector" Pmj
-    "Import for energy sector to GDP" PmjMj_NGDP
     "Profit of energy sector" PIEj_NGDP
 
 
@@ -19,7 +17,6 @@
 
     VAj_NGDP
     PjJ_NGDP
-    PmjMj_NGDP
     PIEj_NGDP
 
 
@@ -32,7 +29,6 @@
 
     "S/S Real world price of energy" ss_Pj_Pw
     "Adjustment coefficient in price of energy"  lambda_Pj
-    psi_jw
 
 
 !equations
@@ -48,28 +44,19 @@
     "Marginal cost of energy"
     Pj0 = S * Pj_star;
 
-
-
     "Price of energy, Y/Y"
     dPj = Pj / Pj{-1};
-
 
     "Energy volume to GDP"
     PjJ_NGDP = Pj * J / NGDP;
 
-    "Price of import for energy production"
-    Pmj = S * Pw_star;
-
     "World price of energy"
     Pj_star = ss_Pj_Pw * Pw_star;
 
-    "Import for energy sector to GDP"
-    PmjMj_NGDP = psi_jw * PjJ_NGDP;
-
     "Profit in energy sector"
-    PIEj_NGDP = PjJ_NGDP - PmjMj_NGDP;
+    PIEj_NGDP = PjJ_NGDP;
 
     "Value added in energy sector"
-    VAj_NGDP = PjJ_NGDP - VAj_NGDP;
+    VAj_NGDP = PjJ_NGDP;
 
 

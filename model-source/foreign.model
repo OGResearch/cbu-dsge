@@ -17,6 +17,7 @@
     "S/S External position of the Foreigners' Investment Fund to GDP Ratio" ss_BWjz_NGDP
     "S/S Foreign-Currency Risk-Free World Rate" ss_Rw_star
     "S/S Rate of Change in World Prices" ss_dPw_star
+    psi_jw
 
     "Smoothing of foreign investors balancence" lambda_BWjz
     "A/R in foreign price rate of change" rho_Pw_star
@@ -54,8 +55,7 @@
     ;
 
     "Profits of foreigners to GDP ratio"
-    %%% PIEw_NGDP = psi_jw*PIEj_NGDP + psi_zw*PIEz_NGDP;
-    PIEw_NGDP = psi_zw*PIEz_NGDP;
+    PIEw_NGDP = psi_jw * PIEj_NGDP;
 
     "Repatriation of retained earnings"
     TFjz_NGDP = TFjz_NGDP{-1}/dNGDP*dNGDP{+4} ...
@@ -64,4 +64,5 @@
 
     "World prices, Y/Y"
     dPw_star = Pw_star / Pw_star{-1};
+
 

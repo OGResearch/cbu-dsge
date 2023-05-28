@@ -28,6 +28,7 @@
 
     "Government tax revenues to GDP Ratio" TX_NGDP
     TXq_NGDP
+    TXj_NGDP
     TXvat_NGDP
     TXls_NGDP
 
@@ -253,6 +254,9 @@
 
     "Government tax revenues from primary export sectors"
     TXq_NGDP = PIEq_NGDP;
+
+    "Government tax revenues from energy sector"
+    TXj_NGDP = (1 - psi_jw) * PIEj_NGDP;
 
     "Government tax revenues from lump-sum taxes"
     TXls_NGDP = ...

@@ -297,8 +297,8 @@ m.PjJ_NGDP = 0.04;
 swap = [swap; "PjJ_NGDP", "gamma_J"];
 
 % Import for energey sector
-m.PmjMj_NGDP = 0.01;
-swap = [swap; "PmjMj_NGDP", "psi_jw"];
+m.TXj_NGDP = 0.03;
+swap = [swap; "TXj_NGDP", "psi_jw"];
 
 
 m = steady( ...
