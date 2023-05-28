@@ -30,7 +30,6 @@
     "Government tax revenues to GDP Ratio" TX_NGDP
     TXq_NGDP
     TXvat_NGDP
-    TXexp_NGDP
     TXls_NGDP
 
     "Total government primary revenues to GDP ratio" REV_NGDP
@@ -75,7 +74,6 @@
     TRexp
 
     TXvat_NGDP
-    TXexp_NGDP
     TXls_NGDP
 
     TFh_NGDP
@@ -254,16 +252,13 @@
     TRexp = ss_TRexp + shk_TRexp;
 
     "Government tax revenues to GDP ratio"
-    TX_NGDP = TXvat_NGDP + TXq_NGDP + TXexp_NGDP + TXls_NGDP;
+    TX_NGDP = TXvat_NGDP + TXq_NGDP + TXls_NGDP;
 
     "Government tax revenues from value-added tax"
     TXvat_NGDP = TRvat/(1+TRvat) * (Pc*Ch/NGDP + PcCg_NGDP);
 
     "Government tax revenues from primary export sectors"
     TXq_NGDP = PIEq_NGDP;
-
-    "Government tax revenues from expat taxes"
-    TXexp_NGDP = TRexp * Whtm * Nhtm / NGDP;
 
     "Government tax revenues from lump-sum taxes"
     TXls_NGDP = ...

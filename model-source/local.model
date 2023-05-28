@@ -223,7 +223,7 @@
 % __Hand-to-mouth households__
 
     "Real current income of hand-to-mouth households"
-    Pc*DLIhtm = (WNhtm_NGDP*(1 - TRexp) + TFhtm_NGDP - (TFw_NGDP + TXexp_NGDP))*NGDP;
+    Pc*DLIhtm = (WNhtm_NGDP + TFhtm_NGDP - TFw_NGDP)*NGDP;
 
     "Remittances from hand-to-mouth households"
     TFw_NGDP = ss_TFw_WNhtm * WNhtm_NGDP*(1 - TRexp);
