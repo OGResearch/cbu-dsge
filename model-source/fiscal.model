@@ -31,7 +31,7 @@
     TXvat_NGDP
     TXls_NGDP
 
-    TFh_NGDP
+    TFgh_NGDP
     TFopt_NGDP
     TFhtm_NGDP
 
@@ -66,7 +66,7 @@
     TXvat_NGDP
     TXls_NGDP
 
-    TFh_NGDP
+    TFgh_NGDP
     TFopt_NGDP
     TFhtm_NGDP
     TFother_NGDP
@@ -164,7 +164,7 @@
         + IntBgh_NGDP + IntBgw_NGDP ...
         - TX_NGDP ...
         - TFfg_NGDP ...
-        + TFh_NGDP ...
+        + TFgh_NGDP ...
         + TFother_NGDP ...
         + PgG_NGDP ...
         + PiIg_NGDP ...
@@ -249,11 +249,11 @@
     !! TXls_NGDP = ss_TXls_NGDP;
 
     "Governments transfers to households"
-    TFh_NGDP = TFopt_NGDP + TFhtm_NGDP;
+    TFgh_NGDP = TFopt_NGDP + TFhtm_NGDP;
 
-    TFh_NGDP = ss_TFgh_NGDP;
+    TFgh_NGDP = ss_TFgh_NGDP;
 
-    TFhtm_NGDP = omega_TFgh * TFh_NGDP;
+    TFhtm_NGDP = omega_TFgh * TFgh_NGDP;
 
     "Balancing net government transfers to GDP ratio"
     TFother_NGDP = &TFother_NGDP ...

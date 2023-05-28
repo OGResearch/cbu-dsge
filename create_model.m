@@ -326,192 +326,184 @@ save mat/create_model.mat m
 
 
 
-
-
-
-
-
-
-return
-
-%% Exogenize some steady state values to reverse engineer respective parameters
-
-% Define baseline steady-state properties
-SS = struct();
-
-% National accounts
-SS.PcCh_NGDP = 0.42; % Private consumption share to GDP based on National Accounts data
-SS.PiIh_NGDP = 0.04; % Private investment to real estate based on National Accounts data
-SS.PxX_NGDP = 0.35; % Export share to GDP based on National Accounts data
-SS.PjJ_NGDP = 0.065; % Size of petro chemical sector, based on trade statistics (w/o oil and natural resources related)
-SS.PzZ_NGDP = 0.04; % Size of non-primary sector, based on trade statistics (w/o oil and natural resources related)
-
-SS.VAq_NGDP = 0.285; % Value added of sector to GDP ratio based on NA statistics 
-SS.VAj_NGDP = 0.025; % Value added of non-oil primary sector to GDP ratio, assumption
-
-% BoP
-SS.TFw_NGDP = 0.05; % Remittance to GDP, based on BOP data
-
-% Production parameters
-m.gamma_J = 0.07; % Share of primary inputs used in local production sectors; (1 - m.gamma_J) is a share of local labor, capital and imports. 
-m.ss_TFq_PqQ = 0.05; % Transfers to households from primary producers' revenues
-
-m.gamma_Nz = 0.40; % Labor intensity of Z sector (Y-3 production stage)
-m.gamma_Mz = 0.45; % Import intensity of Z sector (Y-2 production stage)
-
-% Fiscal data
-SS.TXexp_NGDP = 0.008; % Expat levy to GDP based on fiscal data
-SS.TXinp_NGDP = 0.035 - SS.TXexp_NGDP; % Input(excise +import) tax to GDP based on 2019 budget
-SS.TXvat_NGDP = 0.015; % Tax revenues from VAT to GDP based on 2019 budget
-SS.REV_NGDP = 0.328; % Revenue to GDP based on 2019 budget
-m.ss_TRwf = 0.5;   % Fiscal revenues from primary producers' VA
-m.ss_TFh_NGDP = 0.01;  % Transfers and subsidies to households
-m.ss_TFhtm_TFh = 0.65;  % Share of transfers and subsidies to HTM households
-
-m.ss_PcG_NGDP = 0.24; % Public consumtion to GDP 
-m.ss_PiIg_NGDP = 0.08; % Public non-financial investment to GDP 
-
-m.ss_WNg_NGDP = 0.16; % Public sector wage bill to GDP
-m.ss_Wg_Wopt = 1.50; % Public sector wages to private sector OPT wages
-
-m.ss_Bg_NGDP = 0.40;  % Total public gross debt
-m.ss_Bgw_Bg = 1-0.14;;  % Share of external debt in Total public gross debt
-m.ss_BCBg_NGDP = 0.15; % Gvmt reserve at SAMA
-m.ss_BWcbX_NGDP = 0.35; % SAMA FX met reserves (w/o Gvmt reserve)
-m.ss_Bwf_NGDP = 0.05; % PIF external assets to GDP
-
-
-% Financial markets
-SS.BWh_NGDP = 0.10;  % Household foreign investment position based on end-2018 data 
-SS.Rg_Rw = 1.005; % Risk premium based on current interest rate differential vs U.S.
-m.ss_BWjz_NGDP = 0;  % Foreign fund of retained earnings from jz sectors
-
-% Labor market
-SS.Nhtm_Np = 0.8;   % Share of expats in total employment, based on GOSI and GASTAT 
-SS.WNz_VAz = 0.497; % Assuming larger wage bill to VA then in local sector.
-SS.N0z_Nz = 0.5;   % Assumption about overhead labor to total labor in Non-primary production, assuming lower share then in local
-m.ss_Whtm_Wopt = 0.45;  % Share of HTM vs. OPT wages in private sector 
-
-% Technical assumptions
-SS.Copt_Vh_nu0 = 0; % Set intercept to zero by default
-SS.PSIy = 1.07; % Profit Margins in Local Production assumed at 10%
-SS.VAj_PkjKj = 1/3; % Implicitly provides profil level PIEj
-SS.VAz_PkzKz = 1/1.75; % Implicitly provides profil level PIEz
-
-
-
-% Assign SS as initial parametrisation
-m = assign(m, SS);
-
-
-% Tune SS and set which parameter to use
-swap = [
-    "BWh_NGDP"       "zeta_Rh0"
-    "PxX_NGDP"       "gamma_My"
-    "PjJ_NGDP"       "ss_Aj"
-    "PzZ_NGDP"       "ss_Az"
-    "Rg_Rw"          "zeta_Rg0"
-    "Copt_Vh_nu0"    "nu0"
-    "PSIy"           "mu_Y2"
-    "PcCh_NGDP"       "gamma_Ny"
-    "PiIh_NGDP"      "ss_Kh_Ky"
-    "Qy_Q"           "gamma_Qy"
-    "Nhtm_Np"        "ss_N0y"
-    "WNz_VAz"        "mu_Z"  
-    "N0z_Nz"         "ss_N0z_Kz" 
-    "TFw_NGDP"       "ss_TFw_WNhtm"
-    "TXexp_NGDP"     "ss_TRexp"
-    "TXinp_NGDP"     "ss_TRinp"
-    "TXvat_NGDP"     "ss_TRvat"
-    "REV_NGDP"       "ss_TXls_NGDP"
-    "VAq_NGDP"       "gamma_Mq"
-    "VAj_NGDP"       "gamma_Qj"
-    "VAj_PkjKj"      "ss_Kj_A"
-    "VAz_PkzKz"      "ss_Kz_A"
-    ... "WNp_NGDP"       "upsilon_Y" %"mu_CI"
-];
-
-
-%% Second round calibration
-
-steadyOptions = {
-    "exogenize", swap(:, 1), ...
-    "endogenize", swap(:, 2), ...
-    "fix", ["A", "Pw_star", "S"], ...
-    "blocks", ~true, ...
-};
-
-m = steady(m, steadyOptions{:});
-
-checkSteady(m);
-
-
-%% Calculate first-order approximate solution matrices
-
-m = solve(m);
-
-
-%% Save models to mat file
-
-disp("Saving model to MAT/createModel.mat")
-save MAT/create_model.mat m
-
-
-%% Report steady-state table
-
-t = table( ...
-    m, ["steadyLevel"] ...
-    , "round", 8 ...
-    , "writeTable", "Tables/baseline-steady.xlsx" ...
-);
-
-rows = [
-    "BCBg_NGDP"
-    "Bg_NGDP"
-    "BWh_NGDP"
-    "NIP_NGDP"
-    "TB_NGDP"
-    "TFw_NGDP"
-    "TXexp_NGDP"
-    "TXinp_NGDP"
-    "TXwf_NGDP"
-    "TXls_NGDP"
-    "TX_NGDP"
-    "PIEg_NGDP"
-    "TFh_NGDP"
-    "PcG_NGDP"
-    "PcCg_NGDP"
-    "PcCh_NGDP"
-    "PiI_NGDP"
-    "PizIz_NGDP"
-    "PIEz_NGDP"
-    "PqQ_NGDP"
-    "PzZ_NGDP"
-    "PjJ_NGDP"
-    "PmzMz_NGDP"
-    "PxX_NGDP"
-    "PmM_NGDP"
-    "WN_NGDP"
-    "WNp_NGDP"
-    "WNg_NGDP"
-    "WNy_VAy"
-    "WNz_VAz"
-    "Rg"
-    "PkzKz_NGDP"
-    "VAy_PkyKy"
-    "VAz_PkzKz"
-    "Ng_N"
-    "N0y_Ny"
-    "N0z_Nz"
-    "Nhtm_N"
-    "Whtm_Wopt"
-];
-
-
-disp("=========================================================================");
-disp(" Selected steate-state characteristics of the baseline model calibration")
-disp("=========================================================================")
-disp(" ")
-
-disp(t(rows, :));
-
+% %% Exogenize some steady state values to reverse engineer respective parameters
+% 
+% % Define baseline steady-state properties
+% SS = struct();
+% 
+% % National accounts
+% SS.PcCh_NGDP = 0.42; % Private consumption share to GDP based on National Accounts data
+% SS.PiIh_NGDP = 0.04; % Private investment to real estate based on National Accounts data
+% SS.PxX_NGDP = 0.35; % Export share to GDP based on National Accounts data
+% SS.PjJ_NGDP = 0.065; % Size of petro chemical sector, based on trade statistics (w/o oil and natural resources related)
+% SS.PzZ_NGDP = 0.04; % Size of non-primary sector, based on trade statistics (w/o oil and natural resources related)
+% 
+% SS.VAq_NGDP = 0.285; % Value added of sector to GDP ratio based on NA statistics 
+% SS.VAj_NGDP = 0.025; % Value added of non-oil primary sector to GDP ratio, assumption
+% 
+% % BoP
+% SS.TFw_NGDP = 0.05; % Remittance to GDP, based on BOP data
+% 
+% % Production parameters
+% m.gamma_J = 0.07; % Share of primary inputs used in local production sectors; (1 - m.gamma_J) is a share of local labor, capital and imports. 
+% m.ss_TFq_PqQ = 0.05; % Transfers to households from primary producers' revenues
+% 
+% m.gamma_Nz = 0.40; % Labor intensity of Z sector (Y-3 production stage)
+% m.gamma_Mz = 0.45; % Import intensity of Z sector (Y-2 production stage)
+% 
+% % Fiscal data
+% SS.TXexp_NGDP = 0.008; % Expat levy to GDP based on fiscal data
+% SS.TXinp_NGDP = 0.035 - SS.TXexp_NGDP; % Input(excise +import) tax to GDP based on 2019 budget
+% SS.TXvat_NGDP = 0.015; % Tax revenues from VAT to GDP based on 2019 budget
+% SS.REV_NGDP = 0.328; % Revenue to GDP based on 2019 budget
+% m.ss_TRwf = 0.5;   % Fiscal revenues from primary producers' VA
+% m.ss_TFh_NGDP = 0.01;  % Transfers and subsidies to households
+% m.ss_TFhtm_TFh = 0.65;  % Share of transfers and subsidies to HTM households
+% 
+% m.ss_PcG_NGDP = 0.24; % Public consumtion to GDP 
+% m.ss_PiIg_NGDP = 0.08; % Public non-financial investment to GDP 
+% 
+% m.ss_WNg_NGDP = 0.16; % Public sector wage bill to GDP
+% m.ss_Wg_Wopt = 1.50; % Public sector wages to private sector OPT wages
+% 
+% m.ss_Bg_NGDP = 0.40;  % Total public gross debt
+% m.ss_Bgw_Bg = 1-0.14;;  % Share of external debt in Total public gross debt
+% m.ss_BCBg_NGDP = 0.15; % Gvmt reserve at SAMA
+% m.ss_BWcbX_NGDP = 0.35; % SAMA FX met reserves (w/o Gvmt reserve)
+% m.ss_Bwf_NGDP = 0.05; % PIF external assets to GDP
+% 
+% 
+% % Financial markets
+% SS.BWh_NGDP = 0.10;  % Household foreign investment position based on end-2018 data 
+% SS.Rg_Rw = 1.005; % Risk premium based on current interest rate differential vs U.S.
+% m.ss_BWjz_NGDP = 0;  % Foreign fund of retained earnings from jz sectors
+% 
+% % Labor market
+% SS.Nhtm_Np = 0.8;   % Share of expats in total employment, based on GOSI and GASTAT 
+% SS.WNz_VAz = 0.497; % Assuming larger wage bill to VA then in local sector.
+% SS.N0z_Nz = 0.5;   % Assumption about overhead labor to total labor in Non-primary production, assuming lower share then in local
+% m.ss_Whtm_Wopt = 0.45;  % Share of HTM vs. OPT wages in private sector 
+% 
+% % Technical assumptions
+% SS.Copt_Vh_nu0 = 0; % Set intercept to zero by default
+% SS.PSIy = 1.07; % Profit Margins in Local Production assumed at 10%
+% SS.VAj_PkjKj = 1/3; % Implicitly provides profil level PIEj
+% SS.VAz_PkzKz = 1/1.75; % Implicitly provides profil level PIEz
+% 
+% 
+% 
+% % Assign SS as initial parametrisation
+% m = assign(m, SS);
+% 
+% 
+% % Tune SS and set which parameter to use
+% swap = [
+%     "BWh_NGDP"       "zeta_Rh0"
+%     "PxX_NGDP"       "gamma_My"
+%     "PjJ_NGDP"       "ss_Aj"
+%     "PzZ_NGDP"       "ss_Az"
+%     "Rg_Rw"          "zeta_Rg0"
+%     "Copt_Vh_nu0"    "nu0"
+%     "PSIy"           "mu_Y2"
+%     "PcCh_NGDP"       "gamma_Ny"
+%     "PiIh_NGDP"      "ss_Kh_Ky"
+%     "Qy_Q"           "gamma_Qy"
+%     "Nhtm_Np"        "ss_N0y"
+%     "WNz_VAz"        "mu_Z"  
+%     "N0z_Nz"         "ss_N0z_Kz" 
+%     "TFw_NGDP"       "ss_TFw_WNhtm"
+%     "TXexp_NGDP"     "ss_TRexp"
+%     "TXinp_NGDP"     "ss_TRinp"
+%     "TXvat_NGDP"     "ss_TRvat"
+%     "REV_NGDP"       "ss_TXls_NGDP"
+%     "VAq_NGDP"       "gamma_Mq"
+%     "VAj_NGDP"       "gamma_Qj"
+%     "VAj_PkjKj"      "ss_Kj_A"
+%     "VAz_PkzKz"      "ss_Kz_A"
+%     ... "WNp_NGDP"       "upsilon_Y" %"mu_CI"
+% ];
+% 
+% 
+% %% Second round calibration
+% 
+% steadyOptions = {
+%     "exogenize", swap(:, 1), ...
+%     "endogenize", swap(:, 2), ...
+%     "fix", ["A", "Pw_star", "S"], ...
+%     "blocks", ~true, ...
+% };
+% 
+% m = steady(m, steadyOptions{:});
+% 
+% checkSteady(m);
+% 
+% 
+% %% Calculate first-order approximate solution matrices
+% 
+% m = solve(m);
+% 
+% 
+% %% Save models to mat file
+% 
+% disp("Saving model to MAT/createModel.mat")
+% save MAT/create_model.mat m
+% 
+% 
+% %% Report steady-state table
+% 
+% t = table( ...
+%     m, ["steadyLevel"] ...
+%     , "round", 8 ...
+%     , "writeTable", "Tables/baseline-steady.xlsx" ...
+% );
+% 
+% rows = [
+%     "BCBg_NGDP"
+%     "Bg_NGDP"
+%     "BWh_NGDP"
+%     "NIP_NGDP"
+%     "TB_NGDP"
+%     "TFw_NGDP"
+%     "TXexp_NGDP"
+%     "TXinp_NGDP"
+%     "TXwf_NGDP"
+%     "TXls_NGDP"
+%     "TX_NGDP"
+%     "PIEg_NGDP"
+%     "TFh_NGDP"
+%     "PcG_NGDP"
+%     "PcCg_NGDP"
+%     "PcCh_NGDP"
+%     "PiI_NGDP"
+%     "PizIz_NGDP"
+%     "PIEz_NGDP"
+%     "PqQ_NGDP"
+%     "PzZ_NGDP"
+%     "PjJ_NGDP"
+%     "PmzMz_NGDP"
+%     "PxX_NGDP"
+%     "PmM_NGDP"
+%     "WN_NGDP"
+%     "WNp_NGDP"
+%     "WNg_NGDP"
+%     "WNy_VAy"
+%     "WNz_VAz"
+%     "Rg"
+%     "PkzKz_NGDP"
+%     "VAy_PkyKy"
+%     "VAz_PkzKz"
+%     "Ng_N"
+%     "N0y_Ny"
+%     "N0z_Nz"
+%     "Nhtm_N"
+%     "Whtm_Wopt"
+% ];
+% 
+% 
+% disp("=========================================================================");
+% disp(" Selected steate-state characteristics of the baseline model calibration")
+% disp("=========================================================================")
+% disp(" ")
+% 
+% disp(t(rows, :));
+% 
