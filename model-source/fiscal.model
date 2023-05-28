@@ -10,7 +10,7 @@
     "Government Deficit to GDP Ratio" DEF_NGDP
 
     "Government investment to public investment fund to GDP ratio" TFfg_NGDP
-    PidIg_NGDP
+    PiIg_NGDP
     PgG_NGDP
     PcCg_NGDP
     WNg_NGDP
@@ -63,7 +63,7 @@
     TFfg_NGDP
     TX_NGDP
     TXq_NGDP
-    PidIg_NGDP
+    PiIg_NGDP
     PgG_NGDP
     PcCg_NGDP
     WNg_NGDP
@@ -102,7 +102,7 @@
     "Smoothing of PIF balance" lambda_Bwf
     "S/S External position of the public investment fund to GDP ratio" ss_Bwf_NGDP
     "S/S Government consumption to GDP ratio" ss_PcG_NGDP
-    "S/S Government investment to GDP ratio" ss_PidIg_NGDP
+    "S/S Government investment to GDP ratio" ss_PiIg_NGDP
     ss_WNg_NGDP
     ss_TRvat
     ss_TFh_NGDP
@@ -175,7 +175,7 @@
         - TFh_NGDP ...
         - TFother_NGDP ...
         - PgG_NGDP ...
-        - PidIg_NGDP ...
+        - PiIg_NGDP ...
     ;
 
     "Government deficit to GDP ratio"
@@ -208,7 +208,7 @@
 
 
     "Definitin of government investment to GDP ratio"
-    PidIg_NGDP = Pi*Ig / NGDP;
+    PiIg_NGDP = Pi*Ig / NGDP;
 
     "Government consumption expenditures"
     PgG_NGDP = PcCg_NGDP + WNg_NGDP;

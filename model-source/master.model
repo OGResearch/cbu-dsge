@@ -15,7 +15,6 @@
     "Nominal GDP" NGDP
     "Nominal GDP excluding commodity sector" NGDPX
     "Nominal Exports" PxX
-    "Gross rate of change in real investment" dI
     "Gross rate of change in real exports" dX
     "Gross rate of change in real imports" dM
     "Gross rate of change in real GDP" dGDP
@@ -59,7 +58,7 @@
 
 
     "Investment goods produced locally"
-    I = Iy + PidIg_NGDP*NGDP/Pi + Ih + Iz;
+    I = Iy + PiIg_NGDP*NGDP/Pi + Ih + Iz;
 
     "Local production breakdown"
     Y = Ch + PcCg_NGDP*NGDP/Pc + I;
@@ -97,13 +96,8 @@
     "Nominal GDP"
     NGDP = PcCh + PgG_NGDP*NGDP + PiI + PxX - PmM_NGDP*NGDP;
 
-
     "Nominal GDP excluding primary value added"
     NGDPX = NGDP - VAq_NGDP*NGDP;
-
-
-    "Gross rate of change in real investment"
-    dI = I/I{-1};
 
     "Gross rate of change in real exports"
     dX = ...
@@ -123,7 +117,7 @@
     dGDP = ...
         + movavg(PcCh/NGDP, -2) * Ch/Ch{-1} ...
         + movavg(PgG/NGDP, -2) * G/G{-1} ...
-        + movavg(PiI/NGDP, -2) * dI ...
+        + movavg(PiI_NGDP, -2) * I/I{-1} ...
         + movavg(PxX_NGDP, -2) * dX ...
         - movavg(PmM_NGDP, -2) * dM ...
     !! dGDP = ss_dA;
