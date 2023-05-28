@@ -24,8 +24,8 @@
     "Profits in local sectors to GDP ratio" PIEy_NGDP
     "Share of overhead labor in local sectors" N0y_Ny
 
-    Kh
-    "Private residential (housing) investment" Ih
+    "Private residential and overhead capital" Kh
+    "Private residential and overhead investment" Ih
 
     "Variable hours worked in local sectors" NNy
     "Overhead hours worked in local sectors" N0y
