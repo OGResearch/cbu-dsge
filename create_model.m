@@ -93,7 +93,7 @@ m.zeta_Rg1 = 0.10; 0.015;
 m.zeta_Rh0 = 0; % to be reverse-engineered 
 m.zeta_Rh1 = 0.1;0.2;
 
-m.sigma = 0.7;
+m.lambda_S = 0.7;
 
 % Directly calibrated ratios and rates
 
