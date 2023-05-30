@@ -11,20 +11,19 @@
     "Shadow Price of Optimizing Household Budget" Lambda
     "Total Private Consumption" Ch
     "Consumption of Optimizing Households" Copt
-    "Private residential investment to GDP ratio" PiIh_NGDP
+    "Private residential investment to GDP" PiIh_NGDP
 
     "Consumption of Hand-to-Mouth Households" Chtm
     "Auxiliary Variable for Consumption to Net Worth Ratio" Copt_Vh_nu0
     "Disposable Labor Income of Optimizing Households" DLIopt
-    % "Total disposable labor income to GDP ratio" PcDLI_NGDP
+    % "Total disposable labor income to GDP" PcDLI_NGDP
     "Household real net worth" Vh
     "Disposable labor income of hand-to-mouth households" DLIhtm
     "Hours worked in local sectors" Nd
-    "Wage bill in local sectors to GDP ratio" WNd_NGDP
+    "Wage bill in local sectors to GDP" WNd_NGDP
     "Physical investment in local sectors" Id
 
-    "Profits in local sectors to GDP ratio" PIEd_NGDP
-    "Share of overhead labor in local sectors" N0d_Nd
+    "Profits in local sectors to GDP" PIEd_NGDP
 
     "Private residential and overhead capital" Kh
     "Private residential and overhead investment" Ih
@@ -39,8 +38,10 @@
     "Total productivity in local sectors" AAd
 
 
-    "Household net worth to GDP ratio" PcVh_NGDP
-    "Capital in local sectors to GDP ratio" PkdKd_NGDP
+    "Household net worth to GDP" PcVh_NGDP
+    "Capital in local sectors to GDP" PkdKd_NGDP
+
+    "Capital in nonprimary exports to GDP" PkzKz_NGDP
 
     "Marginal cost of local intermediate goods" Pd1
     "Markuped marginal cost in local sectors" Pd
@@ -84,11 +85,12 @@
     Bhw_NGDP
     PcVh_NGDP
     PkdKd_NGDP
+    PkzKz_NGDP
     DLIopt_Copt
     Md_D2
     D3_D2
     PIEd_NGDP
-    N0d_Nd
+    %N0d_Nd
     React
     PmdMd_NGDP
     WNd_NGDP
@@ -104,6 +106,8 @@
 
 
 !parameters
+
+    "Overhead labor to labor in local sector" ss_N0d_Nd
 
     "Share of remmittances received by HTM househodls" omega_TFwh
 
@@ -144,7 +148,7 @@
     "S/S Rate of Change in Overall Productivity" ss_dA
     "Inflation Target" ss_dPc
     "S/S Relative Sectoral Productivity in Local Production" ss_Ad
-    "S/S Overhead Labor in Local Production" ss_N0d
+    %"S/S Overhead Labor in Local Production" ss_N0d
 
     % Transitory Parameters
     "Habit in consumption" chi_c
@@ -155,7 +159,7 @@
     "Cost of hiring-firing variable labor in local sectors" xi_NNd
     "Autoregression in overall productivity" rho_A
     "Autoregression in relative sectoral productivity in local production" rho_Ad
-    "Residential (housing) investment reaction to private investment to GDP ratio" lambda_Ih1
+    "Residential (housing) investment reaction to private investment to GDP" lambda_Ih1
 
 
 !substitutions
@@ -202,6 +206,9 @@
     "Calibration of net worth utility component"
     Copt_Vh_nu0 = Copt/Vh - nu0;
 
+
+    % Supply of capital to nonprimary export sector
+
     "Price of production capital for local sectors"
     Pkd = Pi*(1 + $AdjId0$ - beta*phi_Y*$AdjId1$ - iota_tf*TRgd) ...
     !! Pkd = Pi*(1 - iota_tf*TRgd);
@@ -219,11 +226,17 @@
         + nu*(Copt/Vh - nu0)*Pkd/(Pc*Copt) ...
     ;
 
-    %Pkz = Pi;
-
     "Stock-flow capital-investment for local sectors"
-    Kd = (1-delta_Kd)*Kd{-1} + Id;
+    Kd = (1 - delta_Kd) * Kd{-1} + Id;
 
+
+    % Supply of capital to nonprimary export sector
+
+    "Stock-flow capital in nonprimary export sector"
+    Kz = (1 - delta_Kz) * Kz{-1} + Iz;
+
+    "Replacement cost of capital in nonprimary export sector"
+    Pkz = Pi;
 
 % __Hand-to-mouth households__
 
@@ -277,7 +290,7 @@
     Nd = N0d + NNd;
 
     "Overhead labor in local sectors"
-    N0d = ss_N0d;
+    N0d = ss_N0d_Nd * &Nd;
 
     "Wage bill in local sectors"
     WNd_NGDP = Wd*Nd / NGDP;
@@ -414,14 +427,12 @@
     DLIopt_Copt = DLIopt / Copt;
     PcVh_NGDP*NGDP = Pc*Vh;
     PkdKd_NGDP*NGDP = Pkd*Kd;
+    PkzKz_NGDP = Pkz*Kz / NGDP;
     PmdMd_NGDP*NGDP = Pmd*Md;
 
-    "Profits of local producers to GDP ratio"
+    "Profits of local producers to GDP"
     PIEd_NGDP = (Pd*D - Wd*Nd - Prkd*Kd{-1} - Pmd*Md - Pj*J) / NGDP;
 
-    "Share of overhead labor in local sectors"
-    N0d_Nd = N0d / Nd;
-
-    "Private residential investment to GDP ratio"
+    "Private residential investment to GDP"
     PiIh_NGDP = Pi*Ih / NGDP;
 

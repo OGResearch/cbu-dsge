@@ -24,17 +24,15 @@
     "Relative price of imported inputs in exports to local imports" Pmz_Pmd
     "Relative price of nonprimary exports to imported inputs" Pz_Pmz
     "Profits including capital income in nonprimary exports" PIEz_NGDP
-    "Physical capital in nonprimary exports to GDP ratio" PkzKz_NGDP
     "Value added created in nonprimary exports to GDP ratio" VAz_NGDP
-    "Value added created in nonprimary exports per capital" VAz_PkzKz
     "Nominal cost of investment in nonprimary exports to GDP ratio" PiIz_NGDP
     "Wage bill in nonprimary exports to GDP ratio" WNz_NGDP
     "Nonprimary export to GDP ratio" PzZ_NGDP
-    "Share of overhead labor in nonprimary exports" N0z_Nz
 
 
 !parameters
 
+    ss_N0z_Nz
     ss_Z_ref_Az
     delta_Kz
     "Markup over factor cost of nonprimary exporters" mu_Z
@@ -44,12 +42,12 @@
     "Overhead labour elasticity on capital"      gamma_N0z
     "Direct import intesity of investment in nonprimary exports" gamma_Iz
 
-    "S/s overhead labor to capital ratio" ss_N0z_Kz
-    "S/s overhead labor" ss_N0z
-    "S/s nonprimary export specific technology" ss_Az
-    "S/s share of capital in nonprimary export technology" ss_Kz_A
-    "S/s relative price of imported inputs in nonprimary exports to local imports" ss_Pmz_Pmd
-    "S/s relative price of nonprimary exports to imported inputs" ss_Pz_Pmz
+    %"S/S overhead labor to capital ratio" ss_N0z_Kz
+    "S/S overhead labor" ss_N0z
+    "S/S nonprimary export specific technology" ss_Az
+    "S/S share of capital in nonprimary export technology" ss_Kz_A
+    "S/S relative price of imported inputs in nonprimary exports to local imports" ss_Pmz_Pmd
+    "S/S relative price of nonprimary exports to imported inputs" ss_Pz_Pmz
     "Scale parameter in nonprimary export production function" alpha_Z
 
     "Cost of hiring-firing variable labor in nonprimary export sector" xi_NNz
@@ -70,11 +68,8 @@
 !log_variables !all_but
 
     PIEz_NGDP
-    PkzKz_NGDP
     PmzMz_NGDP
-    N0z_Nz
     VAz_NGDP
-    VAz_PkzKz
     PiIz_NGDP
     PzZ_NGDP
     WNz_NGDP
@@ -87,11 +82,14 @@
 
 !equations
 
+    % Labor input
+
     "Breakdown of total labor input in nonprimary export sector"
     Nz = N0z + NNz;
 
     "Overhead labor in nonprimary export sector"
-    N0z = ss_N0z_Kz * (Kz/A)^gamma_N0z;
+    N0z = ss_N0z_Nz * &Nz;
+
 
     % Stage T-1: Labor and capital
 
@@ -143,12 +141,7 @@
     !! Kz_tar = ss_Kz_A * AA * ss_Az;
 
 
-    "Stock-flow capital in nonprimary export sector"
-    Kz = (1-delta_Kz)*Kz{-1} + Iz;
     PiIz_NGDP*NGDP = Pi*Iz;
-
-    "Replacement cost of capital in nonprimary export sector"
-    Pkz = Pi;
 
     "Relative productivity in nonprimary export sector"
     log(Az) = ...
@@ -176,10 +169,5 @@
     WNz_NGDP = (Wz*N0z + Wz*NNz) / NGDP;
     PIEz_NGDP*NGDP = Pz*Z - WNz_NGDP*NGDP - Pmz*Mz - PiIz_NGDP*NGDP;
     VAz_NGDP = (Pz*Z - Pmz*Mz) / NGDP;
-    PkzKz_NGDP = Pkz*Kz / NGDP;
-    VAz_PkzKz = VAz_NGDP / PkzKz_NGDP;
-
-    "Share of overhead labor in nonprimary exports"
-    N0z_Nz = N0z/Nz;
 
 

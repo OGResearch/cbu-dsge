@@ -53,7 +53,7 @@ m.ss_Pj_Pw = 1;
 m.rho_Pw_star = 0.3;
 
 
-% __Local__
+% __Local (D)__
 
 % Steady-state parameters
 
@@ -84,7 +84,8 @@ m.mu_D2 = 1; % to be reverse-engineered
 % Local production
 m.gamma_Md = 0.3792; 0.30; % to be reverse-engineered 
 m.gamma_Nd = 0.37; % to be reverse-engineered 
-m.ss_N0d = 0.65; % to be reverse-engineered 
+%m.ss_N0d = 0.65; % to be reverse-engineered 
+m.ss_N0d_Nd = 0.30;
 
 % Interest rate premia
 m.zeta_Rg0 = 0; % to be reverse-engineered 
@@ -142,7 +143,7 @@ m.lambda_Pj0 = 1;
 m.mu_J = 1;
 
 
-% __Non-primary__
+% __Nonprimary export (Z)__
 
 % Steady-state parameters
 
@@ -153,13 +154,14 @@ m.gamma_Mz = 0.40;
 m.gamma_Nz = 0.45;
 m.gamma_N0z = 0.4;
 m.delta_Kz = 0.20;
+m.ss_N0z_Nz = 0.30;
 
 % Steady State for Exogenous/External Variables
 m.ss_Az = 1;
 m.ss_Kz_A = 0.12; % to be reverse-engineered 
 m.ss_Pmz_Pmd = 1;
 m.ss_Pz_Pmz = 1;
-m.ss_N0z_Kz = 0.12; % to be reverse-engineered 
+%m.ss_N0z_Kz = 0.12; % to be reverse-engineered 
 m.ss_N0z = 0.3; % to be reverse-engineered 
 m.alpha_Z = 1; 0.73; % to be reverse-engineered 
 
