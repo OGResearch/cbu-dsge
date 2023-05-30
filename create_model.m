@@ -93,7 +93,7 @@ m.zeta_Rg1 = 0.10; 0.015;
 m.zeta_Rh0 = 0; % to be reverse-engineered 
 m.zeta_Rh1 = 0.1;0.2;
 
-m.lambda_S = 0.7;
+m.zeta_S = 0.7;
 
 % Directly calibrated ratios and rates
 
@@ -234,8 +234,8 @@ m.ss_TXls_NGDP = 0; %%%0.05; % to be reverse-engineered
 
 % Dynamic parameters
 
-m.lambda_Cg1 = 0.5;%0.1;
-m.lambda_Cg2 = 0.5; 
+m.lambda_Gg1 = 0.5;%0.1;
+m.lambda_Gg2 = 0.5; 
 
 m.lambda_Ng1 = 0.2;%0.1;
 m.lambda_Ng2 = 0.5; 

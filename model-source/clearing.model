@@ -62,7 +62,7 @@
     I = Id + Ig + Ih + Iz;
 
     "Total demand for consumption goods"
-    C = Ch + Cg;
+    C = Ch + Gg;
 
     "Local production breakdown"
     D = C + I;
@@ -157,7 +157,7 @@
     "Nomial GDP excluding primary exports to nominal GDP ratio"
     NGDPx_NGDP * NGDP = NGDPx;
 
-    VAd_NGDP = (Pc*Ch + PcCg_NGDP*NGDP + Pi*I - Pmd*Md) / NGDP;
+    VAd_NGDP = (Pc*Ch + PcGg_NGDP*NGDP + Pi*I - Pmd*Md) / NGDP;
 
     VAd_PkdKd = VAd_NGDP / PkdKd_NGDP;
 

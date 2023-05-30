@@ -12,11 +12,11 @@
     "Government investment to public investment fund to GDP" TFfg_NGDP
     PiIg_NGDP
     PgG_NGDP
-    PcCg_NGDP
+    PcGg_NGDP
     WNg_NGDP
 
     "Government consumption" G
-    "Government consumption of goods" Cg
+    "Government consumption of goods" Gg
 
     "Public infrastructure capital" Kg
     "Target public infrastructure capital" Kg0
@@ -67,7 +67,7 @@
     TXj_NGDP
     PiIg_NGDP
     PgG_NGDP
-    PcCg_NGDP
+    PcGg_NGDP
     WNg_NGDP
 
     TRvat
@@ -130,8 +130,8 @@
     "Smoothing of target for government debt to GDP" lambda_Bg_NGDP_tar
     "Smoothing of government reserve deposit" lambda_BCBg
     "Government investment reaction to government investment to consumption" lambda_Ig1
-    lambda_Cg1
-    lambda_Cg2
+    lambda_Gg1
+    lambda_Gg2
     lambda_Ng1
     lambda_Ng2
     lambda_TXls1
@@ -146,7 +146,7 @@
     "Shock to government transfers for optimizing households" shk_TFgopt
     "Shock to government investment" shk_Ig
     "Shock to government wage bill to GDP" shk_WNg_NGDP
-    "Shock to government consumption of goods" shk_Cg
+    "Shock to government consumption of goods" shk_Gg
     "Shock to government employment" shk_Ng
     shk_TFghtm_NGDP
     shk_TXls
@@ -155,7 +155,7 @@
 
 !substitutions
 
-    ss_PcCg_NGDP := (ss_PcG_NGDP - ss_WNg_NGDP);
+    ss_PcGg_NGDP := (ss_PcG_NGDP - ss_WNg_NGDP);
 
 
 !equations
@@ -211,21 +211,21 @@
 
 
     "Government consumption expenditures"
-    PgG_NGDP = PcCg_NGDP + WNg_NGDP;
+    PgG_NGDP = PcGg_NGDP + WNg_NGDP;
 
     "Rule for government consumption of goods"
-    log(Cg) = ...
-        + log(ss_dA * Cg{-1}) ...
-        + lambda_Cg1*(Bg_NGDP_tar{+1} - Bg_NGDP{+1}) ...
-        + lambda_Cg2*($ss_PcCg_NGDP$ - PcCg_NGDP{+1}) ...
-        + shk_Cg ...
-    !! PcCg_NGDP = $ss_PcCg_NGDP$;
+    log(Gg) = ...
+        + log(ss_dA * Gg{-1}) ...
+        + lambda_Gg1*(Bg_NGDP_tar{+1} - Bg_NGDP{+1}) ...
+        + lambda_Gg2*($ss_PcGg_NGDP$ - PcGg_NGDP{+1}) ...
+        + shk_Gg ...
+    !! PcGg_NGDP = $ss_PcGg_NGDP$;
 
     "Definition of government consumption of goods to GDP"
-    PcCg_NGDP = Pc * Cg / NGDP;
+    PcGg_NGDP = Pc * Gg / NGDP;
 
     "Definition of government consumption"
-    PgG = (PcCg_NGDP + WNg_NGDP) * NGDP;
+    PgG = (PcGg_NGDP + WNg_NGDP) * NGDP;
 
     "Arbitrary assumption for total government consumption deflator"
     Pg = Pc;
@@ -253,8 +253,8 @@
     TX_NGDP = TXvat_NGDP + TXlit_NGDP + TXq_NGDP + TXj_NGDP + TXls_NGDP;
 
     "Government tax revenues from value added tax to GDP"
-    TXvat_NGDP = TRvat/(1+TRvat) * (Pc*Ch/NGDP + PcCg_NGDP) ...
-    !! TXvat_NGDP = ss_TRvat/(1+ss_TRvat) * (Pc*Ch/NGDP + PcCg_NGDP);
+    TXvat_NGDP = TRvat/(1+TRvat) * (Pc*Ch/NGDP + PcGg_NGDP) ...
+    !! TXvat_NGDP = ss_TRvat/(1+ss_TRvat) * (Pc*Ch/NGDP + PcGg_NGDP);
 
     "Government tax revenues from labor income tax to GDP"
     TXlit_NGDP = TRlit * WN_NGDP ...

@@ -117,7 +117,7 @@
     "Monetary policy reaction to inflation" kappa_dPc
     "Monetary policy reaction to depreciation" kappa_dS
     "A/R Monetary policy rate" rho_Rg
-    "Imperfections in forex arbitrage" lambda_S
+    "Imperfections in forex arbitrage" zeta_S
 
     rho_Md_D2
     rho_D3_D2
@@ -403,7 +403,7 @@
 
     Rg_star = Rw_star * exp( -zeta_Rg1*(NIP_NGDP - zeta_Rg0) );
 
-    Rg/Rg_star = (S{+1}/S) * (dS/&dS)^(-lambda_S) ...
+    Rg/Rg_star = (S{+1}/S) * (dS/&dS)^(-zeta_S) ...
     !! Rg = Rg_star * dS;
 
     Rg_Rw = Rg_star / Rw_star;
