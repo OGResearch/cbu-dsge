@@ -62,16 +62,18 @@
     "Government foreign-currency debt rate" Rg_star
     "Household shadow interest rate" Rh
     "Government-world spread" Rg_Rw
+    "Premium on government debt" PREMg
+    "Premium on household debt" PREMh
 
-    "Gross Rate of Cange in Consumer Prices" dPc
-    "Gross Rate of Cange in Consumer Prices w/o VAT" dPcx
-    "Gross Rate of Cange in Investment Prices" dPi
-    "Gross Rate of Cange in Nominal GDP" dNGDP
+    "Price of consumption, Y/Y" dPc
+    "Price of consumption excl VAT, Y/Y" dPcx
+    "Price of investment, Y/Y" dPi
+    "Nominal GDP, Y/Y" dNGDP
 
-    "Private Investment in Local Production to GDP Ratio" PiId_NGDP
-    "Investment to Capital Ratio in Local Production" PiId_PkdKd
-    "Household NFA to GDP Ratio"  Bhw_NGDP
-    "Auxiliary Variable for Disposable Labor Income to Consumption Ratio" DLIopt_Copt
+    "Private investment in local production to GDP" PiId_NGDP
+    "Investment to capital in local production" PiId_PkdKd
+    "Household NFA to GDP"  Bhw_NGDP
+    "Auxiliary variable for disposable labor income to consumption" DLIopt_Copt
 
     PmdMd_NGDP
 
@@ -401,14 +403,16 @@
 
 % __Interest rate structure__
 
-    Rg_star = Rw_star * exp( -zeta_Rg1*(NIP_NGDP - zeta_Rg0) );
+    PREMg = exp(-zeta_Rg1*(NIP_NGDP - zeta_Rg0));
+    Rg_star = Rw_star * PREMg;
 
     Rg/Rg_star = (S{+1}/S) * (dS/&dS)^(-zeta_S) ...
     !! Rg = Rg_star * dS;
 
     Rg_Rw = Rg_star / Rw_star;
 
-    Rh = Rg * exp( zeta_Rh1*(Bhw_NGDP + zeta_Rh0) );
+    PREMh = exp(zeta_Rh1*(Bhw_NGDP + zeta_Rh0));
+    Rh = Rg * PREMh;
 
 
 % __Growth rates__
