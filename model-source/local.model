@@ -61,6 +61,7 @@
     "Government local-currency debt rate" Rg
     "Government foreign-currency debt rate" Rg_star
     "Household shadow interest rate" Rh
+    "Household foreign-currency debt rate" Rh_star
     "Government-world spread" Rg_Rw
     "Premium on government debt" PREMg
     "Premium on household debt" PREMh
@@ -121,7 +122,7 @@
     "A/R Monetary policy rate" rho_Rg
     "Imperfections in forex arbitrage" zeta_S
 
-    rho_Md_D2
+    "A/R Share of nonprimary import inputs in local sector" rho_Md_D2
     rho_D3_D2
     psi_dg
 
@@ -412,6 +413,7 @@
     Rg_Rw = Rg_star / Rw_star;
 
     PREMh = exp(zeta_Rh1*(Bhw_NGDP + zeta_Rh0));
+    Rh_star = Rg_star * PREMh;
     Rh = Rg * PREMh;
 
 

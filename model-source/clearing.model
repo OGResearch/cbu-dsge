@@ -95,7 +95,7 @@
     ;
 
     "Interest on household foreign debt to GDP"
-    INThw_NGDP = (Rw_star{-1} - 1)*Bhw_NGDP{-1}*dS/dNGDP;
+    INThw_NGDP = (Rh_star{-1} - 1)*Bhw_NGDP{-1}*dS/dNGDP;
 
     "Trade balance to GDP"
     TB_NGDP = PxX_NGDP - PmM_NGDP;
