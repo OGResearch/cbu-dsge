@@ -47,8 +47,8 @@
 !equations
 
     "Flexible benchmark wage of OPT households"
-    Wopt_flex*(1 - TRlit) * Lambda = 1 ...
-    !! Wopt_flex*(1 - ss_TRlit) * Lambda = 1;
+    Wopt_flex*(1 - TRlit) * LAMBDA = 1 ...
+    !! Wopt_flex*(1 - ss_TRlit) * LAMBDA = 1;
 
     "Optimizing household wage in private sectors"
     log(Wopt/Pc) = ...

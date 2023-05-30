@@ -49,14 +49,14 @@ Household budget constraint in Lagrangian with government support of supply side
 
 $$
 \begin{gather*}
-\Lambda_t \cdot \left[
+\LAMBDA_t \cdot \left[
 \underbrace{-\ \Pi t \cdot \Iy t \cdot \left(1 + \M{adj}_t - {\color{yellow}\iota_{GD} \cdot \TRgd t} \right)}_{}
 \quad \underbrace{+\ \Pky t \cdot \M{Iy_t}}
 \quad \underbrace{+\ \Pky t \cdot \Kd{t-1} \cdot \left(1 - \delta_{Kd}\right)}
 \quad \underbrace{-\ \M{Pky}_t \cdot \Kd t}
 \right]
 \\[10pt]
-+\quad \beta \cdot \Lambda_{t+1} \cdot \left[
++\quad \beta \cdot \LAMBDA_{t+1} \cdot \left[
 \underbrace{\M{Prky_{t+1}} \cdot \Kd t}_{}
 \quad \underbrace{+\ \M{Pky}_{t+1} \cdot \M{Ky}_t \cdot \left(1-\delta_{Ky}\right)}_{}
 \right]

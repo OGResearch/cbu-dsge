@@ -6,7 +6,6 @@
     "Net Investment Position to GDP Ratio" NIP_NGDP
     "Real commodity exports" Q
     "Total demand for investment goods" I
-    "Total demand for consumption goods" C
 
     "Remittances to GDP ratio" TFwh_NGDP
     "Exports to GDP ratio" PxX_NGDP
@@ -61,11 +60,8 @@
     "Total demand for investment goods"
     I = Id + Ig + Ih + Iz;
 
-    "Total demand for consumption goods"
-    C = Ch + Gg;
-
     "Local production breakdown"
-    D = C + I;
+    D = Ch + Gg + I;
 
 
 % __Exports and imports__
