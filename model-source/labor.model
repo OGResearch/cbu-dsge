@@ -4,98 +4,108 @@
 !variables
 
     "Total labor" N
-    "Average wage for total labor" W
-    "Optimal flexible wage of optimizing households" Wopt_flex
-    "Average wage of optimizing households" Wopt
-    "Per-household man-hours supplied by optimizing households to all sectors" Nopt
-    "Labor income of optimizing households to GDP ratio" WNopt_NGDP
-
-    Whtm_flex
-    "Average Wage Rate of HTM Households" Whtm
-    "Per-household man-hours supplied by HTM households to all sectors" Nhtm
-    "Labor income of HTM households to GDP ratio" WNhtm_NGDP
-    Np
-    "Share of expat labor in labor in private sectors" Nhtm_Np
-    "Wage bill in private sectors to GDP ratio" WNp_NGDP
-    "Labor in govt sectors to total labor ratio" Ng_N
-    "Share of expat labor in total labor" Nhtm_N
-    "Expat wage to optimizing household wage ratio" Whtm_Wopt
-    "Wage rate in nonprimary export sectors" Wz
-    "Wage rate in local sectors" Wy
-    Wg
+    "Average wage across sectors" W
+    "Flexible benchmark wage of OPT households" Wopt_flex
+    "Average wage of OPT households" Wopt
+    "Labor supplied by OPT households to all sectors" Nopt
+    "Labor income of OPT households to GDP" WNopt_NGDP
+    "Flexible benchmark wage of HTM households" Whtm_flex
+    "Average wage rate of htm households" Whtm
+    "Labor supplied by HTM households" Nhtm
+    "Wage bill of HTM households to GDP" WNhtm_NGDP
+    "Labor excluding government sector" Np
+    "Wage bill in private sector to GDP" WNp_NGDP
+    "Labor in government sector to total labor" Ng_N
+    "HTM household labor to total labor" Nhtm_N
+    "HTM household wage to OPT household wage" Whtm_Wopt
+    "Wage in nonprimary export sector" Wz
+    "Wage in local sectors" Wd
+    "Wage in government sector" Wg
 
 
 !parameters
 
+    "Inverse elasticity of labor supply for OPT households" eta
     "Share of hand-to-mouth households" omega_N
-    "Inverse elasticity of labor supply curve for optimizing households" eta
-    ss_Whtm_Wopt
+    "S/S HTM household wage to OPT household wage" ss_Whtm_Wopt
     "S/S Wage rate markup in government sectors" ss_Wg_Wopt
 
-    rho_Wopt
-    rho_Whtm
+    "A/R Real wage of OPT households" rho_Wopt
+    "A/R Real wage of HTMl households" rho_Whtm
 
 
 !log-variables !all-but
 
     WNopt_NGDP
     WNhtm_NGDP
-    Nhtm_Np
+    Whtm_Wopt
     Ng_N
     Nhtm_N
-    Whtm_Wopt
-    N, Ny, Nz, Ng, Nopt, Nhtm
+    WNp_NGDP
 
 
 !equations
 
-    "Optimal flexible wage rate of optimizing households"
-    Wopt_flex * Lambda = Nopt^eta;
+    "Flexible benchmark wage of OPT households"
+    Wopt_flex*(1 - TRlit) * Lambda = 1 ...
+    !! Wopt_flex*(1 - ss_TRlit) * Lambda = 1;
 
-    "Private-sector wage rate for optimizing households"
+    "Optimizing household wage in private sectors"
     log(Wopt/Pc) = ...
         + rho_Wopt * log(ss_dA*Wopt{-1}/Pc{-1}) ...
         + (1-rho_Wopt) * log(Wopt_flex/Pc) ...
     !! Wopt = Wopt_flex;
 
-    WNopt_NGDP = Wopt * Nopt / NGDP;
+    "Wage bill of OPT households to GDP"
+    WNopt_NGDP = Wopt*(1 - TRlit) * Nopt / NGDP ...
+    !! WNopt_NGDP = Wopt*(1 - ss_TRlit) * Nopt / NGDP;
 
+    "Flexible benchmark wage of HTM households"
     Whtm_flex = ss_Whtm_Wopt * Wopt_flex;
 
+    "HTM household wage in private sectors"
     log(Whtm/Pc) = ...
         + rho_Whtm * log(ss_dA*Whtm{-1}/Pc{-1}) ...
         + (1-rho_Whtm) * log(Whtm_flex/Pc) ...
     !! Whtm = Whtm_flex;
 
+    "Labor supply by HTM households"
     Nhtm = omega_N * N;
+
+    "Wage bill of HTM households to GDP"
     WNhtm_NGDP = Whtm * Nhtm / NGDP;
 
-
-    "Total labor"
+    "Total labor supply"
     N = Nopt + Nhtm;
-    N = Ny + Nz + Ng;
 
-    W*N = Wopt*Nopt + Whtm*Nhtm;
+    "Total labor demand"
+    N = Nd + Nz + Ng;
 
-    Wy = W;
-    Wz = W;
+    "Average wage across sectors"
+    W*N = Wd*Nd + Wz*Nz + Wg*Ng;
+
+    "Average wage in local sector"
+    Wd = omega_N*Whtm + (1-omega_N)*Wopt;
+
+    "Average wage in nonprimary export sector"
+    Wz = omega_N*Whtm + (1-omega_N)*Wopt;
+
+    "Average wage in government sector"
     Wg = ss_Wg_Wopt * Wopt;
 
-    "Labor in private sectors"
+    "Labor excluding government employment"
     Np = N - Ng;
 
-    "Share of expats in labor in private sectors"
-    Nhtm_Np = Nhtm / Np;
+    "Wage bill in private sectors to GDP"
+    WNp_NGDP = WNd_NGDP + WNz_NGDP;
 
-    "Wage bill in private sectors to GDP ratio"
-    WNp_NGDP = WNy_NGDP + WNz_NGDP;
-
-    "Labor in govt sectors to total labor ratio"
+    "Labor in govt sectors to total labor"
     Ng_N = Ng / N;
 
-    "Expat labor to total labor ratio"
+    "HTM household labor to total labor"
     Nhtm_N = Nhtm / N;
 
-    "Expat wage rate to optimizing household wage rate ratio"
+    "HTM household wage to OPT household wage"
     Whtm_Wopt = Whtm / Wopt;
+
 

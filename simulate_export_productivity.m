@@ -12,6 +12,10 @@ clear
 
 load mat/create_model.mat m
 
+m.xi_NNz = 0;
+checkSteady(m);
+m = solve(m);
+
 m0 = m;
 checkSteady(m0);
 
@@ -49,6 +53,8 @@ s1 = simulate( ...
 );
 
 
+%% Create simulation minus control databanks
+
 smc1 = databank.minusControl(m1, s1, d);
 
 
@@ -58,8 +64,9 @@ ch = Chartpack();
 ch.Range = 0:40;
 ch.PlotSettings = {"marker", "s"};
 
-ch + ["Copt", "Chtm", "Iy", "Kz", "Iz"];
-ch + ["NIP_NGDP", "S", "dPc", "Rg", "W/Pc"];
+ch + ["Copt", "Chtm", "Id", "Kz", "Iz"];
+ch + ["S", "dPc", "Rg", "W/Pc"];
+ch + ["NIP_NGDP", "CA_NGDP", "TB_NGDP"];
 
 draw(ch, smc1);
 

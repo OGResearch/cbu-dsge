@@ -1,13 +1,15 @@
 
 !variables
 
+    TRgd
+    TFgd_NGDP
     "Government debt to GDP" Bg_NGDP
     "Target for gross government debt to GDP" Bg_NGDP_tar
     Bgh_NGDP
     Bgw_NGDP
     Bwf_NGDP
 
-    "Government investment to public investment fund to GDP ratio" TFfg_NGDP
+    "Government investment to public investment fund to GDP" TFfg_NGDP
     PiIg_NGDP
     PgG_NGDP
     PcCg_NGDP
@@ -24,26 +26,30 @@
     PgG
 
     "Value added tax rate" TRvat
+    "Labor income tax" TRlit
 
     "Government tax revenues to GDP Ratio" TX_NGDP
     TXq_NGDP
     TXj_NGDP
-    TXvat_NGDP
+    "Government revenues from value added tax" TXvat_NGDP
+    "Government revenues for labor income tax" TXlit_NGDP
     TXls_NGDP
 
+    "Government transfers to GDP" TF_NGDP
     TFgh_NGDP
     TFgopt_NGDP
     TFghtm_NGDP
+    TFgj_NGDP
 
-    "Balancing net government transfers to GDP ratio" TFother_NGDP
+    "Balancing net government transfers to GDP" TFother_NGDP
 
     DEF_NGDP
     PDEF_NGDP
 
 
-    IntBgh_NGDP
-    IntBgw_NGDP
-    IntBwf_NGDP
+    INTgh_NGDP
+    INTgw_NGDP
+    INTwf_NGDP
 
     Ng
 
@@ -55,7 +61,7 @@
     Bgh_NGDP
     Bgw_NGDP
     Bwf_NGDP
-    TFfg_NGDP
+
     TX_NGDP
     TXq_NGDP
     TXj_NGDP
@@ -65,20 +71,28 @@
     WNg_NGDP
 
     TRvat
+    TRlit
+    TRgd
 
+    TF_NGDP
+    TFfg_NGDP
+    TFgd_NGDP
     TXvat_NGDP
+    TXlit_NGDP
     TXls_NGDP
 
     TFgh_NGDP
     TFgopt_NGDP
     TFghtm_NGDP
     TFother_NGDP
+    TFgj_NGDP
+
     DEF_NGDP
     PDEF_NGDP
 
-    IntBgh_NGDP
-    IntBgw_NGDP
-    IntBwf_NGDP
+    INTgh_NGDP
+    INTgw_NGDP
+    INTwf_NGDP
 
 
 !parameters
@@ -86,7 +100,7 @@
     % Steady-state parameters
 
     "S/S Share of foreign govt debt in total govt debt" ss_Bgw_Bg
-    "S/S Government gross debt to GDP ratio" ss_Bg_NGDP
+    "S/S Government gross debt to GDP" ss_Bg_NGDP
 
     "Depreciation of public infrastructure capital" delta_Kg
     "S/S Public infrastructure to productivity" ss_Kg_A
@@ -99,21 +113,23 @@
     "Distribution of commodity processing industry profits to government" psi_jg
 
     "Smoothing of PIF balance" lambda_Bwf
-    "S/S External position of the public investment fund to GDP ratio" ss_Bwf_NGDP
-    "S/S Government consumption to GDP ratio" ss_PcG_NGDP
-    "S/S Government investment to GDP ratio" ss_PiIg_NGDP
+    "S/S External position of the public investment fund to GDP" ss_Bwf_NGDP
+    "S/S Government consumption to GDP" ss_PcG_NGDP
+    "S/S Government investment to GDP" ss_PiIg_NGDP
     ss_WNg_NGDP
     ss_TRvat
+    ss_TRlit
     ss_TFgh_NGDP
     ss_TFghtm_TFh
     ss_TXls_NGDP
+    ss_TRgd
 
 
     % Dynamic parameters
 
-    "Smoothing of target for government debt to GDP ratio" lambda_Bg_NGDP_tar
+    "Smoothing of target for government debt to GDP" lambda_Bg_NGDP_tar
     "Smoothing of government reserve deposit" lambda_BCBg
-    "Government investment reaction to government investment to consumption ratio" lambda_Ig1
+    "Government investment reaction to government investment to consumption" lambda_Ig1
     lambda_Cg1
     lambda_Cg2
     lambda_Ng1
@@ -129,7 +145,7 @@
     "Shock to government reserve deposit" shk_BCBg
     "Shock to government transfers for optimizing households" shk_TFgopt
     "Shock to government investment" shk_Ig
-    "Shock to government wage bill to GDP ratio" shk_WNg_NGDP
+    "Shock to government wage bill to GDP" shk_WNg_NGDP
     "Shock to government consumption of goods" shk_Cg
     "Shock to government employment" shk_Ng
     shk_TFghtm_NGDP
@@ -146,7 +162,7 @@
 
 % __Government budget__
 
-    "Target for gross government debt to GDP ratio"
+    "Target for gross government debt to GDP"
     Bg_NGDP_tar = ...
         + lambda_Bg_NGDP_tar*Bg_NGDP_tar{-1} ...
         + (1 - lambda_Bg_NGDP_tar) * ss_Bg_NGDP ...
@@ -155,23 +171,21 @@
 
     Bg_NGDP = Bgh_NGDP + Bgw_NGDP;
 
-    "Interest on local government debt to GDP ratio"
-    IntBgh_NGDP = (Rg{-1} - 1) * Bgh_NGDP{-1}/dNGDP;
+    "Interest on local government debt to GDP"
+    INTgh_NGDP = (Rg{-1} - 1) * Bgh_NGDP{-1}/dNGDP;
 
-    "Interest on external government debt to GDP ratio"
-    IntBgw_NGDP = (Rg_star{-1} - 1)*dS * Bgw_NGDP{-1}/dNGDP;
+    "Interest on external government debt to GDP"
+    INTgw_NGDP = (Rg_star{-1} - 1)*dS * Bgw_NGDP{-1}/dNGDP;
 
 
     "Dynamic budget constraint for government finance"
     Bgh_NGDP + Bgw_NGDP = ...
         + (Bgh_NGDP{-1} + Bgw_NGDP{-1}*dS)/dNGDP ...
-        + IntBgh_NGDP + IntBgw_NGDP ...
-        - TX_NGDP ...
-        - TFfg_NGDP ...
-        + TFgh_NGDP ...
-        + TFother_NGDP ...
+        + INTgh_NGDP + INTgw_NGDP ...
         + PgG_NGDP ...
         + PiIg_NGDP ...
+        - TX_NGDP ...
+        + TF_NGDP ...
     ;
 
     "Rule for external government debt"
@@ -207,7 +221,7 @@
         + shk_Cg ...
     !! PcCg_NGDP = $ss_PcCg_NGDP$;
 
-    "Definition of government consumption of goods to GDP ratio"
+    "Definition of government consumption of goods to GDP"
     PcCg_NGDP = Pc * Cg / NGDP;
 
     "Definition of government consumption"
@@ -218,7 +232,7 @@
 
     PgG = Pg * G;
 
-    "Definition of government wage bill to GDP ratio"
+    "Definition of government wage bill to GDP"
     WNg_NGDP = Wg * Ng / NGDP;
 
     "Government employment"
@@ -232,11 +246,19 @@
     "Value added tax rate"
     TRvat = ss_TRvat;
 
-    "Government tax revenues to GDP ratio"
-    TX_NGDP = TXvat_NGDP + TXq_NGDP + TXj_NGDP + TXls_NGDP;
+    "Labor income tax rate"
+    TRlit = ss_TRlit;
 
-    "Government tax revenues from value-added tax"
-    TXvat_NGDP = TRvat/(1+TRvat) * (Pc*Ch/NGDP + PcCg_NGDP);
+    "Government tax revenues to GDP"
+    TX_NGDP = TXvat_NGDP + TXlit_NGDP + TXq_NGDP + TXj_NGDP + TXls_NGDP;
+
+    "Government tax revenues from value added tax to GDP"
+    TXvat_NGDP = TRvat/(1+TRvat) * (Pc*Ch/NGDP + PcCg_NGDP) ...
+    !! TXvat_NGDP = ss_TRvat/(1+ss_TRvat) * (Pc*Ch/NGDP + PcCg_NGDP);
+
+    "Government tax revenues from labor income tax to GDP"
+    TXlit_NGDP = TRlit * WN_NGDP ...
+    !! TXlit_NGDP = ss_TRlit * WN_NGDP;
 
     "Government tax revenues from primary export sectors"
     TXq_NGDP = (1 - psi_qw) * PIEq_NGDP;
@@ -252,14 +274,31 @@
         + shk_TXls ...
     !! TXls_NGDP = ss_TXls_NGDP;
 
-    "Governments transfers to households"
+
+    "Government transfers paid or received"
+    TF_NGDP = ...
+        + TFgh_NGDP ...
+        + TFgd_NGDP ...
+        + TFother_NGDP ...
+        - TFfg_NGDP ...
+    ;
+
+    "Government subsidies to local supply side to GDP"
+    TFgd_NGDP = TRgd*Pi*Id / NGDP;
+
+    TRgd = ss_TRgd;
+
+    "Governments transfers to households to GDP"
     TFgh_NGDP = TFgopt_NGDP + TFghtm_NGDP;
 
     TFgh_NGDP = ss_TFgh_NGDP;
 
     TFghtm_NGDP = omega_TFgh * TFgh_NGDP;
 
-    "Balancing net government transfers to GDP ratio"
+    "Government subsidies of energy to GDP"
+    TFgj_NGDP = (Pj0 - Pj) * J / NGDP;
+
+    "Balancing net government transfers to GDP"
     TFother_NGDP = &TFother_NGDP ...
     !! Bg_NGDP = ss_Bg_NGDP;
 
@@ -272,7 +311,7 @@
     "Primary government deficit"
     PDEF_NGDP = ...
         + DEF_NGDP ...
-        - (IntBgh_NGDP + IntBgw_NGDP) ...
+        - (INTgh_NGDP + INTgw_NGDP) ...
     ;
 
 
@@ -280,12 +319,12 @@
 
     Bwf_NGDP = ...
         + Bwf_NGDP{-1}*S/S{-1}/dNGDP ...
-        + IntBwf_NGDP ...
+        + INTwf_NGDP ...
         - TFfg_NGDP ...
         + psi_zg*PIEz_NGDP ...
     ;
 
-    IntBwf_NGDP = (Rw_star{-1} - 1)*S/S{-1} * Bwf_NGDP{-1}/dNGDP;
+    INTwf_NGDP = (Rw_star{-1} - 1)*S/S{-1} * Bwf_NGDP{-1}/dNGDP;
 
     TFfg_NGDP = ...
         + TFfg_NGDP{-1} ...
