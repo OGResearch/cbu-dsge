@@ -12,10 +12,6 @@ clear
 
 load mat/create_model.mat m
 
-m.xi_NNz = 0;
-checkSteady(m);
-m = solve(m);
-
 m0 = m;
 checkSteady(m0);
 
