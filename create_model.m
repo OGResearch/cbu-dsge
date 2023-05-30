@@ -230,7 +230,7 @@ m.ss_TRlit = 0.03;
 
 m.ss_TRgd = 0;
 
-m.ss_TXls_NGDP = 0; %%%0.05; % to be reverse-engineered
+m.ss_TAXls_NGDP = 0; %%%0.05; % to be reverse-engineered
 
 % Dynamic parameters
 
@@ -240,8 +240,8 @@ m.lambda_Gg2 = 0.5;
 m.lambda_Ng1 = 0.2;%0.1;
 m.lambda_Ng2 = 0.5; 
 
-m.lambda_TXls1 = 0.5;
-m.lambda_TXls2 = 0.5;
+m.lambda_TAXls1 = 0.5;
+m.lambda_TAXls2 = 0.5;
 
 m.lambda_Ig1 = 1.5;%0.5; 
 
@@ -258,8 +258,6 @@ m.lambda_BCBg = 0.5;
 m.omega_N = 0.30;
 m.omega_TFwh = 0.50;
 m.ss_Whtm_Wopt = 1; %%% 0.45;
-
-m.eta = 0;
 
 % Dynamic parameters
 
@@ -308,16 +306,16 @@ m.PjJ_NGDP = 0.04;
 swap = [swap; "PjJ_NGDP", "gamma_J"];
 
 % Import for energy sector
-m.TXj_NGDP = 0.03;
-swap = [swap; "TXj_NGDP", "psi_jw"];
+m.TAXj_NGDP = 0.03;
+swap = [swap; "TAXj_NGDP", "psi_jw"];
 
 % Value added tax
-m.TXvat_NGDP = 0.07;
-swap = [swap; "TXvat_NGDP", "ss_TRvat"];
+m.TAXvat_NGDP = 0.07;
+swap = [swap; "TAXvat_NGDP", "ss_TRvat"];
 
 % Labor income tax
-m.TXlit_NGDP = 0.03;
-swap = [swap; "TXlit_NGDP", "ss_TRlit"];
+m.TAXlit_NGDP = 0.03;
+swap = [swap; "TAXlit_NGDP", "ss_TRlit"];
 
 % Subsidies for local supply capacity (SOE...)
 m.TFgd_NGDP = 0.01;

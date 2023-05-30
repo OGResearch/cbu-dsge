@@ -25,7 +25,6 @@
 
 !parameters
 
-    "Inverse elasticity of labor supply for OPT households" eta
     "Share of hand-to-mouth households" omega_N
     "S/S HTM household wage to OPT household wage" ss_Whtm_Wopt
     "S/S Wage rate markup in government sectors" ss_Wg_Wopt

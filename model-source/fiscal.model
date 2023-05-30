@@ -28,12 +28,12 @@
     "Value added tax rate" TRvat
     "Labor income tax" TRlit
 
-    "Government tax revenues to GDP Ratio" TX_NGDP
-    TXq_NGDP
-    TXj_NGDP
-    "Government revenues from value added tax" TXvat_NGDP
-    "Government revenues for labor income tax" TXlit_NGDP
-    TXls_NGDP
+    "Government tax revenues to GDP Ratio" TAX_NGDP
+    TAXq_NGDP
+    TAXj_NGDP
+    "Government revenues from value added tax" TAXvat_NGDP
+    "Government revenues for labor income tax" TAXlit_NGDP
+    TAXls_NGDP
 
     "Government transfers to GDP" TF_NGDP
     TFgh_NGDP
@@ -62,9 +62,9 @@
     Bgw_NGDP
     Bwf_NGDP
 
-    TX_NGDP
-    TXq_NGDP
-    TXj_NGDP
+    TAX_NGDP
+    TAXq_NGDP
+    TAXj_NGDP
     PiIg_NGDP
     PgG_NGDP
     PcGg_NGDP
@@ -77,9 +77,9 @@
     TF_NGDP
     TFfg_NGDP
     TFgd_NGDP
-    TXvat_NGDP
-    TXlit_NGDP
-    TXls_NGDP
+    TAXvat_NGDP
+    TAXlit_NGDP
+    TAXls_NGDP
 
     TFgh_NGDP
     TFgopt_NGDP
@@ -121,7 +121,7 @@
     ss_TRlit
     ss_TFgh_NGDP
     ss_TFghtm_TFh
-    ss_TXls_NGDP
+    ss_TAXls_NGDP
     ss_TRgd
 
 
@@ -134,8 +134,8 @@
     lambda_Gg2
     lambda_Ng1
     lambda_Ng2
-    lambda_TXls1
-    lambda_TXls2
+    lambda_TAXls1
+    lambda_TAXls2
 
 
 !shocks
@@ -149,7 +149,7 @@
     "Shock to government consumption of goods" shk_Gg
     "Shock to government employment" shk_Ng
     shk_TFghtm_NGDP
-    shk_TXls
+    shk_TAXls
     "Shock to government PIF transfers to GDP" shk_TFfg_NGDP
 
 
@@ -184,7 +184,7 @@
         + INTgh_NGDP + INTgw_NGDP ...
         + PgG_NGDP ...
         + PiIg_NGDP ...
-        - TX_NGDP ...
+        - TAX_NGDP ...
         + TF_NGDP ...
     ;
 
@@ -250,29 +250,29 @@
     TRlit = ss_TRlit;
 
     "Government tax revenues to GDP"
-    TX_NGDP = TXvat_NGDP + TXlit_NGDP + TXq_NGDP + TXj_NGDP + TXls_NGDP;
+    TAX_NGDP = TAXvat_NGDP + TAXlit_NGDP + TAXq_NGDP + TAXj_NGDP + TAXls_NGDP;
 
     "Government tax revenues from value added tax to GDP"
-    TXvat_NGDP = TRvat/(1+TRvat) * (Pc*C/NGDP + PcGg_NGDP) ...
-    !! TXvat_NGDP = ss_TRvat/(1+ss_TRvat) * (Pc*C/NGDP + PcGg_NGDP);
+    TAXvat_NGDP = TRvat/(1+TRvat) * (Pc*C/NGDP + PcGg_NGDP) ...
+    !! TAXvat_NGDP = ss_TRvat/(1+ss_TRvat) * (Pc*C/NGDP + PcGg_NGDP);
 
     "Government tax revenues from labor income tax to GDP"
-    TXlit_NGDP = TRlit * WN_NGDP ...
-    !! TXlit_NGDP = ss_TRlit * WN_NGDP;
+    TAXlit_NGDP = TRlit * WN_NGDP ...
+    !! TAXlit_NGDP = ss_TRlit * WN_NGDP;
 
     "Government tax revenues from primary export sectors"
-    TXq_NGDP = (1 - psi_qw) * PIEq_NGDP;
+    TAXq_NGDP = (1 - psi_qw) * PIEq_NGDP;
 
     "Government tax revenues from energy sector"
-    TXj_NGDP = (1 - psi_jw) * PIEj_NGDP;
+    TAXj_NGDP = (1 - psi_jw) * PIEj_NGDP;
 
     "Government tax revenues from lump-sum taxes"
-    TXls_NGDP = ...
-        + TXls_NGDP{-1} ...
-        - lambda_TXls1*(Bg_NGDP_tar{+1} - Bg_NGDP{+1}) ...
-        + lambda_TXls2*(ss_TXls_NGDP - TXls_NGDP) ...
-        + shk_TXls ...
-    !! TXls_NGDP = ss_TXls_NGDP;
+    TAXls_NGDP = ...
+        + TAXls_NGDP{-1} ...
+        - lambda_TAXls1*(Bg_NGDP_tar{+1} - Bg_NGDP{+1}) ...
+        + lambda_TAXls2*(ss_TAXls_NGDP - TAXls_NGDP) ...
+        + shk_TAXls ...
+    !! TAXls_NGDP = ss_TAXls_NGDP;
 
 
     "Government transfers paid or received"
