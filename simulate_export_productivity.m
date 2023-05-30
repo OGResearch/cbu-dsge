@@ -56,7 +56,7 @@ smc1 = databank.minusControl(m1, s1, d);
 
 %% Chart results
 
-ch = Chartpack();
+ch = databank.Chartpack();
 ch.Range = 0:40;
 ch.PlotSettings = {"marker", "s"};
 
