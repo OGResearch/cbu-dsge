@@ -265,6 +265,26 @@ m.rho_Wopt = 0.4;
 m.rho_Whtm = 0.4;
 
 
+
+%% Calculate steady state for initial parameters
+
+% Fix unit root processes
+
+m.A = 1;
+m.Pw_star = 1;
+m.Pc = 1;
+
+m = steady( ...
+    m ...
+    , "fixLevel", ["A", "Pw_star", "Pc"] ...
+    , "blocks", true ...
+);
+
+checkSteady(m);
+
+return
+
+
 %% Reverse engineer parameters for steady-state ratios
 
 swap = string.empty(0, 2);
@@ -302,14 +322,14 @@ m.TFgd_NGDP = 0.01;
 swap = [swap; "TFgd_NGDP", "ss_TRgd"];
 
 
+%% Calibrate staedy state
+
 % Fix unit root processes
+
 
 m.A = 1;
 m.Pw_star = 1;
 m.Pc = 1;
-
-
-m.ss_TRlit = 0.10;
 
 m = steady( ...
     m ...

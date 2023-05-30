@@ -3,7 +3,6 @@
 
 !variables
 
-    "Price of invements in nonprimary export sector" Piz
     "Stage T-1 marginal cost in nonprimary export sector" Pz1
     "Capital in nonprimary export sector" Kz
     "Target capital in nonprimary export sector" Kz_tar
@@ -29,7 +28,6 @@
     "Value added created in nonprimary exports to GDP ratio" VAz_NGDP
     "Value added created in nonprimary exports per capital" VAz_PkzKz
     "Nominal cost of investment in nonprimary exports to GDP ratio" PizIz_NGDP
-    "Replacement cost of capital in nonprimary export sector" Pkz
     "Wage bill in nonprimary exports to GDP ratio" WNz_NGDP
     "Nonprimary export to GDP ratio" PzZ_NGDP
     "Share of overhead labor in nonprimary exports" N0z_Nz
@@ -147,11 +145,10 @@
 
     "Stock-flow capital in nonprimary export sector"
     Kz = (1-delta_Kz)*Kz{-1} + Iz;
-    Piz = Pi;
-    PizIz_NGDP*NGDP = Piz*Iz;
+    PizIz_NGDP*NGDP = Pi*Iz;
 
     "Replacement cost of capital in nonprimary export sector"
-    Pkz = Piz;
+    Pkz = Pi;
 
     "Relative productivity in nonprimary export sector"
     log(Az) = ...

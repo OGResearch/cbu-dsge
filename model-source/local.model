@@ -48,7 +48,8 @@
     "Price of investment" Pi
     "Consumer Goods Prices" Pc
     "Consumer Goods Prices w/o VAT" Pcx
-    "Price of Capital in Local Production" Pkd
+    "Price of capital in local sector" Pkd
+    "Price of capital in nonprimary export sector" Pkz
     "Rental Price of Capital in Local Production" Prkd
 
     "Price of imported inputs in local sectors" Pmd
@@ -217,6 +218,8 @@
         ] ...
         + nu*(Copt/Vh - nu0)*Pkd/(Pc*Copt) ...
     ;
+
+    %Pkz = Pi;
 
     "Stock-flow capital-investment for local sectors"
     Kd = (1-delta_Kd)*Kd{-1} + Id;
