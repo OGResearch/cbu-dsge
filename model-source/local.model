@@ -9,11 +9,11 @@
     "Monetary policy reaction term" React
 
     "Shadow Price of Optimizing Household Budget" LAMBDA
-    "Total Private Consumption" Ch
+    "Total Private Consumption" C
     "Consumption of Optimizing Households" Copt
     "Private residential investment to GDP" PiIh_NGDP
 
-    "Consumption of Hand-to-Mouth Households" Chtm
+    "Consumption of Hand-to-Mouth Households" Ctm
     "Auxiliary Variable for Consumption to Net Worth Ratio" Copt_Vh_nu0
     "Disposable Labor Income of Optimizing Households" DLIopt
     % "Total disposable labor income to GDP" PcDLI_NGDP
@@ -63,10 +63,10 @@
     "Household shadow interest rate" Rh
     "Government-world spread" Rg_Rw
 
-    "Gross Rate of Change in Consumer Prices" dPc
-    "Gross Rate of Change in Consumer Prices w/o VAT" dPcx
-    "Gross Rate of Change in Investment Prices" dPi
-    "Gross Rate of Change in Nominal GDP" dNGDP
+    "Gross Rate of Cange in Consumer Prices" dPc
+    "Gross Rate of Cange in Consumer Prices w/o VAT" dPcx
+    "Gross Rate of Cange in Investment Prices" dPi
+    "Gross Rate of Cange in Nominal GDP" dNGDP
 
     "Private Investment in Local Production to GDP Ratio" PiId_NGDP
     "Investment to Capital Ratio in Local Production" PiId_PkdKd
@@ -145,7 +145,7 @@
     %"S/S Remittances from HTM households to HTM wage bill" ss_TFwh_WNhtm
     "S/S Remittances from HTM households to HTM wage bill" ss_TFwh_NGDP
     "S/S Private Residential (Housing) Investment to Investment in Local Production Ratio" ss_Kh_Kd
-    "S/S Rate of Change in Overall Productivity" ss_dA
+    "S/S Rate of Cange in Overall Productivity" ss_dA
     "Inflation Target" ss_dPc
     "S/S Relative Sectoral Productivity in Local Production" ss_Ad
     %"S/S Overhead Labor in Local Production" ss_N0d
@@ -244,13 +244,13 @@
     Pc*DLIhtm = (WNhtm_NGDP + TFghtm_NGDP - omega_TFwh*TFwh_NGDP)*NGDP;
 
     "Demand for consumption by optimizing households"
-    Chtm = DLIhtm;
+    Ctm = DLIhtm;
 
 
 % __Total private consumption__
 
     "Total private consumption"
-    Ch = Copt + Chtm;
+    C = Copt + Ctm;
 
 
 % __Residential and overhead investment__

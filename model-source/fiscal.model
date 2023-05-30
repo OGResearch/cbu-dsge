@@ -253,8 +253,8 @@
     TX_NGDP = TXvat_NGDP + TXlit_NGDP + TXq_NGDP + TXj_NGDP + TXls_NGDP;
 
     "Government tax revenues from value added tax to GDP"
-    TXvat_NGDP = TRvat/(1+TRvat) * (Pc*Ch/NGDP + PcGg_NGDP) ...
-    !! TXvat_NGDP = ss_TRvat/(1+ss_TRvat) * (Pc*Ch/NGDP + PcGg_NGDP);
+    TXvat_NGDP = TRvat/(1+TRvat) * (Pc*C/NGDP + PcGg_NGDP) ...
+    !! TXvat_NGDP = ss_TRvat/(1+ss_TRvat) * (Pc*C/NGDP + PcGg_NGDP);
 
     "Government tax revenues from labor income tax to GDP"
     TXlit_NGDP = TRlit * WN_NGDP ...
