@@ -37,7 +37,7 @@ t1 = table( ...
 
 %% Prepare initial databank for simulation
 
-d = databank.forModel(m0, 1:40);
+d = steadydb(m0, 1:40);
 
 %% Simulate model with higher productivity
 
