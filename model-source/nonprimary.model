@@ -27,7 +27,7 @@
     "Physical capital in nonprimary exports to GDP ratio" PkzKz_NGDP
     "Value added created in nonprimary exports to GDP ratio" VAz_NGDP
     "Value added created in nonprimary exports per capital" VAz_PkzKz
-    "Nominal cost of investment in nonprimary exports to GDP ratio" PizIz_NGDP
+    "Nominal cost of investment in nonprimary exports to GDP ratio" PiIz_NGDP
     "Wage bill in nonprimary exports to GDP ratio" WNz_NGDP
     "Nonprimary export to GDP ratio" PzZ_NGDP
     "Share of overhead labor in nonprimary exports" N0z_Nz
@@ -75,7 +75,7 @@
     N0z_Nz
     VAz_NGDP
     VAz_PkzKz
-    PizIz_NGDP
+    PiIz_NGDP
     PzZ_NGDP
     WNz_NGDP
 
@@ -145,7 +145,7 @@
 
     "Stock-flow capital in nonprimary export sector"
     Kz = (1-delta_Kz)*Kz{-1} + Iz;
-    PizIz_NGDP*NGDP = Pi*Iz;
+    PiIz_NGDP*NGDP = Pi*Iz;
 
     "Replacement cost of capital in nonprimary export sector"
     Pkz = Pi;
@@ -174,7 +174,7 @@
 
     % Nonprimary exporters profits including capital income
     WNz_NGDP = (Wz*N0z + Wz*NNz) / NGDP;
-    PIEz_NGDP*NGDP = Pz*Z - WNz_NGDP*NGDP - Pmz*Mz - PizIz_NGDP*NGDP;
+    PIEz_NGDP*NGDP = Pz*Z - WNz_NGDP*NGDP - Pmz*Mz - PiIz_NGDP*NGDP;
     VAz_NGDP = (Pz*Z - Pmz*Mz) / NGDP;
     PkzKz_NGDP = Pkz*Kz / NGDP;
     VAz_PkzKz = VAz_NGDP / PkzKz_NGDP;
