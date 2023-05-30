@@ -221,6 +221,7 @@
     "Stock-flow capital-investment for local sectors"
     Kd = (1-delta_Kd)*Kd{-1} + Id;
 
+
 % __Hand-to-mouth households__
 
     "Real current income of hand-to-mouth households"
