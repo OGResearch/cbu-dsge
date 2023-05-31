@@ -175,12 +175,6 @@ m.lambda_Kz = 0.5;
 % m.xi_NNz = 0;
 m.xi_Z = 0.3;
 
-% Ownership of NP exporters. Note: local HH could also hold equity, i.e.
-% psi_zw + psi_zg do not need to sum up to 1
-m.psi_zw = 0; % share of foreign-owned equity in nonprimary export sectors
-m.psi_zg = 0; % share of PIF-owned equity nonprimary export sectors
-
-
 % __Monetary policy__
 
 m.rho_Rg = 0.5;

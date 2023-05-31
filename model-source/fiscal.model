@@ -113,10 +113,6 @@
 
     ss_PiIq_NGDP
 
-    "Distribution of non-primary export profits to government" psi_zg
-    "Distribution of nonprimary export profits to foreign investors" psi_zw
-    "Distribution of commodity processing industry profits to government" psi_jg
-
     "Smoothing of PIF balance" lambda_Bwf
     "S/S External position of the public investment fund to GDP" ss_Bwf_NGDP
     "S/S Government consumption to GDP" ss_PcG_NGDP
