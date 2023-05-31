@@ -7,6 +7,7 @@
     "Target for gross government debt to GDP" Bg_NGDP_tar
     Bgh_NGDP
     Bgw_NGDP
+    Bgh_Bg
     Bwf_NGDP
 
     "Government investment to public investment fund to GDP" TFfg_NGDP
@@ -63,6 +64,7 @@
     Bgh_NGDP
     Bgw_NGDP
     Bwf_NGDP
+    Bgh_Bg
 
     TAX_NGDP
     TAXq_NGDP
@@ -103,7 +105,7 @@
 
     % Steady-state parameters
 
-    "S/S Share of foreign govt debt in total govt debt" ss_Bgw_Bg
+    "S/S Foreign government debt to government debt" ss_Bgh_Bg
     "S/S Government gross debt to GDP" ss_Bg_NGDP
 
     "Depreciation of public infrastructure capital" delta_Kg
@@ -178,6 +180,8 @@
 
     Bg_NGDP = Bgh_NGDP + Bgw_NGDP;
 
+    Bgh_Bg = Bgh_NGDP / Bg_NGDP;
+
     "Interest on local government debt to GDP"
     INTgh_NGDP = (Rg{-1} - 1) * Bgh_NGDP{-1}/dNGDP;
 
@@ -196,7 +200,7 @@
     ;
 
     "Rule for external government debt"
-    Bgw_NGDP = ss_Bgw_Bg * ss_Bg_NGDP;
+    Bgh_NGDP = ss_Bgh_Bg * ss_Bg_NGDP;
 
 
     % Public infrastructure
