@@ -315,30 +315,15 @@
 
     "Stage T-2 production technology in local sectors"
     Pd2*D2 = mu_D2*(Pmd*Md + Pd3*D3) ...
-    !if LongCobbDouglas
-        !! D2 = (1/$gamma_D2$) * Md^gamma_Md * D3^(1-gamma_Md) ...
-    !else
-        !! Pd2*D2 = mu_D2*(Pmd*Md + Pd3*D3) ...
-    !end
-    ;
+    !! D2 = (1/$gamma_D2$) * Md^gamma_Md * D3^(1-gamma_Md);
 
     "Demand for nonprimary imports in local sectors"
     Md = Md_D2 * D2 ...
-    !if LongCobbDouglas
-        !! gamma_Md*Pd2*D2 = mu_D2*Pmd*Md ...
-    !else
-        !! Md = gamma_Md * D2 ...
-    !end 
-    ;
+    !! gamma_Md*Pd2*D2 = mu_D2*Pmd*Md;
 
     "Demand for local input in local sectors"
     D3 = D3_D2 * D2 ...
-    !if LongCobbDouglas
-        !! (1-gamma_Md)*Pd2*D2 = mu_D2*Pd3*D3 ...
-    !else
-        !! D3 = (1-gamma_Md) * D2 ...
-    !end
-    ;
+    !! (1-gamma_Md)*Pd2*D2 = mu_D2*Pd3*D3;
 
     "Real nonprimary import share of stage T-2 output in local sectors"
     Md_D2 = ...
