@@ -8,8 +8,6 @@
     "Flexible benchmark wage of OPT households" Wflex
     "Labor supplied by OPT households to all sectors" Nopt
     "Labor supplied by HTM households" Nhtm
-    "Labor excluding government sector" Np
-    "Wage bill in private sector to GDP" WNp_NGDP
     "Labor in government sector to total labor" Ng_N
 
 
@@ -22,7 +20,6 @@
 !log-variables !all-but
 
     Ng_N
-    WNp_NGDP
 
 
 !equations
@@ -45,12 +42,6 @@
 
     "Total labor demand"
     N = Nd + Nz + Ng;
-
-    "Labor excluding government employment"
-    Np = N - Ng;
-
-    "Wage bill in private sectors to GDP"
-    WNp_NGDP = WNd_NGDP + WNz_NGDP;
 
     "Labor in govt sectors to total labor"
     Ng_N = Ng / N;
