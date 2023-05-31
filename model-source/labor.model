@@ -5,10 +5,9 @@
 
     "Total labor" N
     "Average wage across sectors" W
-    "Flexible benchmark wage of OPT households" Wopt_flex
+    "Flexible benchmark wage of OPT households" Wflex
     "Average wage of OPT households" Wopt
     "Labor supplied by OPT households to all sectors" Nopt
-    "Flexible benchmark wage of HTM households" Whtm_flex
     "Average wage rate of htm households" Whtm
     "Labor supplied by HTM households" Nhtm
     "Labor excluding government sector" Np
@@ -40,23 +39,16 @@
 !equations
 
     "Flexible benchmark wage of OPT households"
-    Wopt_flex*(1 - TRlit) * LAMBDA = 1 ...
-    !! Wopt_flex*(1 - ss_TRlit) * LAMBDA = 1;
+    Wflex*(1 - TRlit) * LAMBDA = 1 ...
+    !! Wflex*(1 - ss_TRlit) * LAMBDA = 1;
 
     "Optimizing household wage in private sectors"
     log(Wopt/Pc) = ...
         + rho_Wopt * log(ss_dA*Wopt{-1}/Pc{-1}) ...
-        + (1-rho_Wopt) * log(Wopt_flex/Pc) ...
-    !! Wopt = Wopt_flex;
+        + (1-rho_Wopt) * log(Wflex/Pc) ...
+    !! Wopt = Wflex;
 
-    "Flexible benchmark wage of HTM households"
-    Whtm_flex = ss_Whtm_Wopt * Wopt_flex;
-
-    "HTM household wage in private sectors"
-    log(Whtm/Pc) = ...
-        + rho_Whtm * log(ss_dA*Whtm{-1}/Pc{-1}) ...
-        + (1-rho_Whtm) * log(Whtm_flex/Pc) ...
-    !! Whtm = Whtm_flex;
+    Whtm = Wopt;
 
     "Labor supply by HTM households"
     Nhtm = omega_N * N;
