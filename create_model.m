@@ -121,7 +121,7 @@ m.phi_Id = 1;
 m.xi_Id = 3;
 m.xi_Pc = 2.5; %1
 m.xi_Pi = 2.5; %0.5
-m.xi_NNd = 0;
+% m.xi_NNd = 0;
 
 
 % __Primary export sector (Q)__
@@ -172,7 +172,7 @@ m.rho_Az = 0.5;
 m.lambda_Kz = 0.5;
 
 % Adjustment Costs
-m.xi_NNz = 0;
+% m.xi_NNz = 0;
 m.xi_Z = 0.3;
 
 % Ownership of NP exporters. Note: local HH could also hold equity, i.e.
@@ -193,7 +193,7 @@ m.kappa_dS = 0;1;
 % Steady-state parameters
 
 % Government debt
-m.ss_Bg_NGDP = 0.40;
+m.ss_Bg_NGDP = 0.28;
 m.ss_Bgh_Bg = 0.107;
 
 % Government transfers to households
@@ -283,7 +283,7 @@ checkSteady(m);
 swap = string.empty(0, 2);
 
 % Net investment position
-m.NIP_NGDP = -0.40;
+m.NIP_NGDP = -0.30;
 swap = [swap; "NIP_NGDP", "zeta_Rg0"];
 
 % Public infrastructure expenditures
@@ -353,7 +353,7 @@ save mat/create_model.mat m
 
 %% Calibration table with key ratios and rates
 
-list = [
+nationalList = [
     "PcC_NGDP"
     "PiI_NGDP"
     "PgG_NGDP"
@@ -369,12 +369,20 @@ list = [
     "INTw_NGDP"
     "CA_NGDP"
     "TB_NGDP"
+];
+
+fiscalList = [
     "Bg_NGDP"
     "Bgh_Bg"
 ];
 
-calibTable = steadyTable(list, :);
-writetable(calibTable, "tables/calibration.xlsx", "writeRowNames", true);
+nationalTable = steadyTable(nationalList, :);
+fiscalTable = steadyTable(fiscalList, :);
 
-disp(calibTable)
+writetable(nationalTable, "tables/calibration-national.xlsx", "writeRowNames", true);
+writetable(fiscalTable, "tables/calibration-fiscal.xlsx", "writeRowNames", true);
+
+disp(nationalTable)
+disp(fiscalTable)
+
 

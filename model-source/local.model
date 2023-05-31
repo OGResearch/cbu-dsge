@@ -160,7 +160,7 @@
     "Intensity of capital or investment adjustment cost" xi_Id
     "Consumer Price Adjustment Cost" xi_Pc
     "Investment price adjustment cost" xi_Pi
-    "Cost of hiring-firing variable labor in local sectors" xi_NNd
+    %"Cost of hiring-firing variable labor in local sectors" xi_NNd
     "Autoregression in overall productivity" rho_A
     "Autoregression in relative sectoral productivity in local production" rho_Ad
     "Residential (housing) investment reaction to private investment to GDP" lambda_Ih1
@@ -184,7 +184,7 @@
     AdjPi0 := xi_Pi*[ log(dPi) - log(dPi{-1}) ];
     AdjPi1 := xi_Pi*[ log(dPi{+1}) - log(dPi) ];
 
-    AdjNNd := xi_NNd*[ log(NNd/NNd{-1}) - beta*log(NNd{+1}/NNd) ];
+    % AdjNNd := xi_NNd*[ log(NNd/NNd{-1}) - beta*log(NNd{+1}/NNd) ];
 
     gamma_Dm := (gamma_Md^gamma_Md * (1-gamma_Md)^(1-gamma_Md));
 
@@ -304,8 +304,8 @@
     Dk = Kd{-1}^(1-gamma_Nd) * (A*Ad*NNd)^gamma_Nd;
 
     "Demand for labor in local sectors"
-    gamma_Nd * Pd3*Dk = W * NNd * (1 + $AdjNNd$) ...
-    !! gamma_Nd * Pd3*Dk = W * NNd;
+    % gamma_Nd * Pd3*Dk = W * NNd * (1 + $AdjNNd$) ...
+    gamma_Nd * Pd3*Dk = W * NNd;
 
     "Demand for capital in local sectors"
     (1-gamma_Nd)*Pd3*Dk = Prkd*Kd{-1};

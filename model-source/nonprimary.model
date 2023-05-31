@@ -50,7 +50,7 @@
     "S/S relative price of nonprimary exports to imported inputs" ss_Pz_Pmz
     "Scale parameter in nonprimary export production function" alpha_Z
 
-    "Cost of hiring-firing variable labor in nonprimary export sector" xi_NNz
+    %"Cost of hiring-firing variable labor in nonprimary export sector" xi_NNz
     "Output adjustment cost in nonprimary exports" xi_Z
 
     "Autoregression in nonprimary export technology" rho_Az
@@ -77,7 +77,7 @@
 
 !substitutions
 
-    AdjNNz := xi_NNz*[ log(NNz/NNz{-1}) - beta*log(NNz{+1}/NNz) ];
+    % AdjNNz := xi_NNz*[ log(NNz/NNz{-1}) - beta*log(NNz{+1}/NNz) ];
 
 
 !equations
@@ -97,8 +97,8 @@
     Zk = Kz{-1}^(1 - gamma_Nz) * (AAz * NNz)^gamma_Nz;
 
     "Demand for labor in nonprimary export sector"
-    gamma_Nz * Pz1 * Zk = W * NNz * (1 + $AdjNNz$) ...
-    !! gamma_Nz * Pz1 * Zk = W * NNz;
+    % gamma_Nz * Pz1 * Zk = W * NNz * (1 + $AdjNNz$) ...
+    gamma_Nz * Pz1 * Zk = W * NNz;
 
     % AAz = Az * A^(1-gamma_Kz) * Kz{-1}^gamma_Kz;
     AAz = AA * Az;
