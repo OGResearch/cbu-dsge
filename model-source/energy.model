@@ -3,21 +3,26 @@
 
 !variables
 
-    "Price of energy" Pj
-    "Marginal cost of energy" Pj0
-    "Price of energy, Y/Y" dPj0
     "Energy inputs" J
+    "Price of energy" Pj
+    "World price of energy" Pj_star
+    "Marginal cost of energy" Pj0
     "Value added in energy sector to GDP" VAj_NGDP
     "Energy volume to GDP" PjJ_NGDP
-    "World price of energy" Pj_star
+    "Energy cost base to GDP" Pj0J_NGDP
     "Profit of energy sector" PIEj_NGDP
+    "Import inputs into energy sector" Mj
+    Pmj
+    PmjMj_NGDP
 
 
 !log-variables !all-but
 
     VAj_NGDP
     PjJ_NGDP
+    Pj0J_NGDP
     PIEj_NGDP
+    PmjMj_NGDP
 
 
 !shocks
@@ -28,35 +33,41 @@
 !parameters
 
     "S/S Real world price of energy" ss_Pj_Pw
+    gamma_Mj
     "Adjustment coefficient in price of energy"  lambda_Pj0
-    "Subsidy on price of energy" mu_J
 
 
 !equations
 
     "Subsidized price of energy"
-    Pj = mu_J * Pj0;
+    % Pj = Pj0*(1 + TRj) - subsidy
+    Pj = Pj0*(1 + TRj) - TFgj_NGDP*NGDP/J;
 
     "Marginal cost in energy sector"
-    log(dPj0) = ...
-        + log(dPj0{-1}) ...
+    log(Pj0) = ...
+        + log(ss_dPc * Pj0{-1}) ...
         + lambda_Pj0 * log(S * Pj_star / Pj0) ...
         + shk_Pj0 ...
     !! Pj0 = S * Pj_star;
 
-    "Price of energy, Y/Y"
-    dPj0 = Pj0 / Pj0{-1};
+    "Energy sales to GDP"
+    PjJ_NGDP*NGDP = Pj * J;
 
-    "Energy volume to GDP"
-    PjJ_NGDP = Pj * J / NGDP;
+    "Energy cost base to GDP"
+    Pj0J_NGDP*NGDP = Pj0 * J;
+
+    "Import inputs into energy sector"
+    Mj = gamma_Mj * J;
+    Pmj = Pj0;
+    PmjMj_NGDP*NGDP = Pmj * Mj;
 
     "World price of energy"
     Pj_star = ss_Pj_Pw * Pw_star;
 
     "Profit in energy sector"
-    PIEj_NGDP = Pj0 * J / NGDP;
+    PIEj_NGDP = PjJ_NGDP + TFgj_NGDP - Pj0J_NGDP*(1 + TRj);
 
     "Value added in energy sector"
-    VAj_NGDP = PjJ_NGDP;
+    VAj_NGDP = Pj0J_NGDP - PmjMj_NGDP;
 
 

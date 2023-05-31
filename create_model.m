@@ -57,9 +57,9 @@ m.rho_Pw_star = 0.3;
 
 % Steady-state parameters
 
+m.ss_dA = 1.04;
+m.ss_dPc = 1.05;
 m.beta = 0.95; 
-m.delta_Kd = 0.20;
-m.delta_Kh = 0.20;
 
 
 % Households
@@ -75,6 +75,10 @@ m.chi_dli = 0;
 m.chi_c = 0.5;
 m.nu = 0;
 
+m.beta_Kd = 0.9;
+m.delta_Kd = 0.10;
+m.delta_Kh = 0.10;
+
 m.ss_TFwh_NGDP = 0.12; % to be reverse engineered
 
 % Markups
@@ -82,10 +86,9 @@ m.mu_CI = 1.25; % to be reverse-engineered
 m.mu_D2 = 1; % to be reverse-engineered 
 
 % Local production
-m.gamma_Md = 0.3792; 0.30; % to be reverse-engineered 
-m.gamma_Nd = 0.37; % to be reverse-engineered 
-%m.ss_N0d = 0.65; % to be reverse-engineered 
-m.ss_N0d_Nd = 0.30;
+m.gamma_Md = 0.40; 0.3792; 0.30; % to be reverse-engineered 
+m.gamma_Nd = 0.50; % to be reverse-engineered 
+m.ss_N0d_Nd = 0.35;
 
 % Interest rate premia
 m.zeta_Rg0 = 0; % to be reverse-engineered 
@@ -93,17 +96,15 @@ m.zeta_Rg1 = 0.10; 0.015;
 m.zeta_Rh0 = 0; % to be reverse-engineered 
 m.zeta_Rh1 = 0.1;0.2;
 
-m.zeta_S = 0.7;
+m.zeta_S = 0.5;
 
 % Directly calibrated ratios and rates
 
 % Residential investment
-m.ss_Kh_Kd = 0.30; % to be reverse-engineered 
+m.ss_Kh_Kd = 0.10; % to be reverse-engineered 
 m.lambda_Ih1 = 0.05;
 
 % Steady state for exogenous variables
-m.ss_dA = 1.04;
-m.ss_dPc = 1.05;
 m.ss_Ad = 1;
 
 % Transitory parameters
@@ -139,8 +140,8 @@ m.rho_Pq_Pw = 0.5;
 
 % __Energy sector (J)__
 
+m.gamma_Mj = 0.25;
 m.lambda_Pj0 = 1;
-m.mu_J = 1;
 
 
 % __Nonprimary export (Z)__
@@ -152,8 +153,7 @@ m.mu_Z = 1; % to be reverse-engineered
 m.gamma_Kz = 0.2;
 m.gamma_Mz = 0.40;
 m.gamma_Nz = 0.45;
-m.gamma_N0z = 0.4;
-m.delta_Kz = 0.20;
+m.delta_Kz = 0.10;
 m.ss_N0z_Nz = 0.30;
 
 % Steady State for Exogenous/External Variables
@@ -184,15 +184,11 @@ m.psi_zw = 0; % share of foreign-owned equity in nonprimary export sectors
 m.psi_zg = 0; % share of PIF-owned equity nonprimary export sectors
 
 
-m.psi_jw = 0.25;
-m.psi_qw = 0.25;
-
-
 % __Monetary policy__
 
 m.rho_Rg = 0.5;
 m.kappa_dPc = 3;
-m.kappa_dS = 1;
+m.kappa_dS = 0;1;
 
 
 % __Fiscal__
@@ -205,13 +201,11 @@ m.ss_Bgw_Bg = 0.85;
 
 % Government transfers to households
 m.ss_TFgh_NGDP = 0.05;
+m.ss_TFgj_NGDP = 0.01;
 
 % Government consumption
-m.ss_PcG_NGDP = 0.265;
+m.ss_PcG_NGDP = 0.16;
 m.ss_WNg_NGDP = 0.10;
-m.ss_Wg_Wopt = 1;
-
-m.omega_TFgh = 0.50;
 
 % Government investment
 m.ss_PiIg_NGDP = 0.08;
@@ -227,10 +221,11 @@ m.ss_Bwf_NGDP = 0.10;
 % Tax rates
 m.ss_TRvat = 0; % to be reverse-engineered 
 m.ss_TRlit = 0.03;
-
 m.ss_TRgd = 0;
+m.ss_TRj = 0;
+m.ss_TRq = 0;
 
-m.ss_TXls_NGDP = 0; %%%0.05; % to be reverse-engineered
+m.ss_TAXls_NGDP = 0; %%%0.05; % to be reverse-engineered
 
 % Dynamic parameters
 
@@ -240,8 +235,8 @@ m.lambda_Gg2 = 0.5;
 m.lambda_Ng1 = 0.2;%0.1;
 m.lambda_Ng2 = 0.5; 
 
-m.lambda_TXls1 = 0.5;
-m.lambda_TXls2 = 0.5;
+m.lambda_TAXls1 = 0.5;
+m.lambda_TAXls2 = 0.5;
 
 m.lambda_Ig1 = 1.5;%0.5; 
 
@@ -255,8 +250,7 @@ m.lambda_BCBg = 0.5;
 
 % Steady state parameters
 
-m.omega_N = 0.30;
-m.omega_TFwh = 0.50;
+m.omega = 0.30;
 m.ss_Whtm_Wopt = 1; %%% 0.45;
 
 m.eta = 0;
@@ -284,7 +278,7 @@ m = steady( ...
 
 checkSteady(m);
 
-return
+% return
 
 
 %% Reverse engineer parameters for steady-state ratios
@@ -303,21 +297,25 @@ swap = [swap; "PiIg_NGDP", "ss_Kg_A"];
 m.PqQ_NGDP = 0.08;
 swap = [swap; "PqQ_NGDP", "ss_Aq"];
 
-% Energy volume
-m.PjJ_NGDP = 0.04;
-swap = [swap; "PjJ_NGDP", "gamma_J"];
+% Energy cost base
+m.Pj0J_NGDP = 0.04;
+swap = [swap; "Pj0J_NGDP", "gamma_J"];
 
-% Import for energy sector
-m.TXj_NGDP = 0.03;
-swap = [swap; "TXj_NGDP", "psi_jw"];
+% Energy sector tax
+m.TAXj_NGDP = 0.02;
+swap = [swap; "TAXj_NGDP", "ss_TRj"];
+
+% Primary export sector
+m.TAXq_NGDP = 0.07;
+swap = [swap; "TAXq_NGDP", "ss_TRq"];
 
 % Value added tax
-m.TXvat_NGDP = 0.07;
-swap = [swap; "TXvat_NGDP", "ss_TRvat"];
+m.TAXvat_NGDP = 0.07;
+swap = [swap; "TAXvat_NGDP", "ss_TRvat"];
 
 % Labor income tax
-m.TXlit_NGDP = 0.03;
-swap = [swap; "TXlit_NGDP", "ss_TRlit"];
+m.TAXlit_NGDP = 0.03;
+swap = [swap; "TAXlit_NGDP", "ss_TRlit"];
 
 % Subsidies for local supply capacity (SOE...)
 m.TFgd_NGDP = 0.01;
@@ -352,6 +350,8 @@ t = table( ...
 disp(t)
 
 m = solve(m);
+
+disp DONE
 
 save mat/create_model.mat m
 

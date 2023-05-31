@@ -8,6 +8,8 @@
     "Total demand for investment goods" I
 
     "Remittances to GDP ratio" TFwh_NGDP
+    "Remittances to GDP ratio" TFwhtm_NGDP
+    "Remittances to GDP ratio" TFwopt_NGDP
     "Exports to GDP ratio" PxX_NGDP
     "Imports to GDP Ratio" PmM_NGDP
     "Nominal GDP" NGDP
@@ -41,6 +43,9 @@
     PcC_NGDP
     PiI_NGDP
     TFwh_NGDP
+    TFwhtm_NGDP
+    TFwopt_NGDP
+    TFwopt_NGDP
     PmM_NGDP
     PxX_NGDP
     CA_NGDP
@@ -66,13 +71,15 @@
 
 % __Exports and imports__
 
-    PmM_NGDP*NGDP = Pmd*Md + Pmz*Mz;
+    PmM_NGDP*NGDP = Pmd*Md + Pmz*Mz + Pmj*Mj + Pmq*Mq;
 
     PxX_NGDP*NGDP = (Pq*Q + Pz*Z);
 
 
     "Remittances from abroad to households"
     TFwh_NGDP = ss_TFwh_NGDP;
+    TFwh_NGDP = TFwhtm_NGDP + TFwopt_NGDP;
+    TFwhtm_NGDP = omega * TFwh_NGDP;
 
 
 % __International investment position / BOP__
@@ -88,14 +95,13 @@
         - INTgw_NGDP ...
         ... CA: Current transfers
         + TFwh_NGDP ...
-        - PIEw_NGDP ...
         ... CA: Trade balance
         + PxX_NGDP ...
         - PmM_NGDP ...
     ;
 
     "Interest on household foreign debt to GDP"
-    INThw_NGDP = (Rw_star{-1} - 1)*Bhw_NGDP{-1}*dS/dNGDP;
+    INThw_NGDP = (Rh_star{-1} - 1)*Bhw_NGDP{-1}*dS/dNGDP;
 
     "Trade balance to GDP"
     TB_NGDP = PxX_NGDP - PmM_NGDP;
@@ -124,6 +130,8 @@
     dM = ...
         + movavg(PmdMd_NGDP/PmM_NGDP, -2) * Md/Md{-1} ...
         + movavg(PmzMz_NGDP/PmM_NGDP, -2) * Mz/Mz{-1} ...
+        + movavg(PmjMj_NGDP/PmM_NGDP, -2) * Mj/Mj{-1} ...
+        + movavg(PmqMq_NGDP/PmM_NGDP, -2) * Mq/Mq{-1} ...
     !! dM = ss_dA;
 
 
