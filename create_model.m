@@ -358,12 +358,14 @@ list = [
     "PgG_NGDP"
     "PxX_NGDP"
     "PmM_NGDP"
-    "NIP_NGDP"
-    "INTw_NGDP"
+    "PiIg_NGDP"
+    "WN_NGDP"
     "Rg"
     "Rh"
-    "WN_NGDP"
-    "PiIg_NGDP"
+    "NIP_NGDP"
+    "INTw_NGDP"
+    "CA_NGDP"
+    "TB_NGDP"
 ];
 
 calibTable = steadyTable(list, :);
