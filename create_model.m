@@ -274,6 +274,7 @@ m = steady( ...
 );
 
 checkSteady(m);
+m = solve(m)
 
 return
 
