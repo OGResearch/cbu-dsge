@@ -116,7 +116,7 @@ m.rho_Md_Dm = 0.75;
 m.rho_Dk_Dm = 0.75;
 
 % Habit, adjustment costs
-m.phi_D = 1;
+m.phi_Id = 1;
 
 m.xi_Id = 3;
 m.xi_Pc = 2.5; %1
