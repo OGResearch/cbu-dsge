@@ -15,7 +15,6 @@
     "HTM household labor to total labor" Nhtm_N
     "Wage in nonprimary export sector" Wz
     "Wage in local sectors" Wd
-    "Wage in government sector" Wg
 
 
 !parameters
@@ -63,8 +62,6 @@
     "Average wage in nonprimary export sector"
     Wz = omega_N*Whtm + (1-omega_N)*W;
 
-    "Average wage in government sector"
-    Wg = W;
 
     "Labor excluding government employment"
     Np = N - Ng;

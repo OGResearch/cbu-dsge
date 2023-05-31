@@ -227,7 +227,7 @@
     PgG = Pg * G;
 
     "Definition of government wage bill to GDP"
-    WNg_NGDP = Wg * Ng / NGDP;
+    WNg_NGDP = W * Ng / NGDP;
 
     "Government employment"
     log(Ng) = ...
