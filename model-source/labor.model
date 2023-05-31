@@ -11,7 +11,6 @@
     "Flexible benchmark wage of HTM households" Whtm_flex
     "Average wage rate of htm households" Whtm
     "Labor supplied by HTM households" Nhtm
-    "Wage bill of HTM households to GDP" WNhtm_NGDP
     "Labor excluding government sector" Np
     "Wage bill in private sector to GDP" WNp_NGDP
     "Labor in government sector to total labor" Ng_N
@@ -34,7 +33,6 @@
 
 !log-variables !all-but
 
-    WNhtm_NGDP
     Whtm_Wopt
     Ng_N
     Nhtm_N
@@ -64,9 +62,6 @@
 
     "Labor supply by HTM households"
     Nhtm = omega_N * N;
-
-    "Wage bill of HTM households to GDP"
-    WNhtm_NGDP = Whtm * Nhtm / NGDP;
 
     "Total labor supply"
     N = Nopt + Nhtm;
