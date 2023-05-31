@@ -148,6 +148,7 @@
 
     PiI_NGDP = Pi*I / NGDP;
 
+    "Wage bill to GDP"
     WN_NGDP = WNd_NGDP + WNz_NGDP + WNg_NGDP;
 
     "Nomial GDP excluding primary exports to nominal GDP ratio"
