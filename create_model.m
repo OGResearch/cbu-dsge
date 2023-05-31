@@ -75,7 +75,7 @@ m.chi_dli = 0;
 m.chi_c = 0.5;
 m.nu = 0;
 
-m.beta_Kd = 0.9;
+m.beta_Kd = 1;
 m.delta_Kd = 0.10;
 m.delta_Kh = 0.10;
 
@@ -101,7 +101,7 @@ m.zeta_S = 0.5;
 % Directly calibrated ratios and rates
 
 % Residential investment
-m.ss_Kh_Kd = 0.10; % to be reverse-engineered 
+m.ss_Kh_Kd = 0.30; % to be reverse-engineered 
 m.lambda_Ih1 = 0.05;
 
 % Steady state for exogenous variables
@@ -158,7 +158,7 @@ m.ss_N0z_Nz = 0.30;
 
 % Steady State for Exogenous/External Variables
 m.ss_Az = 1;
-m.ss_Kz_A = 0.12; % to be reverse-engineered 
+m.ss_Kz_A = 0.20; % to be reverse-engineered 
 m.ss_Pmz_Pmd = 1;
 m.ss_Pz_Pmz = 1;
 %m.ss_N0z_Kz = 0.12; % to be reverse-engineered 
@@ -290,7 +290,7 @@ m.NIP_NGDP = -0.40;
 swap = [swap; "NIP_NGDP", "zeta_Rg0"];
 
 % Public infrastructure expenditures
-m.PiIg_NGDP = 0.20;
+m.PiIg_NGDP = 0.03;
 swap = [swap; "PiIg_NGDP", "ss_Kg_A"];
 
 % Primary export to GDP
@@ -363,9 +363,12 @@ list = [
     "INTw_NGDP"
     "Rg"
     "Rh"
+    "WN_NGDP"
+    "PiIg_NGDP"
 ];
 
 calibTable = steadyTable(list, :);
 writetable(calibTable, "tables/calibration.xlsx", "writeRowNames", true);
 
+disp(calibTable)
 
