@@ -7,9 +7,11 @@
     "Primary production specific technology" Aq
     "Real world price of primary commodity" Pq_Pw
     "Primary production maintenance services" Mq
-    "Profits in primary production to GDP ratio before taxes" PIEq_NGDP
+    "Profits in primary production to GDP ratio" PIEq_NGDP
     "Value added in primary production to GDP ratio" VAq_NGDP
     "Primary production to GDP ratio" PqQ_NGDP
+    Pmq
+    PmqMq_NGDP
 
 
 !parameters
@@ -29,6 +31,7 @@
     PIEq_NGDP
     PqQ_NGDP
     VAq_NGDP
+    PmqMq_NGDP
 
 
 !shocks
@@ -41,6 +44,7 @@
 
 % __Primary exports__
 
+    "Primary export production"
     Q = Aq * A;
 
     log(Aq) = ...
@@ -49,17 +53,19 @@
     !! Aq = ss_Aq;
 
     Mq = gamma_Mq*Q;
+    Pmq = Pq;
+    PmqMq_NGDP*NGDP = Pmq * Mq;
 
 
 % __Profits and value added__
 
-    PIEq_NGDP = Pq*Q / NGDP;
-    VAq_NGDP = Pq*Q / NGDP;
+    PIEq_NGDP*NGDP = Pq*Q*(1 - TRj);
+    VAq_NGDP*NGDP = Pq*Q - Pmq*Mq;
 
 
 % __World price of primary commodities__
 
-    Pq  = S * Pq_star;
+    Pq = S * Pq_star;
     Pq_star = Pq_Pw * Pw_star;
 
 

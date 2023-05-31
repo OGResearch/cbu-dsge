@@ -14,16 +14,15 @@
     "Private residential investment to GDP" PiIh_NGDP
 
     "Consumption of Hand-to-Mouth Households" Chtm
-    "Auxiliary Variable for Consumption to Net Worth Ratio" Copt_Vh_nu0
+    "Auxiliary Variable for Consumption to Net Worth Ratio" Copt_Vopt_nu0
     "Disposable Labor Income of Optimizing Households" DLIopt
-    % "Total disposable labor income to GDP" PcDLI_NGDP
-    "Real net worth of OPT households" Vopt
+    "Household real net worth" Vopt
     "Disposable labor income of hand-to-mouth households" DLIhtm
     "Hours worked in local sectors" Nd
     "Wage bill in local sectors to GDP" WNd_NGDP
     "Physical investment in local sectors" Id
 
-    "Profits in local sectors to GDP before taxes" PIEd_NGDP
+    "Profits in local sectors to GDP" PIEd_NGDP
 
     "Private residential and overhead capital" Kh
     "Private residential and overhead investment" Ih
@@ -38,7 +37,7 @@
     "Total productivity in local sectors" AAd
 
 
-    "Household net worth to GDP" PcVh_NGDP
+    "Household net worth to GDP" PcVopt_NGDP
     "Capital in local sectors to GDP" PkdKd_NGDP
 
     "Capital in nonprimary exports to GDP" PkzKz_NGDP
@@ -60,8 +59,8 @@
 
     "Government local-currency debt rate" Rg
     "Government foreign-currency debt rate" Rg_star
-    "Household shadow interest rate" Rh
-    "Household foreign-currency debt rate" Rh_star
+    "Household local-currency interest rate" Rh
+    "Household foreign-currency interest rate" Rh_star
     "Government-world spread" Rg_Rw
     "Premium on government debt" PREMg
     "Premium on household debt" PREMh
@@ -82,11 +81,11 @@
 !log-variables !all-but
 
     PiIh_NGDP
-    Copt_Vh_nu0
+    Copt_Vopt_nu0
     PiId_NGDP
     PiId_PkdKd
     Bhw_NGDP
-    PcVh_NGDP
+    PcVopt_NGDP
     PkdKd_NGDP
     PkzKz_NGDP
     DLIopt_Copt
@@ -112,7 +111,7 @@
 
     "Overhead labor to labor in local sector" ss_N0d_Nd
 
-    "Share of remmittances received by HTM househodls" omega
+    "Share of remmittances received by HTM households" omega
 
     "Efficiency of public infrastructure" iota_kg
     "Efficiency of government support of local supply side" iota_tf
@@ -123,11 +122,13 @@
     "Imperfections in forex arbitrage" zeta_S
 
     "A/R Share of nonprimary import inputs in local sector" rho_Md_D2
+
     rho_D3_D2
     psi_dg
 
     % Steady-state parameters
-    "Discount Factor" beta
+    "Discount factor" beta
+    "Capital uncertainty discount factor" beta_Kd
     "Current Income Sensitivity of Intertemporally Optimizing Households" chi_dli
     "Sensitivity of utility to net worth" nu
     "Intercept in net worth utility component" nu0
@@ -201,16 +202,16 @@
     LAMBDA*Pc*(Copt - chi_dli*DLIopt - chi_c*ss_dA*Copt{-1}) = 1;
 
     "Net worth of optimizing households"
-    Pc*Vopt = (Pkd*(Kd + Kh) + (Bgh_NGDP - Bhw_NGDP)*NGDP);%/(1 - omega);
+    Pc*Vopt = (Pkd*(Kd + Kh) + (Bgh_NGDP - Bhw_NGDP)*NGDP)/(1-omega);
 
     "Real current income of optimizing households"
-    Pc*DLIopt = W*Nopt*(1 - TRlit) + TFgopt_NGDP*NGDP;
+    Pc*DLIopt = (WNopt_NGDP*(1 - TRlit) + TFgopt_NGDP)*NGDP/(1-omega);
 
     "Calibration of net worth utility component"
-    Copt_Vh_nu0 = Copt/Vopt - nu0;
+    Copt_Vopt_nu0 = Copt/Vopt - nu0;
 
 
-    % Supply of capital to local sector
+    % Supply of capital to nonprimary export sector
 
     "Price of production capital for local sectors"
     Pkd = Pi*(1 + $AdjId0$ - beta*phi_Y*$AdjId1$ - iota_tf*TRgd) ...
@@ -218,12 +219,12 @@
 
     "Creation of production capital for local sectors"
     LAMBDA*Pkd = ...
-        + beta*LAMBDA{+1}*[ ...
+        + beta*beta_Kd*LAMBDA{+1}*[ ...
             Pkd{+1}*(1-delta_Kd) + Prkd{+1} + Pkd{+1}*(1-phi_Y)*&PiId_PkdKd*ss_dA*$AdjId1$ ...
         ] ...
         + nu*(Copt/Vopt - nu0)*Pkd/(Pc*Copt) ...
     !! LAMBDA*Pkd = ...
-        + beta*LAMBDA{+1}*[ ...
+        + beta*beta_Kd*LAMBDA{+1}*[ ...
             Pkd{+1}*(1-delta_Kd) + Prkd{+1} ...
         ] ...
         + nu*(Copt/Vopt - nu0)*Pkd/(Pc*Copt) ...
@@ -233,9 +234,7 @@
     Kd = (1 - delta_Kd) * Kd{-1} + Id;
 
 
-
     % Supply of capital to nonprimary export sector
-    % To be endogenized
 
     "Stock-flow capital in nonprimary export sector"
     Kz = (1 - delta_Kz) * Kz{-1} + Iz;
@@ -247,10 +246,10 @@
 % __Hand-to-mouth households__
 
     "Real current income of hand-to-mouth households"
-    Pc*DLIhtm = W*Nhtm*(1 - TRlit) + TFghtm_NGDP*NGDP + TFwhtm_NGDP*NGDP;
+    Pc*DLIhtm/NGDP = (WNhtm_NGDP*(1 - TRlit) + TFghtm_NGDP + TFwhtm_NGDP)/omega;
 
     "Demand for consumption by optimizing households"
-    Chtm = Copt;%DLIhtm;
+    Chtm = DLIhtm;
 
 
 % __Total private consumption__
@@ -269,7 +268,7 @@
     Kh = (1-delta_Kh)*Kh{-1} + Ih;
 
 
-% __Local Distribution of Consumer and Investment Goods__
+% __Local distribution of consumer and investment goods__
 
     % Staget T-0 in local sectors: Distribution
     D = D1;
@@ -416,8 +415,8 @@
     Rg_Rw = Rg_star / Rw_star;
 
     PREMh = exp(zeta_Rh1*(Bhw_NGDP + zeta_Rh0));
-    Rh_star = Rg_star * PREMh;
     Rh = Rg * PREMh;
+    Rh_star = Rw_star; 
 
 
 % __Growth rates__
@@ -434,7 +433,7 @@
     PiId_NGDP*NGDP = Pi*Id;
     PiId_PkdKd = Pi*Id / (Pkd*Kd);
     DLIopt_Copt = DLIopt / Copt;
-    PcVh_NGDP*NGDP = Pc*Vopt;
+    PcVopt_NGDP*NGDP = Pc*Vopt;
     PkdKd_NGDP*NGDP = Pkd*Kd;
     PkzKz_NGDP = Pkz*Kz / NGDP;
     PmdMd_NGDP*NGDP = Pmd*Md;

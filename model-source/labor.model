@@ -5,37 +5,56 @@
 
     "Total labor" N
     "Average wage across sectors" W
-    "Flexible benchmark wage of OPT households" Wflex
+    "Flexible benchmark wage of OPT households" Wopt_flex
+    "Average wage of OPT households" Wopt
     "Labor supplied by OPT households to all sectors" Nopt
+    "Labor income of OPT households to GDP" WNopt_NGDP
+    "Average wage rate of htm households" Whtm
     "Labor supplied by HTM households" Nhtm
-    "Labor in government sector to total labor" Ng_N`x
+    "Wage bill of HTM households to GDP" WNhtm_NGDP
+    "Labor in government sector to total labor" Ng_N
 
 
 !parameters
 
-    % Dynamic parameters
-    "A/R Real wage of OPT households" rho_W
+    "Inverse elasticity of labor supply for OPT households" eta
+    "S/S HTM household wage to OPT household wage" ss_Whtm_Wopt
+    "S/S Wage rate markup in government sectors" ss_W_Wopt
+
+    "A/R Real wage of OPT households" rho_Wopt
+    "A/R Real wage of HTMl households" rho_Whtm
 
 
 !log-variables !all-but
 
-    !list(`x)
+    WNopt_NGDP
+    WNhtm_NGDP
+    Ng_N
 
 
 !equations
 
-    "Labor supply by OPT households under flexible wage"
-    Wflex*(1 - TRlit) * LAMBDA = 1 ...
-    !! Wflex*(1 - ss_TRlit) * LAMBDA = 1;
+    "Flexible benchmark wage of OPT households"
+    Wopt_flex*(1 - TRlit) * LAMBDA = 1 ...
+    !! Wopt_flex*(1 - ss_TRlit) * LAMBDA = 1;
 
     "OPT household wage"
-    log(W/Pc) = ...
-        + rho_W * log(ss_dA*W{-1}/Pc{-1}) ...
-        + (1-rho_W) * log(Wflex/Pc) ...
-    !! W = Wflex;
+    log(Wopt/Pc) = ...
+        + rho_Wopt * log(ss_dA*Wopt{-1}/Pc{-1}) ...
+        + (1-rho_Wopt) * log(Wopt_flex/Pc) ...
+    !! Wopt = Wopt_flex;
+
+    "HTM household wage"
+    Whtm = Wopt;
+
+    "Wage bill of OPT households to GDP"
+    WNopt_NGDP = (1 - omega) * Wopt * Nopt / NGDP;
 
     "Labor supply by HTM households"
     Nhtm = Nopt;
+
+    "Wage bill of HTM households to GDP"
+    WNhtm_NGDP = omega * Whtm * Nhtm / NGDP;
 
     "Total labor supply"
     N = omega*Nhtm + (1 - omega)*Nopt;
@@ -43,7 +62,10 @@
     "Total labor demand"
     N = Nd + Nz + Ng;
 
-    "Labor in government sector to total labor"
+    "Average wage across sectors"
+    W*N = omega*Whtm*Nhtm + (1 - omega)*Wopt*Nopt;
+
+    "Labor in govt sectors to total labor"
     Ng_N = Ng / N;
 
 

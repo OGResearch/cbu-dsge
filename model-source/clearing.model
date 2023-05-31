@@ -3,15 +3,15 @@
 
 !variables
 
-    "Net Investment Position to GDP Ratio" NIP_NGDP`x
+    "Net Investment Position to GDP Ratio" NIP_NGDP
     "Real commodity exports" Q
     "Total demand for investment goods" I
 
-    "Remittances received by households to GDP" TFwh_NGDP`x
-    "Remittances received by HTM households to GDP" TFwhtm_NGDP`x
-    "Remittances received by OPT households to GDP" TFwopt_NGDP`x
-    "Exports to GDP" PxX_NGDP`x
-    "Imports to GDP Ratio" PmM_NGDP`x
+    "Remittances to GDP ratio" TFwh_NGDP
+    "Remittances to GDP ratio" TFwhtm_NGDP
+    "Remittances to GDP ratio" TFwopt_NGDP
+    "Exports to GDP ratio" PxX_NGDP
+    "Imports to GDP Ratio" PmM_NGDP
     "Nominal GDP" NGDP
     "Nominal GDP excluding commodity sector" NGDPx
     "Gross rate of change in real exports" dX
@@ -19,26 +19,43 @@
     "Gross rate of change in real GDP" dGDP
     "Gross rate of change in real GDP excluding commodity sector" dGDPx
 
-    "Private consumption to GDP" PcC_NGDP`x
-    "Investment to GDP" PiI_NGDP`x
-    "Wage bill to GDP" WN_NGDP`x
+    "Private consumption to GDP ratio" PcC_NGDP
+    "Investment to GDP ratio" PiI_NGDP
+    "Wage bill to GDP ratio" WN_NGDP
 
-    "Value added in local production sector to GDP" VAd_NGDP`x
-    "Value added in local production sector per capital" VAd_PkdKd`x
-    "Wage bill to value-added ratio in local sector" WNd_VAd`x
-    "Trade balance to GDP" TB_NGDP`x
-    "Current account to GDP" CA_NGDP`x
+    "Value added in local production sector to GDP ratio" VAd_NGDP
+    "Value added in local production sector per capital" VAd_PkdKd
+    "Wage bill to value-added ratio in local sector" WNd_VAd
+    "Trade balance to GDP ratio" TB_NGDP
+    "Current account to GDP ratio" CA_NGDP
 
-    "Nominal GDP excluding primary exports to nominal GDP" NGDPx_NGDP`x
+    "Nominal GDP excluding primary exports to nominal GDP ratio" NGDPx_NGDP
 
     "Consumer real exchange rate" RER
-    "Interest on household foreign liabilities to GDP" INThw_NGDP`x
+    "Interest on household foreign liabilities to GDP" INThw_NGDP
 
 
 
 !log-variables !all-but
 
-    !list(`x)
+    NGDPx_NGDP
+    NIP_NGDP
+    PcC_NGDP
+    PiI_NGDP
+    TFwh_NGDP
+    TFwhtm_NGDP
+    TFwopt_NGDP
+    TFwopt_NGDP
+    PmM_NGDP
+    PxX_NGDP
+    CA_NGDP
+    TB_NGDP
+    VAd_NGDP
+    VAd_PkdKd
+    WN_NGDP
+    WNd_VAd
+    INThw_NGDP
+
 
 
 !equations
@@ -48,24 +65,25 @@
     "Total demand for investment goods"
     I = Id + Ig + Ih + Iz;
 
-    "Total demand for local production"
+    "Local production breakdown"
     D = C + Gg + I;
+
+
+% __Exports and imports__
+
+    PmM_NGDP*NGDP = Pmd*Md + Pmz*Mz + Pmj*Mj + Pmq*Mq;
+
+    PxX_NGDP*NGDP = (Pq*Q + Pz*Z);
+
+
+    "Remittances from abroad to households"
+    TFwh_NGDP = ss_TFwh_NGDP;
+    TFwh_NGDP = TFwhtm_NGDP + TFwopt_NGDP;
+    TFwhtm_NGDP = omega * TFwh_NGDP;
 
 
 % __International investment position / BOP__
 
-    "Nominal import to GDP"
-    PmM_NGDP = PmdMd_NGDP + PmzMz_NGDP;
-
-    "Nominal export to GDP"
-    PxX_NGDP = PqQ_NGDP + PzZ_NGDP;
-
-    "Remittances received by households to GDP"
-    TFwh_NGDP = omega*TFwhtm_NGDP + (1 - omega)*TFwopt_NGDP;
-    TFwh_NGDP = ss_TFwh_NGDP;
-    TFwhtm_NGDP = TFwopt_NGDP;
-
-    "Net investment position to GDP"
     NIP_NGDP = Bwf_NGDP - Bhw_NGDP - Bgw_NGDP;
 
     NIP_NGDP - NIP_NGDP{-1}/dNGDP = ...
@@ -77,7 +95,6 @@
         - INTgw_NGDP ...
         ... CA: Current transfers
         + TFwh_NGDP ...
-        - PIEw_NGDP ...
         ... CA: Trade balance
         + PxX_NGDP ...
         - PmM_NGDP ...
@@ -93,7 +110,7 @@
     CA_NGDP = NIP_NGDP - NIP_NGDP{-1}*dS/dNGDP;
 
 
-% __Nominal and real GDP__
+% __Nominal GDP__
 
     "Nominal GDP"
     % NGDP = (PcC_NGDP + PgG_NGDP + PiI_NGDP + PxX_NGDP - PmM_NGDP)*NGDP;
@@ -113,6 +130,8 @@
     dM = ...
         + movavg(PmdMd_NGDP/PmM_NGDP, -2) * Md/Md{-1} ...
         + movavg(PmzMz_NGDP/PmM_NGDP, -2) * Mz/Mz{-1} ...
+        + movavg(PmjMj_NGDP/PmM_NGDP, -2) * Mj/Mj{-1} ...
+        + movavg(PmqMq_NGDP/PmM_NGDP, -2) * Mq/Mq{-1} ...
     !! dM = ss_dA;
 
 
@@ -132,16 +151,14 @@
         - movavg(VAq_NGDP*NGDP/NGDPx, -2) * Q/Q{-1} ...
     !! dGDPx = ss_dA;
 
-    "Private consumption to GDP"
+
     PcC_NGDP = Pc*C / NGDP;
 
-    "Investment to GDP"
     PiI_NGDP = Pi*I / NGDP;
 
-    "Wage bill to GDP"
     WN_NGDP = WNd_NGDP + WNz_NGDP + WNg_NGDP;
 
-    "Nominal GDP excluding primary exports to nominal GDP"
+    "Nomial GDP excluding primary exports to nominal GDP ratio"
     NGDPx_NGDP * NGDP = NGDPx;
 
     VAd_NGDP = (Pc*C + PcGg_NGDP*NGDP + Pi*I - Pmd*Md) / NGDP;
@@ -151,6 +168,6 @@
     WNd_VAd = WNd_NGDP / VAd_NGDP;
 
     "Consumer real exchange rate"
-    RER = S * Pw_star / Pc;
+    RER = S*Pw_star / Pc;
 
 

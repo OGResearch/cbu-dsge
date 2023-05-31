@@ -26,14 +26,16 @@
     PgG
 
     "Value added tax rate" TRvat
-    "Labor income tax" TRlit
+    "Labor income tax rate" TRlit
+    "Energy sector tax rate" TRj
+    "Primary export sector tax rate" TRq
 
     "Government tax revenues to GDP Ratio" TAX_NGDP
     TAXq_NGDP
     TAXj_NGDP
     "Government revenues from value added tax" TAXvat_NGDP
-    "Government revenues from labor income tax" TAXlit_NGDP
-    "Government revenues from lump sum tax" TAXls_NGDP
+    "Government revenues for labor income tax" TAXlit_NGDP
+    TAXls_NGDP
 
     "Government transfers to GDP" TF_NGDP
     TFgh_NGDP
@@ -41,7 +43,7 @@
     TFghtm_NGDP
     TFgj_NGDP
 
-    % "Balancing net government transfers to GDP" TFother_NGDP
+    "Balancing net government transfers to GDP" TFother_NGDP
 
     DEF_NGDP
     PDEF_NGDP
@@ -73,6 +75,8 @@
     TRvat
     TRlit
     TRgd
+    TRj
+    TRq
 
     TF_NGDP
     TFfg_NGDP
@@ -84,7 +88,7 @@
     TFgh_NGDP
     TFgopt_NGDP
     TFghtm_NGDP
-    %TFother_NGDP
+    TFother_NGDP
     TFgj_NGDP
 
     DEF_NGDP
@@ -107,6 +111,8 @@
 
     ss_PiIq_NGDP
 
+    "Distribution of non-primary export profits to government" psi_zg
+    "Distribution of nonprimary export profits to foreign investors" psi_zw
     "Distribution of commodity processing industry profits to government" psi_jg
 
     "Smoothing of PIF balance" lambda_Bwf
@@ -116,7 +122,13 @@
     ss_WNg_NGDP
     ss_TRvat
     ss_TRlit
+    ss_TRj
+    ss_TRq
+
     ss_TFgh_NGDP
+    ss_TFghtm_TFh
+    ss_TFgj_NGDP
+    ss_TAXls_NGDP
     ss_TRgd
 
 
@@ -129,6 +141,8 @@
     lambda_Gg2
     lambda_Ng1
     lambda_Ng2
+    lambda_TAXls1
+    lambda_TAXls2
 
 
 !shocks
@@ -136,10 +150,13 @@
     "Shock to government reserve at the central bank" shk_Bg_NGDP_tar
     "Shock to government external debt" shk_Bgw
     "Shock to government reserve deposit" shk_BCBg
+    "Shock to government transfers for optimizing households" shk_TFgopt
     "Shock to government investment" shk_Ig
     "Shock to government wage bill to GDP" shk_WNg_NGDP
     "Shock to government consumption of goods" shk_Gg
     "Shock to government employment" shk_Ng
+    shk_TFghtm_NGDP
+    shk_TAXls
     "Shock to government PIF transfers to GDP" shk_TFfg_NGDP
 
 
@@ -239,8 +256,21 @@
     "Labor income tax rate"
     TRlit = ss_TRlit;
 
+    "Energy sector tax rate"
+    TRj = ss_TRj;
+
+    "Primary export sector tax rate"
+    TRq = ss_TRq;
+
     "Government tax revenues to GDP"
-    TAX_NGDP = TAXvat_NGDP + TAXlit_NGDP + TAXq_NGDP + TAXj_NGDP + TAXls_NGDP;
+    TAX_NGDP = ...
+        + TAXvat_NGDP ...
+        + TAXlit_NGDP ...
+        + TAXq_NGDP ...
+        + TAXj_NGDP ...
+        + TAXq_NGDP ...
+        + TAXls_NGDP ...
+    ;
 
     "Government tax revenues from value added tax to GDP"
     TAXvat_NGDP = TRvat/(1+TRvat) * (Pc*C/NGDP + PcGg_NGDP) ...
@@ -251,40 +281,43 @@
     !! TAXlit_NGDP = ss_TRlit * WN_NGDP;
 
     "Government tax revenues from primary export sectors"
-    TAXq_NGDP = (1 - psi_qw) * PIEq_NGDP;
+    TAXq_NGDP = TRq * PqQ_NGDP;
 
     "Government tax revenues from energy sector"
-    TAXj_NGDP = (1 - psi_jw) * PIEj_NGDP;
-    % TAXj_NGDP = TRj * Pj0 * J / NGDP;
+    TAXj_NGDP = TRj * Pj0J_NGDP;
 
     "Government tax revenues from lump-sum taxes"
-    TAXls_NGDP = &TAXls_NGDP ...
-    !! Bg_NGDP = ss_Bg_NGDP;
+    TAXls_NGDP = ...
+        + TAXls_NGDP{-1} ...
+        - lambda_TAXls1*(Bg_NGDP_tar{+1} - Bg_NGDP{+1}) ...
+        + lambda_TAXls2*(ss_TAXls_NGDP - TAXls_NGDP) ...
+        + shk_TAXls ...
+    !! TAXls_NGDP = ss_TAXls_NGDP;
+
 
     "Government transfers paid or received"
     TF_NGDP = ...
         + TFgh_NGDP ...
         + TFgd_NGDP ...
-        ... + TFother_NGDP ...
+        + TFother_NGDP ...
         - TFfg_NGDP ...
     ;
 
     "Government subsidies to local supply side to GDP"
     TFgd_NGDP = TRgd*Pi*Id / NGDP;
-
     TRgd = ss_TRgd;
 
     "Governments transfers to households to GDP"
+    TFgh_NGDP = TFgopt_NGDP + TFghtm_NGDP;
     TFgh_NGDP = ss_TFgh_NGDP;
-    TFgh_NGDP = omega*TFghtm_NGDP + (1-omega)*TFgopt_NGDP;
-    TFghtm_NGDP = TFgopt_NGDP;
+    TFghtm_NGDP = omega * TFgh_NGDP;
 
     "Government subsidies of energy to GDP"
-    TFgj_NGDP = (Pj0 - Pj) * J / NGDP;
+    TFgj_NGDP = ss_TFgj_NGDP;
 
     "Balancing net government transfers to GDP"
-    %TFother_NGDP = &TFother_NGDP ...
-    %!! Bg_NGDP = ss_Bg_NGDP;
+    TFother_NGDP = &TFother_NGDP ...
+    !! Bg_NGDP = ss_Bg_NGDP;
 
     "Total government deficit"
     DEF_NGDP = ...

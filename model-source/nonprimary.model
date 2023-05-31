@@ -23,7 +23,7 @@
     "Auxiliary term for total export technology" AAz
     "Relative price of imported inputs in exports to local imports" Pmz_Pmd
     "Relative price of nonprimary exports to imported inputs" Pz_Pmz
-    "Profits including capital income in nonprimary exports before taxes" PIEz_NGDP
+    "Profits including capital income in nonprimary exports" PIEz_NGDP
     "Value added created in nonprimary exports to GDP ratio" VAz_NGDP
     "Nominal cost of investment in nonprimary exports to GDP ratio" PiIz_NGDP
     "Wage bill in nonprimary exports to GDP ratio" WNz_NGDP
@@ -39,7 +39,6 @@
     "Capital share of nonprimary exports" gamma_Kz
     "Import share of nonprimary exports" gamma_Mz
     "Labor share of nonprimary exports" gamma_Nz
-    "Overhead labour elasticity on capital"      gamma_N0z
     "Direct import intesity of investment in nonprimary exports" gamma_Iz
 
     %"S/S overhead labor to capital ratio" ss_N0z_Kz
@@ -166,7 +165,7 @@
     PzZ_NGDP = Pz*Z / NGDP;
 
     % Nonprimary exporters profits including capital income
-    WNz_NGDP = (W*N0z + W*NNz) / NGDP;
+    WNz_NGDP = W*Nz / NGDP;
     PIEz_NGDP*NGDP = Pz*Z - WNz_NGDP*NGDP - Pmz*Mz - PiIz_NGDP*NGDP;
     VAz_NGDP = (Pz*Z - Pmz*Mz) / NGDP;
 
