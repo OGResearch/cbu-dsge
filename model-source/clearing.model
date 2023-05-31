@@ -60,11 +60,8 @@
     "Total demand for investment goods"
     I = Id + Ig + Ih + Iz;
 
-    "Local production breakdown"
+    "Total demand for local production"
     D = C + Gg + I;
-
-    "Remittances from abroad to households"
-    TFwh_NGDP = ss_TFwh_NGDP;
 
 
 % __International investment position / BOP__
@@ -74,6 +71,9 @@
 
     "Nominal export to GDP"
     PxX_NGDP = PqQ_NGDP + PzZ_NGDP;
+
+    "Remittances from abroad to households"
+    TFwh_NGDP = ss_TFwh_NGDP;
 
     "Net investment position to GDP"
     NIP_NGDP = Bwf_NGDP - Bhw_NGDP - Bgw_NGDP;
@@ -142,15 +142,16 @@
         - movavg(VAq_NGDP*NGDP/NGDPx, -2) * Q/Q{-1} ...
     !! dGDPx = ss_dA;
 
-
+    "Private consumption to GDP"
     PcC_NGDP = Pc*C / NGDP;
 
+    "Investment to GDP"
     PiI_NGDP = Pi*I / NGDP;
 
     "Wage bill to GDP"
     WN_NGDP = WNd_NGDP + WNz_NGDP + WNg_NGDP;
 
-    "Nomial GDP excluding primary exports to nominal GDP"
+    "Nominal GDP excluding primary exports to nominal GDP"
     NGDPx_NGDP * NGDP = NGDPx;
 
     VAd_NGDP = (Pc*C + PcGg_NGDP*NGDP + Pi*I - Pmd*Md) / NGDP;
@@ -160,6 +161,6 @@
     WNd_VAd = WNd_NGDP / VAd_NGDP;
 
     "Consumer real exchange rate"
-    RER = S*Pw_star / Pc;
+    RER = S * Pw_star / Pc;
 
 
