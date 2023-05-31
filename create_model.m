@@ -196,7 +196,7 @@ m.kappa_dS = 0;1;
 
 % Government debt
 m.ss_Bg_NGDP = 0.40;
-m.ss_Bgw_Bg = 0.85;
+m.ss_Bgh_Bg = 0.107;
 
 % Government transfers to households
 m.ss_TFgh_NGDP = 0.05;
@@ -352,6 +352,9 @@ m = solve(m);
 disp("==> Writing model to mat file")
 save mat/create_model.mat m
 
+
+%% Calibration table with key ratios and rates
+
 list = [
     "PcC_NGDP"
     "PiI_NGDP"
@@ -362,10 +365,14 @@ list = [
     "WN_NGDP"
     "Rg"
     "Rh"
+    "Rg_star"
+    "Rh_star"
     "NIP_NGDP"
     "INTw_NGDP"
     "CA_NGDP"
     "TB_NGDP"
+    "Bg_NGDP"
+    "Bgh_Bg"
 ];
 
 calibTable = steadyTable(list, :);
