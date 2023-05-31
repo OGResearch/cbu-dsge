@@ -17,7 +17,7 @@
     "Auxiliary Variable for Consumption to Net Worth Ratio" Copt_Vh_nu0
     "Disposable Labor Income of Optimizing Households" DLIopt
     % "Total disposable labor income to GDP" PcDLI_NGDP
-    "Household real net worth" Vh
+    "Real net worth of OPT households" Vopt
     "Disposable labor income of hand-to-mouth households" DLIhtm
     "Hours worked in local sectors" Nd
     "Wage bill in local sectors to GDP" WNd_NGDP
@@ -195,22 +195,22 @@
     "Intertemporal choice by optimizing households"
     LAMBDA = ...
         + beta*LAMBDA{+1}*Rh ...
-        + nu*(Copt/Vh - nu0)/(Pc*Copt);
+        + nu*(Copt/Vopt - nu0)/(Pc*Copt);
 
     "Demand for consumption by optimizing households"
     LAMBDA*Pc*(Copt - chi_dli*DLIopt - chi_c*ss_dA*Copt{-1}) = 1;
 
     "Net worth of optimizing households"
-    Pc*Vh = Pkd*(Kd + Kh) + (Bgh_NGDP - Bhw_NGDP)*NGDP;
+    Pc*Vopt = (Pkd*(Kd + Kh) + (Bgh_NGDP - Bhw_NGDP)*NGDP);%/(1 - omega);
 
     "Real current income of optimizing households"
     Pc*DLIopt = W*Nopt*(1 - TRlit) + TFgopt_NGDP*NGDP;
 
     "Calibration of net worth utility component"
-    Copt_Vh_nu0 = Copt/Vh - nu0;
+    Copt_Vh_nu0 = Copt/Vopt - nu0;
 
 
-    % Supply of capital to nonprimary export sector
+    % Supply of capital to local sector
 
     "Price of production capital for local sectors"
     Pkd = Pi*(1 + $AdjId0$ - beta*phi_Y*$AdjId1$ - iota_tf*TRgd) ...
@@ -221,19 +221,21 @@
         + beta*LAMBDA{+1}*[ ...
             Pkd{+1}*(1-delta_Kd) + Prkd{+1} + Pkd{+1}*(1-phi_Y)*&PiId_PkdKd*ss_dA*$AdjId1$ ...
         ] ...
-        + nu*(Copt/Vh - nu0)*Pkd/(Pc*Copt) ...
+        + nu*(Copt/Vopt - nu0)*Pkd/(Pc*Copt) ...
     !! LAMBDA*Pkd = ...
         + beta*LAMBDA{+1}*[ ...
             Pkd{+1}*(1-delta_Kd) + Prkd{+1} ...
         ] ...
-        + nu*(Copt/Vh - nu0)*Pkd/(Pc*Copt) ...
+        + nu*(Copt/Vopt - nu0)*Pkd/(Pc*Copt) ...
     ;
 
     "Stock-flow capital-investment for local sectors"
     Kd = (1 - delta_Kd) * Kd{-1} + Id;
 
 
+
     % Supply of capital to nonprimary export sector
+    % To be endogenized
 
     "Stock-flow capital in nonprimary export sector"
     Kz = (1 - delta_Kz) * Kz{-1} + Iz;
@@ -241,19 +243,20 @@
     "Replacement cost of capital in nonprimary export sector"
     Pkz = Pi;
 
+
 % __Hand-to-mouth households__
 
     "Real current income of hand-to-mouth households"
-    Pc*DLIhtm = W*Nhtm*(1 - TRlit) + TFghtm_NGDP*NGDP - omega*TFwh_NGDP*NGDP;
+    Pc*DLIhtm = W*Nhtm*(1 - TRlit) + TFghtm_NGDP*NGDP + TFwhtm_NGDP*NGDP;
 
     "Demand for consumption by optimizing households"
-    Chtm = DLIhtm;
+    Chtm = Copt;%DLIhtm;
 
 
 % __Total private consumption__
 
     "Total private consumption"
-    C = Copt + Chtm;
+    C = omega*Chtm + (1 - omega)*Copt;
 
 
 % __Residential and overhead investment__
@@ -431,7 +434,7 @@
     PiId_NGDP*NGDP = Pi*Id;
     PiId_PkdKd = Pi*Id / (Pkd*Kd);
     DLIopt_Copt = DLIopt / Copt;
-    PcVh_NGDP*NGDP = Pc*Vh;
+    PcVh_NGDP*NGDP = Pc*Vopt;
     PkdKd_NGDP*NGDP = Pkd*Kd;
     PkzKz_NGDP = Pkz*Kz / NGDP;
     PmdMd_NGDP*NGDP = Pmd*Md;

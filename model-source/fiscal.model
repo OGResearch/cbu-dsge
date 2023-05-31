@@ -32,8 +32,8 @@
     TAXq_NGDP
     TAXj_NGDP
     "Government revenues from value added tax" TAXvat_NGDP
-    "Government revenues for labor income tax" TAXlit_NGDP
-    TAXls_NGDP
+    "Government revenues from labor income tax" TAXlit_NGDP
+    "Government revenues from lump sum tax" TAXls_NGDP
 
     "Government transfers to GDP" TF_NGDP
     TFgh_NGDP
@@ -41,7 +41,7 @@
     TFghtm_NGDP
     TFgj_NGDP
 
-    "Balancing net government transfers to GDP" TFother_NGDP
+    % "Balancing net government transfers to GDP" TFother_NGDP
 
     DEF_NGDP
     PDEF_NGDP
@@ -84,7 +84,7 @@
     TFgh_NGDP
     TFgopt_NGDP
     TFghtm_NGDP
-    TFother_NGDP
+    %TFother_NGDP
     TFgj_NGDP
 
     DEF_NGDP
@@ -117,7 +117,6 @@
     ss_TRvat
     ss_TRlit
     ss_TFgh_NGDP
-    ss_TAXls_NGDP
     ss_TRgd
 
 
@@ -130,8 +129,6 @@
     lambda_Gg2
     lambda_Ng1
     lambda_Ng2
-    lambda_TAXls1
-    lambda_TAXls2
 
 
 !shocks
@@ -143,7 +140,6 @@
     "Shock to government wage bill to GDP" shk_WNg_NGDP
     "Shock to government consumption of goods" shk_Gg
     "Shock to government employment" shk_Ng
-    shk_TAXls
     "Shock to government PIF transfers to GDP" shk_TFfg_NGDP
 
 
@@ -261,21 +257,15 @@
     TAXj_NGDP = (1 - psi_jw) * PIEj_NGDP;
     % TAXj_NGDP = TRj * Pj0 * J / NGDP;
 
-
     "Government tax revenues from lump-sum taxes"
-    TAXls_NGDP = ...
-        + TAXls_NGDP{-1} ...
-        - lambda_TAXls1*(Bg_NGDP_tar{+1} - Bg_NGDP{+1}) ...
-        + lambda_TAXls2*(ss_TAXls_NGDP - TAXls_NGDP) ...
-        + shk_TAXls ...
-    !! TAXls_NGDP = ss_TAXls_NGDP;
-
+    TAXls_NGDP = &TAXls_NGDP ...
+    !! Bg_NGDP = ss_Bg_NGDP;
 
     "Government transfers paid or received"
     TF_NGDP = ...
         + TFgh_NGDP ...
         + TFgd_NGDP ...
-        + TFother_NGDP ...
+        ... + TFother_NGDP ...
         - TFfg_NGDP ...
     ;
 
@@ -293,8 +283,8 @@
     TFgj_NGDP = (Pj0 - Pj) * J / NGDP;
 
     "Balancing net government transfers to GDP"
-    TFother_NGDP = &TFother_NGDP ...
-    !! Bg_NGDP = ss_Bg_NGDP;
+    %TFother_NGDP = &TFother_NGDP ...
+    %!! Bg_NGDP = ss_Bg_NGDP;
 
     "Total government deficit"
     DEF_NGDP = ...

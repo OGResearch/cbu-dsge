@@ -1,3 +1,4 @@
+
 %% Read model with primary and non-primary exports
 
 
@@ -57,7 +58,7 @@ m.rho_Pw_star = 0.3;
 
 % Steady-state parameters
 
-m.beta = 0.95; 
+m.beta = 0.95;
 m.delta_Kd = 0.20;
 m.delta_Kh = 0.20;
 
@@ -75,15 +76,17 @@ m.chi_dli = 0;
 m.chi_c = 0.5;
 m.nu = 0;
 
-m.ss_TFwh_NGDP = 0.12; % to be reverse engineered
+
+
+m.ss_TFwh_NGDP = 0.12;
 
 % Markups
 m.mu_CI = 1.25; % to be reverse-engineered 
 m.mu_D2 = 1; % to be reverse-engineered 
 
 % Local production
-m.gamma_Md = 0.3792; 0.30; % to be reverse-engineered 
-m.gamma_Nd = 0.37; % to be reverse-engineered 
+m.gamma_Md = 0.45; 0.3792; 0.30; % to be reverse-engineered 
+m.gamma_Nd = 0.45; 0.37; % to be reverse-engineered 
 %m.ss_N0d = 0.65; % to be reverse-engineered 
 m.ss_N0d_Nd = 0.30;
 
@@ -93,12 +96,12 @@ m.zeta_Rg1 = 0.10; 0.015;
 m.zeta_Rh0 = 0; % to be reverse-engineered 
 m.zeta_Rh1 = 0.1;0.2;
 
-m.zeta_S = 0.7;
+m.zeta_S = 0.5;
 
 % Directly calibrated ratios and rates
 
 % Residential investment
-m.ss_Kh_Kd = 0.30; % to be reverse-engineered 
+m.ss_Kh_Kd = 0.10; 0.30; % to be reverse-engineered 
 m.lambda_Ih1 = 0.05;
 
 % Steady state for exogenous variables
@@ -126,10 +129,10 @@ m.xi_NNd = 0;
 
 % __Primary export sector (Q)__
 
-% Steady State for Exogenous/External/Policy Variables
+% Steady state for exogenous/external/policy variables
 m.ss_Aq = 1;
 m.ss_Pq_Pw = 1;
-m.gamma_Mq = 0.25; % if non-primary exporters disabled, use m.gamma_Mq = 0.29 in read_model
+m.gamma_Mq = 0.30; 0.25;
 m.gamma_J = 0.07;
 
 % Autoregression Parameters
@@ -150,7 +153,7 @@ m.mu_J = 1;
 % Non-Primary Exports
 m.mu_Z = 1; % to be reverse-engineered 
 m.gamma_Kz = 0.2;
-m.gamma_Mz = 0.40;
+m.gamma_Mz = 0.50;0.40;
 m.gamma_Nz = 0.45;
 m.gamma_N0z = 0.4;
 m.delta_Kz = 0.20;
@@ -178,8 +181,8 @@ m.lambda_Z_ref = 0.7;
 m.xi_NNz = 0;
 m.xi_Z = 0.3;
 
-m.psi_jw = 0.25;
-m.psi_qw = 0.25;
+m.psi_jw = 0;
+m.psi_qw = 0;
 
 
 % __Monetary policy__
@@ -201,7 +204,7 @@ m.ss_Bgw_Bg = 0.85;
 m.ss_TFgh_NGDP = 0.05;
 
 % Government consumption
-m.ss_PcG_NGDP = 0.265;
+m.ss_PcG_NGDP = 0.26;
 m.ss_WNg_NGDP = 0.10;
 
 m.omega = 0.30;
@@ -223,8 +226,6 @@ m.ss_TRlit = 0.03;
 
 m.ss_TRgd = 0;
 
-m.ss_TAXls_NGDP = 0; %%%0.05; % to be reverse-engineered
-
 % Dynamic parameters
 
 m.lambda_Gg1 = 0.5;%0.1;
@@ -232,9 +233,6 @@ m.lambda_Gg2 = 0.5;
 
 m.lambda_Ng1 = 0.2;%0.1;
 m.lambda_Ng2 = 0.5; 
-
-m.lambda_TAXls1 = 0.5;
-m.lambda_TAXls2 = 0.5;
 
 m.lambda_Ig1 = 1.5;%0.5; 
 
@@ -269,10 +267,16 @@ m = steady( ...
 checkSteady(m);
 m = solve(m)
 
+save mat/create_model.mat m
 return
 
 
-%% Reverse engineer parameters for calibrating steady-state ratios
+%% Directly calibrate Uzbeksitan steady state
+
+m.ss_TFwh_NGDP = 0.12;
+
+
+%% Reverse engineer Uzbekistan steady state
 
 swap = string.empty(0, 2);
 

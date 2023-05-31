@@ -60,9 +60,9 @@
     "Nominal export to GDP"
     PxX_NGDP = PqQ_NGDP + PzZ_NGDP;
 
-    "Remittances from abroad to households"
-    TFwh_NGDP = ss_TFwh_NGDP;
+    "Remittances received by households to GDP"
     TFwh_NGDP = omega*TFwhtm_NGDP + (1 - omega)*TFwopt_NGDP;
+    TFwh_NGDP = ss_TFwh_NGDP;
     TFwhtm_NGDP = TFwopt_NGDP;
 
     "Net investment position to GDP"
