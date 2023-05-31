@@ -8,7 +8,6 @@
     "Flexible benchmark wage of OPT households" Wopt_flex
     "Average wage of OPT households" Wopt
     "Labor supplied by OPT households to all sectors" Nopt
-    "Labor income of OPT households to GDP" WNopt_NGDP
     "Flexible benchmark wage of HTM households" Whtm_flex
     "Average wage rate of htm households" Whtm
     "Labor supplied by HTM households" Nhtm
@@ -35,7 +34,6 @@
 
 !log-variables !all-but
 
-    WNopt_NGDP
     WNhtm_NGDP
     Whtm_Wopt
     Ng_N
@@ -54,10 +52,6 @@
         + rho_Wopt * log(ss_dA*Wopt{-1}/Pc{-1}) ...
         + (1-rho_Wopt) * log(Wopt_flex/Pc) ...
     !! Wopt = Wopt_flex;
-
-    "Wage bill of OPT households to GDP"
-    WNopt_NGDP = Wopt*(1 - TRlit) * Nopt / NGDP ...
-    !! WNopt_NGDP = Wopt*(1 - ss_TRlit) * Nopt / NGDP;
 
     "Flexible benchmark wage of HTM households"
     Whtm_flex = ss_Whtm_Wopt * Wopt_flex;

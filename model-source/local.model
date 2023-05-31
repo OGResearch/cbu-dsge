@@ -204,7 +204,7 @@
     Pc*Vh = Pkd*(Kd + Kh) + (Bgh_NGDP - Bhw_NGDP)*NGDP;
 
     "Real current income of optimizing households"
-    Pc*DLIopt = (WNopt_NGDP + TFgopt_NGDP)*NGDP;
+    Pc*DLIopt = W*Nopt*(1 - TRlit) + TFgopt_NGDP*NGDP;
 
     "Calibration of net worth utility component"
     Copt_Vh_nu0 = Copt/Vh - nu0;
