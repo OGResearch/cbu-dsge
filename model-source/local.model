@@ -156,7 +156,7 @@
 
     % Transitory Parameters
     "Habit in consumption" chi_c
-    "Capital versus investment adjustment cost" phi_D
+    "Capital versus investment adjustment cost" phi_Id
     "Intensity of capital or investment adjustment cost" xi_Id
     "Consumer Price Adjustment Cost" xi_Pc
     "Investment price adjustment cost" xi_Pi
@@ -172,9 +172,9 @@
     chi_DLI0 := (1-chi_dli*&DLIopt_Copt-chi_c);
 
     % Investment adjustment cost term in local production
-    xi_Id0 := ((1-phi_D)*log(ss_dA - (1-delta_Kd)) + phi_D*log(ss_dA));
-    AdjId0 := xi_Id*[ log(Id)-(1-phi_D)*log(Kd{-1})-phi_D*log(Id{-1}) - $xi_Id0$ ];
-    AdjId1 := xi_Id*[ log(Id{+1})-(1-phi_D)*log(Kd)-phi_D*log(Id) - $xi_Id0$ ];
+    xi_Id0 := ((1-phi_Id)*log(ss_dA - (1-delta_Kd)) + phi_Id*log(ss_dA));
+    AdjId0 := xi_Id*[ log(Id)-(1-phi_Id)*log(Kd{-1})-phi_Id*log(Id{-1}) - $xi_Id0$ ];
+    AdjId1 := xi_Id*[ log(Id{+1})-(1-phi_Id)*log(Kd)-phi_Id*log(Id) - $xi_Id0$ ];
 
     % Consumer price adjustment cost term
     AdjPc0 := xi_Pc*[ log(dPcx) - log(dPcx{-1}) ];
@@ -214,13 +214,13 @@
     % Supply of capital to nonprimary export sector
 
     "Price of production capital for local sectors"
-    Pkd = Pi*(1 + $AdjId0$ - beta*phi_D*$AdjId1$ - iota_tf*TRgd) ...
+    Pkd = Pi*(1 + $AdjId0$ - beta*phi_Id*$AdjId1$ - iota_tf*TRgd) ...
     !! Pkd = Pi*(1 - iota_tf*TRgd);
 
     "Creation of production capital for local sectors"
     LAMBDA*Pkd = ...
         + beta*beta_Kd*LAMBDA{+1}*[ ...
-            Pkd{+1}*(1-delta_Kd) + Prkd{+1} + Pkd{+1}*(1-phi_D)*&PiId_PkdKd*ss_dA*$AdjId1$ ...
+            Pkd{+1}*(1-delta_Kd) + Prkd{+1} + Pkd{+1}*(1-phi_Id)*&PiId_PkdKd*ss_dA*$AdjId1$ ...
         ] ...
         + nu*(Copt/Vopt - nu0)*Pkd/(Pc*Copt) ...
     !! LAMBDA*Pkd = ...
