@@ -1,0 +1,266 @@
+
+\usepackage{ogrtools}
+
+\renewcommand{\cmd}[1]{{{\color{ogrblack}\small\ttfamily#1}}}
+
+\usepackage{etoolbox}
+\usepackage{polyglossia,xltxtra}
+\usepackage{array}
+\usepackage{picture}
+
+\setmainfont[Ligatures=TeX]{Open Sans}
+\setsansfont[Ligatures=TeX]{Open Sans}
+
+% \setmonofont[Ligatures=TeX]{InputMono Light}
+\usepackage{unicode-math}
+\setmathfont{Cambria Math}
+\unimathsetup{math-style=literal}
+
+% \usepackage{arevmath} %alternative for linux?
+ 
+\hypersetup{pdfstartview=Fit,pdfpagelayout=SinglePage}
+\usefonttheme{professionalfonts}
+
+\ProcessOptionsBeamer
+
+\setbeamercolor{structure}              {fg=ogrgreen!66!ogrlightgrey}
+\setbeamercolor{normal text}            {fg=ogrgrey}
+
+\setbeamercolor{title}                  {fg=ogrgrey}
+\setbeamercolor{institute}              {fg=ogrgrey}
+\setbeamercolor{author}                 {fg=ogrgrey}
+\setbeamercolor{date}                   {fg=ogrgrey}
+
+\setbeamercolor{frametitle}             {fg=ogrblack}
+
+\setbeamerfont{title}{size=\huge}
+\setbeamerfont{institute}{size=\large}
+\setbeamerfont{author}{size=\large}
+\setbeamerfont{date}{size=\large}
+
+\setbeamerfont{frametitle}{size=\Large, series=\bfseries} % Large
+\setbeamerfont{page number in head/foot}{size=\fontsize{5}{5}\selectfont}
+
+\setbeamertemplate{navigation symbols}{}
+
+\setbeamersize{text margin left=6mm}
+\setbeamersize{text margin right=6mm}
+
+\newlength{\templen}
+\setlength{\templen}{\paperwidth-6mm}
+
+\setbeamertemplate{headline}{
+    \vspace{3mm}
+    \hspace{0pt plus 1filll}
+    \usebeamerfont{page number in head/foot}\insertframenumber/\inserttotalframenumber \hspace{5mm}
+  }
+
+\newboolean{framecont}
+\setboolean{framecont}{false}
+
+\newcounter{framecont}
+\setcounter{framecont}{0}
+
+\newcommand{\startframecont}{\setboolean{framecont}{true}\setcounter{framecont}{0}}
+\newcommand{\stopframecont}{\setboolean{framecont}{false}}
+
+\newcommand{\printframecont}{%
+  \ifthenelse{\boolean{framecont}}{\Roman{framecont}}{}
+}
+
+
+\setbeamertemplate{frametitle}{\nointerlineskip\stepcounter{framecont}
+  \begin{beamercolorbox}[ht=1.95ex,dp=0.65ex,wd=\paperwidth]{frametitle}
+    \hspace{10mm}\usebeamerfont{frametitle}\insertframetitle\ \printframecont\hspace{5mm}
+  \end{beamercolorbox}
+}
+
+\AtBeginSection{
+  \slidebck[12]
+  \begin{frame}[t]{}
+    \vskip60mm\LARGE\MakeUppercase{\bf \insertsection}
+  \end{frame}
+  \slidebck
+}
+
+\AtBeginSubsection{
+  \slidebck[12]
+  \begin{frame}[t]{}
+    \vskip50mm\large\MakeUppercase{\bf \insertsection}\par%
+    \vskip2mm\LARGE{\it \insertsubsection}
+  \end{frame}
+  \slidebck
+}
+
+\newcommand{\titlebck}{
+  \setbeamertemplate{background}{%
+    \setlength{\unitlength}{1mm}%
+    \begin{picture}(\paperwidth,\paperheight)
+      \put(\paperwidth-30mm,\paperheight){\makebox(-15,0)[t]{\rotatebox{90}{\resizebox{!}{75mm}{\includegraphics{../ogr_sty_simple/og_background}}}}}
+      \put(\paperwidth-57mm,6){\makebox(57,0)[b]{\resizebox{36mm}{!}{\includegraphics{../ogr_sty_simple/ogresearch}}}}
+      \put(\paperwidth-100mm,5){\makebox(57,0)[b]{\resizebox{36mm}{!}{\includegraphics{../ogr_sty_simple/SNB.pdf}}}}
+    \end{picture}%
+  }
+}
+
+\newcommand{\slidebck}[1][12.1]{
+  \setbeamercolor{background canvas}{bg=white}
+  \setbeamertemplate{background}{%
+    \setlength{\unitlength}{1mm}%
+    \begin{picture}(\paperwidth,\paperheight)
+      \put(\paperwidth-30mm,\paperheight-#1mm){\makebox(30,0)[t]{\rotatebox{90}{\resizebox{!}{30mm}{\includegraphics{../ogr_sty_simple/og_background}}}}}
+      \put(\paperwidth-28mm,2){\makebox(28,0)[b]{\resizebox{24mm}{!}{\includegraphics{../ogr_sty_simple/ogresearch}}}}
+      \put(\paperwidth-52mm,1.5){\makebox(28,0)[b]{\resizebox{18mm}{!}{\includegraphics{../ogr_sty_simple/SNB.pdf}}}}
+    \end{picture}%
+  }
+}
+
+\setbeamertemplate{title page}{%
+  \setlength{\unitlength}{1mm}%
+    \begin{picture}(\paperwidth-10mm,\paperheight) % 5 mm margin on both sides
+      \put((\paperwidth-10mm)/2,62){\makebox(0,0){\usebeamerfont{title}\usebeamercolor[fg]{title}\parbox{118mm}{\inserttitle}}}
+      \put((\paperwidth-10mm)/2,32){\makebox(0,0){\parbox{\paperwidth-10mm}{%
+        {\usebeamerfont{institute}\usebeamercolor[fg]{institute}\hspace{0pt}\insertinstitute}\\[3mm]
+        {\usebeamerfont{author}\usebeamercolor[fg]{author}\hspace{0pt}\insertauthor}\\[3mm]
+        {\usebeamerfont{date}\usebeamercolor[fg]{date}\hspace{0pt}\insertdate}
+      }}}
+    \end{picture}%
+}
+
+\AtEndDocument{
+  \slidebck[4.6]
+  \begin{frame}
+    \begin{minipage}[t][0.75\textheight][b]{\textwidth}
+      {\bfseries Disclaimer}\par
+      \vspace{0ex}
+      \tiny\flushleft
+      This document and the information contained within are intended only for the person or entity to whom they are addressed and may contain confidential,
+      proprietary and/or privileged information. Any unauthorized disclosure or distribution to persons or entities other than the intended recipient is prohibited.
+      The information and opinions contained herein do not necessarily reflect OGResearch’s views and OGResearch does not warrant the correctness thereof.
+      This document is for informational purposes only, it is not intended as a solicitation or offer to enter into any transaction or business relationship,
+      and should not be taken as advice or a recommendation to buy or sell any financial instruments or securities. OGResearch does not accept liability for any damage
+      caused by reliance on the contents herein.
+    \end{minipage}
+  \end{frame}
+}
+
+
+\renewcommand{\maketitle}{\titlebck\begin{frame}[plain]\titlepage\end{frame}\slidebck}
+
+\setbeamertemplate{itemize item}{$\bullet$}
+\setbeamertemplate{itemize subitem}{$-$}
+\setbeamertemplate{itemize subsubitem}{\raisebox{0.25ex}{\tikz\node[rectangle,fill,inner sep=0pt,minimum size=0.5ex]{};}}
+
+\newlength\listlen
+\setlength{\listlen}{1.1em}
+
+\setlength\leftmargini      {\listlen}
+\setlength\leftmarginii     {\listlen}
+\setlength\leftmarginiii    {\listlen}
+\setlength\labelsep         {0em}
+
+\setlength\labelwidth{\leftmargini}
+\addtolength\labelwidth{-\labelsep}
+
+\newlength{\vertsepi}
+\setlength{\vertsepi}{6pt}
+\newlength{\vertsepii}
+\setlength{\vertsepii}{4pt}
+\newlength{\vertsepiii}
+\setlength{\vertsepiii}{3pt}
+
+\def\@listi{\leftmargin\leftmargini
+            \topsep\vertsepi
+            \parsep      0\p@
+            \itemsep\vertsepi}
+\let\@listI\@listi
+\def\@listii{\leftmargin\leftmarginii
+            \topsep\vertsepii
+            \parsep     0\p@
+            \itemsep\vertsepii}
+\def\@listiii{\leftmargin\leftmarginiii
+            \topsep\vertsepiii
+            \parsep     0\p@
+            \itemsep\vertsepiii}
+
+% (Patching commands with etoolbox, and with help from regexpatch.pdf)
+\newcommand{\alignlabelleft}[1]{#1\hfil}
+
+\patchcmd{\beamer@enum@}{\hss\llap}{\alignlabelleft}{}{}
+
+\expandafter\patchcmd\csname\string\itemize\endcsname{\hss\llap}{\alignlabelleft}{}{}
+
+\patchcmd{\beamer@enum@}{\def\makelabel}{%
+    \labelwidth\listlen\leftmargin\listlen\labelsep0pt\def\makelabel}{}{}
+
+\expandafter\patchcmd\csname\string\itemize\endcsname{\def\makelabel}{%
+    \labelwidth\listlen\leftmargin\listlen\labelsep0pt\def\makelabel}{}{}
+
+\patchcmd{\@@description}{\advance\beamer@descdefault}{\labelsep0.5em\advance\beamer@descdefault}{}{}
+
+% PGF setup
+
+\renewcommand{\figurefontsize}{\fontsize{5}{5}\selectfont}
+\renewcommand{\notesize}{\fontsize{4}{4}\selectfont}
+
+\pgfplotsset{
+    width=\textwidth,
+    height=0.75\textheight,
+    every axis/.append style={line width=1pt},
+    every axis legend/.append style={cells={line width=1.5pt}},
+    axis line style={line width=0.5pt,color=ogrgrey},
+    every axis title/.append style={font=\figurefontsize,inner sep=0pt},
+    every axis label/.append style={font=\figurefontsize},
+    tick style={line width=0.25pt,color=ogrgrey},
+    major tick length=2pt,
+    every tick label/.append style={font=\figurefontsize},
+}
+
+\pgfplotsset{2-by-1/.style={
+    width=\textwidth,
+    height=0.4\textheight,
+    every axis/.append style={line width=0.75pt},
+    every axis legend/.append style={cells={line width=0.75pt}},
+    axis line style={line width=0.5pt,color=ogrgrey},
+    every axis title/.append style={font=\figurefontsize,inner sep=0pt},
+    every axis label/.append style={font=\figurefontsize},
+    tick style={line width=0.25pt,color=ogrgrey},
+    major tick length=2pt,
+    every tick label/.append style={font=\figurefontsize},
+    legend style={at={(0.5,-0.15)}}
+}}
+
+\pgfplotsset{1-by-2/.style={
+    width=0.55\textwidth,
+    height=0.75\textheight,
+    every axis/.append style={line width=0.75pt},
+    every axis legend/.append style={cells={line width=0.75pt}},
+    axis line style={line width=0.5pt,color=ogrgrey},
+    every axis title/.append style={font=\figurefontsize,inner sep=0pt},
+    every axis label/.append style={font=\figurefontsize},
+    tick style={line width=0.25pt,color=ogrgrey},
+    major tick length=2pt,
+    every tick label/.append style={font=\figurefontsize},
+}}
+
+\pgfplotsset{2-by-2/.style={
+    width=0.55\textwidth,
+    height=0.4\textheight,
+    every axis/.append style={line width=0.5pt},
+    every axis legend/.append style={cells={line width=0.5pt}},
+    axis line style={line width=0.35pt,color=ogrgrey},
+    every axis title/.append style={font=\figurefontsize,inner sep=0pt},
+    every axis label/.append style={font=\figurefontsize},
+    tick style={line width=0.25pt,color=ogrgrey},
+    major tick length=2pt,
+    every tick label/.append style={font=\figurefontsize},
+}}
+
+\pgfplotsset{every axis legend/.append style={
+  inner xsep=0.25em,
+  inner ysep=0.25ex,
+}}
+
+% Misc
+
+\renewcommand{\arraystretch}{1.5}

@@ -1,0 +1,126 @@
+\documentclass[14pt]{beamer}
+
+\usepackage{../ogr_sty_simple/ogrtools}
+\usepackage{../ogr_sty_simple/beamerthemeOGRsimple}
+
+\usetheme{OGRsimple}
+\usepackage{multicol} % two-column TOC
+    \setmainlanguage{english}
+
+\title{Uzbekistan}
+\institute{DSGE model for an open economy}
+\author{Hynek Hrebicek, Jaromir Benes}
+\date{May, 2023}
+
+\input{../TeXcommon/commands2}
+
+\usepackage{booktabs}
+\usepackage{xfrac}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{graphs}
+\usetikzlibrary{positioning}
+\usetikzlibrary{calc}
+
+\colorlet{linecolor}{ogr7!75}
+\colorlet{agentcolor}{ogr3!15} %
+\colorlet{goodcolor}{ogr7!1} %
+\colorlet{incomecolor}{ogr7!1} %
+\colorlet{explanationcolor}{ogr7!1}
+\colorlet{explanationlabelcolor}{ogr3!5}
+
+\tikzset{agent/.style={
+  draw,
+  linecolor,
+  fill=agentcolor,
+  text=ogrgrey,
+  align=center,
+  rounded corners=2pt,
+  minimum width=20mm,
+  minimum height=8mm,
+  font=\scriptsize,
+}}
+
+\tikzset{agent2/.style={
+  draw,
+  linecolor,
+  fill=agentcolor,
+  text=ogrgrey,
+  align=center,
+  rounded corners=2pt,
+  minimum width=0mm,
+  minimum height=0mm,
+  font=\scriptsize,
+}}
+
+\tikzset{flow/.style={
+  draw,
+  thin,
+  linecolor,
+  fill=goodcolor,
+  text=ogrgrey,
+  align=center,
+  rounded corners=2pt,
+  inner sep=2pt,
+  font=\tiny
+}}
+
+\tikzset{explanation/.style={
+  draw,
+  linecolor,
+  fill=explanationcolor,
+  text=ogrgrey,
+  align=center,
+  rounded corners=2pt,
+  inner sep=2pt
+}}
+
+\tikzset{explanation label/.style={
+  draw,
+  linecolor,
+  fill=explanationlabelcolor,
+  text=ogrgrey,
+  align=center,
+  rounded corners=2pt,
+  inner sep=3pt,
+  font=\small
+}}
+
+\tikzset{explanation line/.style={
+  linecolor,
+  thick,
+  -{Stealth[length=0mm 6,width=0mm 6]},
+}}
+
+\newcommand{\expl}[4]{%
+  \begin{tikzpicture}[baseline=(tmp0.base)]
+    \node[explanation] (tmp0) {#1};
+    \node[explanation label,overlay] at (#3:#4) {#2} edge[explanation line,overlay] (tmp0);
+  \end{tikzpicture}%
+}
+
+\newenvironment{xGlossary}[1]
+{   \renewcommand{\arraystretch}{1.2}
+    \scriptsize
+    \begin{center}
+    \begin{tabular}{cc|m{7.5cm}}\multicolumn{3}{c}{#1}\\ \hline \hline}
+{   \\ \hline \hline
+    \end{tabular} 
+    \end{center} }
+
+\begin{document}
+
+\maketitle
+
+% {\small
+% \begin{frame}
+%   \begin{multicols}{2}
+%     \tableofcontents[hideallsubsections]
+%   \end{multicols}
+% \end{frame}
+% }
+
+%
+\section{Households}
+  \input{./sections/Households}
+
+\end{document} 

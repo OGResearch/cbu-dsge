@@ -1,0 +1,290 @@
+\renewcommand{\cmd}[1]{\texttt{#1}}
+\newcommand{\sst}[1]{{#1}_{\hspace{-0.15em}s\hspace{-0.1em}s}}
+\newcommand{\gr}{\text{d}} % \smaller{d} has some conflict with tikz library
+\newcommand{\prel}[1]{\widetilde{#1}}
+
+
+\newcommand{\WR}{W\hspace{-0.175em}R}
+\newcommand{\Wg}{W\hspace{-0.1em}g}
+
+
+\newcommand{\PRRk}{P\hspace{-0.1em}R\hspace{-0.1em}R\hspace{-0.1em}k}
+\newcommand{\PRk}{P\hspace{-0.1em}R\hspace{-0.1em}k}
+\newcommand{\PRkd}{P\hspace{-0.1em}R\hspace{-0.1em}\hspace{-0.1em}k\hspace{-0.1em}d}
+\newcommand{\PRkz}{P\hspace{-0.1em}R\hspace{-0.1em}\hspace{-0.1em}k\hspace{-0.1em}z}
+
+\newcommand{\DLI}{D\hspace{-0.15em}L\hspace{-0.05em}I}
+
+
+% \newcommand{\RPRk}{R\hspace{-0.1em}P\hspace{-0.1em}R\hspace{-0.1em}k}
+
+% HH
+%\newcommand{\ls}{{\vphantom{lp}\text{ls}}}
+\newcommand{\g}{{\vphantom{lp}\text{G}}}
+\newcommand{\ii}{{\vphantom{lp}\text{I}}} % we need it to index parameters in ADJ common to Id and Iz
+% \newcommand{\y}{{\vphantom{lp}\text{Y}}}
+\newcommand{\h}{{\vphantom{lp}\text{H}}}
+% \newcommand{\TX}{T\hspace{-0.1em}X}
+% \newcommand{\cc}{{\vphantom{lp}\text{C}}}
+% \newcommand{\ky}{{\vphantom{lp}\text{KY}}}
+\newcommand{\cc}{{\vphantom{lp}\text{C}}}
+\newcommand{\y}{{\vphantom{lp}\text{Y}}}
+
+
+
+
+% Zoltan
+% \newcommand{\pdiff}[1]{\frac{\partial}{\partial #1}}
+\newcommand{\sstrat}[2]{\frac{\hspace{0.3em}\sst{#1}\hspace{0.3em}}{\sst{#2}}}
+\newcommand{\sstratg}[2]{\sst{\left(\sfrac{#1}{#2}\right)}}
+\newcommand{\rat}{\hspace{-0.1em}\_{\NGDP}}
+\newcommand{\ratpy}{\hspace{-0.2em}\_{P\hspace{-0.1em}Y}\hspace{-0.2em}}
+
+
+\newcommand{\st}{\text{\scriptsize subject to}\nonumber}
+\newcommand{\lagr}{\mathcal{L}}
+\newcommand{\llapp}[1]{\widetilde{#1}\vphantom{#1}}
+\newcommand{\pitar}{\pi^{\text{tar}}}
+\newcommand{\opt}{\text{opt}}
+\newcommand{\htm}{\text{htm}}
+\newcommand{\mix}{\text{mix}}
+\newcommand{\flex}{\text{flex}}
+
+\newcommand{\ls}{\text{ls}}
+\newcommand{\lit}{\text{lit}}
+\newcommand{\vat}{\text{vat}}
+\newcommand{\ept}{\text{ept}}
+
+% \newcommand{\RK}{R\hspace{-0.10e  m}K}
+% \newcommand{\WRs}{w\hspace{-0.1em}r}
+% \newcommand{\DR}{D\hspace{-0.15em}R}
+% \newcommand{\WH}{W\hspace{-0.15em}H}
+% \newcommand{\WK}{W\hspace{-0.15em}K}
+% \newcommand{\WF}{W\hspace{-0.15em}F}
+% \newcommand{\WO}{w\hspace{-0.125em}o}
+% \newcommand{\MPC}{M\hspace{-0.175em}P\hspace{-0.125em}C}
+% \newcommand{\RPs}{r\hspace{-0.1em}p}
+% \newcommand{\GY}{g\hspace{-0.075em}y}
+% \newcommand{\BY}{b\hspace{-0.075em}y}
+% \newcommand{\DY}{d\hspace{-0.075em}y}
+% %\newcommand{\PD}{p\hspace{-0.075em}d}
+% \newcommand{\PDY}{p\hspace{-0.05em}d\hspace{-0.1em}y}
+% \newcommand{\TY}{\tau\hspace{-0.05em}y}
+\newcommand{\HH}{h\hspace{-0.15em}h}
+
+\newcommand{\Yd}{Y\hspace{-0.20em}d}
+\newcommand{\Yz}{Y\hspace{-0.20em}z}
+\newcommand{\Yq}{Y\hspace{-0.20em}q}
+
+\newcommand{\Kd}{K\hspace{-0.15em}d}
+\newcommand{\Kz}{K\hspace{-0.15em}z}
+\newcommand{\Kh}{K\hspace{-0.15em}h}
+
+
+\newcommand{\Nd}{N\hspace{-0.1em}d}
+\newcommand{\Nz}{N\hspace{-0.1em}z}
+\newcommand{\Nq}{N\hspace{-0.1em}q}
+\newcommand{\Ng}{N\hspace{-0.1em}g}
+
+\newcommand{\Ad}{A\hspace{-0.1em}d_0}
+\newcommand{\Az}{A\hspace{-0.1em}z}
+\newcommand{\Aq}{A\hspace{-0.1em}q_0}
+\newcommand{\Atfwh}{A\hspace{-0.1em}t\hspace{-0.1em}f\hspace{-0.1em}w\hspace{-0.1em}h}
+
+
+%\newcommand{\AOZ}{\AO\hspace{-0.20em}_\text{Z}}
+%\newcommand{\AOQ}{\AO\hspace{-0.20em}_\text{Q}}
+
+
+\newcommand{\alphaD}{\alpha_\text{D}}
+\newcommand{\alphaZ}{\alpha_\text{Z}}
+\newcommand{\muD}{\mu_\text{D}}
+
+
+% \newcommand{\Mc}{M\hspace{-0.1em}c}
+% \newcommand{\Mi}{M\hspace{-0.1em}i}
+% \newcommand{\Mg}{M\hspace{-0.1em}g}
+\newcommand{\Mz}{M\hspace{-0.15em}z}
+\newcommand{\Mq}{M\hspace{-0.155em}q}
+\newcommand{\Md}{M\hspace{-0.15em}d}
+
+%\newcommand{\Qd}{Q\hspace{-0.15em}d}
+%\newcommand{\Qz}{Q\hspace{-0.15em}z}
+\newcommand{\Q}{Q} % Redefine as Q, as we won't use primary output for domestic production
+
+%\newcommand{\DC}{D^\text{c}}
+%\newcommand{\DI}{D^\text{i}}
+%\newcommand{\DG}{D^\text{g}}
+%\newcommand{\DX}{D^\text{z}}
+
+\newcommand{\Id}{I\hspace{-0.15em}d}
+\newcommand{\Iz}{I\hspace{-0.15em}z}
+\newcommand{\Ih}{I\hspace{-0.15em}h}
+\newcommand{\Ig}{I\hspace{-0.15em}g}
+\newcommand{\Iq}{I\hspace{-0.15em}q}
+
+
+\newcommand{\Pstar}{P\hspace{-0.15em}w^{\star}}
+\newcommand{\Pc}{P\hspace{-0.15em}c}
+\newcommand{\PcO}{P\hspace{-0.15em}c\hspace{-0.1em}0}
+% \newcommand{\Pii}{P\hspace{-0.1em}i}
+%\newcommand{\Px}{P\hspace{-0.15em}x}
+\newcommand{\Pz}{P\hspace{-0.15em}z}
+\newcommand{\Pii}{P\hspace{-0.15em}i}
+\newcommand{\Pq}{P\hspace{-0.15em}q}
+\newcommand{\Pm}{P\hspace{-0.15em}m}
+\newcommand{\Pd}{P\hspace{-0.15em}d}
+\newcommand{\Py}{P\hspace{-0.15em}y}
+\newcommand{\Pyz}{\Py\hspace{-0.15em}z}
+\newcommand{\Pyd}{\Py\hspace{-0.15em}d}
+
+
+\newcommand{\PIEd}{P\hspace{-0.10em}I\hspace{-0.10em}E\hspace{-0.15em}d}
+
+% \newcommand{\PqS}{P^\text{qs}}
+
+
+
+\newcommand{\Pkd}{P\hspace{-0.1em}k\hspace{-0.1em}d}
+\newcommand{\Pkz}{P\hspace{-0.1em}k\hspace{-0.1em}z}
+% \newcommand{\PK}{R\hspace{-0.1em}P^{K}}
+
+% \newcommand{\PRYX}{\widetilde{P\hspace{-0.10em}y}^{\text{z}}}
+% \newcommand{\PRYD}{\widetilde{P\hspace{-0.10em}y}^{\text{d}}}        %{\tilde{\PYD}}
+% \newcommand{\PRD}{\widetilde{P}^{\text{d}}}
+% \newcommand{\PRX}{\widetilde{P}^{\text{z}}}
+% \newcommand{\PRM}{\widetilde{P}^{\text{m}}}
+
+\newcommand{\NN}{N\hspace{-0.15em}N}
+\newcommand{\NNd}{N\hspace{-0.15em}N\hspace{-0.15em}d}
+\newcommand{\NNz}{N\hspace{-0.15em}N\hspace{-0.15em}z}
+\newcommand{\NO}{N\hspace{-0.15em}0}
+\newcommand{\NOz}{N\hspace{-0.15em}0\hspace{-0.15em}z}
+\newcommand{\NOd}{N\hspace{-0.15em}0\hspace{-0.15em}d}
+
+
+\newcommand{\TAXR}{T\hspace{-0.2em}A\hspace{-0.1em}X\hspace{-0.15em}R}
+
+
+%\newcommand{\QD}{Q^\text{d}}
+%\newcommand{\QX}{Q^\text{z}}
+
+%\newcommand{\NMC}{{N\hspace{-0.10em}M\hspace{-0.10em}C}}
+%\newcommand{\NMI}{{N\hspace{-0.10em}M\hspace{-0.10em}I}}
+%\newcommand{\NMG}{{N\hspace{-0.10em}M\hspace{-0.10em}G}}
+%\newcommand{\NMX}{{N\hspace{-0.10em}M\hspace{-0.10em}X}}
+%
+%\newcommand{\NC}{{\Pc C}}
+%\renewcommand{\PG}{{N\hspace{-0.125em}G}}
+%\newcommand{\NI}{{N\hspace{-0.10em}I}}
+%\newcommand{\NX}{{N\hspace{-0.10em}X}}
+%\newcommand{\NM}{{N\hspace{-0.125em}M}}
+%\newcommand{\NYD}{{N\hspace{-0.075em}Y\hspace{-0.125em}D}}
+%\newcommand{\NYX}{{N\hspace{-0.075em}Y\hspace{-0.125em}X}}
+%\newcommand{\NKD}{{N\hspace{-0.10em}\KD}}
+%\newcommand{\NKX}{{N\hspace{-0.10em}\Kz}}
+
+\newcommand{\GDP}{G\hspace{-0.15em}D\hspace{-0.15em}P}
+\newcommand{\NGDP}{{N\hspace{-0.125em}G\hspace{-0.125em}D\hspace{-0.125em}P}}
+\newcommand{\PGDP}{{P\hspace{-0.125em}G\hspace{-0.125em}D\hspace{-0.125em}P}}
+\newcommand{\RER}{R\hspace{-0.125em}E\hspace{-0.125em}R}
+\newcommand{\NIP}{N\hspace{-0.15em}I\hspace{-0.15em}P}
+\newcommand{\CA}{C\hspace{-0.15em}A}
+\newcommand{\TOT}{T\hspace{-0.125em}O\hspace{-0.05em}T}
+\newcommand{\TB}{T\hspace{-0.10em}B}
+\newcommand{\TFw}{T\hspace{-0.125em}F\hspace{-0.05em}w}
+\newcommand{\TFwhstar}{T\hspace{-0.125em}F\hspace{-0.05em}w\hspace{-0.05em}h^\star}
+\newcommand{\TFgh}{T\hspace{-0.125em}F\hspace{-0.15em}g\hspace{-0.15em}h}
+\newcommand{\TFgw}{T\hspace{-0.125em}F\hspace{-0.15em}g\hspace{-0.15em}w}
+\newcommand{\TFwh}{T\hspace{-0.125em}F\hspace{-0.15em}w\hspace{-0.15em}h}
+\newcommand{\TFqw}{T\hspace{-0.125em}F\hspace{-0.15em}q\hspace{-0.15em}w}
+\newcommand{\TFqh}{T\hspace{-0.125em}F\hspace{-0.15em}q\hspace{-0.15em}h}
+
+
+\newcommand{\VAd}{V\hspace{-0.125em}A\hspace{-0.15em}d}
+\newcommand{\VAg}{V\hspace{-0.125em}A\hspace{-0.15em}g}
+\newcommand{\VAz}{V\hspace{-0.125em}A\hspace{-0.15em}z}
+\newcommand{\VAq}{V\hspace{-0.125em}A\hspace{-0.15em}q}
+
+\newcommand{\Astar}{A^\star}
+
+\newcommand{\Bg}{{B\hspace{-0.125em}g}}
+\newcommand{\Bgh}{B\hspace{-0.15em}g\hspace{-0.075em}h}
+\newcommand{\Rgh}{R\hspace{-0.10em}g\hspace{-0.075em}h}
+% \newcommand{\RWH}{R\hspace{-0.075em}w\hspace{-0.075em}h}
+\newcommand{\Bhw}{B\hspace{-0.125em}h\hspace{-0.075em}w}
+\newcommand{\Rhw}{R\hspace{-0.15em}h\hspace{-0.075em}w^{\star}}   %{R\hspace{-0.075em}h\hspace{-0.075em}w}
+% \newcommand{\RH}{R\hspace{-0.10em}h}
+\newcommand{\Bgw}{B\hspace{-0.125em}g\hspace{-0.075em}w}
+\newcommand{\Rgw}{R\hspace{-0.15em}g\hspace{-0.075em}w^{\star}}   %{R\hspace{-0.10em}g\hspace{-0.075em}w}
+\newcommand{\Rw}{R\hspace{-0.075em}w^{\star}}   
+\newcommand{\RN}{R}
+\newcommand{\Rg}{R\hspace{-0.15em}g}
+\newcommand{\Rh}{R\hspace{-0.15em}h}
+\newcommand{\RR}{R\hspace{-0.10em}R}
+
+
+\newcommand{\PREM}{P\hspace{-0.15em}R\hspace{-0.15em}E\hspace{-0.15em}M}
+\newcommand{\PREMg}{\PREM\hspace{-0.15em}g}
+\newcommand{\PREMh}{\PREM\hspace{-0.15em}h}
+
+\newcommand{\RRH}{R\hspace{-0.10em}R\hspace{-0.10em}h}
+
+\newcommand{\DF}{D\hspace{-0.10em}F}
+
+\newcommand{\DEF}{D\hspace{-0.15em}E\hspace{-0.15em}F}
+\newcommand{\PDEF}{P\hspace{-0.15em}R\hspace{-0.15em}I\hspace{-0.15em}M\hspace{-0.15em}D\hspace{-0.15em}E\hspace{-0.15em}F}
+\newcommand{\TAX}{T\hspace{-0.2em}A\hspace{-0.1em}X}
+\newcommand{\TAXvat}{\TAX\hspace{-0.075em}v\hspace{-0.075em}a\hspace{-0.075em}t}
+\newcommand{\TAXlit}{\TAX\hspace{-0.075em}l\hspace{-0.075em}i\hspace{-0.075em}t}
+\newcommand{\TAXls}{\TAX\hspace{-0.075em}l\hspace{-0.075em}s}
+\newcommand{\TAXq}{\TAX\hspace{-0.1em}q}
+
+
+% \newcommand{\TAXR}{T\hspace{-0.2em}A\hspace{-0.1em}X\hspace{-0.15em}R}
+\newcommand{\TAR}{T\hspace{-0.2em}A\hspace{-0.1em}R}
+\newcommand{\PG}{P\hspace{-0.125em}G}
+\newcommand{\Gg}{G\hspace{-0.125em}g}
+\newcommand{\PY}{P\hspace{-0.1em}Y}
+\newcommand{\BGR}{B\hspace{-0.125em}G\hspace{-0.125em}R}
+\newcommand{\BR}{B\hspace{-0.125em}R}
+
+\newcommand{\GREV}{G\hspace{-0.15em}R\hspace{-0.15em}E\hspace{-0.075em}V}
+\newcommand{\GEXP}{G\hspace{-0.15em}E\hspace{-0.125em}X\hspace{-0.15em}P}
+
+\newcommand{\TR}{T\hspace{-0.1em}R}
+\newcommand{\TRvat}{\TR\hspace{-0.075em}v\hspace{-0.075em}a\hspace{-0.075em}t}
+\newcommand{\TRlit}{\TR\hspace{-0.075em}l\hspace{-0.075em}i\hspace{-0.075em}t}
+\newcommand{\TRls}{\TR\hspace{-0.075em}l\hspace{-0.075em}s}
+
+\newcommand{\TRPQS}{\TR^{\PQS}}
+
+\newcommand{\ADJ}{A\hspace{-0.075em}D\hspace{-0.125em}J}
+
+\newcommand{\shk}{s\hspace{-0.075em}h\hspace{-0.075em}k}
+
+\newcommand{\transf}{\mathcal{T}}
+\newcommand{\remit}{\mathcal{R}}
+\newcommand{\prem}{p\hspace{-0.05em}r\hspace{-0.1em}e\hspace{-0.05em}m}
+\newcommand{\dom}{D}
+%\newcommand{\export}{X}
+%\newcommand{\import}{M}
+%\newcommand{\lcy}{\text{lcy}}
+%\newcommand{\fcy}{\text{fcy}}
+% \renewcommand{\ss}{\text{ss}}
+\newcommand{\tar}{\text{tar}}
+\newcommand{\issue}[1]{\textcolor{red}{#1}}
+
+\newcounter{modeleq}
+\setcounter{modeleq}{0}
+\newcommand{\nextmodeleq}{\stepcounter{modeleq}M.\arabic{modeleq}}
+
+\newcounter{steadyeq}
+\setcounter{steadyeq}{0}
+\newcommand{\nextsteadyeq}{\stepcounter{steadyeq}SS.\arabic{steadyeq}} 
+
+% Colors
+\newcommand{\pcol}[1]{\textcolor{ogr11}{#1}}
+\renewcommand{\ccol}[1]{\textcolor{ogr2}{#1}}
+\newcommand{\ncol}[1]{\textcolor{ogr4}{#1}}
+\newcommand{\nncol}[1]{\textcolor{ogr6}{#1}}
