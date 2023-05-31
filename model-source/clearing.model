@@ -68,7 +68,7 @@
 
     PmM_NGDP*NGDP = Pmd*Md + Pmz*Mz;
 
-    PxX_NGDP*NGDP = (Pq*Q + Pz*Z);
+    PxX_NGDP = PqQ_NGDP + PzZ_NGDP;
 
 
     "Remittances from abroad to households"

@@ -8,7 +8,7 @@
     "Flexible benchmark wage of OPT households" Wflex
     "Labor supplied by OPT households to all sectors" Nopt
     "Labor supplied by HTM households" Nhtm
-    "Labor in government sector to total labor" Ng_N
+    "Labor in government sector to total labor" Ng_N`x
 
 
 !parameters
@@ -19,30 +19,31 @@
 
 !log-variables !all-but
 
-    Ng_N
+    !list(`x)
 
 
 !equations
 
-    "Flexible benchmark wage of OPT households"
+    "Labor supply by OPT households under flexible wage"
     Wflex*(1 - TRlit) * LAMBDA = 1 ...
     !! Wflex*(1 - ss_TRlit) * LAMBDA = 1;
 
-    "Optimizing household wage in private sectors"
+    "OPT household wage"
     log(W/Pc) = ...
         + rho_W * log(ss_dA*W{-1}/Pc{-1}) ...
         + (1-rho_W) * log(Wflex/Pc) ...
     !! W = Wflex;
 
     "Labor supply by HTM households"
-    Nhtm = omega * N;
+    Nhtm = Nopt;
 
     "Total labor supply"
-    N = Nopt + Nhtm;
+    N = omega*Nhtm + (1 - omega)*Nopt;
 
     "Total labor demand"
     N = Nd + Nz + Ng;
 
     "Labor in government sector to total labor"
     Ng_N = Ng / N;
+
 
