@@ -130,7 +130,6 @@ m.xi_NNd = 0;
 m.ss_Aq = 1;
 m.ss_Pq_Pw = 1;
 m.gamma_Mq = 0.25; % % gives PmqMq_NGDP = 0.02; if non-primary exporters disabled, use m.gamma_Mq = 0.29 in read_model
-m.gamma_J = 0.07; % to be reverse-engineered 
 
 % Autoregression Parameters
 m.rho_Aq = 0.5;
@@ -138,7 +137,7 @@ m.rho_Pq_Pw = 0.5;
 
 
 % __Energy sector (J)__
-
+m.gamma_J = 0.07; % to be reverse-engineered 
 m.gamma_Mj = 0.25; % gives PmjMj_NGDP = 0.02
 m.lambda_Pj0 = 1;
 
@@ -161,17 +160,16 @@ m.ss_Kz_A = 0.20; % to be reverse-engineered
 m.ss_Pmz_Pmd = 1;
 m.ss_Pz_Pmz = 1;
 %m.ss_N0z_Kz = 0.12; % to be reverse-engineered 
-m.ss_N0z = 0.3; % to be reverse-engineered 
 m.alpha_Z = 1; 0.73; % to be reverse-engineered 
 
 m.ss_Z_ref_Az = 1;
 
 % Transitory parameters
+m.lambda_Z_ref = 0.7;
 
 % Autoregressive Coefficients
 m.rho_Az = 0.5;
 m.lambda_Kz = 0.5;
-m.lambda_Z_ref = 0.7;
 
 % Adjustment Costs
 m.xi_NNz = 0;
