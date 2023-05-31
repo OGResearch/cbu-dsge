@@ -97,8 +97,8 @@
     Z1 = Kz{-1}^(1 - gamma_Nz) * (AAz * NNz)^gamma_Nz;
 
     "Demand for labor in nonprimary export sector"
-    gamma_Nz * Pz1 * Z1 = Wz * NNz * (1 + $AdjNNz$) ...
-    !! gamma_Nz * Pz1 * Z1 = Wz * NNz;
+    gamma_Nz * Pz1 * Z1 = W * NNz * (1 + $AdjNNz$) ...
+    !! gamma_Nz * Pz1 * Z1 = W * NNz;
 
     % AAz = Az * A^(1-gamma_Kz) * Kz{-1}^gamma_Kz;
     AAz = AA * Az;
@@ -166,7 +166,7 @@
     PzZ_NGDP = Pz*Z / NGDP;
 
     % Nonprimary exporters profits including capital income
-    WNz_NGDP = (Wz*N0z + Wz*NNz) / NGDP;
+    WNz_NGDP = (W*N0z + W*NNz) / NGDP;
     PIEz_NGDP*NGDP = Pz*Z - WNz_NGDP*NGDP - Pmz*Mz - PiIz_NGDP*NGDP;
     VAz_NGDP = (Pz*Z - Pmz*Mz) / NGDP;
 

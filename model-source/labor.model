@@ -11,8 +11,6 @@
     "Labor excluding government sector" Np
     "Wage bill in private sector to GDP" WNp_NGDP
     "Labor in government sector to total labor" Ng_N
-    "HTM household labor to total labor" Nhtm_N
-    "Wage in nonprimary export sector" Wz
 
 
 !parameters
@@ -24,7 +22,6 @@
 !log-variables !all-but
 
     Ng_N
-    Nhtm_N
     WNp_NGDP
 
 
@@ -49,10 +46,6 @@
     "Total labor demand"
     N = Nd + Nz + Ng;
 
-    "Average wage in nonprimary export sector"
-    Wz = omega*W + (1-omega)*W;
-
-
     "Labor excluding government employment"
     Np = N - Ng;
 
@@ -61,8 +54,4 @@
 
     "Labor in govt sectors to total labor"
     Ng_N = Ng / N;
-
-    "HTM household labor to total labor"
-    Nhtm_N = Nhtm / N;
-
 
