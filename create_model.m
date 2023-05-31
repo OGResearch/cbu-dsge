@@ -246,10 +246,6 @@ m.lambda_BCBg = 0.5;
 
 % __Labor__
 
-% Steady state parameters
-
-m.omega_N = 0.30;
-
 % Dynamic parameters
 
 m.rho_W = 0.4;

@@ -7,7 +7,6 @@
     "Average wage across sectors" W
     "Flexible benchmark wage of OPT households" Wflex
     "Labor supplied by OPT households to all sectors" Nopt
-    "Average wage rate of htm households" Whtm
     "Labor supplied by HTM households" Nhtm
     "Labor excluding government sector" Np
     "Wage bill in private sector to GDP" WNp_NGDP
@@ -19,11 +18,8 @@
 
 !parameters
 
-    "Share of hand-to-mouth households" omega_N
-    "S/S HTM household wage to OPT household wage" ss_Whtm_W
-
+    % Dynamic parameters
     "A/R Real wage of OPT households" rho_W
-    "A/R Real wage of HTMl households" rho_Whtm
 
 
 !log-variables !all-but
@@ -45,10 +41,8 @@
         + (1-rho_W) * log(Wflex/Pc) ...
     !! W = Wflex;
 
-    Whtm = W;
-
     "Labor supply by HTM households"
-    Nhtm = omega_N * N;
+    Nhtm = omega * N;
 
     "Total labor supply"
     N = Nopt + Nhtm;
@@ -57,10 +51,10 @@
     N = Nd + Nz + Ng;
 
     "Average wage in local sector"
-    Wd = omega_N*Whtm + (1-omega_N)*W;
+    Wd = omega*W + (1-omega)*W;
 
     "Average wage in nonprimary export sector"
-    Wz = omega_N*Whtm + (1-omega_N)*W;
+    Wz = omega*W + (1-omega)*W;
 
 
     "Labor excluding government employment"
