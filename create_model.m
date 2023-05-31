@@ -121,7 +121,7 @@ m.phi_Id = 1;
 m.xi_Id = 3;
 m.xi_Pc = 2.5; %1
 m.xi_Pi = 2.5; %0.5
-m.xi_NNd = 0;
+% m.xi_NNd = 0;
 
 
 % __Primary export sector (Q)__
@@ -174,7 +174,7 @@ m.lambda_Kz = 0.5;
 m.lambda_Z_ref = 0.7;
 
 % Adjustment Costs
-m.xi_NNz = 0;
+% m.xi_NNz = 0;
 m.xi_Z = 0.3;
 
 % Ownership of NP exporters. Note: local HH could also hold equity, i.e.
