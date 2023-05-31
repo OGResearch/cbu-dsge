@@ -3,13 +3,15 @@
 
 !variables
 
-    "Net Investment Position to GDP Ratio" NIP_NGDP
+    "Net Investment Position to GDP Ratio" NIP_NGDP`x
     "Real commodity exports" Q
     "Total demand for investment goods" I
 
-    "Remittances to GDP" TFwh_NGDP
-    "Exports to GDP" PxX_NGDP
-    "Imports to GDP Ratio" PmM_NGDP
+    "Remittances received by households to GDP" TFwh_NGDP`x
+    "Remittances received by HTM households to GDP" TFwhtm_NGDP`x
+    "Remittances received by OPT households to GDP" TFwopt_NGDP`x
+    "Exports to GDP" PxX_NGDP`x
+    "Imports to GDP Ratio" PmM_NGDP`x
     "Nominal GDP" NGDP
     "Nominal GDP excluding commodity sector" NGDPx
     "Gross rate of change in real exports" dX
@@ -17,40 +19,26 @@
     "Gross rate of change in real GDP" dGDP
     "Gross rate of change in real GDP excluding commodity sector" dGDPx
 
-    "Private consumption to GDP" PcC_NGDP
-    "Investment to GDP" PiI_NGDP
-    "Wage bill to GDP" WN_NGDP
+    "Private consumption to GDP" PcC_NGDP`x
+    "Investment to GDP" PiI_NGDP`x
+    "Wage bill to GDP" WN_NGDP`x
 
-    "Value added in local production sector to GDP" VAd_NGDP
-    "Value added in local production sector per capital" VAd_PkdKd
-    "Wage bill to value-added ratio in local sector" WNd_VAd
-    "Trade balance to GDP" TB_NGDP
-    "Current account to GDP" CA_NGDP
+    "Value added in local production sector to GDP" VAd_NGDP`x
+    "Value added in local production sector per capital" VAd_PkdKd`x
+    "Wage bill to value-added ratio in local sector" WNd_VAd`x
+    "Trade balance to GDP" TB_NGDP`x
+    "Current account to GDP" CA_NGDP`x
 
-    "Nominal GDP excluding primary exports to nominal GDP" NGDPx_NGDP
+    "Nominal GDP excluding primary exports to nominal GDP" NGDPx_NGDP`x
 
     "Consumer real exchange rate" RER
-    "Interest on household foreign liabilities to GDP" INThw_NGDP
+    "Interest on household foreign liabilities to GDP" INThw_NGDP`x
 
 
 
 !log-variables !all-but
 
-    NGDPx_NGDP
-    NIP_NGDP
-    PcC_NGDP
-    PiI_NGDP
-    TFwh_NGDP
-    PmM_NGDP
-    PxX_NGDP
-    CA_NGDP
-    TB_NGDP
-    VAd_NGDP
-    VAd_PkdKd
-    WN_NGDP
-    WNd_VAd
-    INThw_NGDP
-
+    !list(`x)
 
 
 !equations
@@ -74,6 +62,8 @@
 
     "Remittances from abroad to households"
     TFwh_NGDP = ss_TFwh_NGDP;
+    TFwh_NGDP = omega*TFwhtm_NGDP + (1 - omega)*TFwopt_NGDP;
+    TFwhtm_NGDP = TFwopt_NGDP;
 
     "Net investment position to GDP"
     NIP_NGDP = Bwf_NGDP - Bhw_NGDP - Bgw_NGDP;
