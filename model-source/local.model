@@ -296,14 +296,14 @@
     N0d = ss_N0d_Nd * &Nd;
 
     "Wage bill in local sectors"
-    WNd_NGDP = Wd*Nd / NGDP;
+    WNd_NGDP = W*Nd / NGDP;
 
     "Stage T-3 production technology in local sectors"
     D3 = Kd{-1}^(1-gamma_Nd) * (A*Ad*NNd)^gamma_Nd;
 
     "Demand for labor in local sectors"
-    gamma_Nd * Pd3*D3 = Wd * NNd * (1 + $AdjNNd$) ...
-    !! gamma_Nd * Pd3*D3 = Wd * NNd;
+    gamma_Nd * Pd3*D3 = W * NNd * (1 + $AdjNNd$) ...
+    !! gamma_Nd * Pd3*D3 = W * NNd;
 
     "Demand for capital in local sectors"
     (1-gamma_Nd)*Pd3*D3 = Prkd*Kd{-1};
@@ -437,7 +437,7 @@
     PmdMd_NGDP*NGDP = Pmd*Md;
 
     "Profits of local producers to GDP"
-    PIEd_NGDP = (Pd*D - Wd*Nd - Prkd*Kd{-1} - Pmd*Md - Pj*J) / NGDP;
+    PIEd_NGDP = (Pd*D - W*Nd - Prkd*Kd{-1} - Pmd*Md - Pj*J) / NGDP;
 
     "Private residential investment to GDP"
     PiIh_NGDP = Pi*Ih / NGDP;
