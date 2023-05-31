@@ -64,7 +64,7 @@ m.beta = 0.95;
 % Households
 
 m.chi_dli = 0.20;
-m.chi_c = 0.3;
+m.chi_c = 0.30;
 m.nu = 0.05;
 m.nu0 = 0; % to be reverse-engineered
 
@@ -116,7 +116,7 @@ m.rho_Md_D2 = 0.75;
 m.rho_D3_D2 = 0.75;
 
 % Habit, adjustment costs
-m.phi_Y = 1;
+m.phi_D = 1;
 
 m.xi_Id = 3;
 m.xi_Pc = 2.5; %1
