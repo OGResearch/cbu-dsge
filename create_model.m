@@ -248,9 +248,7 @@ m.eta = 0;
 
 % Dynamic parameters
 
-m.rho_Wopt = 0.4;
-m.rho_Whtm = 0.4;
-
+m.rho_W = 0.4;
 
 
 %% Calculate steady state for initial parameters
@@ -368,6 +366,7 @@ nationalList = [
 fiscalList = [
     "Bg_NGDP"
     "Bgh_Bg"
+    "TAX_NGDP"
 ];
 
 nationalTable = steadyTable(nationalList, :);

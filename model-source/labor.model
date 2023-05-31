@@ -21,8 +21,7 @@
     "S/S HTM household wage to OPT household wage" ss_Whtm_Wopt
     "S/S Wage rate markup in government sectors" ss_W_Wopt
 
-    "A/R Real wage of OPT households" rho_Wopt
-    "A/R Real wage of HTMl households" rho_Whtm
+    "A/R Real wage" rho_W
 
 
 !log-variables !all-but
@@ -40,8 +39,8 @@
 
     "OPT household wage"
     log(Wopt/Pc) = ...
-        + rho_Wopt * log(ss_dA*Wopt{-1}/Pc{-1}) ...
-        + (1-rho_Wopt) * log(Wopt_flex/Pc) ...
+        + rho_W * log(ss_dA*Wopt{-1}/Pc{-1}) ...
+        + (1-rho_W) * log(Wopt_flex/Pc) ...
     !! Wopt = Wopt_flex;
 
     "HTM household wage"
