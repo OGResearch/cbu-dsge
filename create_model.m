@@ -75,14 +75,14 @@ m.chi_c = 0.5;
 m.nu = 0;
 
 m.beta_Kd = 1;
-m.delta_Kd = 0.10;
-m.delta_Kh = 0.10;
+m.delta_Kd = 0.15;
+m.delta_Kh = 0.15;
 
 m.ss_TFwh_NGDP = 0.12; % to be reverse engineered
 
 % Markups
 m.mu_CI = 1.25; % to be reverse-engineered 
-m.mu_D2 = 1; % to be reverse-engineered 
+m.mu_Dm = 1; % to be reverse-engineered 
 
 % Local production
 m.gamma_Md = 0.40; 0.3792; 0.30; % to be reverse-engineered 
@@ -112,8 +112,8 @@ m.ss_Ad = 1;
 m.rho_A = 0;
 m.rho_Ad = 0.5;
 
-m.rho_Md_D2 = 0.75;
-m.rho_D3_D2 = 0.75;
+m.rho_Md_Dm = 0.75;
+m.rho_Dk_Dm = 0.75;
 
 % Habit, adjustment costs
 m.phi_Y = 1;
@@ -152,7 +152,7 @@ m.mu_Z = 1; % to be reverse-engineered
 m.gamma_Kz = 0.2;
 m.gamma_Mz = 0.40;
 m.gamma_Nz = 0.45;
-m.delta_Kz = 0.10;
+m.delta_Kz = 0.15;
 m.ss_N0z_Nz = 0.30;
 
 % Steady State for Exogenous/External Variables
@@ -250,7 +250,7 @@ m.lambda_BCBg = 0.5;
 % Steady state parameters
 
 m.omega = 0.30;
-m.ss_Whtm_Wopt = 1; %%% 0.45;
+m.ss_Whtm_Wopt = 1;
 
 m.eta = 0;
 

@@ -4,8 +4,8 @@
 !variables
 
     "Public infrastructure auxiliary variable" AA
-    D1, D2, D3, Pd3
-    Md_D2, D3_D2
+    Dj, Dm, Dk, Pd3
+    Md_Dm, Dk_Dm
     "Monetary policy reaction term" React
 
     "Shadow Price of Optimizing Household Budget" LAMBDA
@@ -89,8 +89,8 @@
     PkdKd_NGDP
     PkzKz_NGDP
     DLIopt_Copt
-    Md_D2
-    D3_D2
+    Md_Dm
+    Dk_Dm
     PIEd_NGDP
     %N0d_Nd
     React
@@ -103,8 +103,8 @@
     "Shock to overall productivity" shk_A
     "Shock to relative sector productivity in local sectors" shk_Ad
     "Shock to exchange rate parity" shk_S
-    shk_Md_D2
-    shk_D3_D2
+    shk_Md_Dm
+    shk_Dk_Dm
 
 
 !parameters
@@ -121,9 +121,9 @@
     "A/R Monetary policy rate" rho_Rg
     "Imperfections in forex arbitrage" zeta_S
 
-    "A/R Share of nonprimary import inputs in local sector" rho_Md_D2
+    "A/R Share of nonprimary import inputs in local sector" rho_Md_Dm
 
-    rho_D3_D2
+    rho_Dk_Dm
     psi_dg
 
     % Steady-state parameters
@@ -135,7 +135,7 @@
     "Depreciation of production capital" delta_Kd
     "Depreciation of residential capital" delta_Kh
     "Markup in final goods sectors" mu_CI
-    "Markup over variable factors in local sectors" mu_D2
+    "Markup over variable factors in local sectors" mu_Dm
     "Import Share of local sectors" gamma_Md
     "Labor Share of local sectors" gamma_Nd
 
@@ -186,7 +186,7 @@
 
     AdjNNd := xi_NNd*[ log(NNd/NNd{-1}) - beta*log(NNd{+1}/NNd) ];
 
-    gamma_D2 := (gamma_Md^gamma_Md * (1-gamma_Md)^(1-gamma_Md));
+    gamma_Dm := (gamma_Md^gamma_Md * (1-gamma_Md)^(1-gamma_Md));
 
 
 !equations
@@ -271,7 +271,7 @@
 % __Local distribution of consumer and investment goods__
 
     % Staget T-0 in local sectors: Distribution
-    D = D1;
+    D = Dj;
     Pd = mu_CI*Pd1;
 
     % Final consumer price setting
@@ -301,49 +301,49 @@
     WNd_NGDP = W*Nd / NGDP;
 
     "Stage T-3 production technology in local sectors"
-    D3 = Kd{-1}^(1-gamma_Nd) * (A*Ad*NNd)^gamma_Nd;
+    Dk = Kd{-1}^(1-gamma_Nd) * (A*Ad*NNd)^gamma_Nd;
 
     "Demand for labor in local sectors"
-    gamma_Nd * Pd3*D3 = W * NNd * (1 + $AdjNNd$) ...
-    !! gamma_Nd * Pd3*D3 = W * NNd;
+    gamma_Nd * Pd3*Dk = W * NNd * (1 + $AdjNNd$) ...
+    !! gamma_Nd * Pd3*Dk = W * NNd;
 
     "Demand for capital in local sectors"
-    (1-gamma_Nd)*Pd3*D3 = Prkd*Kd{-1};
+    (1-gamma_Nd)*Pd3*Dk = Prkd*Kd{-1};
 
 
     % Stage T-2 in local sectors: Nonprimary import
 
     "Stage T-2 production technology in local sectors"
-    Pd2*D2 = mu_D2*(Pmd*Md + Pd3*D3) ...
-    !! D2 = (1/$gamma_D2$) * Md^gamma_Md * D3^(1-gamma_Md);
+    Pd2*Dm = mu_Dm*(Pmd*Md + Pd3*Dk) ...
+    !! Dm = (1/$gamma_Dm$) * Md^gamma_Md * Dk^(1-gamma_Md);
 
     "Demand for nonprimary imports in local sectors"
-    Md = Md_D2 * D2 ...
-    !! gamma_Md*Pd2*D2 = mu_D2*Pmd*Md;
+    Md = Md_Dm * Dm ...
+    !! gamma_Md*Pd2*Dm = mu_Dm*Pmd*Md;
 
     "Demand for local input in local sectors"
-    D3 = D3_D2 * D2 ...
-    !! (1-gamma_Md)*Pd2*D2 = mu_D2*Pd3*D3;
+    Dk = Dk_Dm * Dm ...
+    !! (1-gamma_Md)*Pd2*Dm = mu_Dm*Pd3*Dk;
 
     "Real nonprimary import share of stage T-2 output in local sectors"
-    Md_D2 = ...
-        + rho_Md_D2 * (Md_D2{-1}) ...
-        + (1 - rho_Md_D2) * (&Md / &D2) ...
-        + shk_Md_D2 ...
-    !! Md_D2 = &Md / &D2;
+    Md_Dm = ...
+        + rho_Md_Dm * (Md_Dm{-1}) ...
+        + (1 - rho_Md_Dm) * (&Md / &Dm) ...
+        + shk_Md_Dm ...
+    !! Md_Dm = &Md / &Dm;
 
     "Real domestic input share of stage T-2 output in local sectors"
-    D3_D2 = ...
-        + rho_D3_D2 * (D3_D2{-1}) ...
-        + (1 - rho_D3_D2) * (&D3 / &D2) ...
-        + shk_D3_D2 ...
-    !! D3_D2 = &D3 / &D2;
+    Dk_Dm = ...
+        + rho_Dk_Dm * (Dk_Dm{-1}) ...
+        + (1 - rho_Dk_Dm) * (&Dk / &Dm) ...
+        + shk_Dk_Dm ...
+    !! Dk_Dm = &Dk / &Dm;
 
 
     % Stage T-1 in local sectors: Primary inputs
 
-    D1 = D2 / (1 - gamma_J);
-    D1 = J / gamma_J;
+    Dj = Dm / (1 - gamma_J);
+    Dj = J / gamma_J;
     Pd1 = (1 - gamma_J)*Pd2 + gamma_J*Pj;
 
 
