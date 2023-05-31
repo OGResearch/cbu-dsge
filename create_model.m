@@ -203,7 +203,6 @@ m.ss_TFgh_NGDP = 0.05;
 % Government consumption
 m.ss_PcG_NGDP = 0.265;
 m.ss_WNg_NGDP = 0.10;
-m.ss_Wg_Wopt = 1;
 
 m.omega = 0.30;
 
@@ -250,12 +249,10 @@ m.lambda_BCBg = 0.5;
 % Steady state parameters
 
 m.omega_N = 0.30;
-m.ss_Whtm_Wopt = 1; %%% 0.45;
 
 % Dynamic parameters
 
-m.rho_Wopt = 0.4;
-m.rho_Whtm = 0.4;
+m.rho_W = 0.4;
 
 
 
