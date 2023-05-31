@@ -7,8 +7,8 @@
     "Real commodity exports" Q
     "Total demand for investment goods" I
 
-    "Remittances to GDP ratio" TFwh_NGDP
-    "Exports to GDP ratio" PxX_NGDP
+    "Remittances to GDP" TFwh_NGDP
+    "Exports to GDP" PxX_NGDP
     "Imports to GDP Ratio" PmM_NGDP
     "Nominal GDP" NGDP
     "Nominal GDP excluding commodity sector" NGDPx
@@ -17,17 +17,17 @@
     "Gross rate of change in real GDP" dGDP
     "Gross rate of change in real GDP excluding commodity sector" dGDPx
 
-    "Private consumption to GDP ratio" PcC_NGDP
-    "Investment to GDP ratio" PiI_NGDP
-    "Wage bill to GDP ratio" WN_NGDP
+    "Private consumption to GDP" PcC_NGDP
+    "Investment to GDP" PiI_NGDP
+    "Wage bill to GDP" WN_NGDP
 
-    "Value added in local production sector to GDP ratio" VAd_NGDP
+    "Value added in local production sector to GDP" VAd_NGDP
     "Value added in local production sector per capital" VAd_PkdKd
     "Wage bill to value-added ratio in local sector" WNd_VAd
-    "Trade balance to GDP ratio" TB_NGDP
-    "Current account to GDP ratio" CA_NGDP
+    "Trade balance to GDP" TB_NGDP
+    "Current account to GDP" CA_NGDP
 
-    "Nominal GDP excluding primary exports to nominal GDP ratio" NGDPx_NGDP
+    "Nominal GDP excluding primary exports to nominal GDP" NGDPx_NGDP
 
     "Consumer real exchange rate" RER
     "Interest on household foreign liabilities to GDP" INThw_NGDP
@@ -63,20 +63,19 @@
     "Local production breakdown"
     D = C + Gg + I;
 
-
-% __Exports and imports__
-
-    PmM_NGDP*NGDP = Pmd*Md + Pmz*Mz;
-
-    PxX_NGDP = PqQ_NGDP + PzZ_NGDP;
-
-
     "Remittances from abroad to households"
     TFwh_NGDP = ss_TFwh_NGDP;
 
 
 % __International investment position / BOP__
 
+    "Nominal import to GDP"
+    PmM_NGDP = PmdMd_NGDP + PmzMz_NGDP;
+
+    "Nominal export to GDP"
+    PxX_NGDP = PqQ_NGDP + PzZ_NGDP;
+
+    "Net investment position to GDP"
     NIP_NGDP = Bwf_NGDP - Bhw_NGDP - Bgw_NGDP;
 
     NIP_NGDP - NIP_NGDP{-1}/dNGDP = ...
@@ -104,7 +103,7 @@
     CA_NGDP = NIP_NGDP - NIP_NGDP{-1}*dS/dNGDP;
 
 
-% __Nominal GDP__
+% __Nominal and real GDP__
 
     "Nominal GDP"
     % NGDP = (PcC_NGDP + PgG_NGDP + PiI_NGDP + PxX_NGDP - PmM_NGDP)*NGDP;
@@ -151,7 +150,7 @@
     "Wage bill to GDP"
     WN_NGDP = WNd_NGDP + WNz_NGDP + WNg_NGDP;
 
-    "Nomial GDP excluding primary exports to nominal GDP ratio"
+    "Nomial GDP excluding primary exports to nominal GDP"
     NGDPx_NGDP * NGDP = NGDPx;
 
     VAd_NGDP = (Pc*C + PcGg_NGDP*NGDP + Pi*I - Pmd*Md) / NGDP;
