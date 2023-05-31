@@ -108,8 +108,6 @@
     ss_PiIq_NGDP
     omega_TFgh
 
-    "Distribution of non-primary export profits to government" psi_zg
-    "Distribution of nonprimary export profits to foreign investors" psi_zw
     "Distribution of commodity processing industry profits to government" psi_jg
 
     "Smoothing of PIF balance" lambda_Bwf
@@ -265,6 +263,8 @@
 
     "Government tax revenues from energy sector"
     TAXj_NGDP = (1 - psi_jw) * PIEj_NGDP;
+    % TAXj_NGDP = TRj * Pj0 * J / NGDP;
+
 
     "Government tax revenues from lump-sum taxes"
     TAXls_NGDP = ...
@@ -321,7 +321,6 @@
         + Bwf_NGDP{-1}*S/S{-1}/dNGDP ...
         + INTwf_NGDP ...
         - TFfg_NGDP ...
-        + psi_zg*PIEz_NGDP ...
     ;
 
     INTwf_NGDP = (Rw_star{-1} - 1)*S/S{-1} * Bwf_NGDP{-1}/dNGDP;

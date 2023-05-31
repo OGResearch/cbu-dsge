@@ -7,7 +7,7 @@
     "Primary production specific technology" Aq
     "Real world price of primary commodity" Pq_Pw
     "Primary production maintenance services" Mq
-    "Profits in primary production to GDP ratio" PIEq_NGDP
+    "Profits in primary production to GDP ratio before taxes" PIEq_NGDP
     "Value added in primary production to GDP ratio" VAq_NGDP
     "Primary production to GDP ratio" PqQ_NGDP
 
@@ -71,4 +71,5 @@
     !! Pq_Pw = ss_Pq_Pw;
 
     PqQ_NGDP*NGDP = Pq*Q;
+
 

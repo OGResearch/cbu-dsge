@@ -10,7 +10,7 @@
     "Value added in energy sector to GDP" VAj_NGDP
     "Energy volume to GDP" PjJ_NGDP
     "World price of energy" Pj_star
-    "Profit of energy sector" PIEj_NGDP
+    "Profit of energy sector before taxes" PIEj_NGDP
 
 
 !log-variables !all-but
@@ -38,8 +38,8 @@
     Pj = mu_J * Pj0;
 
     "Marginal cost in energy sector"
-    log(dPj0) = ...
-        + log(dPj0{-1}) ...
+    log(Pj0) = ...
+        + log(&dPj0 * Pj0{-1}) ...
         + lambda_Pj0 * log(S * Pj_star / Pj0) ...
         + shk_Pj0 ...
     !! Pj0 = S * Pj_star;
@@ -54,9 +54,22 @@
     Pj_star = ss_Pj_Pw * Pw_star;
 
     "Profit in energy sector"
-    PIEj_NGDP = Pj0 * J / NGDP;
+    PIEj_NGDP = (Pj - Pj0) * J / NGDP - TAXj_NGDP;
 
     "Value added in energy sector"
-    VAj_NGDP = PjJ_NGDP;
+    VAj_NGDP = Pj0*J / NGDP;
 
+%    Pj0*J = TFjh;
+%    % 4% = 3% + 1%
+%
+%    Revenues Pj*J 3%
+%    Subsidies TFgj 1%
+%    Cost = Pj0*J 4%
+%    Cost = Pj0*J = M 1% + TXj 2% + WN 1%
+%    VAj = Pj0*J - M 3%
+%    TXj = TRj * Pj0*J
+%    PIEj = Pj*J + TFgj - Pj0*J
+%
+%    % Rule: constant TFgj plus shock (full subsidy in steady state)
+%    % Final price responds endogenously so that it's always fully subsidized
 

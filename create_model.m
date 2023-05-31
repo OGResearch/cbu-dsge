@@ -139,7 +139,7 @@ m.rho_Pq_Pw = 0.5;
 
 % __Energy sector (J)__
 
-m.lambda_Pj0 = 1;
+m.lambda_Pj0 = 0.5;
 m.mu_J = 1;
 
 
@@ -177,12 +177,6 @@ m.lambda_Z_ref = 0.7;
 % Adjustment Costs
 m.xi_NNz = 0;
 m.xi_Z = 0.3;
-
-% Ownership of NP exporters. Note: local HH could also hold equity, i.e.
-% psi_zw + psi_zg do not need to sum up to 1
-m.psi_zw = 0; % share of foreign-owned equity in nonprimary export sectors
-m.psi_zg = 0; % share of PIF-owned equity nonprimary export sectors
-
 
 m.psi_jw = 0.25;
 m.psi_qw = 0.25;

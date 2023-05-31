@@ -23,7 +23,7 @@
     "Wage bill in local sectors to GDP" WNd_NGDP
     "Physical investment in local sectors" Id
 
-    "Profits in local sectors to GDP" PIEd_NGDP
+    "Profits in local sectors to GDP before taxes" PIEd_NGDP
 
     "Private residential and overhead capital" Kh
     "Private residential and overhead investment" Ih
@@ -244,7 +244,7 @@
 % __Hand-to-mouth households__
 
     "Real current income of hand-to-mouth households"
-    Pc*DLIhtm = (WNhtm_NGDP + TFghtm_NGDP - omega_TFwh*TFwh_NGDP)*NGDP;
+    Pc*DLIhtm = (WNhtm_NGDP*(1 - TRlit) + TFghtm_NGDP - omega_TFwh*TFwh_NGDP)*NGDP;
 
     "Demand for consumption by optimizing households"
     Ctm = DLIhtm;

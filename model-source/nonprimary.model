@@ -23,7 +23,7 @@
     "Auxiliary term for total export technology" AAz
     "Relative price of imported inputs in exports to local imports" Pmz_Pmd
     "Relative price of nonprimary exports to imported inputs" Pz_Pmz
-    "Profits including capital income in nonprimary exports" PIEz_NGDP
+    "Profits including capital income in nonprimary exports before taxes" PIEz_NGDP
     "Value added created in nonprimary exports to GDP ratio" VAz_NGDP
     "Nominal cost of investment in nonprimary exports to GDP ratio" PiIz_NGDP
     "Wage bill in nonprimary exports to GDP ratio" WNz_NGDP
