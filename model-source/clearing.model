@@ -33,6 +33,7 @@
 
     "Consumer real exchange rate" RER
     "Interest on household foreign liabilities to GDP" INThw_NGDP
+    "Interest received by country on NIP" INTw_NGDP
 
 
 
@@ -55,6 +56,7 @@
     WN_NGDP
     WNd_VAd
     INThw_NGDP
+    INTw_NGDP
 
 
 
@@ -102,6 +104,9 @@
 
     "Interest on household foreign debt to GDP"
     INThw_NGDP = (Rh_star{-1} - 1)*Bhw_NGDP{-1}*dS/dNGDP;
+
+    "Interest received by country on NIP"
+    INTw_NGDP = INTwf_NGDP - INThw_NGDP - INTgw_NGDP;
 
     "Trade balance to GDP"
     TB_NGDP = PxX_NGDP - PmM_NGDP;

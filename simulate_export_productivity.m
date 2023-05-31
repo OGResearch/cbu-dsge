@@ -77,7 +77,7 @@ ch = databank.Chartpack();
 ch.Range = 0:T;
 ch.PlotSettings = {"marker", "s"};
 
-ch + ["Az", "Copt", "Chtm", "Id", "Kz", "Iz"];
+ch + ["Az", "Copt", "Chtm", "Id", "Kd", "Iz"];
 ch + ["S", "dPc", "Rg", "W/Pc"];
 ch + ["NIP_NGDP", "CA_NGDP", "TB_NGDP"];
 

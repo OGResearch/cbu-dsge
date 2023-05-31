@@ -93,8 +93,8 @@ m.ss_N0d_Nd = 0.35;
 % Interest rate premia
 m.zeta_Rg0 = 0; % to be reverse-engineered 
 m.zeta_Rg1 = 0.10; 0.015;
-m.zeta_Rh0 = 0; % to be reverse-engineered 
-m.zeta_Rh1 = 0.1;0.2;
+m.zeta_Rh0 = 0.05; % to be reverse-engineered 
+m.zeta_Rh1 = 0;0.1;0.2;
 
 m.zeta_S = 0.5;
 
@@ -341,16 +341,27 @@ m = steady( ...
 
 checkSteady(m);
 
-
-t = table( ...
+steadyTable = table( ...
     m, ["steady-level", "steady-change", "form", "description"] ...
     , "writeTable", "tables/steady-state-baseline.xlsx" ...
 );
 
-disp(t)
+disp(steadyTable)
 
 m = solve(m);
 
-disp("Writing model to mat file")
+disp("==> Writing model to mat file")
 save mat/create_model.mat m
+
+list = [
+    "PcC_NGDP"
+    "PiI_NGDP"
+    "PgG_NGDP"
+    "PxX_NGDP"
+    "PmM_NGDP"
+    "NIP_NGDP"
+    "INTw_NGDP"
+];
+
+calibTable = steadyTable;
 
