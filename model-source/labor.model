@@ -43,6 +43,6 @@
     "Total labor demand"
     N = Nd + Nz + Ng;
 
-    "Labor in govt sectors to total labor"
+    "Labor in government sector to total labor"
     Ng_N = Ng / N;
 
