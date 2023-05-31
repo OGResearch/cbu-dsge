@@ -13,7 +13,7 @@
     "Consumption of Optimizing Households" Copt
     "Private residential investment to GDP" PiIh_NGDP
 
-    "Consumption of Hand-to-Mouth Households" Ctm
+    "Consumption of Hand-to-Mouth Households" Chtm
     "Auxiliary Variable for Consumption to Net Worth Ratio" Copt_Vh_nu0
     "Disposable Labor Income of Optimizing Households" DLIopt
     % "Total disposable labor income to GDP" PcDLI_NGDP
@@ -247,13 +247,13 @@
     Pc*DLIhtm = W*Nhtm*(1 - TRlit) + TFghtm_NGDP*NGDP - omega*TFwh_NGDP*NGDP;
 
     "Demand for consumption by optimizing households"
-    Ctm = DLIhtm;
+    Chtm = DLIhtm;
 
 
 % __Total private consumption__
 
     "Total private consumption"
-    C = Copt + Ctm;
+    C = Copt + Chtm;
 
 
 % __Residential and overhead investment__
