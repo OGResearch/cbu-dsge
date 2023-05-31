@@ -23,7 +23,6 @@ modelFiles = [
 m = Model.fromFile( ...
     modelFiles ...
     , "growth", true ...
-    , "assign", struct("LongCobbDouglas", true) ...
 );
 
 
@@ -35,6 +34,7 @@ for n = list
         error(n);
     end
 end
+
 
 %% Assign generic calibration
 
@@ -361,7 +361,11 @@ list = [
     "PmM_NGDP"
     "NIP_NGDP"
     "INTw_NGDP"
+    "Rg"
+    "Rh"
 ];
 
-calibTable = steadyTable;
+calibTable = steadyTable(list, :);
+writetable(calibTable, "tables/calibration.xlsx", "writeRowNames", true);
+
 
