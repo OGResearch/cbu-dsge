@@ -14,8 +14,9 @@
     "Imported inputs to nonprimary exports" Mz
     "Imported inputs to nonprimary exports to GDP ratio" PmzMz_NGDP
     "Nonprimary exports" Z
+    "Stage T-1 production in nonprimary exports" Zk
+    Zm
     "Reference level for nonprimary exports" Z_ref
-    "Stage T-1 production in nonprimary exports" Z1
     "Nominal marginal cost in nonprimary exports" Pz0
     "Import prices in nonprimary exports" Pmz
     "Price of nonprimary exports" Pz
@@ -93,11 +94,11 @@
     % Stage T-1: Labor and capital
 
     "Stage T-1 production function in nonprimary export sector"
-    Z1 = Kz{-1}^(1 - gamma_Nz) * (AAz * NNz)^gamma_Nz;
+    Zk = Kz{-1}^(1 - gamma_Nz) * (AAz * NNz)^gamma_Nz;
 
     "Demand for labor in nonprimary export sector"
-    gamma_Nz * Pz1 * Z1 = W * NNz * (1 + $AdjNNz$) ...
-    !! gamma_Nz * Pz1 * Z1 = W * NNz;
+    gamma_Nz * Pz1 * Zk = W * NNz * (1 + $AdjNNz$) ...
+    !! gamma_Nz * Pz1 * Zk = W * NNz;
 
     % AAz = Az * A^(1-gamma_Kz) * Kz{-1}^gamma_Kz;
     AAz = AA * Az;
@@ -108,10 +109,12 @@
     % Stage T-0: Import inputs
 
     "Demand for imported inputs in nonprimary export sector"
-    Mz = gamma_Mz * Z;
+    Mz = gamma_Mz * Zm;
 
     "Demand for domestic inputs in nonprimary export sector"
-    Z1 = (1 - gamma_Mz) * Z;
+    Zk = (1 - gamma_Mz) * Zm;
+
+    Z = Zm;
 
     "Marginal cost equals final price in export sector"
     Pz = Pz0*[1 + xi_Z*log(Z / Z_ref)] ...
