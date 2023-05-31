@@ -106,7 +106,6 @@
     "S/S Public infrastructure to productivity" ss_Kg_A
 
     ss_PiIq_NGDP
-    omega_TFgh
 
     "Distribution of commodity processing industry profits to government" psi_jg
 
@@ -118,7 +117,6 @@
     ss_TRvat
     ss_TRlit
     ss_TFgh_NGDP
-    ss_TFghtm_TFh
     ss_TAXls_NGDP
     ss_TRgd
 
@@ -141,12 +139,10 @@
     "Shock to government reserve at the central bank" shk_Bg_NGDP_tar
     "Shock to government external debt" shk_Bgw
     "Shock to government reserve deposit" shk_BCBg
-    "Shock to government transfers for optimizing households" shk_TFgopt
     "Shock to government investment" shk_Ig
     "Shock to government wage bill to GDP" shk_WNg_NGDP
     "Shock to government consumption of goods" shk_Gg
     "Shock to government employment" shk_Ng
-    shk_TFghtm_NGDP
     shk_TAXls
     "Shock to government PIF transfers to GDP" shk_TFfg_NGDP
 
@@ -289,11 +285,9 @@
     TRgd = ss_TRgd;
 
     "Governments transfers to households to GDP"
-    TFgh_NGDP = TFgopt_NGDP + TFghtm_NGDP;
-
     TFgh_NGDP = ss_TFgh_NGDP;
-
-    TFghtm_NGDP = omega_TFgh * TFgh_NGDP;
+    TFgh_NGDP = omega*TFghtm_NGDP + (1-omega)*TFgopt_NGDP;
+    TFghtm_NGDP = TFgopt_NGDP;
 
     "Government subsidies of energy to GDP"
     TFgj_NGDP = (Pj0 - Pj) * J / NGDP;

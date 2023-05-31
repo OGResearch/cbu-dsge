@@ -112,7 +112,7 @@
 
     "Overhead labor to labor in local sector" ss_N0d_Nd
 
-    "Share of remmittances received by HTM househodls" omega_TFwh
+    "Share of remmittances received by HTM househodls" omega
 
     "Efficiency of public infrastructure" iota_kg
     "Efficiency of government support of local supply side" iota_tf
@@ -244,7 +244,7 @@
 % __Hand-to-mouth households__
 
     "Real current income of hand-to-mouth households"
-    Pc*DLIhtm = (WNhtm_NGDP*(1 - TRlit) + TFghtm_NGDP - omega_TFwh*TFwh_NGDP)*NGDP;
+    Pc*DLIhtm = (WNhtm_NGDP*(1 - TRlit) + TFghtm_NGDP - omega*TFwh_NGDP)*NGDP;
 
     "Demand for consumption by optimizing households"
     Ctm = DLIhtm;

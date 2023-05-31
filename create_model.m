@@ -205,7 +205,7 @@ m.ss_PcG_NGDP = 0.265;
 m.ss_WNg_NGDP = 0.10;
 m.ss_Wg_Wopt = 1;
 
-m.omega_TFgh = 0.50;
+m.omega = 0.30;
 
 % Government investment
 m.ss_PiIg_NGDP = 0.08;
@@ -250,7 +250,6 @@ m.lambda_BCBg = 0.5;
 % Steady state parameters
 
 m.omega_N = 0.30;
-m.omega_TFwh = 0.50;
 m.ss_Whtm_Wopt = 1; %%% 0.45;
 
 % Dynamic parameters
@@ -279,7 +278,7 @@ checkSteady(m);
 return
 
 
-%% Reverse engineer parameters for steady-state ratios
+%% Reverse engineer parameters for calibrating steady-state ratios
 
 swap = string.empty(0, 2);
 
@@ -316,10 +315,7 @@ m.TFgd_NGDP = 0.01;
 swap = [swap; "TFgd_NGDP", "ss_TRgd"];
 
 
-%% Calibrate staedy state
-
 % Fix unit root processes
-
 
 m.A = 1;
 m.Pw_star = 1;
