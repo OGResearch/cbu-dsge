@@ -195,7 +195,7 @@ m.kappa_dS = 0;1;
 % Steady-state parameters
 
 % Government debt
-m.ss_Bg_NGDP = 0.40;
+m.ss_Bg_NGDP = 0.28;
 m.ss_Bgh_Bg = 0.107;
 
 % Government transfers to households
@@ -285,7 +285,7 @@ checkSteady(m);
 swap = string.empty(0, 2);
 
 % Net investment position
-m.NIP_NGDP = -0.40;
+m.NIP_NGDP = -0.30;
 swap = [swap; "NIP_NGDP", "zeta_Rg0"];
 
 % Public infrastructure expenditures
@@ -355,7 +355,7 @@ save mat/create_model.mat m
 
 %% Calibration table with key ratios and rates
 
-list = [
+nationalList = [
     "PcC_NGDP"
     "PiI_NGDP"
     "PgG_NGDP"
@@ -371,12 +371,20 @@ list = [
     "INTw_NGDP"
     "CA_NGDP"
     "TB_NGDP"
+];
+
+fiscalList = [
     "Bg_NGDP"
     "Bgh_Bg"
 ];
 
-calibTable = steadyTable(list, :);
-writetable(calibTable, "tables/calibration.xlsx", "writeRowNames", true);
+nationalTable = steadyTable(nationalList, :);
+fiscalTable = steadyTable(fiscalList, :);
 
-disp(calibTable)
+writetable(nationalTable, "tables/calibration-national.xlsx", "writeRowNames", true);
+writetable(fiscalTable, "tables/calibration-fiscal.xlsx", "writeRowNames", true);
+
+disp(nationalTable)
+disp(fiscalTable)
+
 
