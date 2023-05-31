@@ -351,7 +351,6 @@ disp(t)
 
 m = solve(m);
 
-disp DONE
-
+disp("Writing model to mat file")
 save mat/create_model.mat m
 
