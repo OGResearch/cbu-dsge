@@ -1,0 +1,131 @@
+\usepackage{booktabs}
+\usepackage{xfrac}
+\usepackage{relsize}
+
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{graphs}
+\usetikzlibrary{positioning}
+\usetikzlibrary{calc}
+
+\colorlet{linecolor}{ogr7!75}
+\colorlet{agentcolor}{ogr3!15} %
+\colorlet{goodcolor}{ogr7!1} %
+\colorlet{incomecolor}{ogr7!1} %
+\colorlet{explanationcolor}{ogr7!1}
+\colorlet{explanationlabelcolor}{ogr3!5}
+
+\tikzset{agent/.style={
+  draw,
+  linecolor,
+  fill=agentcolor,
+  text=ogrgrey,
+  align=center,
+  rounded corners=2pt,
+  %inner sep=6pt,
+  minimum width=24mm,
+  minimum height=8mm,
+  font=\small,
+}}
+
+\tikzset{good/.style={
+  draw,
+  thin,
+  linecolor,
+  fill=goodcolor,
+  text=ogrgrey,
+  align=center,
+  rounded corners=2pt,
+  inner sep=2pt,
+  font=\scriptsize
+}}
+
+\tikzset{income/.style={
+  draw,
+  thin,
+  linecolor,
+  fill=incomecolor,
+  text=ogrgrey,
+  align=center,
+  rounded corners=2pt,
+  inner sep=2pt,
+  font=\scriptsize
+}}
+
+\tikzset{explanation/.style={
+  draw,
+  linecolor,
+  fill=explanationcolor,
+  text=ogrgrey,
+  align=center,
+  rounded corners=2pt,
+  inner sep=2pt
+}}
+
+\tikzset{explanation label/.style={
+  draw,
+  linecolor,
+  fill=explanationlabelcolor,
+  text=ogrgrey,
+  align=center,
+  rounded corners=2pt,
+  inner sep=3pt,
+  font=\small
+}}
+
+\tikzset{explanation line/.style={
+  linecolor,
+  thick,
+  -{Stealth[length=0mm 6,width=0mm 6]},
+}}
+
+\newcommand{\expl}[4]{%
+  \begin{tikzpicture}[baseline=(tmp0.base)]
+    \node[explanation] (tmp0) {#1};
+    \node[explanation label,overlay] at (#3:#4) {#2} edge[explanation line,overlay] (tmp0);
+  \end{tikzpicture}%
+}
+
+\newenvironment{xGlossary}[1]
+{   \renewcommand{\arraystretch}{1.2}
+    \scriptsize
+    \begin{center}
+    \begin{tabular}{cc|m{7.5cm}}\multicolumn{3}{c}{#1}\\ \hline \hline}
+{   \\ \hline \hline
+    \end{tabular} 
+    \end{center} }
+
+% \newcommand{\DLI}{D\hspace{-0.15em}L\hspace{-0.05em}I}
+% \newcommand{\TX}{T\hspace{-0.1em}X}
+% \newcommand{\RMC}{R\hspace{-0.075em}M\hspace{-0.15em}C} %?
+% \newcommand{\RR}{R\hspace{-0.1em}R}
+% \newcommand{\PR}{P\hspace{-0.15em}R}
+% \newcommand{\RRK}{P\hspace{-0.1em}R\hspace{-0.1em}R} %?
+% \newcommand{\WR}{W\hspace{-0.2em}R} %?
+% \newcommand{\PG}{P\hspace{-0.08em}G} %?
+% \newcommand{\DEF}{D\hspace{-0.15em}E\hspace{-0.15em}F}
+% \newcommand{\BGP}{B\hspace{-0.15em}G\hspace{-0.15em}P}
+% \newcommand{\NGDP}{N\hspace{-0.15em}G\hspace{-0.15em}D\hspace{-0.15em}P}
+% \newcommand{\NIP}{N\hspace{-0.15em}I\hspace{-0.15em}P}
+% \newcommand{\PREM}{P\hspace{-0.15em}R\hspace{-0.1em}E\hspace{-0.15em}M} %?
+% \newcommand{\NN}{N\hspace{-0.15em}N}
+% \newcommand{\NO}{N\hspace{-0.10em}0}
+% \newcommand{\BG}{B\hspace{-0.1em}G}
+
+
+% \newcommand{\aaa}{{\vphantom{lp}\text{A}}}
+% \newcommand{\opt}{{\vphantom{lp}\text{opt}}}
+% \newcommand{\htm}{{\vphantom{lp}\text{htm}}}
+% \newcommand{\sst}{{\vphantom{lp}\text{ss}}}
+% \newcommand{\flex}{\text{flex}}
+% \newcommand{\ls}{{\vphantom{lp}\text{ls}}}
+% \newcommand{\cc}{{\vphantom{lp}\text{C}}}
+% \newcommand{\h}{{\vphantom{lp}\text{H}}}
+% \newcommand{\y}{{\vphantom{lp}\text{Y}}}
+% \newcommand{\ky}{{\vphantom{lp}\text{KY}}}
+% \newcommand{\ii}{{\vphantom{lp}\text{I}}}
+% \newcommand{\iy}{{\vphantom{lp}\text{IY}}}
+% \newcommand{\g}{{\vphantom{lp}\text{G}}}
+% \newcommand{\n}{{\vphantom{lp}\text{N}}}
+
+
+% \newcommand{\ny}{{\vphantom{lp}\text{NY}}}
