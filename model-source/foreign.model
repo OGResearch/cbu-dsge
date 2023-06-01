@@ -6,6 +6,8 @@
     "Foreign-currency risk-free world rate" Rw_star
     "World prices" Pw_star
     "World prices, Y/Y" dPw_star
+    "Relative productivity in remittance inflows" At
+    "Remittance inflows in foreign prices" TFwh_star
 
 
 !parameters
@@ -13,15 +15,16 @@
     "S/S World risk-free FCY real interest rate" ss_RRw_star
     "S/S Rate of Cange in World Prices" ss_dPw_star
 
-    "Smoothing of foreign investors balancence" lambda_BWjz
     "A/R in foreign price rate of change" rho_Pw_star
-
+    
+    "S/S relative productivity in remittance inflows" ss_At
+    "A/R in remittance inflows productivity" rho_At
 
 !shocks
 
     "Shock to foreign price growth" shk_dPw_star
     "Shock to foreign investor transfers to home" shk_TFjz
-
+    "Shock to relative productivity in remittance inflows" shk_At
 
 !equations
 
@@ -37,5 +40,12 @@
 
     "World prices, Y/Y"
     dPw_star = Pw_star / Pw_star{-1};
+
+    "Remittance inflows in foreign currency"
+    TFwh_star = At*A*Pw_star;
+
+    "Relative productivity in remittance inflows"
+    log(At) = rho_At*log(At{-1}) + (1-rho_At)*(log(ss_At) + shk_At) ...
+    !! At = ss_At;
 
 

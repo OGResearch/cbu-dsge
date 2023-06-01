@@ -33,8 +33,7 @@
 
     "Consumer real exchange rate" RER
     "Interest on household foreign liabilities to GDP" INThw_NGDP
-    "Interest received by country on NIP" INTw_NGDP
-
+    "Interest received by country on NIP" INTw_NGDP    
 
 
 !log-variables !all-but
@@ -43,7 +42,7 @@
     NIP_NGDP
     PcC_NGDP
     PiI_NGDP
-    TFwh_NGDP
+    
     TFwhtm_NGDP
     TFwopt_NGDP
     TFwopt_NGDP
@@ -58,7 +57,7 @@
     INThw_NGDP
     INTw_NGDP
 
-
+    TFwh_NGDP
 
 !equations
 
@@ -79,7 +78,10 @@
 
 
     "Remittances from abroad to households"
-    TFwh_NGDP = ss_TFwh_NGDP;
+    % Remittance inflows in local currency and as NGDP ratio
+    TFwh_NGDP*NGDP = TFwh_star * S;
+
+    % Distribution of remittance inflows among households
     TFwh_NGDP = TFwhtm_NGDP + TFwopt_NGDP;
     TFwhtm_NGDP = omega * TFwh_NGDP;
 

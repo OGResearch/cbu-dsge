@@ -46,10 +46,12 @@ end
 m.ss_RRw_star = 1.01;
 m.ss_dPw_star = 1.03;
 m.ss_Pj0_Pw = 1;
+m.ss_At = 0.1;
 
 % Transitory parameters
 
 m.rho_Pw_star = 0.3;
+m.rho_At =  0.5;
 
 
 % __Local (D)__
@@ -77,8 +79,6 @@ m.nu = 0;
 m.beta_Kd = 1;
 m.delta_Kd = 0.15;
 m.delta_Kh = 0.15;
-
-m.ss_TFwh_NGDP = 0.12; % to be reverse engineered
 
 % Markups
 m.mu_CI = 1.25; % to be reverse-engineered 
@@ -232,7 +232,6 @@ m.lambda_Ig1 = 1.5;%0.5;
 m.lambda_Bg_NGDP_tar = 0.93;
 m.lambda_Bgw = 0.1;
 m.lambda_Bwf = 0.05; 
-m.lambda_BWjz = 0.05;
 m.lambda_BCBg = 0.5;
 
 
@@ -331,6 +330,9 @@ swap = [swap; "TAXlit_NGDP", "ss_TRlit"];
 % Subsidies for local supply capacity (SOE...)
 m.TFgd_NGDP = 0.01;
 swap = [swap; "TFgd_NGDP", "ss_TRgd"];
+
+m.TFwh_NGDP = 0.12;
+swap = [swap; "TFwh_NGDP", "ss_At"];
 
 
 %% Calibrate staedy state
