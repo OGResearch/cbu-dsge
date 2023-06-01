@@ -18,9 +18,6 @@
 !parameters
 
     "Inverse elasticity of labor supply for OPT households" eta
-    "S/S HTM household wage to OPT household wage" ss_Whtm_Wopt
-    "S/S Wage rate markup in government sectors" ss_W_Wopt
-
     "A/R Real wage" rho_W
 
 

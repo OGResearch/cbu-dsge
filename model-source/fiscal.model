@@ -147,10 +147,7 @@
 !shocks
 
     "Shock to government reserve at the central bank" shk_Bg_NGDP_tar
-    "Shock to government external debt" shk_Bgw
-    "Shock to government reserve deposit" shk_BCBg
-    "Shock to government transfers for optimizing households" shk_TFgopt
-    
+    "Shock to government external debt" shk_Bgw    
     "Shock to government investment" shk_Ig
     "Shock to government consumption of goods" shk_Gg
     "Shock to government employment" shk_Ng
