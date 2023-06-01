@@ -213,6 +213,7 @@ m.ss_Bwf_NGDP = 0.10;
 m.ss_TRvat = 0; % to be reverse-engineered 
 m.ss_TRlit = 0.03;
 m.ss_TRgd = 0;
+m.ss_TRgz = 0;
 m.ss_TRj = 0;
 m.ss_TRq = 0;
 
@@ -225,9 +226,6 @@ m.lambda_Gg2 = 0.5;
 
 m.lambda_Ng1 = 0.2;%0.1;
 m.lambda_Ng2 = 0.5; 
-
-m.lambda_TAXls1 = 0.5;
-m.lambda_TAXls2 = 0.5;
 
 m.lambda_Ig1 = 1.5;%0.5; 
 

@@ -1,59 +1,62 @@
 
 !variables
 
-    TRgd
-    TFgd_NGDP
     "Government debt to GDP" Bg_NGDP
     "Target for gross government debt to GDP" Bg_NGDP_tar
-    Bgh_NGDP
-    Bgw_NGDP
-    Bgh_Bg
-    Bwf_NGDP
+    "Government local debt to GDP" Bgh_NGDP
+    "Government external debt to GDP" Bgw_NGDP
+    "Government external debt to government debt" Bgh_Bg
+    "Private external debt to GDP" Bwf_NGDP
 
-    "Government investment to public investment fund to GDP" TFfg_NGDP
-    PiIg_NGDP
-    PgG_NGDP
-    PcGg_NGDP
-    WNg_NGDP
-    VAg_NGDP
+    "FRD transfers to government to GDP" TFfg_NGDP
+    "Government infrastructure investment to GDP" PiIg_NGDP
+    "Government consumption to GDP" PgG_NGDP
+    "Government consumption of goods to GDP" PcGg_NGDP
+    "Government wage bill to GDP" WNg_NGDP
+    "Government sector value added to GDP" VAg_NGDP
 
     "Government consumption" G
     "Government consumption of goods" Gg
 
-    "Public infrastructure capital" Kg
-    "Target public infrastructure capital" Kg0
-    "Public infrastructure investment" Ig
+    "Government infrastructure capital" Kg
+    "Target government infrastructure capital" Kg0
+    "Government infrastructure investment" Ig
 
-    Pg
-    PgG
+    "Total government consumption deflator" Pg
+    "Total government consumption expenditures" PgG
 
     "Value added tax rate" TRvat
     "Labor income tax rate" TRlit
     "Energy sector tax rate" TRj
     "Primary export sector tax rate" TRq
+    
 
     "Government tax revenues to GDP Ratio" TAX_NGDP
-    TAXq_NGDP
-    TAXj_NGDP
+    "Government revenues from mining sector tax in primary exporters to GDP" TAXq_NGDP
+    "Government revenues from mining sector tax in energy sector to GDP" TAXj_NGDP
     "Government revenues from value added tax" TAXvat_NGDP
     "Government revenues for labor income tax" TAXlit_NGDP
-    TAXls_NGDP
+    "Government revenues from lump-sum taxes" TAXls_NGDP
 
     "Government transfers to GDP" TFg_NGDP
-    TFgh_NGDP
-    TFgopt_NGDP
-    TFghtm_NGDP
-    TFgj_NGDP
+    "Government transfers to households to GDP" TFgh_NGDP
+    "Government transfers to optimizing households to GDP" TFgopt_NGDP
+    "Government transfers to HTM households to GDP" TFghtm_NGDP
+    "Government transfers to local energy sector to GDP" TFgj_NGDP
+    
+    "Share of centrally planned investment on total investment in local supply side" TRgd
+    "Share of centrally planned investment on total investment in non-primary export sectors" TRgz
+    "Centrally planned investment on total investment in local supply side on GDP" TFgd_NGDP
+    "Centrally planned investment on total investment in non-primary export sectors on GDP" TFgz_NGDP
+   
+    "Government total deficit to GDP" DEF_NGDP
+    "Government primary deficit to GDP" PDEF_NGDP
 
-    DEF_NGDP
-    PDEF_NGDP
+    "Debt service costs of local government debt to GDP" INTgh_NGDP
+    "Debt service costs of external government debt to GDP" INTgw_NGDP
+    "Interest receipts on foreign FRD savings to GDP" INTwf_NGDP
 
-
-    INTgh_NGDP
-    INTgw_NGDP
-    INTwf_NGDP
-
-    Ng
+    "Public sector labor" Ng
 
 
 !log-variables !all-but
@@ -76,12 +79,14 @@
     TRvat
     TRlit
     TRgd
+    TRgz
     TRj
     TRq
 
     TFg_NGDP
     TFfg_NGDP
     TFgd_NGDP
+    TFgz_NGDP
     TAXvat_NGDP
     TAXlit_NGDP
     TAXls_NGDP
@@ -105,16 +110,16 @@
 
     % Steady-state parameters
 
-    "S/S Foreign government debt to government debt" ss_Bgh_Bg
+    "S/S External government debt to total government debt" ss_Bgh_Bg
     "S/S Government gross debt to GDP" ss_Bg_NGDP
 
-    "Depreciation of public infrastructure capital" delta_Kg
-    "S/S Public infrastructure to productivity" ss_Kg_A
+    "Depreciation of government infrastructure capital" delta_Kg
+    "S/S government infrastructure capital to productivity" ss_Kg_A
 
     ss_PiIq_NGDP
 
     "Smoothing of PIF balance" lambda_Bwf
-    "S/S External position of the public investment fund to GDP" ss_Bwf_NGDP
+    "S/S External position of the government investment fund to GDP" ss_Bwf_NGDP
     "S/S Government consumption to GDP" ss_PcG_NGDP
     "S/S Government investment to GDP" ss_PiIg_NGDP
     ss_WNg_NGDP
@@ -128,6 +133,7 @@
     ss_TFgj_NGDP
     ss_TAXls_NGDP
     ss_TRgd
+    ss_TRgz
 
 
     % Dynamic parameters
@@ -139,8 +145,6 @@
     lambda_Gg2
     lambda_Ng1
     lambda_Ng2
-    lambda_TAXls1
-    lambda_TAXls2
 
 
 !shocks
@@ -199,9 +203,9 @@
     Bgh_NGDP = ss_Bgh_Bg * ss_Bg_NGDP;
 
 
-    % Public infrastructure
+    % government infrastructure
 
-    "Public infrastructure investment"
+    "government infrastructure investment"
     log(Ig) = ...
         + log(ss_dA * Ig{-1}) ...
         + lambda_Ig1*log(Kg0{+1} / Kg{+1}) ...
@@ -210,7 +214,7 @@
 
     Kg0 = ss_Kg_A * A;
 
-    "Public infrastructure capital"
+    "government infrastructure capital"
     Kg = (1 - delta_Kg) * Kg{-1} + Ig;
 
     "Government investment to GDP"
@@ -295,6 +299,7 @@
     TFg_NGDP = ...
         + TFgh_NGDP ...
         + TFgd_NGDP ...
+        + TFgz_NGDP ...
         - TFfg_NGDP ...
         + TFgj_NGDP ...
         - PIEq_NGDP ...
@@ -305,6 +310,10 @@
     "Government subsidies to local supply side to GDP"
     TFgd_NGDP = TRgd*Pi*Id / NGDP;
     TRgd = ss_TRgd;
+
+    "Government subsidies to non-primary export to GDP"
+    TFgz_NGDP = TRgz*Pi*Iz / NGDP;
+    TRgz = ss_TRgz;
 
     "Governments transfers to households to GDP"
     TFgh_NGDP = TFgopt_NGDP + TFghtm_NGDP;
