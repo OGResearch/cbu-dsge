@@ -10,10 +10,12 @@
     "Value added in energy sector to GDP" VAj_NGDP
     "Energy volume to GDP" PjJ_NGDP
     "Energy cost base to GDP" Pj0J_NGDP
+    "Costs of energy sector production paid to households" TFjh_NGDP
     "Profit of energy sector" PIEj_NGDP
     "Import inputs into energy sector" Mj
-    Pmj
-    PmjMj_NGDP
+    "Profit repatriation from energy sector" TFjw_NGDP
+    "Import price for energy sector inputs" Pmj
+    "Imports for energy sector to GDP" PmjMj_NGDP
 
 
 !log-variables !all-but
@@ -22,7 +24,9 @@
     PjJ_NGDP
     Pj0J_NGDP
     PIEj_NGDP
+    TFjh_NGDP
     PmjMj_NGDP
+    TFjw_NGDP
 
 
 !shocks
@@ -33,14 +37,14 @@
 !parameters
 
     "S/S Real world price of energy" ss_Pj0_Pw
-    gamma_Mj
+    "Import intensity of energy sector" gamma_Mj
+    "Share of repatriated profits on VA" gamma_TFjw
     "Adjustment coefficient in price of energy"  lambda_Pj0
 
 
 !equations
 
     "Subsidized price of energy"
-    % Pj = Pj0*(1 + TRj) - subsidy
     Pj = Pj0*(1 + TRj) - TFgj_NGDP*NGDP/J;
 
     "Marginal cost in energy sector"
@@ -61,11 +65,16 @@
     Pmj = Pj0;
     PmjMj_NGDP*NGDP = Pmj * Mj;
 
+    "Profit repatriation from energy sector"
+    TFjw_NGDP = gamma_TFjw * VAj_NGDP;
+
     "World price of energy"
     Pj0_star = ss_Pj0_Pw * Pw_star;
 
     "Profit in energy sector"
-    PIEj_NGDP = PjJ_NGDP + TFgj_NGDP - Pj0J_NGDP*(1 + TRj);
+    % Distrubuted to HH of repatriated abroad
+    PIEj_NGDP = PjJ_NGDP + TFgj_NGDP  - Pj0J_NGDP*(1 + TRj);
+    TFjh_NGDP = VAj_NGDP - Pj0J_NGDP*TRj - TFjw_NGDP;
 
     "Value added in energy sector"
     VAj_NGDP = Pj0J_NGDP - PmjMj_NGDP;

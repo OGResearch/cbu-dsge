@@ -139,7 +139,8 @@ m.rho_Pq_Pw = 0.5;
 
 % __Energy sector (J)__
 m.gamma_J = 0.07; % to be reverse-engineered 
-m.gamma_Mj = 0.25; % gives PmjMj_NGDP = 0.02
+m.gamma_Mj = 0.2; % gives PmjMj_NGDP = 0.02
+m.gamma_TFjw = 0.25; %gives TFjw_NGDP = 0.02
 m.lambda_Pj0 = 1;
 
 
@@ -310,7 +311,7 @@ m.PqQ_NGDP = 0.08;
 swap = [swap; "PqQ_NGDP", "ss_Aq"];
 
 % Energy cost base
-m.Pj0J_NGDP = 0.04;
+m.Pj0J_NGDP = 0.1;
 swap = [swap; "Pj0J_NGDP", "gamma_J"];
 
 % Energy sector tax
