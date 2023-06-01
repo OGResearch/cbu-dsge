@@ -15,6 +15,7 @@
     PgG_NGDP
     PcGg_NGDP
     WNg_NGDP
+    VAg_NGDP
 
     "Government consumption" G
     "Government consumption of goods" Gg
@@ -96,6 +97,8 @@
     INTgh_NGDP
     INTgw_NGDP
     INTwf_NGDP
+
+    VAg_NGDP
 
 
 !parameters
@@ -297,6 +300,8 @@
         - PIEq_NGDP ...
     ;
 
+
+
     "Government subsidies to local supply side to GDP"
     TFgd_NGDP = TRgd*Pi*Id / NGDP;
     TRgd = ss_TRgd;
@@ -337,5 +342,7 @@
         - lambda_Bwf*(ss_Bwf_NGDP - Bwf_NGDP{+1}) ...
         + shk_TFfg_NGDP ...
     !! Bwf_NGDP = ss_Bwf_NGDP;
+
+    VAg_NGDP = WNg_NGDP;
 
 
