@@ -80,3 +80,16 @@
     VAj_NGDP = Pj0J_NGDP - PmjMj_NGDP;
 
 
+% REV = PjJ + TFgj
+% 13% = 10.5% + 2.5%
+
+% COSTS = Pj0J + TAXj
+% 13% = 10% + 3%
+
+% Pj0J  = TFjh + TFjw + PmjMj_NGDP + TAXj
+% % 10% = 3+ 2+ 2 + 3
+% VAj = TFjh + TFjw + TAXj
+% % 8 = 3+2+3
+
+% VAj = Pj0J - PmM_NGDP
+% 8% = 10 - 2

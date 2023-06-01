@@ -192,7 +192,7 @@ m.ss_Bgh_Bg = 0.107;
 
 % Government transfers to households
 m.ss_TFgh_NGDP = 0.05;
-m.ss_TFgj_NGDP = 0.01;
+m.ss_TFgj_NGDP = 0.025;
 
 % Government consumption
 m.ss_PcG_NGDP = 0.16;
@@ -311,11 +311,11 @@ m.PqQ_NGDP = 0.08;
 swap = [swap; "PqQ_NGDP", "ss_Aq"];
 
 % Energy cost base
-m.Pj0J_NGDP = 0.1;
-swap = [swap; "Pj0J_NGDP", "gamma_J"];
+m.VAj_NGDP = 0.08;
+swap = [swap; "VAj_NGDP", "gamma_J"];
 
 % Energy sector tax
-m.TAXj_NGDP = 0.02;
+m.TAXj_NGDP = 0.03;
 swap = [swap; "TAXj_NGDP", "ss_TRj"];
 
 % Primary export sector
