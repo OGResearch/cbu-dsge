@@ -4,18 +4,14 @@
 !variables
 
     "Stage T-1 marginal cost in nonprimary export sector" Pz1
-    "Capital in nonprimary export sector" Kz
-    "Target capital in nonprimary export sector" Kz_tar
-    "Investment in nonprimary export sector" Iz
-
     "Total labor in nonprimary exports" Nz
     "Variable labor in nonprimary exports" NNz
     "Overhead labor in nonprimary exports" N0z
     "Imported inputs to nonprimary exports" Mz
     "Imported inputs to nonprimary exports to GDP ratio" PmzMz_NGDP
     "Nonprimary exports" Z
-    "Stage T-1 production in nonprimary exports: Labor-Capital" Zk
-    "Stage T-1 production in nonprimary exports: Imports" Zm
+    "Stage T-1 production in nonprimary exports: Labor-Capital" Z2
+    "Stage T-1 production in nonprimary exports: Imports" Z1
     "Reference level for nonprimary exports" Z_ref
     "Nominal marginal cost in nonprimary exports" Pz0
     "Import prices in nonprimary exports" Pmz
@@ -33,9 +29,7 @@
 
 !parameters
 
-    ss_N0z_Nz
-    ss_Z_ref_Az
-    delta_Kz
+    "S/S Overhead labot to total labor in nonprimary export sector" ss_N0z_Nz
     "Markup over factor cost of nonprimary exporters" mu_Z
     "Capital share of nonprimary exports" gamma_Kz
     "Import share of nonprimary exports" gamma_Mz
@@ -45,7 +39,6 @@
     %"S/S overhead labor to capital ratio" ss_N0z_Kz
     "S/S overhead labor" ss_N0z
     "S/S nonprimary export specific technology" ss_Az
-    "S/S share of capital in nonprimary export technology" ss_Kz_A
     "S/S relative price of imported inputs in nonprimary exports to local imports" ss_Pmz_Pmd
     "S/S relative price of nonprimary exports to imported inputs" ss_Pz_Pmz
     "Scale parameter in nonprimary export production function" alpha_Z
@@ -82,7 +75,7 @@
 
 !equations
 
-    % Labor input
+% Labor input
 
     "Breakdown of total labor input in nonprimary export sector"
     Nz = N0z + NNz;
@@ -91,14 +84,16 @@
     N0z = ss_N0z_Nz * &Nz;
 
 
-    % Stage T-2: Labor and capital
+% Stage T-2: Labor and capital
 
     "Stage T-1 production function in nonprimary export sector"
-    Zk = Kz{-1}^(1 - gamma_Nz) * (AAz * NNz)^gamma_Nz;
+    Z2 = Kz{-1}^(1 - gamma_Nz) * (AAz * NNz)^gamma_Nz;
 
     "Demand for labor in nonprimary export sector"
-    % gamma_Nz * Pz1 * Zk = W * NNz * (1 + $AdjNNz$) ...
-    gamma_Nz * Pz1 * Zk = W * NNz;
+    gamma_Nz * Pz1 * Z2 = W * NNz;
+
+    "Demand for capital in nonprimary export sector"
+    (1 - gamma_Nz) * Pz1 * Z2{-1} = Prkz * Kz{-1};
 
     % AAz = Az * A^(1-gamma_Kz) * Kz{-1}^gamma_Kz;
     AAz = AA * Az;
@@ -106,45 +101,31 @@
     "Nominal marginal cost in nonprimary export sector"
     Pz0 = mu_Z * (gamma_Mz*Pmz + (1-gamma_Mz)*Pz1);
 
-    % Stage T-1: Import inputs
+
+% Stage T-1: Import inputs
 
     "Demand for imported inputs in nonprimary export sector"
-    Mz = gamma_Mz * Zm;
+    Mz = gamma_Mz * Z1;
 
     "Demand for domestic inputs in nonprimary export sector"
-    Zk = (1 - gamma_Mz) * Zm;
+    Z2 = (1 - gamma_Mz) * Z1;
 
-    % Stage T-0: Sales
-    Z = Zm;
+
+% __Stage T-0: Sales__
+
+    "Final sales of nonprimary exports"
+    Z = Z1;
 
     "Marginal cost equals final price in export sector"
     Pz = Pz0*[1 + xi_Z*log(Z / Z_ref)] ...
     !! Pz = Pz0;
 
-    % Reference level for nonprimary export production
+    "Reference level for nonprimary export production"
     log(Z_ref) = ...
         + log(Z_ref{-1} * ss_dA) ...
         + lambda_Z_ref * (log(A * Az * &Z / (&A * &Az)) - log(Z_ref)) ...
         + shk_Z_ref ...
     !! Z_ref = Z;
-
-
-% __Autonomous capital supply to nonprimary export sector__
-
-    "Capital supply to nonprimary export sector"
-    log(Iz) = ...
-        + log(Iz{-1} * ss_dA) ...
-        + lambda_Kz * log(Kz_tar{+1} / Kz{+1}) ...
-        + shk_Kz ...
-    !! Kz = Kz_tar;
-
-
-    "Target capital in nonprimary export sector"
-    Kz_tar = ss_Kz_A * AAz{+1} / ss_dA^1 ...
-    !! Kz_tar = ss_Kz_A * AA * ss_Az;
-
-
-    PiIz_NGDP*NGDP = Pi*Iz;
 
     "Relative productivity in nonprimary export sector"
     log(Az) = ...
@@ -152,7 +133,6 @@
         + (1-rho_Az) * log(ss_Az) ...
         + (1-rho_Az) * shk_Az ...
     !! Az = ss_Az;
-
 
 % __International prices__
 
@@ -167,10 +147,9 @@
 
     PmzMz_NGDP*NGDP = Pmz*Mz;
     PzZ_NGDP = Pz*Z / NGDP;
+    PiIz_NGDP*NGDP = Pi*Iz;
 
-    % Nonprimary exporters profits including capital income
     WNz_NGDP = W*Nz / NGDP;
     PIEz_NGDP*NGDP = Pz*Z - WNz_NGDP*NGDP - Pmz*Mz - PiIz_NGDP*NGDP;
     VAz_NGDP = (Pz*Z - Pmz*Mz) / NGDP;
-
 

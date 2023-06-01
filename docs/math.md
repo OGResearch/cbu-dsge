@@ -1,6 +1,7 @@
 
 $$
 \newcommand{\M}[1]{\mathit{#1}}
+\newcommand{\Dk}[1]{\mathit{Dk}_{\,#1}}
 \newcommand{\Kd}[1]{\mathit{K}_{D,\,#1}}
 \newcommand{\Kz}[1]{\mathit{K}_{Z,\,#1}}
 \newcommand{\Kg}[1]{\mathit{K}_{G,\,#1}}

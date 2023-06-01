@@ -3,6 +3,7 @@
 # Details of local supply side
 
 * Pairwise production stages
+* Short-term Leontief, long-term Cobb-Douglas
 * Productivity and public infrastructure
 * Public incentives to expand capacity
 
@@ -15,7 +16,7 @@
 * Public infrastructure augmented productivity
 
 $$
-D^3_t = \Kd{t-1} {}^{1-\gammaND} \cdot \left( \AAd t \cdot \Ny t \right)^{\gammaND}
+\Dk t = \Kd{t-1} {}^{1-\gammaND} \cdot \left( \AAd t \cdot \Ny t \right)^{\gammaND} 
 $$
 
 ### Stage T–2: Nonprimary import inputs
@@ -31,7 +32,7 @@ $$
 Public infrastructure augmented technology
 
 $$
-\AA t = A_t + \iotaKG \cdot \Kg t 
+\AA t = A_t + \iotaKG \cdot \Kg t
 $$
 
 Total productivity in local sector
@@ -49,14 +50,14 @@ Household budget constraint in Lagrangian with government support of supply side
 
 $$
 \begin{gather*}
-\LAMBDA_t \cdot \left[
+\Lambda_t \cdot \left[
 \underbrace{-\ \Pi t \cdot \Iy t \cdot \left(1 + \M{adj}_t - {\color{yellow}\iota_{GD} \cdot \TRgd t} \right)}_{}
 \quad \underbrace{+\ \Pky t \cdot \M{Iy_t}}
 \quad \underbrace{+\ \Pky t \cdot \Kd{t-1} \cdot \left(1 - \delta_{Kd}\right)}
 \quad \underbrace{-\ \M{Pky}_t \cdot \Kd t}
 \right]
 \\[10pt]
-+\quad \beta \cdot \LAMBDA_{t+1} \cdot \left[
++\quad \beta \cdot \Lambda_{t+1} \cdot \left[
 \underbrace{\M{Prky_{t+1}} \cdot \Kd t}_{}
 \quad \underbrace{+\ \M{Pky}_{t+1} \cdot \M{Ky}_t \cdot \left(1-\delta_{Ky}\right)}_{}
 \right]

@@ -118,7 +118,8 @@ m.rho_Dk_Dm = 0.75;
 % Habit, adjustment costs
 m.phi_Id = 1;
 
-m.xi_Id = 3;
+m.xi_Id = 1;
+m.xi_Iz = 1;
 m.xi_Pc = 2.5; %1
 m.xi_Pi = 2.5; %0.5
 % m.xi_NNd = 0;
@@ -161,8 +162,6 @@ m.ss_Pmz_Pmd = 1;
 m.ss_Pz_Pmz = 1;
 %m.ss_N0z_Kz = 0.12; % to be reverse-engineered 
 m.alpha_Z = 1; 0.73; % to be reverse-engineered 
-
-m.ss_Z_ref_Az = 1;
 
 % Transitory parameters
 m.lambda_Z_ref = 0.7;
@@ -255,9 +254,15 @@ m.rho_W = 0.4;
 
 % Fix unit root processes
 
-m.A = 1;
+m.A = 0.7;
 m.Pw_star = 1;
 m.Pc = 1;
+
+
+m.gamma_Mz = 0.35;
+m.gamma_Nz = 0.35;
+m.ss_Kz_A = 0.5;
+m.ss_Az = 1;
 
 m = steady( ...
     m ...
@@ -266,8 +271,26 @@ m = steady( ...
 );
 
 checkSteady(m);
+m.A = 1;
+m = steady( ...
+    m ...
+    , "fixLevel", ["A", "Pw_star", "Pc"] ...
+    , "blocks", true ...
+);
 
-% return
+
+m1 = m;
+m1.ss_Az = 1.5;
+
+m1 = steady( ...
+    m1 ...
+    , "fixLevel", ["A", "Pw_star", "Pc"] ...
+    , "blocks", true ...
+);
+
+checkSteady(m1);
+m = m1;
+m = solve(m);
 
 
 %% Reverse engineer parameters for steady-state ratios
