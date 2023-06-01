@@ -45,9 +45,9 @@
     "Government transfers to local energy sector to GDP" TFgj_NGDP
     
     "Share of centrally planned investment on total investment in local supply side" TRgd
-    "Share of centrally planned investment on total investment in non-primary export sectors" TRgz
+    "Share of centrally planned investment on total investment in non-primary export sector" TRgz
     "Centrally planned investment on total investment in local supply side on GDP" TFgd_NGDP
-    "Centrally planned investment on total investment in non-primary export sectors on GDP" TFgz_NGDP
+    "Centrally planned investment on total investment in non-primary export sector on GDP" TFgz_NGDP
    
     "Government total deficit to GDP" DEF_NGDP
     "Government primary deficit to GDP" PDEF_NGDP
@@ -116,36 +116,32 @@
     "Depreciation of government infrastructure capital" delta_Kg
     "S/S government infrastructure capital to productivity" ss_Kg_A
 
-    ss_PiIq_NGDP
-
-    "Smoothing of PIF balance" lambda_Bwf
-    "S/S External position of the government investment fund to GDP" ss_Bwf_NGDP
+    "Smoothing of FRD balance" lambda_Bwf
+    "S/S External position of the government investment fund (FRD) to GDP" ss_Bwf_NGDP
     "S/S Government consumption to GDP" ss_PcG_NGDP
-    "S/S Government investment to GDP" ss_PiIg_NGDP
-    ss_WNg_NGDP
-    ss_TRvat
-    ss_TRlit
-    ss_TRj
-    ss_TRq
+    "S/S Government infrastructure investment to GDP" ss_PiIg_NGDP
+    "S/S Government wage bill to GDP" ss_WNg_NGDP
+    "S/S VAT rax rate" ss_TRvat
+    "S/S LIT tax rate" ss_TRlit
+    "S/S Energy sector mining tax rate" ss_TRj
+    "S/S Primary export sector mining tax rate" ss_TRq
 
-    ss_TFgh_NGDP
-    ss_TFghtm_TFh
-    ss_TFgj_NGDP
-    ss_TAXls_NGDP
-    ss_TRgd
-    ss_TRgz
-
+    "S/S Government transfers to households to GDP" ss_TFgh_NGDP
+    "S/S Government subsidy to energy sector to GDP" ss_TFgj_NGDP
+    "S/S Lump-sum tax revenues to GDP" ss_TAXls_NGDP
+    "S/S Share of centrally planned investment on total investment in local supply side" ss_TRgd
+    "S/S Share of centrally planned investment on total investment in non-primary export sector" ss_TRgz
 
     % Dynamic parameters
 
     "Smoothing of target for government debt to GDP" lambda_Bg_NGDP_tar
     "Smoothing of government reserve deposit" lambda_BCBg
     "Government investment reaction to government investment to consumption" lambda_Ig1
-    lambda_Bgw
-    lambda_Gg1
-    lambda_Gg2
-    lambda_Ng1
-    lambda_Ng2
+    "Smoothing of government external debt adjustment" lambda_Bgw
+    "Government consumption reaction to a deviation of government debt from its target" lambda_Gg1
+    "Government consumption reaction to a deviation from its S/S level" lambda_Gg2
+    "Government employment reaction to a deviation of government debt from its target"  lambda_Ng1
+    "Government employment reaction to a deviation from S/S wage bill" lambda_Ng2
 
 
 !shocks
