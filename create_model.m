@@ -188,7 +188,7 @@ m.kappa_dS = 0;1;
 
 % Government debt
 m.ss_Bg_NGDP = 0.28;
-m.ss_Bgh_Bg = 0.107;
+m.ss_Bgw_Bg  = 25/28;
 
 % Government transfers to households
 m.ss_TFgh_NGDP = 0.05;
@@ -230,6 +230,7 @@ m.lambda_Ng2 = 0.5;
 m.lambda_Ig1 = 1.5;%0.5; 
 
 m.lambda_Bg_NGDP_tar = 0.93;
+m.lambda_Bgw = 0.1;
 m.lambda_Bwf = 0.05; 
 m.lambda_BWjz = 0.05;
 m.lambda_BCBg = 0.5;
@@ -387,7 +388,7 @@ nationalList = [
 
 fiscalList = [
     "Bg_NGDP"
-    "Bgh_Bg"
+    "Bgw_Bg"
     "TAX_NGDP"
 ];
 

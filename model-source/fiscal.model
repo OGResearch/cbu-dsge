@@ -5,7 +5,7 @@
     "Target for gross government debt to GDP" Bg_NGDP_tar
     "Government local debt to GDP" Bgh_NGDP
     "Government external debt to GDP" Bgw_NGDP
-    "Government external debt to government debt" Bgh_Bg
+    "Government external debt to government debt" Bgw_Bg
     "Private external debt to GDP" Bwf_NGDP
 
     "FRD transfers to government to GDP" TFfg_NGDP
@@ -66,7 +66,7 @@
     Bgh_NGDP
     Bgw_NGDP
     Bwf_NGDP
-    Bgh_Bg
+    Bgw_Bg
 
     TAX_NGDP
     TAXq_NGDP
@@ -110,7 +110,7 @@
 
     % Steady-state parameters
 
-    "S/S External government debt to total government debt" ss_Bgh_Bg
+    "S/S External government debt to total government debt" ss_Bgw_Bg
     "S/S Government gross debt to GDP" ss_Bg_NGDP
 
     "Depreciation of government infrastructure capital" delta_Kg
@@ -141,6 +141,7 @@
     "Smoothing of target for government debt to GDP" lambda_Bg_NGDP_tar
     "Smoothing of government reserve deposit" lambda_BCBg
     "Government investment reaction to government investment to consumption" lambda_Ig1
+    lambda_Bgw
     lambda_Gg1
     lambda_Gg2
     lambda_Ng1
@@ -153,19 +154,17 @@
     "Shock to government external debt" shk_Bgw
     "Shock to government reserve deposit" shk_BCBg
     "Shock to government transfers for optimizing households" shk_TFgopt
+    
     "Shock to government investment" shk_Ig
-    "Shock to government wage bill to GDP" shk_WNg_NGDP
     "Shock to government consumption of goods" shk_Gg
     "Shock to government employment" shk_Ng
-    shk_TFghtm_NGDP
-    shk_TAXls
-    "Shock to government PIF transfers to GDP" shk_TFfg_NGDP
+    "Shock to lump-sum taxes" shk_TAXls
+    "Shock to FRD transfers" shk_TFfg
 
 
-!substitutions
+    !substitutions
 
     ss_PcGg_NGDP := (ss_PcG_NGDP - ss_WNg_NGDP);
-
 
 !equations
 
@@ -179,8 +178,6 @@
     !! Bg_NGDP_tar = ss_Bg_NGDP;
 
     Bg_NGDP = Bgh_NGDP + Bgw_NGDP;
-
-    Bgh_Bg = Bgh_NGDP / Bg_NGDP;
 
     "Interest on local government debt to GDP"
     INTgh_NGDP = (Rg{-1} - 1) * Bgh_NGDP{-1}/dNGDP;
@@ -200,8 +197,11 @@
     ;
 
     "Rule for external government debt"
-    Bgh_NGDP = ss_Bgh_Bg * ss_Bg_NGDP;
+    log(Bgw_NGDP*NGDP/S) = log(Bgw_NGDP{-1}*NGDP{-1}/S{-1}*&dNGDP/&dS) ...
+      + lambda_Bgw*log(ss_Bgw_Bg/Bgw_Bg) + shk_Bgw ...
+    !! Bgw_NGDP = ss_Bg_NGDP*ss_Bgw_Bg;
 
+    Bgw_Bg = Bgw_NGDP / Bg_NGDP;
 
     % government infrastructure
 
@@ -349,7 +349,7 @@
     TFfg_NGDP = ...
         + TFfg_NGDP{-1} ...
         - lambda_Bwf*(ss_Bwf_NGDP - Bwf_NGDP{+1}) ...
-        + shk_TFfg_NGDP ...
+        + shk_TFfg ...
     !! Bwf_NGDP = ss_Bwf_NGDP;
 
     VAg_NGDP = WNg_NGDP;
