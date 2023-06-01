@@ -319,7 +319,7 @@ m.TAXj_NGDP = 0.03;
 swap = [swap; "TAXj_NGDP", "ss_TRj"];
 
 % Primary export sector
-m.TAXq_NGDP = 0.07;
+m.TAXq_NGDP = 0.04;
 swap = [swap; "TAXq_NGDP", "ss_TRq"];
 
 % Value added tax

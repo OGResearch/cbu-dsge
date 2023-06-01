@@ -38,7 +38,7 @@
     "Government revenues for labor income tax" TAXlit_NGDP
     TAXls_NGDP
 
-    "Government transfers to GDP" TF_NGDP
+    "Government transfers to GDP" TFg_NGDP
     TFgh_NGDP
     TFgopt_NGDP
     TFghtm_NGDP
@@ -78,7 +78,7 @@
     TRj
     TRq
 
-    TF_NGDP
+    TFg_NGDP
     TFfg_NGDP
     TFgd_NGDP
     TAXvat_NGDP
@@ -189,7 +189,7 @@
         + PgG_NGDP ...
         + PiIg_NGDP ...
         - TAX_NGDP ...
-        + TF_NGDP ...
+        + TFg_NGDP ...
     ;
 
     "Rule for external government debt"
@@ -289,11 +289,12 @@
 
 
     "Government transfers paid or received"
-    TF_NGDP = ...
+    TFg_NGDP = ...
         + TFgh_NGDP ...
         + TFgd_NGDP ...
         - TFfg_NGDP ...
         + TFgj_NGDP ...
+        - PIEq_NGDP ...
     ;
 
     "Government subsidies to local supply side to GDP"
