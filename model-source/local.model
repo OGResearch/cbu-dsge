@@ -299,7 +299,7 @@
     D3 = Kd{-1}^(1 - gamma_Nd) * (A * Ad * NNd)^gamma_Nd;
 
     "Demand for labor in local sectors"
-    gamma_Nd * Pd3*D3 = mu_D3 * W * NNd;
+    gamma_Nd * Pd3 * D3 = mu_D3 * W * NNd;
 
     "Demand for capital in local sectors"
     (1 - gamma_Nd) * Pd3 * D3 = mu_D3 * Prkd * Kd{-1};
@@ -313,7 +313,7 @@
 
     "Demand for nonprimary imports in local sectors"
     Md = GAMMA_Md * D2 ...
-    !! gamma_Md*Pd2*D2 = Pmd*Md;
+    !! gamma_Md * Pd2 * D2 = Pmd * Md;
 
     "Demand for local input in local sectors"
     D3 = GAMMA_D3 * D2 ...

@@ -9,12 +9,13 @@ $$
 \newcommand{\CC}[1]{\mathit{CC}_{\,#1}}
 \newcommand{\II}[1]{\mathit{II}_{\,#1}}
 \newcommand{\Kd}[1]{\mathit{Kd}_{\,#1}}
+\newcommand{\kkd}[1]{\mathit{kkd}_{\,#1}}
 \newcommand{\Md}[1]{\mathit{Md}_{\,#1}}
 \newcommand{\Nd}[1]{\mathit{Nd}_{\,#1}}
 \newcommand{\Kz}[1]{\mathit{Kz}_{\,#1}}
 \newcommand{\Kg}[1]{\mathit{Kg}_{\,#1}}
 \newcommand{\Nd}[1]{\mathit{Nd}_{\,#1}}
-\newcommand{\Pi}[1]{\mathit{Pi}_{\,#1}}
+\newcommand{\PPi}[1]{\mathit{Pi}_{\,#1}}
 \newcommand{\Id}[1]{\mathit{Id}_{\,#1}}
 \newcommand{\Iz}[1]{\mathit{Iz}_{\,#1}}
 \newcommand{\Ih}[1]{\mathit{Ih}_{\,#1}}

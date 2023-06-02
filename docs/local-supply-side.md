@@ -19,19 +19,42 @@
 
 Combine
 
-* capital, $\Kd{t-1}$
+* capital, $\kkd{t}$ (quantity of capital demanded)
 * variable labor,  $\NNd t$
 * public infrastructure augmented productivity, $\AAd t$
 
 to produce $\Dthree t$ under perfect competition condition
 $$
-\Dthree t = \Kd{t-1} {}^{1-\gammaND} \cdot \left( \AAd t \cdot \NNd t \right)^{\gammaND} 
+\Dthree t = \kkd{t} {}^{1-\gammaND} \cdot \left( \AAd t \cdot \NNd t \right)^{\gammaND} 
 $$
+
+---
+
+### Overhead labor
+
 To operate, the producers need to keep a fixed amount of overhead labor employed, $\NOd t$. Total amount of labor is
 
 $$
 \Nd t = \NOd t + \NNd t \\
 $$
+
+Motivation: short-run labor response to production
+
+Implications for profits
+
+$$
+\begin{gathered}
+\gamma \, Pd_t \cdot D_t = W_t \cdot \NNd t
+\\[20pt]
+\left(1-\gamma\right) \, Pd_t \cdot D_t = Prk_t \cdot kkd_t
+\\[20pt]
+{\Pi{}d}_t = Pd_t \cdot D_t - Prk_t \cdot \kkd t - W_t \cdot \NNd t - W_t \cdot \NOd t
+\end{gathered}
+$$
+
+* Markup
+
+---
 
 ### Stage T–2: Nonprimary import inputs
 
@@ -50,6 +73,8 @@ $$
 $$
 
 
+---
+
 ### Stage T–1: Energy inputs
 
 Combine
@@ -62,9 +87,11 @@ to produce $\Done t$ under perfect competition condition
 $$
 \Done t = \min \left\{
 \, \frac{\Dtwo t}{1-\gammaJD}\, , \ 
-\, \frac{\ \Md t\ }{\gammaJD}
+\, \frac{\  J_t }{\gammaJD}
 \right\} 
 $$
+
+---
 
 ### Stage T: Distribution
 
@@ -77,7 +104,7 @@ D_t = \underbrace{\ C_t + \Gg t\ }_\text{Consumption}
 \\[20pt]
 \CC t = C_t + \Gg t
 \\[20pt]
-\II t = \Id t + \Iz t + \Ig t + \Ih t
+I t = \Id t + \Iz t + \Ig t + \Ih t
 \end{gathered}
 $$
 
@@ -115,7 +142,7 @@ Household budget constraint in Lagrangian with government support of supply side
 $$
 \begin{gather*}
 \Lambda_t \cdot \left[
-\underbrace{-\ \Pi t \cdot \Id t \cdot \left(1 + \M{adj}_t - {\color{yellow}\iota_{GD} \cdot \TRgd t} \right)}_{}
+\underbrace{-\ \PPi t \cdot \Id t \cdot \left(1 + \M{adj}_t - {\color{yellow}\iota_{GD} \cdot \TRgd t} \right)}_{}
 \quad \underbrace{+\ \Pkd t \cdot \M{Id_t}}
 \quad \underbrace{+\ \Pkd t \cdot \Kd{t-1} \cdot \left(1 - \delta_{Kd}\right)}
 \quad \underbrace{-\ \M{Pkd}_t \cdot \Kd t}
