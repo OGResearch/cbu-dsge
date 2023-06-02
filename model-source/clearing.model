@@ -37,8 +37,6 @@
     
     PrK_NGDP
     PIE_NGDP
-    TAXindirect_NGDP
-
 
 !log-variables !all-but
 
@@ -64,8 +62,6 @@
     TFwh_NGDP
     PrK_NGDP
     PIE_NGDP
-
-    TAXindirect_NGDP
 
 !equations
 
