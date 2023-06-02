@@ -149,6 +149,6 @@
     PiIz_NGDP*NGDP = Pi*Iz;
 
     WNz_NGDP = W*Nz / NGDP;
-    PIEz_NGDP*NGDP = Pz*Z - WNz_NGDP*NGDP - Pmz*Mz - PiIz_NGDP*NGDP;
+    PIEz_NGDP*NGDP = Pz*Z - WNz_NGDP*NGDP - Pmz*Mz - Prkz*Kz{-1};
     VAz_NGDP = (Pz*Z - Pmz*Mz) / NGDP;
 

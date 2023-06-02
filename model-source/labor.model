@@ -8,7 +8,7 @@
     "Flexible benchmark wage of OPT households" Wopt_flex
     "Average wage of OPT households" Wopt
     "Labor supplied by OPT households to all sectors" Nopt
-    "Labor income of OPT households to GDP" WNopt_NGDP`xx
+    "Labor income of OPT households to GDP" WNopt_NGDP`x
     "Average wage rate of htm households" Whtm
     "Labor supplied by HTM households" Nhtm
     "Wage bill of HTM households to GDP" WNhtm_NGDP`x
