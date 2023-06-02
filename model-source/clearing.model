@@ -189,7 +189,7 @@
     % m.VAd_NGDP+m.VAg_NGDP+m.VAj_NGDP+m.VAq_NGDP+m.VAz_NGDP+m.TAXvat_NGDP
 
     % "NGDP check: Income"
-    % ss.WN_NGDP+ss.PrK_NGDP+ss.PIE_NGDP + ss.TAXindirect_NGDP
+    % m.WN_NGDP+m.PrK_NGDP+m.PIE_NGDP + m.TAXvat_NGDP
     
     "Rents and income on NGDP"
     PrK_NGDP*NGDP = Prkd*Kd{-1}+Prkz*Kz{-1};
