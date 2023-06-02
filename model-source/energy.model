@@ -72,8 +72,8 @@
     Pj0_star = ss_Pj0_Pw * Pw_star;
 
     "Profit in energy sector"
-    % Distrubuted to HH of repatriated abroad
-    PIEj_NGDP = PjJ_NGDP + TFgj_NGDP  - Pj0J_NGDP*(1 + TRj);
+    % Distrubuted to HH or repatriated abroad
+    PIEj_NGDP = VAj_NGDP - TFgj_NGDP;
     TFjh_NGDP = VAj_NGDP - Pj0J_NGDP*TRj - TFjw_NGDP;
 
     "Value added in energy sector"

@@ -68,7 +68,6 @@
     Pq = S * Pq_star;
     Pq_star = Pq_Pw * Pw_star;
 
-
 % __Real world price of primary commodity__
 
     log(Pq_Pw) = ...

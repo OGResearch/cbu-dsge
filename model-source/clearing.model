@@ -33,7 +33,11 @@
 
     "Consumer real exchange rate" RER
     "Interest on household foreign liabilities to GDP" INThw_NGDP
-    "Interest received by country on NIP" INTw_NGDP    
+    "Interest received by country on NIP" INTw_NGDP   
+    
+    PrK_NGDP
+    PIE_NGDP
+    TAXindirect_NGDP
 
 
 !log-variables !all-but
@@ -58,6 +62,10 @@
     INTw_NGDP
 
     TFwh_NGDP
+    PrK_NGDP
+    PIE_NGDP
+
+    TAXindirect_NGDP
 
 !equations
 
@@ -169,7 +177,7 @@
     "Nomial GDP excluding primary exports to nominal GDP ratio"
     NGDPx_NGDP * NGDP = NGDPx;
 
-    VAd_NGDP = (Pc*C + PcGg_NGDP*NGDP + Pi*I - Pmd*Md) / NGDP;
+    VAd_NGDP = (Pc*C/(1+TRvat) + PcGg_NGDP*NGDP/(1+TRvat) + Pi*I - Pmd*Md - Pj0J_NGDP*NGDP) / NGDP;
 
     VAd_PkdKd = VAd_NGDP / PkdKd_NGDP;
 
@@ -178,4 +186,15 @@
     "Consumer real exchange rate"
     RER = S*Pw_star / Pc;
 
+    % "NGDP check: Expenditures"
+    % m.PcC_NGDP+m.PgG_NGDP+m.PiI_NGDP+m.PxX_NGDP-m.PmM_NGDP
 
+    % "NGDP check: Value added"
+    % m.VAd_NGDP+m.VAg_NGDP+m.VAj_NGDP+m.VAq_NGDP+m.VAz_NGDP+m.TAXvat_NGDP
+
+    % "NGDP check: Income"
+    % ss.WN_NGDP+ss.PrK_NGDP+ss.PIE_NGDP + ss.TAXindirect_NGDP
+    
+    "Rents and income on NGDP"
+    PrK_NGDP*NGDP = Prkd*Kd{-1}+Prkz*Kz{-1};
+    PIE_NGDP = PIEq_NGDP + PIEj_NGDP + PIEd_NGDP + PIEz_NGDP + TAXq_NGDP + TAXj_NGDP;
