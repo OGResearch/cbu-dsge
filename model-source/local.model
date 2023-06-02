@@ -5,24 +5,28 @@
 
     "Public infrastructure auxiliary variable" AA
     D1, D2, D3, Pd3
-    Md_D2, D3_D2
-    "Monetary policy reaction term" React
+    GAMMA_Md`x
+    GAMMA_D3`x
+    "Monetary policy reaction term" React`x
 
     "Shadow Price of Optimizing Household Budget" LAMBDA
     "Total Private Consumption" C
     "Consumption of Optimizing Households" Copt
-    "Private residential investment to GDP" PiIh_NGDP
+    "Private residential investment to GDP" PiIh_NGDP`x
 
     "Consumption of Hand-to-Mouth Households" Chtm
-    "Auxiliary Variable for Consumption to Net Worth Ratio" Copt_Vopt_nu0
+    "Auxiliary Variable for Consumption to Net Worth Ratio" Copt_Vopt_nu0`x
     "Disposable Labor Income of Optimizing Households" DLIopt
     "Household real net worth" Vopt
     "Disposable labor income of hand-to-mouth households" DLIhtm
     "Hours worked in local sectors" Nd
-    "Wage bill in local sectors to GDP" WNd_NGDP
+    "Wage bill in local sectors to GDP" WNd_NGDP`x
     "Physical investment in local sectors" Id
 
-    "Profits in local sectors to GDP" PIEd_NGDP
+    "Profits in local sectors to GDP" PIEd_NGDP`x
+    "Profits in local sectors to GDP" PIEd1_NGDP`x
+    "Profits in local sectors to GDP" PIEd2_NGDP`x
+    "Profits in local sectors to GDP" PIEd3_NGDP`x
 
     "Private residential and overhead capital" Kh
     "Private residential and overhead investment" Ih
@@ -38,10 +42,10 @@
     "Capital in nonprimary export sector" Kz
     "Investment in nonprimary export sector" Iz
 
-    "Household net worth to GDP" PcVopt_NGDP
-    "Capital in local sectors to GDP" PkdKd_NGDP
+    "Household net worth to GDP" PcVopt_NGDP`x
+    "Capital in local sectors to GDP" PkdKd_NGDP`x
 
-    "Capital in nonprimary exports to GDP" PkzKz_NGDP
+    "Capital in nonprimary exports to GDP" PkzKz_NGDP`x
 
     "Marginal cost of local intermediate goods" Pd1
     "Markuped marginal cost in local sectors" Pd
@@ -72,32 +76,17 @@
     "Price of investment, Y/Y" dPi
     "Nominal GDP, Y/Y" dNGDP
 
-    "Private investment in local production to GDP" PiId_NGDP
-    "Investment to capital in local production" PiId_PkdKd
-    "Household NFA to GDP"  Bhw_NGDP
-    "Auxiliary variable for disposable labor income to consumption" DLIopt_Copt
+    "Private investment in local production to GDP" PiId_NGDP`x
+    "Investment to capital in local production" PiId_PkdKd`x
+    "Household NFA to GDP"  Bhw_NGDP`x
+    "Auxiliary variable for disposable labor income to consumption" DLIopt_Copt`x
 
-    PmdMd_NGDP
+    PmdMd_NGDP`x
 
 
 !log-variables !all-but
 
-    PiIh_NGDP
-    Copt_Vopt_nu0
-    PiId_NGDP
-    PiId_PkdKd
-    Bhw_NGDP
-    PcVopt_NGDP
-    PkdKd_NGDP
-    PkzKz_NGDP
-    DLIopt_Copt
-    Md_D2
-    D3_D2
-    PIEd_NGDP
-    %N0d_Nd
-    React
-    PmdMd_NGDP
-    WNd_NGDP
+    !list(`x)
 
 
 !shocks
@@ -105,8 +94,8 @@
     "Shock to overall productivity" shk_A
     "Shock to relative sector productivity in local sectors" shk_Ad
     "Shock to exchange rate parity" shk_S
-    shk_Md_D2
-    shk_Dk_D2
+    shock_GAMMA_Md
+    shock_GAMMA_D3
 
 
 !parameters
@@ -123,9 +112,8 @@
     "A/R Monetary policy rate" rho_Rg
     "Imperfections in forex arbitrage" zeta_S
 
-    "A/R Share of nonprimary import inputs in local sector" rho_Md_D2
+    "A/R Leontief share coefficients" rho_GAMMA
 
-    rho_Dk_D2
     psi_dg
 
     % Steady-state parameters
@@ -137,7 +125,7 @@
     "Depreciation of residential capital" delta_Kh
     "Depreciation of capital in nonprimary export sector" delta_Kz
     "Markup in final goods sectors" mu_CI
-    "Markup over variable factors in local sectors" mu_D2
+    "Markup over variable factors in local sectors" mu_D3
     "Import Share of local sectors" gamma_Md
     "Labor Share of local sectors" gamma_Nd
 
@@ -158,7 +146,6 @@
 
     % Transitory Parameters
     "Habit in consumption" chi_c
-    "Capital versus investment adjustment cost" phi_Id
     "Investment adjustment cost in local sector" xi_Id
     "Investment adjustment cost in nonprimary export sector" xi_Iz
     "Consumer Price Adjustment Cost" xi_Pc
@@ -175,9 +162,8 @@
     chi_DLI0 := (1-chi_dli*&DLIopt_Copt-chi_c);
 
     % Investment adjustment cost term in local production
-    xi_Id0 := ((1-phi_Id)*log(ss_dA - (1-delta_Kd)) + phi_Id*log(ss_dA));
-    AdjId0 := xi_Id*[ log(Id)-(1-phi_Id)*log(Kd{-1})-phi_Id*log(Id{-1}) - $xi_Id0$ ];
-    AdjId1 := xi_Id*[ log(Id{+1})-(1-phi_Id)*log(Kd)-phi_Id*log(Id) - $xi_Id0$ ];
+    AdjId0 := xi_Id*[log(Id) - log(Id{-1}) - log(ss_dA) ];
+    AdjId1 := xi_Id*[log(Id{+1}) - log(Id) - log(ss_dA) ];
 
     % Investment adjustment cost term in nonprimary export sector
     AdjIz0 := xi_Iz*[ log(Iz)-log(Iz{-1}) - log(ss_dA) ];
@@ -191,8 +177,10 @@
     AdjPi0 := xi_Pi*[ log(dPi) - log(dPi{-1}) ];
     AdjPi1 := xi_Pi*[ log(dPi{+1}) - log(dPi) ];
 
+    % Current net worth effect
     NetWorthEff = ((Copt/Vopt - nu0)/(Pc*Copt));
 
+    % Scale constant for production function
     gamma_D2 := (gamma_Md^gamma_Md * (1-gamma_Md)^(1-gamma_Md));
 
 
@@ -221,7 +209,7 @@
     % Supply of capital to local sector
 
     "Demand for investment in local sector"
-    Pkd = Pi*(1 + $AdjId0$ - beta*phi_Id*$AdjId1$ - iota_tf*TRgd) ...
+    Pkd = Pi*(1 + $AdjId0$ - beta*$AdjId1$ - iota_tf*TRgd) ...
     !! Pkd = Pi*(1 - iota_tf*TRgd);
 
     "Price of capital in local sector"
@@ -240,8 +228,8 @@
     Kz = (1 - delta_Kz) * Kz{-1} + Iz;
 
     "Replacement cost of capital in nonprimary export sector"
-    Pkz = Pi*(1 + $AdjIz0$ - beta*$AdjIz1$) ...
-    !! Pkz = Pi;
+    Pkz = Pi*(1 + $AdjIz0$ - beta*$AdjIz1$ - iota_tf*TRgz) ...
+    !! Pkz = Pi*(1 - iota_tf*TRgz);
 
     "Price of capital in nonprimary export sector"
     LAMBDA*Pkz = ...
@@ -279,7 +267,7 @@
 
     % Staget T-0 in local sectors: Distribution
     D = D1;
-    Pd = mu_CI*Pd1;
+    Pd = mu_CI * Pd1;
 
     % Final consumer price setting
     Pd = Pcx*[1 + (mu_CI-1)*($AdjPc0$ - beta*$AdjPc1$)] ...
@@ -308,48 +296,50 @@
     WNd_NGDP = W*Nd / NGDP;
 
     "Stage T-3 production technology in local sectors"
-    D3 = Kd{-1}^(1-gamma_Nd) * (A*Ad*NNd)^gamma_Nd;
+    D3 = Kd{-1}^(1 - gamma_Nd) * (A * Ad * NNd)^gamma_Nd;
 
     "Demand for labor in local sectors"
-    gamma_Nd * Pd3*D3 = W * NNd;
+    gamma_Nd * Pd3*D3 = mu_D3 * W * NNd;
 
     "Demand for capital in local sectors"
-    (1-gamma_Nd)*Pd3*D3 = Prkd*Kd{-1};
+    (1 - gamma_Nd) * Pd3 * D3 = mu_D3 * Prkd * Kd{-1};
 
 
     % Stage T-2 in local sectors: Nonprimary import
 
     "Stage T-2 production technology in local sectors"
-    Pd2*D2 = mu_D2*(Pmd*Md + Pd3*D3) ...
+    Pd2*D2 = Pmd*Md + Pd3*D3 ...
     !! D2 = (1/$gamma_D2$) * Md^gamma_Md * D3^(1-gamma_Md);
 
     "Demand for nonprimary imports in local sectors"
-    Md = Md_D2 * D2 ...
-    !! gamma_Md*Pd2*D2 = mu_D2*Pmd*Md;
+    Md = GAMMA_Md * D2 ...
+    !! gamma_Md*Pd2*D2 = Pmd*Md;
 
     "Demand for local input in local sectors"
-    D3 = D3_D2 * D2 ...
-    !! (1-gamma_Md)*Pd2*D2 = mu_D2*Pd3*D3;
+    D3 = GAMMA_D3 * D2 ...
+    !! (1-gamma_Md)*Pd2*D2 = Pd3*D3;
 
     "Real nonprimary import share of stage T-2 output in local sectors"
-    Md_D2 = ...
-        + rho_Md_D2 * (Md_D2{-1}) ...
-        + (1 - rho_Md_D2) * (&Md / &D2) ...
-        + shk_Md_D2 ...
-    !! Md_D2 = &Md / &D2;
+    GAMMA_Md = ...
+        + rho_GAMMA * (GAMMA_Md{-1}) ...
+        + (1 - rho_GAMMA) * (&Md / &D2) ...
+        + shock_GAMMA_Md ...
+    !! GAMMA_Md = &Md / &D2;
 
     "Real domestic input share of stage T-2 output in local sectors"
-    D3_D2 = ...
-        + rho_Dk_D2 * (D3_D2{-1}) ...
-        + (1 - rho_Dk_D2) * (&D3 / &D2) ...
-        + shk_Dk_D2 ...
-    !! D3_D2 = &D3 / &D2;
+    GAMMA_D3 = ...
+        + rho_GAMMA * (GAMMA_D3{-1}) ...
+        + (1 - rho_GAMMA) * (&D3 / &D2) ...
+        + shock_GAMMA_D3 ...
+    !! GAMMA_D3 = &D3 / &D2;
 
 
     % Stage T-1 in local sectors: Primary inputs
 
     D1 = D2 / (1 - gamma_J);
+
     D1 = J / gamma_J;
+
     Pd1 = (1 - gamma_J)*Pd2 + gamma_J*Pj;
 
 
@@ -430,6 +420,9 @@
     PmdMd_NGDP*NGDP = Pmd*Md;
 
     "Profits of local producers to GDP"
+    PIEd3_NGDP = (Pd3*D3 - W*Nd - Prkd*Kd{-1}) / NGDP;
+    PIEd2_NGDP = (Pd2*D2 - Pd3*D3 - Pmd*Md) / NGDP;
+    PIEd1_NGDP = (Pd1*D1 - Pd2*D2 - Pj*J) / NGDP;
     PIEd_NGDP = (Pd*D - W*Nd - Prkd*Kd{-1} - Pmd*Md - Pj*J) / NGDP;
 
     "Private residential investment to GDP"
