@@ -81,7 +81,7 @@ m.delta_Kh = 0.15;
 
 % Markups
 m.mu_CI = 1.25; % to be reverse-engineered 
-m.mu_D2 = 1; % to be reverse-engineered 
+m.mu_D3 = 1; % to be reverse-engineered 
 
 % Local production
 m.gamma_Md = 0.40; 0.3792; 0.30; % to be reverse-engineered 
@@ -111,10 +111,7 @@ m.ss_Ad = 1;
 m.rho_A = 0;
 m.rho_Ad = 0.5;
 
-m.rho_Md_D2 = 0.75;
-m.rho_Dk_D2 = 0.75;
-
-m.phi_Id = 1;
+m.rho_GAMMA = 0.75;
 
 m.xi_Id = 1;
 m.xi_Iz = 1;
