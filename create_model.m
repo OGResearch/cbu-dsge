@@ -252,15 +252,19 @@ m.rho_W = 0.4;
 
 % Fix unit root processes
 
-m.A = 0.7;
+m.A = 1;
 m.Pw_star = 1;
 m.Pc = 1;
 
+m.gamma_Mz = 0.3;
+m.gamma_Nz = 0.40;
+m.ss_Kz_A = 0.8;
+m.ss_Az = 1.5;
+m.ss_Pz_Pmz = 1.5;
 
-m.gamma_Mz = 0.35;
-m.gamma_Nz = 0.35;
-m.ss_Kz_A = 0.5;
-m.ss_Az = 1;
+m.J = 0.20;
+m.Mj = 0.20;
+
 
 m = steady( ...
     m ...
@@ -269,25 +273,6 @@ m = steady( ...
 );
 
 checkSteady(m);
-m.A = 1;
-m = steady( ...
-    m ...
-    , "fixLevel", ["A", "Pw_star", "Pc"] ...
-    , "blocks", true ...
-);
-
-
-m1 = m;
-m1.ss_Az = 1.5;
-
-m1 = steady( ...
-    m1 ...
-    , "fixLevel", ["A", "Pw_star", "Pc"] ...
-    , "blocks", true ...
-);
-
-checkSteady(m1);
-m = m1;
 m = solve(m);
 
 
@@ -335,7 +320,7 @@ m.TFwh_NGDP = 0.12;
 swap = [swap; "TFwh_NGDP", "ss_At"];
 
 
-%% Calibrate staedy state
+%% Calibrate steady state
 
 % Fix unit root processes
 
@@ -350,12 +335,13 @@ m = steady( ...
     , "blocks", true ...
     , "exogenize", swap(:, 1) ...
     , "endogenize", swap(:, 2) ...
+    , "solver", {"qnsd", "stepTolerance", Inf} ...
 );
 
 checkSteady(m);
 
 steadyTable = table( ...
-    m, ["steady-level", "steady-change", "form", "description"] ...
+    m, ["steady-level", "description"] ...
     , "writeTable", "tables/steady-state-baseline.xlsx" ...
 );
 
@@ -374,9 +360,12 @@ nationalList = [
     "PiI_NGDP"
     "PgG_NGDP"
     "PxX_NGDP"
+    "PzZ_NGDP"
     "PmM_NGDP"
     "PiIg_NGDP"
     "WN_NGDP"
+    "Nz_N"
+    "Ng_N"
     "Rg"
     "Rh"
     "Rg_star"

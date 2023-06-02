@@ -19,7 +19,7 @@ checkSteady(m0);
 %% Create model with higher productivity
 
 m1 = m0;
-%m1.ss_Az = m1.ss_Az * 1.01;
+m1.ss_Az = m1.ss_Az * 1.10;
 
 m1 = steady( ...
     m1 ...
@@ -47,12 +47,10 @@ d = steadydb(m0, 1:T);
 % Unexpected, from time t=3
 d1 = d;
 s1 = simulate( ...
-    m, d1, 3:T ...
+    m1, d1, 3:T ...
     , "prependInput", true ...
     , "method", "stacked" ...
 );
-
-return
 
 p2 = Plan.forModel(m1, 1:T);
 p2 = swap(p2, 1:2, ["Az", "shk_Az"]);
@@ -78,7 +76,7 @@ ch = databank.Chartpack();
 ch.Range = 0:T;
 ch.PlotSettings = {"marker", "s"};
 
-ch + ["Az", "Copt", "Chtm", "Id", "Kd", "Iz"];
+ch + ["Az", "Z", "Copt", "Chtm", "Id", "Kd", "Iz", "Kz"];
 ch + ["S", "dPc", "Rg", "W/Pc"];
 ch + ["NIP_NGDP", "CA_NGDP", "TB_NGDP"];
 

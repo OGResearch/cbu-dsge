@@ -8,24 +8,26 @@
     "Flexible benchmark wage of OPT households" Wopt_flex
     "Average wage of OPT households" Wopt
     "Labor supplied by OPT households to all sectors" Nopt
-    "Labor income of OPT households to GDP" WNopt_NGDP
+    "Labor income of OPT households to GDP" WNopt_NGDP`xx
     "Average wage rate of htm households" Whtm
     "Labor supplied by HTM households" Nhtm
-    "Wage bill of HTM households to GDP" WNhtm_NGDP
-    "Labor in government sector to total labor" Ng_N
+    "Wage bill of HTM households to GDP" WNhtm_NGDP`x
+    "Labor in government sector to total labor" Ng_N`x
+    "Labor in nonprimary export sector to total labor" Nz_N`x
 
 
 !parameters
 
+    % Steady state parameters
     "Inverse elasticity of labor supply for OPT households" eta
+
+    % Dynamic adjustment parameters
     "A/R Real wage" rho_W
 
 
 !log-variables !all-but
 
-    WNopt_NGDP
-    WNhtm_NGDP
-    Ng_N
+    !list(`x)
 
 
 !equations
@@ -61,7 +63,9 @@
     "Average wage across sectors"
     W*N = omega*Whtm*Nhtm + (1 - omega)*Wopt*Nopt;
 
-    "Labor in govt sectors to total labor"
+    "Labor in government sector to total labor"
     Ng_N = Ng / N;
 
+    "Labor in nonprimary export sector to total labor"
+    Nz_N = Nz / N;
 
