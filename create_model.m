@@ -76,13 +76,12 @@ m.chi_dli = 0;
 m.chi_c = 0.5;
 m.nu = 0;
 
-m.beta_Kd = 1;
 m.delta_Kd = 0.15;
 m.delta_Kh = 0.15;
 
 % Markups
 m.mu_CI = 1.25; % to be reverse-engineered 
-m.mu_Dm = 1; % to be reverse-engineered 
+m.mu_D2 = 1; % to be reverse-engineered 
 
 % Local production
 m.gamma_Md = 0.40; 0.3792; 0.30; % to be reverse-engineered 
@@ -112,17 +111,15 @@ m.ss_Ad = 1;
 m.rho_A = 0;
 m.rho_Ad = 0.5;
 
-m.rho_Md_Dm = 0.75;
-m.rho_Dk_Dm = 0.75;
+m.rho_Md_D2 = 0.75;
+m.rho_Dk_D2 = 0.75;
 
-% Habit, adjustment costs
 m.phi_Id = 1;
 
 m.xi_Id = 1;
 m.xi_Iz = 1;
-m.xi_Pc = 2.5; %1
-m.xi_Pi = 2.5; %0.5
-% m.xi_NNd = 0;
+m.xi_Pc = 2.5;
+m.xi_Pi = 2.5;
 
 
 % __Primary export sector (Q)__
@@ -156,23 +153,15 @@ m.gamma_Nz = 0.45;
 m.delta_Kz = 0.15;
 m.ss_N0z_Nz = 0.30;
 
-% Steady State for Exogenous/External Variables
+% Steady state for exogenous/external variables
 m.ss_Az = 1;
-m.ss_Kz_A = 0.20; % to be reverse-engineered 
 m.ss_Pmz_Pmd = 1;
 m.ss_Pz_Pmz = 1;
-%m.ss_N0z_Kz = 0.12; % to be reverse-engineered 
-m.alpha_Z = 1; 0.73; % to be reverse-engineered 
 
-% Transitory parameters
+% Dynamic adjustment parameters
 m.lambda_Z_ref = 0.7;
-
-% Autoregressive Coefficients
-m.rho_Az = 0.5;
 m.lambda_Kz = 0.5;
-
-% Adjustment Costs
-% m.xi_NNz = 0;
+m.rho_Az = 0.5;
 m.xi_Z = 0.3;
 
 % __Monetary policy__
@@ -258,7 +247,6 @@ m.Pc = 1;
 
 m.gamma_Mz = 0.3;
 m.gamma_Nz = 0.40;
-m.ss_Kz_A = 0.8;
 m.ss_Az = 1.5;
 m.ss_Pz_Pmz = 1.5;
 

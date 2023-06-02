@@ -41,7 +41,6 @@
     "S/S nonprimary export specific technology" ss_Az
     "S/S relative price of imported inputs in nonprimary exports to local imports" ss_Pmz_Pmd
     "S/S relative price of nonprimary exports to imported inputs" ss_Pz_Pmz
-    "Scale parameter in nonprimary export production function" alpha_Z
 
     %"Cost of hiring-firing variable labor in nonprimary export sector" xi_NNz
     "Output adjustment cost in nonprimary exports" xi_Z

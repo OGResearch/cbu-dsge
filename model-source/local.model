@@ -4,8 +4,8 @@
 !variables
 
     "Public infrastructure auxiliary variable" AA
-    Dj, Dm, D3, Pd3
-    Md_Dm, D3_Dm
+    D1, D2, D3, Pd3
+    Md_D2, D3_D2
     "Monetary policy reaction term" React
 
     "Shadow Price of Optimizing Household Budget" LAMBDA
@@ -36,7 +36,6 @@
     "Relative productivity in local sectors" Ad
     "Total productivity in local sectors" AAd
     "Capital in nonprimary export sector" Kz
-    "Target capital in nonprimary export sector" Kz_tar
     "Investment in nonprimary export sector" Iz
 
     "Household net worth to GDP" PcVopt_NGDP
@@ -92,8 +91,8 @@
     PkdKd_NGDP
     PkzKz_NGDP
     DLIopt_Copt
-    Md_Dm
-    D3_Dm
+    Md_D2
+    D3_D2
     PIEd_NGDP
     %N0d_Nd
     React
@@ -106,8 +105,8 @@
     "Shock to overall productivity" shk_A
     "Shock to relative sector productivity in local sectors" shk_Ad
     "Shock to exchange rate parity" shk_S
-    shk_Md_Dm
-    shk_Dk_Dm
+    shk_Md_D2
+    shk_Dk_D2
 
 
 !parameters
@@ -124,22 +123,21 @@
     "A/R Monetary policy rate" rho_Rg
     "Imperfections in forex arbitrage" zeta_S
 
-    "A/R Share of nonprimary import inputs in local sector" rho_Md_Dm
+    "A/R Share of nonprimary import inputs in local sector" rho_Md_D2
 
-    rho_Dk_Dm
+    rho_Dk_D2
     psi_dg
 
     % Steady-state parameters
     "Discount factor" beta
-    "Capital uncertainty discount factor" beta_Kd
-    "Current Income Sensitivity of Intertemporally Optimizing Households" chi_dli
+    "Current income sensitivity of intertemporally optimizing households" chi_dli
     "Sensitivity of utility to net worth" nu
     "Intercept in net worth utility component" nu0
     "Depreciation of production capital in local sector" delta_Kd
     "Depreciation of residential capital" delta_Kh
     "Depreciation of capital in nonprimary export sector" delta_Kz
     "Markup in final goods sectors" mu_CI
-    "Markup over variable factors in local sectors" mu_Dm
+    "Markup over variable factors in local sectors" mu_D2
     "Import Share of local sectors" gamma_Md
     "Labor Share of local sectors" gamma_Nd
 
@@ -148,8 +146,6 @@
     "Intercept in household spread" zeta_Rh0
     "Sensitivity of household spread to debt" zeta_Rh1
     "Share of primary inputs used in local sectors" gamma_J;
-
-    "S/S share of capital in nonprimary export technology" ss_Kz_A
 
     % Directly calibrated ratios and rates
     %"S/S Remittances from HTM households to HTM wage bill" ss_TFwh_WNhtm
@@ -195,9 +191,9 @@
     AdjPi0 := xi_Pi*[ log(dPi) - log(dPi{-1}) ];
     AdjPi1 := xi_Pi*[ log(dPi{+1}) - log(dPi) ];
 
-    % AdjNNd := xi_NNd*[ log(NNd/NNd{-1}) - beta*log(NNd{+1}/NNd) ];
+    NetWorthEff = ((Copt/Vopt - nu0)/(Pc*Copt));
 
-    gamma_Dm := (gamma_Md^gamma_Md * (1-gamma_Md)^(1-gamma_Md));
+    gamma_D2 := (gamma_Md^gamma_Md * (1-gamma_Md)^(1-gamma_Md));
 
 
 !equations
@@ -207,7 +203,7 @@
     "Intertemporal choice by optimizing households"
     LAMBDA = ...
         + beta*LAMBDA{+1}*Rh ...
-        + nu*(Copt/Vopt - nu0)/(Pc*Copt);
+        + nu*$NetWorthEff$;
 
     "Demand for consumption by optimizing households"
     LAMBDA*Pc*(Copt - chi_dli*DLIopt - chi_c*ss_dA*Copt{-1}) = $chi_DLI0$;
@@ -224,21 +220,14 @@
 
     % Supply of capital to local sector
 
-    "Price of production capital for local sectors"
+    "Demand for investment in local sector"
     Pkd = Pi*(1 + $AdjId0$ - beta*phi_Id*$AdjId1$ - iota_tf*TRgd) ...
     !! Pkd = Pi*(1 - iota_tf*TRgd);
 
-    "Creation of production capital for local sectors"
+    "Price of capital in local sector"
     LAMBDA*Pkd = ...
-        + beta*beta_Kd*LAMBDA{+1}*[ ...
-            Pkd{+1}*(1-delta_Kd) + Prkd{+1} + Pkd{+1}*(1-phi_Id)*&PiId_PkdKd*ss_dA*$AdjId1$ ...
-        ] ...
-        + nu*(Copt/Vopt - nu0)*Pkd/(Pc*Copt) ...
-    !! LAMBDA*Pkd = ...
-        + beta*beta_Kd*LAMBDA{+1}*[ ...
-            Pkd{+1}*(1-delta_Kd) + Prkd{+1} ...
-        ] ...
-        + nu*(Copt/Vopt - nu0)*Pkd/(Pc*Copt) ...
+        + beta*LAMBDA{+1}*[Pkd{+1}*(1-delta_Kd) + Prkd{+1}] ...
+        + nu*$NetWorthEff$*Pkd ...
     ;
 
     "Stock-flow capital-investment for local sectors"
@@ -254,16 +243,11 @@
     Pkz = Pi*(1 + $AdjIz0$ - beta*$AdjIz1$) ...
     !! Pkz = Pi;
 
+    "Price of capital in nonprimary export sector"
     LAMBDA*Pkz = ...
         + beta*LAMBDA{+1}*[Pkz{+1}*(1-delta_Kz) + Prkz{+1}] ...
+        + nu*$NetWorthEff$*Pkz ...
     ;
-
-    %Pkz0 = Pkz;
-    %Pkz0 = (&Pkz0/&Pkz)*Pkz ...
-    %!! Kz = Kz_tar;
-
-    "Target capital in nonprimary export sector"
-    Kz_tar = ss_Kz_A * AA;
 
 
 % __Hand-to-mouth households__
@@ -294,7 +278,7 @@
 % __Local distribution of consumer and investment goods__
 
     % Staget T-0 in local sectors: Distribution
-    D = Dj;
+    D = D1;
     Pd = mu_CI*Pd1;
 
     % Final consumer price setting
@@ -327,7 +311,6 @@
     D3 = Kd{-1}^(1-gamma_Nd) * (A*Ad*NNd)^gamma_Nd;
 
     "Demand for labor in local sectors"
-    % gamma_Nd * Pd3*D3 = W * NNd * (1 + $AdjNNd$) ...
     gamma_Nd * Pd3*D3 = W * NNd;
 
     "Demand for capital in local sectors"
@@ -337,36 +320,36 @@
     % Stage T-2 in local sectors: Nonprimary import
 
     "Stage T-2 production technology in local sectors"
-    Pd2*Dm = mu_Dm*(Pmd*Md + Pd3*D3) ...
-    !! Dm = (1/$gamma_Dm$) * Md^gamma_Md * D3^(1-gamma_Md);
+    Pd2*D2 = mu_D2*(Pmd*Md + Pd3*D3) ...
+    !! D2 = (1/$gamma_D2$) * Md^gamma_Md * D3^(1-gamma_Md);
 
     "Demand for nonprimary imports in local sectors"
-    Md = Md_Dm * Dm ...
-    !! gamma_Md*Pd2*Dm = mu_Dm*Pmd*Md;
+    Md = Md_D2 * D2 ...
+    !! gamma_Md*Pd2*D2 = mu_D2*Pmd*Md;
 
     "Demand for local input in local sectors"
-    D3 = D3_Dm * Dm ...
-    !! (1-gamma_Md)*Pd2*Dm = mu_Dm*Pd3*D3;
+    D3 = D3_D2 * D2 ...
+    !! (1-gamma_Md)*Pd2*D2 = mu_D2*Pd3*D3;
 
     "Real nonprimary import share of stage T-2 output in local sectors"
-    Md_Dm = ...
-        + rho_Md_Dm * (Md_Dm{-1}) ...
-        + (1 - rho_Md_Dm) * (&Md / &Dm) ...
-        + shk_Md_Dm ...
-    !! Md_Dm = &Md / &Dm;
+    Md_D2 = ...
+        + rho_Md_D2 * (Md_D2{-1}) ...
+        + (1 - rho_Md_D2) * (&Md / &D2) ...
+        + shk_Md_D2 ...
+    !! Md_D2 = &Md / &D2;
 
     "Real domestic input share of stage T-2 output in local sectors"
-    D3_Dm = ...
-        + rho_Dk_Dm * (D3_Dm{-1}) ...
-        + (1 - rho_Dk_Dm) * (&D3 / &Dm) ...
-        + shk_Dk_Dm ...
-    !! D3_Dm = &D3 / &Dm;
+    D3_D2 = ...
+        + rho_Dk_D2 * (D3_D2{-1}) ...
+        + (1 - rho_Dk_D2) * (&D3 / &D2) ...
+        + shk_Dk_D2 ...
+    !! D3_D2 = &D3 / &D2;
 
 
     % Stage T-1 in local sectors: Primary inputs
 
-    Dj = Dm / (1 - gamma_J);
-    Dj = J / gamma_J;
+    D1 = D2 / (1 - gamma_J);
+    D1 = J / gamma_J;
     Pd1 = (1 - gamma_J)*Pd2 + gamma_J*Pj;
 
 
