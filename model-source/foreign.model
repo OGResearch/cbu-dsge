@@ -6,7 +6,7 @@
     "Foreign-currency risk-free world rate" Rw_star
     "World prices" Pw_star
     "World prices, Y/Y" dPw_star
-    "Relative productivity in remittance inflows" At
+    "Relative productivity in remittance inflows" Aw
     "Remittance inflows in foreign prices" TFwh_star
 
 
@@ -33,7 +33,7 @@
         + rho_Pw_star * log(dPw_star{-1}) ...
         + (1 - rho_Pw_star) * log(ss_dPw_star) ...
         + shk_dPw_star ...
-    !! Pw_star = ss_dPw_star*Pw_star{-1};
+    !! dPw_star = ss_dPw_star;
 
     "World interest rates"
     Rw_star = ss_RRw_star * ss_dPw_star;
@@ -42,10 +42,12 @@
     dPw_star = Pw_star / Pw_star{-1};
 
     "Remittance inflows in foreign currency"
-    TFwh_star = At*A*Pw_star;
+    TFwh_star = Aw*A*Pw_star;
 
     "Relative productivity in remittance inflows"
-    log(At) = rho_At*log(At{-1}) + (1-rho_At)*(log(ss_At) + shk_At) ...
-    !! At = ss_At;
+    log(Aw) = ...
+        + rho_At*log(Aw{-1}) ...
+        + (1- rho_At) * (log(ss_At) + shk_At) ...
+    !! Aw = ss_At;
 
 

@@ -41,8 +41,11 @@ $$
 \newcommand{\Zone}[1]{Z^1_{#1}}
 \newcommand{\gammaND}{{\gamma_{\mathit{ND}}}}
 \newcommand{\gammaMD}{{\gamma_{\mathit{MD}}}}
+\newcommand{\GammaMD}[1]{{\Gamma_{\mathit{MD},\,#1}}}
+\newcommand{\GammaDthree}[1]{{\Gamma_{\mathit{D3},\,#1}}}
 \newcommand{\gammaJD}{{\gamma_{\mathit{JD}}}}
 \newcommand{\gammaNZ}{{\gamma_{\mathit{NZ}}}}
 \newcommand{\gammaMZ}{{\gamma_{\mathit{MZ}}}}
 \newcommand{\ss}{\mathrm{ss}}
+\newcommand{\shock}[1]{\varepsilon_{#1,\,t}}
 $$

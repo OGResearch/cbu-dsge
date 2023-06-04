@@ -24,8 +24,9 @@ Combine
 * public infrastructure augmented productivity, $\AAd t$
 
 to produce $\Dthree t$ under perfect competition condition
+
 $$
-\Dthree t = \kkd{t} {}^{1-\gammaND} \cdot \left( \AAd t \cdot \NNd t \right)^{\gammaND} 
+\Dthree t = \left( \kkd{t} \right)^{1-\gammaND} \cdot \left( \AAd t \cdot \NNd t \right)^{\gammaND} 
 $$
 
 ---
@@ -169,8 +170,8 @@ Leontief production function
 
 $$
 \Dtwo t = \min \left\{
-\, \frac{\Dthree t}{1-\gammaMD}\, , \ 
-\, \frac{\ \Md t\ }{\gammaMD}
+\, \frac{\Dthree t}{\ \GammaDthree t\ }\ , \ 
+\, \frac{\Md t}{\ \GammaMD t\ }
 \right\}
 $$
 
@@ -178,24 +179,24 @@ Demand functions for inputs
 
 $$
 \begin{gathered}
-\Dthree t = \left(1 - \gammaMD\right) \, \Dtwo t
+\Dthree t = \GammaDthree t \cdot \Dtwo t
 \\[20pt]
-\Md t = \gammaMD \, \Dtwo t 
+\Md t = \GammaMD t \cdot \Dtwo t 
 \end{gathered} 
 $$
 
 The real share parameter, $\gammaMD$ is not set as a deep/structural parameter but rather derived as follows:
 
-1. Create a steady state model with a Cobb-Douglas production function instead, with the share parameter denoted by $\gammaMD\star$
+1. Create a steady state model with a Cobb-Douglas production function instead, with the share parameter denoted by $\gammaMD$
 $$
-\Dtwo t = \left( \Dthree t\right)^{\gammaMD\star}
-\, \left( \Md t \right)^{1-\gammaMD\star}
+\Dtwo t = \left( \Dthree t\right)^{\gammaMD}
+\, \left( \Md t \right)^{1-\gammaMD}
 $$
 2.  Switch to a Leontief equation for dynamic simulations, setting
 $$
-\gammaMD \equiv \frac{\Md{\ss}}{\Dtwo{\ss}}
+\GammaMD{\ss} \equiv \frac{\Md{\ss}}{\Dtwo{\ss}}
 $$
-3. To resolve steady-state transition (from one value of $\gammaMD$ to another) and avoid a discrete jump, make the parameter time varying
+3. To resolve steady-state transition (from one value of $\GammaMD t$ to another) and avoid a discrete jump, make the parameter time varying
 $$
-\gammaMD_t = \rho_{\gammaMD} \cdot \gammaMD_{t-1} + \left(1 - \rho_{\gammaMD} \right) \cdot \frac{\Md{\ss}}{\Dtwo{\ss}}
+\GammaMD t = \rho_{\Gamma \mathit{MD}} \cdot \GammaMD{t-1} + \left(1 - \rho_{\Gamma \mathit{MD}} \right) \cdot \GammaMD\ss + \shock{\Gamma\mathit{MD}}
 $$

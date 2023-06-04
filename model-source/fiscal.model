@@ -1,6 +1,10 @@
 
 !variables
 
+    Bg_new_NGDP`x
+    Bgw_new_NGDP`x
+    Bgh_new_NGDP`x
+
     "Government debt to GDP" Bg_NGDP
     "Target for gross government debt to GDP" Bg_NGDP_tar
     "Government local debt to GDP" Bgh_NGDP
@@ -19,7 +23,7 @@
     "Government consumption of goods" Gg
 
     "Government infrastructure capital" Kg
-    "Target government infrastructure capital" Kg0
+    "Target public infrastructure capital" Kg_tar
     "Government infrastructure investment" Ig
 
     "Total government consumption deflator" Pg
@@ -29,7 +33,7 @@
     "Labor income tax rate" TRlit
     "Energy sector tax rate" TRj
     "Primary export sector tax rate" TRq
-    
+
 
     "Government tax revenues to GDP Ratio" TAX_NGDP
     "Government revenues from mining sector tax in primary exporters to GDP" TAXq_NGDP
@@ -61,6 +65,7 @@
 
 !log-variables !all-but
 
+    !list(`x)
     Bg_NGDP
     Bg_NGDP_tar
     Bgh_NGDP
@@ -132,9 +137,11 @@
     "S/S Share of centrally planned investment on total investment in local supply side" ss_TRgd
     "S/S Share of centrally planned investment on total investment in non-primary export sector" ss_TRgz
 
-    % Dynamic parameters
+    "Principal paydown rate on government debt" theta_Bg
 
-    "Smoothing of target for government debt to GDP" lambda_Bg_NGDP_tar
+    % Dynamic adjustment parameters
+
+    "Smoothing of target for government debt to GDP" rho_Bg_NGDP_tar
     "Smoothing of government reserve deposit" lambda_BCBg
     "Government investment reaction to government investment to consumption" lambda_Ig1
     "Smoothing of government external debt adjustment" lambda_Bgw
@@ -142,6 +149,7 @@
     "Government consumption reaction to a deviation from its S/S level" lambda_Gg2
     "Government employment reaction to a deviation of government debt from its target"  lambda_Ng1
     "Government employment reaction to a deviation from S/S wage bill" lambda_Ng2
+    "A/R Lump sum tax revenues to GDP" rho_TAXls
 
 
 !shocks
@@ -165,8 +173,8 @@
 
     "Target for gross government debt to GDP"
     Bg_NGDP_tar = ...
-        + lambda_Bg_NGDP_tar*Bg_NGDP_tar{-1} ...
-        + (1 - lambda_Bg_NGDP_tar) * ss_Bg_NGDP ...
+        + rho_Bg_NGDP_tar*Bg_NGDP_tar{-1} ...
+        + (1 - rho_Bg_NGDP_tar) * ss_Bg_NGDP ...
         + shk_Bg_NGDP_tar ...
     !! Bg_NGDP_tar = ss_Bg_NGDP;
 
@@ -189,30 +197,46 @@
         + TFg_NGDP ...
     ;
 
-    "Rule for external government debt"
-    log(Bgw_NGDP*NGDP/S) = log(Bgw_NGDP{-1}*NGDP{-1}/S{-1}*&dNGDP/&dS) ...
-      + lambda_Bgw*log(ss_Bgw_Bg/Bgw_Bg) + shk_Bgw ...
+%     "Rule for external government debt"
+%     log(Bgw_NGDP*NGDP/S) = log(Bgw_NGDP{-1}*NGDP{-1}/S{-1}*&dNGDP/&dS) ...
+%       + lambda_Bgw*log(ss_Bgw_Bg/Bgw_Bg) + shk_Bgw ...
+%     !! Bgw_NGDP = ss_Bg_NGDP*ss_Bgw_Bg;
+
+    Bgw_NGDP = ...
+        + (1 - theta_Bg)*Bgw_NGDP{-1}*dS/dNGDP ...
+        + Bgw_new_NGDP;
+
+    Bgh_NGDP = ...
+        + (1 - theta_Bg)*Bgh_NGDP{-1}/dNGDP ...
+        + Bgh_new_NGDP;
+
+    Bgw_new_NGDP = (&Bgw_new_NGDP/&Bg_new_NGDP) * Bg_new_NGDP ...
     !! Bgw_NGDP = ss_Bg_NGDP*ss_Bgw_Bg;
+
+    Bg_new_NGDP = Bgh_new_NGDP + Bgw_new_NGDP;
 
     Bgw_Bg = Bgw_NGDP / Bg_NGDP;
 
-    % government infrastructure
+    % Public infrastructure
 
-    "government infrastructure investment"
+    "Public infrastructure investment"
     log(Ig) = ...
         + log(ss_dA * Ig{-1}) ...
-        + lambda_Ig1*log(Kg0{+1} / Kg{+1}) ...
+        + lambda_Ig1*log(Kg_tar{+1} / Kg{+1}) ...
         + shk_Ig ...
-    !! Kg = Kg0;
+    !! Kg = Kg_tar;
 
-    Kg0 = ss_Kg_A * A;
+    "Target public infrastructure capital"
+    Kg_tar = ss_Kg_A * A;
 
-    "government infrastructure capital"
+    "Government infrastructure capital"
     Kg = (1 - delta_Kg) * Kg{-1} + Ig;
 
     "Government investment to GDP"
     PiIg_NGDP = Pi*Ig / NGDP;
 
+
+    % Government consumption
 
     "Government consumption expenditures"
     PgG_NGDP = PcGg_NGDP + WNg_NGDP;
@@ -220,8 +244,8 @@
     "Rule for government consumption of goods"
     log(Gg) = ...
         + log(ss_dA * Gg{-1}) ...
-        + lambda_Gg1*(Bg_NGDP_tar{+1} - Bg_NGDP{+1}) ...
-        + lambda_Gg2*($ss_PcGg_NGDP$ - PcGg_NGDP{+1}) ...
+        + lambda_Gg1*(Bg_NGDP_tar{+4} - Bg_NGDP{+4}) ...
+        + lambda_Gg2*($ss_PcGg_NGDP$ - PcGg_NGDP{+4}) ...
         + shk_Gg ...
     !! PcGg_NGDP = $ss_PcGg_NGDP$;
 
@@ -242,8 +266,8 @@
     "Government employment"
     log(Ng) = ...
         + log(Ng{-1}) ...
-        + lambda_Ng1*(Bg_NGDP_tar{+1} - Bg_NGDP{+1}) ...
-        + lambda_Ng2*(ss_WNg_NGDP - WNg_NGDP{+1}) ...
+        + lambda_Ng1*(Bg_NGDP_tar{+4} - Bg_NGDP{+4}) ...
+        + lambda_Ng2*(ss_WNg_NGDP - WNg_NGDP{+4}) ...
         + shk_Ng ...
     !! WNg_NGDP = ss_WNg_NGDP;
 
@@ -283,7 +307,9 @@
     TAXj_NGDP = TRj * Pj0J_NGDP;
 
     "Government tax revenues from lump-sum taxes"
-    TAXls_NGDP = &TAXls_NGDP ...
+    TAXls_NGDP = ...
+        + rho_TAXls * TAXls_NGDP{-1} ...
+        + (1 - rho_TAXls) * &TAXls_NGDP ...
         + shk_TAXls ...
     !! Bg_NGDP = ss_Bg_NGDP;
 

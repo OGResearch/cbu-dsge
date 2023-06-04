@@ -118,7 +118,7 @@
 
     % Steady-state parameters
     "Discount factor" beta
-    "Current income sensitivity of intertemporally optimizing households" chi_dli
+    "Current income sensitivity of intertemporally optimizing households" chi_DLI
     "Sensitivity of utility to net worth" nu
     "Intercept in net worth utility component" nu0
     "Depreciation of production capital in local sector" delta_Kd
@@ -145,7 +145,7 @@
     %"S/S Overhead Labor in Local Production" ss_N0d
 
     % Transitory Parameters
-    "Habit in consumption" chi_c
+    "Habit in consumption" chi_C
     "Investment adjustment cost in local sector" xi_Id
     "Investment adjustment cost in nonprimary export sector" xi_Iz
     "Consumer Price Adjustment Cost" xi_Pc
@@ -159,7 +159,7 @@
 !substitutions
 
     % Auxiliary Constant to Make MUC equal 1/Copt in steady state
-    chi_DLI0 := (1-chi_dli*&DLIopt_Copt-chi_c);
+    chi_DLI0 := (1-chi_DLI*&DLIopt_Copt-chi_C);
 
     % Investment adjustment cost term in local production
     AdjId0 := xi_Id*[log(Id) - log(Id{-1}) - log(ss_dA) ];
@@ -194,10 +194,11 @@
         + nu*$NetWorthEff$;
 
     "Demand for consumption by optimizing households"
-    LAMBDA*Pc*(Copt - chi_dli*DLIopt - chi_c*ss_dA*Copt{-1}) = $chi_DLI0$;
+    LAMBDA*Pc*(Copt - chi_DLI*DLIopt - chi_C*ss_dA*Copt{-1}) = 1; %$chi_DLI0$;
 
     "Net worth of optimizing households"
-    Pc*Vopt = (Pkd*(Kd + Kh) + (Bgh_NGDP - Bhw_NGDP)*NGDP)/(1-omega);
+    %%%% Pc*Vopt = (Pkd*(Kd + Kh) + Pkz*Kz + (Bgh_NGDP - Bhw_NGDP)*NGDP)/(1-omega);
+    Pc*Vopt = (Pkd*(Kd + Kh));
 
     "Real current income of optimizing households"
     Pc*DLIopt = (WNopt_NGDP*(1 - TRlit) + TFgopt_NGDP)*NGDP/(1-omega);
@@ -241,7 +242,8 @@
 % __Hand-to-mouth households__
 
     "Real current income of hand-to-mouth households"
-    Pc*DLIhtm/NGDP = (WNhtm_NGDP*(1 - TRlit) + TFghtm_NGDP + TFwhtm_NGDP)/omega;
+    omega*Pc*DLIhtm/NGDP = omega*(W*Nhtm*(1 - TRlit))/NGDP + (TFghtm_NGDP + TFwhtm_NGDP) ...
+    !! omega*Pc*DLIhtm/NGDP = (WNhtm_NGDP*(1 - TRlit) + TFghtm_NGDP + TFwhtm_NGDP);
 
     "Demand for consumption by optimizing households"
     Chtm = DLIhtm;
@@ -334,7 +336,7 @@
     !! GAMMA_D3 = &D3 / &D2;
 
 
-    % Stage T-1 in local sectors: Primary inputs
+    % Stage T-1 in local sectors: Energy inputs
 
     D1 = D2 / (1 - gamma_J);
 
@@ -387,6 +389,7 @@
 
 % __Interest rate structure__
 
+    "Premium on country and government rate"
     PREMg = exp(zeta_Rg0 - zeta_Rg1*NIP_NGDP);
     Rg_star = Rw_star * PREMg;
 
@@ -395,6 +398,7 @@
 
     Rg_Rw = Rg_star / Rw_star;
 
+    "Premium on household rate"
     PREMh = exp(zeta_Rh0 + zeta_Rh1*Bhw_NGDP);
     Rh = Rg * PREMh;
     Rh_star = Rg_star * PREMh; 

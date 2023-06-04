@@ -81,13 +81,18 @@
     PxX_NGDP*NGDP = (Pq*Q + Pz*Z);
 
 
-    "Remittances from abroad to households"
-    % Remittance inflows in local currency and as NGDP ratio
+% __Remittances__
+
+    "Remittances to GDP ratio"
     TFwh_NGDP*NGDP = TFwh_star * S;
 
-    % Distribution of remittance inflows among households
+    "Remittances to GDP ratio"
+    %TFwh_NGDP = omega*TFwhtm_NGDP + (1 - omega)*TFwopt_NGDP;
     TFwh_NGDP = TFwhtm_NGDP + TFwopt_NGDP;
-    TFwhtm_NGDP = omega * TFwh_NGDP;
+
+    "Remittances to HTM households to GDP ratio"
+    %TFwhtm_NGDP = TFwh_NGDP;
+    TFwhtm_NGDP = omega*TFwh_NGDP;
 
 
 % __International investment position / BOP__
@@ -110,7 +115,7 @@
     ;
 
     "Interest on household foreign debt to GDP"
-    INThw_NGDP = (Rh_star{-1} - 1)*Bhw_NGDP{-1}*dS/dNGDP;
+    INThw_NGDP = (Rg_star{-1} - 1)*Bhw_NGDP{-1}*dS/dNGDP;
 
     "Interest received by country on NIP"
     INTw_NGDP = INTwf_NGDP - INThw_NGDP - INTgw_NGDP;

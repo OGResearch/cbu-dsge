@@ -65,15 +65,15 @@ m.beta = 0.95;
 
 % Households
 
-m.chi_dli = 0.20;
-m.chi_c = 0.30;
+m.chi_DLI = 0.20;
+m.chi_C = 0.30;
 m.nu = 0.05;
 m.nu0 = 0; % to be reverse-engineered
 
 
 % ----- Temporary -----
-m.chi_dli = 0;
-m.chi_c = 0.5;
+m.chi_DLI = 0;
+m.chi_C = 0.5;
 m.nu = 0;
 
 m.delta_Kd = 0.15;
@@ -175,6 +175,7 @@ m.kappa_dS = 0;1;
 % Government debt
 m.ss_Bg_NGDP = 0.28;
 m.ss_Bgw_Bg  = 25/28;
+m.theta_Bg = 0.2;
 
 % Government transfers to households
 m.ss_TFgh_NGDP = 0.05;
@@ -215,10 +216,12 @@ m.lambda_Ng2 = 0.5;
 
 m.lambda_Ig1 = 1.5;%0.5; 
 
-m.lambda_Bg_NGDP_tar = 0.93;
+m.rho_Bg_NGDP_tar = 0.5;
 m.lambda_Bgw = 0.1;
 m.lambda_Bwf = 0.05; 
 m.lambda_BCBg = 0.5;
+
+m.rho_TAXls = 0.5;
 
 
 % __Labor__
