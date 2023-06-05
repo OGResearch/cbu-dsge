@@ -3,7 +3,6 @@
 
 !variables
 
-    WNhtm
     "Total labor" N
     "Average wage across sectors" W
     "Flexible benchmark wage of OPT households" Wopt_flex
@@ -47,14 +46,15 @@
     Whtm = Wopt;
 
     "Wage bill of OPT households to GDP"
-    WNopt_NGDP = (1 - omega) * Wopt * Nopt / NGDP;
+    %%%%% WNopt_NGDP = (1 - omega) * Wopt * Nopt / NGDP;
+    WNopt_NGDP = Wopt * Nopt / NGDP;
 
     "Labor supply by HTM households"
     Nhtm = Nopt;
 
     "Wage bill of HTM households to GDP"
-    WNhtm_NGDP = omega * Whtm * Nhtm / NGDP;
-    WNhtm = Whtm * Nhtm;
+    %%%%% WNhtm_NGDP = omega * Whtm * Nhtm / NGDP;
+    WNhtm_NGDP = Whtm * Nhtm / NGDP;
 
     "Total labor supply"
     N = omega*Nhtm + (1 - omega)*Nopt;

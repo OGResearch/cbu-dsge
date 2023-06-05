@@ -1,23 +1,23 @@
 
 !variables
 
-    Bg_new_NGDP`x
-    Bgw_new_NGDP`x
-    Bgh_new_NGDP`x
+    "Government debt to GDP" Bg_NGDP`x
+    "Target for gross government debt to GDP" Bg_NGDP_tar`x
+    "Government local debt to GDP" Bgb_NGDP`x
+    "Government external debt to GDP" Bgw_NGDP`x
+    "Government external debt to government debt" Bgw_Bg`x
+    "Private external debt to GDP" Bwf_NGDP`x
 
-    "Government debt to GDP" Bg_NGDP
-    "Target for gross government debt to GDP" Bg_NGDP_tar
-    "Government local debt to GDP" Bgh_NGDP
-    "Government external debt to GDP" Bgw_NGDP
-    "Government external debt to government debt" Bgw_Bg
-    "Private external debt to GDP" Bwf_NGDP
+    "New issuance of government debt" Bg_new_NGDP`x
+    "New issuance of external government debt" Bgw_new_NGDP`x
+    "New issuance of local government debt" Bgb_new_NGDP`x
 
-    "FRD transfers to government to GDP" TFfg_NGDP
-    "Government infrastructure investment to GDP" PiIg_NGDP
-    "Government consumption to GDP" PgG_NGDP
-    "Government consumption of goods to GDP" PcGg_NGDP
-    "Government wage bill to GDP" WNg_NGDP
-    "Government sector value added to GDP" VAg_NGDP
+    "FRD transfers to government to GDP" TFfg_NGDP`x
+    "Government infrastructure investment to GDP" PiIg_NGDP`x
+    "Government consumption to GDP" PgG_NGDP`x
+    "Government consumption of goods to GDP" PcGg_NGDP`x
+    "Government wage bill to GDP" WNg_NGDP`x
+    "Government sector value added to GDP" VAg_NGDP`x
 
     "Government consumption" G
     "Government consumption of goods" Gg
@@ -29,36 +29,36 @@
     "Total government consumption deflator" Pg
     "Total government consumption expenditures" PgG
 
-    "Value added tax rate" TRvat
-    "Labor income tax rate" TRlit
-    "Energy sector tax rate" TRj
-    "Primary export sector tax rate" TRq
+    "Value added tax rate" TRvat`x
+    "Labor income tax rate" TRlit`x
+    "Energy sector tax rate" TRj`x
+    "Primary export sector tax rate" TRq`x
 
 
-    "Government tax revenues to GDP Ratio" TAX_NGDP
-    "Government revenues from mining sector tax in primary exporters to GDP" TAXq_NGDP
-    "Government revenues from mining sector tax in energy sector to GDP" TAXj_NGDP
-    "Government revenues from value added tax" TAXvat_NGDP
-    "Government revenues for labor income tax" TAXlit_NGDP
-    "Government revenues from lump-sum taxes" TAXls_NGDP
+    "Government tax revenues to GDP Ratio" TAX_NGDP`x
+    "Government revenues from mining sector tax in primary exporters to GDP" TAXq_NGDP`x
+    "Government revenues from mining sector tax in energy sector to GDP" TAXj_NGDP`x
+    "Government revenues from value added tax" TAXvat_NGDP`x
+    "Government revenues for labor income tax" TAXlit_NGDP`x
+    "Government revenues from lump-sum taxes" TAXls_NGDP`x
 
-    "Government transfers to GDP" TFg_NGDP
-    "Government transfers to households to GDP" TFgh_NGDP
-    "Government transfers to optimizing households to GDP" TFgopt_NGDP
-    "Government transfers to HTM households to GDP" TFghtm_NGDP
-    "Government transfers to local energy sector to GDP" TFgj_NGDP
-    
-    "Share of centrally planned investment on total investment in local supply side" TRgd
-    "Share of centrally planned investment on total investment in non-primary export sector" TRgz
-    "Centrally planned investment on total investment in local supply side on GDP" TFgd_NGDP
-    "Centrally planned investment on total investment in non-primary export sector on GDP" TFgz_NGDP
-   
-    "Government total deficit to GDP" DEF_NGDP
-    "Government primary deficit to GDP" PDEF_NGDP
+    "Government transfers to GDP" TFg_NGDP`x
+    "Government transfers to households to GDP" TFgh_NGDP`x
+    "Government transfers to optimizing households to GDP" TFgopt_NGDP`x
+    "Government transfers to HTM households to GDP" TFghtm_NGDP`x
+    "Government transfers to local energy sector to GDP" TFgj_NGDP`x
 
-    "Debt service costs of local government debt to GDP" INTgh_NGDP
-    "Debt service costs of external government debt to GDP" INTgw_NGDP
-    "Interest receipts on foreign FRD savings to GDP" INTwf_NGDP
+    "Share of centrally planned investment on total investment in local supply side" TRgd`x
+    "Share of centrally planned investment on total investment in non-primary export sector" TRgz`x
+    "Centrally planned investment on total investment in local supply side on GDP" TFgd_NGDP`x
+    "Centrally planned investment on total investment in non-primary export sector on GDP" TFgz_NGDP`x
+
+    "Government total deficit to GDP" DEF_NGDP`x
+    "Government primary deficit to GDP" PDEF_NGDP`x
+
+    "Debt service costs of local government debt to GDP" INTgh_NGDP`x
+    "Debt service costs of external government debt to GDP" INTgw_NGDP`x
+    "Interest receipts on foreign FRD savings to GDP" INTwf_NGDP`x
 
     "Public sector labor" Ng
 
@@ -68,7 +68,7 @@
     !list(`x)
     Bg_NGDP
     Bg_NGDP_tar
-    Bgh_NGDP
+    Bgb_NGDP
     Bgw_NGDP
     Bwf_NGDP
     Bgw_Bg
@@ -155,7 +155,7 @@
 !shocks
 
     "Shock to government reserve at the central bank" shk_Bg_NGDP_tar
-    "Shock to government external debt" shk_Bgw    
+    "Shock to government external debt" shk_Bgw
     "Shock to government investment" shk_Ig
     "Shock to government consumption of goods" shk_Gg
     "Shock to government employment" shk_Ng
@@ -163,9 +163,10 @@
     "Shock to FRD transfers" shk_TFfg
 
 
-    !substitutions
+!substitutions
 
     ss_PcGg_NGDP := (ss_PcG_NGDP - ss_WNg_NGDP);
+
 
 !equations
 
@@ -178,18 +179,18 @@
         + shk_Bg_NGDP_tar ...
     !! Bg_NGDP_tar = ss_Bg_NGDP;
 
-    Bg_NGDP = Bgh_NGDP + Bgw_NGDP;
+    Bg_NGDP = Bgb_NGDP + Bgw_NGDP;
 
     "Interest on local government debt to GDP"
-    INTgh_NGDP = (Rg{-1} - 1) * Bgh_NGDP{-1}/dNGDP;
+    INTgh_NGDP = (Rg{-1} - 1) * Bgb_NGDP{-1}/dNGDP;
 
     "Interest on external government debt to GDP"
     INTgw_NGDP = (Rg_star{-1} - 1)*dS * Bgw_NGDP{-1}/dNGDP;
 
 
     "Dynamic budget constraint for government finance"
-    Bgh_NGDP + Bgw_NGDP = ...
-        + (Bgh_NGDP{-1} + Bgw_NGDP{-1}*dS)/dNGDP ...
+    Bgb_NGDP + Bgw_NGDP = ...
+        + (Bgb_NGDP{-1} + Bgw_NGDP{-1}*dS)/dNGDP ...
         + INTgh_NGDP + INTgw_NGDP ...
         + PgG_NGDP ...
         + PiIg_NGDP ...
@@ -197,25 +198,24 @@
         + TFg_NGDP ...
     ;
 
-%     "Rule for external government debt"
-%     log(Bgw_NGDP*NGDP/S) = log(Bgw_NGDP{-1}*NGDP{-1}/S{-1}*&dNGDP/&dS) ...
-%       + lambda_Bgw*log(ss_Bgw_Bg/Bgw_Bg) + shk_Bgw ...
-%     !! Bgw_NGDP = ss_Bg_NGDP*ss_Bgw_Bg;
-
+    "Stock and new issuance of external government debt"
     Bgw_NGDP = ...
         + (1 - theta_Bg)*Bgw_NGDP{-1}*dS/dNGDP ...
         + Bgw_new_NGDP;
 
-    Bgh_NGDP = ...
-        + (1 - theta_Bg)*Bgh_NGDP{-1}/dNGDP ...
-        + Bgh_new_NGDP;
+    "Stock and new issuance of local government debt"
+    Bgb_NGDP = ...
+        + (1 - theta_Bg)*Bgb_NGDP{-1}/dNGDP ...
+        + Bgb_new_NGDP;
 
+    "Rule for issuance of new external vs local government debt"
     Bgw_new_NGDP = (&Bgw_new_NGDP/&Bg_new_NGDP) * Bg_new_NGDP ...
     !! Bgw_NGDP = ss_Bg_NGDP*ss_Bgw_Bg;
 
-    Bg_new_NGDP = Bgh_new_NGDP + Bgw_new_NGDP;
+    Bg_new_NGDP = Bgb_new_NGDP + Bgw_new_NGDP;
 
     Bgw_Bg = Bgw_NGDP / Bg_NGDP;
+
 
     % Public infrastructure
 
@@ -335,17 +335,17 @@
     TRgz = ss_TRgz;
 
     "Governments transfers to households to GDP"
-    TFgh_NGDP = TFgopt_NGDP + TFghtm_NGDP;
+    TFgh_NGDP = omega * TFghtm_NGDP + (1 - omega) * TFgopt_NGDP;
     TFgh_NGDP = ss_TFgh_NGDP;
-    TFghtm_NGDP = omega * TFgh_NGDP;
+    TFghtm_NGDP = TFgh_NGDP;
 
     "Government subsidies of energy to GDP"
     TFgj_NGDP = ss_TFgj_NGDP;
 
     "Total government deficit"
     DEF_NGDP = ...
-        + Bgh_NGDP + Bgw_NGDP ...
-        - (Bgh_NGDP{-1} + Bgw_NGDP{-1}*dS)/dNGDP ...
+        + Bgb_NGDP + Bgw_NGDP ...
+        - (Bgb_NGDP{-1} + Bgw_NGDP{-1}*dS)/dNGDP ...
     ;
 
     "Primary government deficit"

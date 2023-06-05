@@ -65,16 +65,15 @@ m.beta = 0.95;
 
 % Households
 
-m.chi_DLI = 0.20;
 m.chi_C = 0.30;
+m.chi_DLI = 0.50;
 m.nu = 0.05;
-m.nu0 = 0; % to be reverse-engineered
+m.nu0 = 0; % To be reverse-engineered
 
 
 % ----- Temporary -----
-m.chi_DLI = 0;
-m.chi_C = 0.5;
 m.nu = 0;
+
 
 m.delta_Kd = 0.15;
 m.delta_Kh = 0.15;
@@ -260,7 +259,7 @@ m = steady( ...
     , "blocks", true ...
 );
 
-checkSteady(m);
+checkSteady(m, "equationSwitch", "steady");
 m = solve(m);
 
 
@@ -369,7 +368,6 @@ nationalList = [
     "Rg"
     "Rh"
     "Rg_star"
-    "Rh_star"
     "NIP_NGDP"
     "INTw_NGDP"
     "CA_NGDP"

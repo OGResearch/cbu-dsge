@@ -7,26 +7,21 @@
     "Price of energy" Pj
     "World price of energy" Pj0_star
     "Marginal cost of energy" Pj0
-    "Value added in energy sector to GDP" VAj_NGDP
-    "Energy volume to GDP" PjJ_NGDP
-    "Energy cost base to GDP" Pj0J_NGDP
-    "Costs of energy sector production paid to households" TFjh_NGDP
-    "Profit of energy sector" PIEj_NGDP
-    "Import inputs into energy sector" Mj
-    "Profit repatriation from energy sector" TFjw_NGDP
-    "Import price for energy sector inputs" Pmj
-    "Imports for energy sector to GDP" PmjMj_NGDP
+    "Import input in energy sector" Mj
+    "Price of import for energy sector inputs" Pmj
+
+    "Value added in energy sector to GDP" VAj_NGDP`x
+    "Energy volume to GDP" PjJ_NGDP`x
+    "Energy cost base to GDP" Pj0J_NGDP`x
+    "Costs of energy sector production paid to households" TFjh_NGDP`x
+    "Profit of energy sector" PIEj_NGDP`x
+    "Profit repatriation from energy sector" TFjw_NGDP`x
+    "Imports for energy sector to GDP" PmjMj_NGDP`x
 
 
 !log-variables !all-but
 
-    VAj_NGDP
-    PjJ_NGDP
-    Pj0J_NGDP
-    PIEj_NGDP
-    TFjh_NGDP
-    PmjMj_NGDP
-    TFjw_NGDP
+    !list(`x)
 
 
 !shocks

@@ -8,10 +8,9 @@
     "Variable labor in nonprimary exports" NNz
     "Overhead labor in nonprimary exports" N0z
     "Imported inputs to nonprimary exports" Mz
-    "Imported inputs to nonprimary exports to GDP ratio" PmzMz_NGDP
     "Nonprimary exports" Z
-    "Stage T-1 production in nonprimary exports: Labor-Capital" Z2
-    "Stage T-1 production in nonprimary exports: Imports" Z1
+    "Stage T-1 production in nonprimary exports: Labor-capital" Z2
+    "Stage T-1 production in nonprimary exports: Import" Z1
     "Reference level for nonprimary exports" Z_ref
     "Nominal marginal cost in nonprimary exports" Pz0
     "Import prices in nonprimary exports" Pmz
@@ -20,11 +19,13 @@
     "Auxiliary term for total export technology" AAz
     "Relative price of imported inputs in exports to local imports" Pmz_Pmd
     "Relative price of nonprimary exports to imported inputs" Pz_Pmz
-    "Profits including capital income in nonprimary exports" PIEz_NGDP
-    "Value added created in nonprimary exports to GDP ratio" VAz_NGDP
-    "Nominal cost of investment in nonprimary exports to GDP ratio" PiIz_NGDP
-    "Wage bill in nonprimary exports to GDP ratio" WNz_NGDP
-    "Nonprimary export to GDP ratio" PzZ_NGDP
+
+    "Imported inputs to nonprimary exports to GDP ratio" PmzMz_NGDP`x
+    "Profits including capital income in nonprimary exports" PIEz_NGDP`x
+    "Value added created in nonprimary exports to GDP ratio" VAz_NGDP`x
+    "Nominal cost of investment in nonprimary exports to GDP ratio" PiIz_NGDP`x
+    "Wage bill in nonprimary exports to GDP ratio" WNz_NGDP`x
+    "Nonprimary export to GDP ratio" PzZ_NGDP`x
 
 
 !parameters
@@ -59,12 +60,7 @@
 
 !log_variables !all_but
 
-    PIEz_NGDP
-    PmzMz_NGDP
-    VAz_NGDP
-    PiIz_NGDP
-    PzZ_NGDP
-    WNz_NGDP
+    !list(`x)
 
 
 !substitutions
