@@ -432,7 +432,7 @@
     PIEd3_NGDP = (Pd3*D3 - W*Nd - Prkd*Kd{-1}) / NGDP;
     PIEd2_NGDP = (Pd2*D2 - Pd3*D3 - Pmd*Md) / NGDP;
     PIEd1_NGDP = (Pd1*D1 - Pd2*D2 - Pj*J) / NGDP;
-    PIEd_NGDP = (Pd*D - W*Nd - Prkd*Kd{-1} - Pmd*Md - Pj*J) / NGDP;
+    PIEd_NGDP  = (Pcx*(C+Gg) + Pi*I - W*Nd - Prkd*Kd{-1} - Pmd*Md - Pj*J) / NGDP;
 
     "Private residential investment to GDP"
     PiIh_NGDP = Pi*Ih / NGDP;
