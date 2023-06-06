@@ -96,8 +96,8 @@
     "Shock to overall productivity" shk_A
     "Shock to relative sector productivity in local sector" shk_Ad
     "Shock to exchange rate parity" shk_S
-    shock_GAMMA_Md
-    shock_GAMMA_D3
+    shk_GAMMA_Md
+    shk_GAMMA_D3
 
 
 !parameters
@@ -115,6 +115,7 @@
     "Imperfections in forex arbitrage" zeta_S
 
     "A/R Leontief share coefficients" rho_GAMMA
+    "Calibration constant for Leontief shares in local production" Ad2
 
     psi_dg
 
@@ -179,7 +180,7 @@
     % Current net worth effect
     NetWorthEff = ((Copt/Vopt - nu0)/(Pc*Copt));
 
-    % Scale constant for production function
+    % Scale constant for production function in local sector
     gamma_D2 := (gamma_Md^gamma_Md * (1-gamma_Md)^(1-gamma_Md));
 
 
@@ -313,8 +314,8 @@
     % Stage T-2 in local sector: Nonprimary import
 
     "Stage T-2 production technology in local sector"
-    Pd2*D2 = Pmd*Md + Pd3*D3 ...
-    !! D2 = (1/$gamma_D2$) * Md^gamma_Md * D3^(1-gamma_Md);
+    Pd2 = GAMMA_Md*Pmd + GAMMA_D3*Pd3 ...
+    !! D2 = Ad2 * (1/$gamma_D2$) * Md^gamma_Md * D3^(1-gamma_Md);
 
     "Demand for nonprimary imports in local sector"
     Md = GAMMA_Md * D2 ...
@@ -322,20 +323,20 @@
 
     "Demand for local input in local sector"
     D3 = GAMMA_D3 * D2 ...
-    !! (1-gamma_Md)*Pd2*D2 = Pd3*D3;
+    !! (1 - gamma_Md) * Pd2 * D2 = Pd3 * D3;
 
-    "Real nonprimary import share of stage T-2 output in local sector"
+    "Leontief coefficient on import input in T-2 output in local sector"
     GAMMA_Md = ...
         + rho_GAMMA * (GAMMA_Md{-1}) ...
         + (1 - rho_GAMMA) * (&Md / &D2) ...
-        + shock_GAMMA_Md ...
+        + shk_GAMMA_Md ...
     !! GAMMA_Md = &Md / &D2;
 
-    "Real domestic input share of stage T-2 output in local sector"
+    "Leontief coefficient on D3 in T-2 output in local sector"
     GAMMA_D3 = ...
         + rho_GAMMA * (GAMMA_D3{-1}) ...
         + (1 - rho_GAMMA) * (&D3 / &D2) ...
-        + shock_GAMMA_D3 ...
+        + shk_GAMMA_D3 ...
     !! GAMMA_D3 = &D3 / &D2;
 
 

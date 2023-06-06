@@ -2,24 +2,27 @@
 
 !variables
 
-    "Foreign price of primary commodity" Pq_star
-    "Price of primary commodity" Pq
+    "Foreign price of primary export" Pq_star
+    "Price of primary export" Pq
     "Primary production specific technology" Aq
-    "Real world price of primary commodity" Pq_Pw
+    "Real world price of primary export" Pq_Pw
     "Primary production maintenance services" Mq
     "Profits in primary production to GDP ratio" PIEq_NGDP`x
     "Value added in primary production to GDP ratio" VAq_NGDP`x
     "Primary production to GDP ratio" PqQ_NGDP`x
     "Price of import for primary export" Pmq
+    "World price of import for primary export" Pmq_star
+    "Real world price of import for primary export" Pmq_Pw
     "Import for primary export to GDP" PmqMq_NGDP`x
 
 
 !parameters
 
     % Steady state parameters
-    "S/S Primary Production Specific Technology" ss_Aq
-    "S/S Real World Price of Primary Commodity" ss_Pq_Pw
-    "S/S Import intensity of Primary Production" gamma_Mq
+    "S/S Primary production specific technology" ss_Aq
+    "S/S Real world price of primary export" ss_Pq_Pw
+    "S/S Import intensity of primary production" gamma_Mq
+    "S/S Real world price of import for primary sector" ss_Pmq_Pw
 
     % Dynamic adjustment parameters
     "Autoregression in Relative Sectoral Productivity in Primary Production" rho_Aq
@@ -50,7 +53,6 @@
     !! Aq = ss_Aq;
 
     Mq = gamma_Mq*Q;
-    Pmq = Pq;
     PmqMq_NGDP*NGDP = Pmq * Mq;
 
 
@@ -60,19 +62,27 @@
     VAq_NGDP*NGDP = Pq*Q - Pmq*Mq;
 
 
-% __World price of primary commodities__
+% __World price of primary export__
 
+    Pmq = S * Pmq_star;
     Pq = S * Pq_star;
-    Pq_star = Pq_Pw * Pw_star;
 
-% __Real world price of primary commodity__
+    Pq_star = Pq_Pw * Pw_star;
+    Pmq_star = Pmq_Pw * Pw_star;
+
+
+% __Real world price of primary export__
 
     log(Pq_Pw) = ...
         + rho_Pq_Pw * log(Pq_Pw{-1}) ...
-        + (1 - rho_Pq_Pw) * (log(ss_Pq_Pw) + shk_Pq_Pw) ...
+        + (1 - rho_Pq_Pw) * log(ss_Pq_Pw) ...
+        + shk_Pq_Pw ...
     !! Pq_Pw = ss_Pq_Pw;
 
+    Pmq_Pw = ss_Pmq_Pw;
+
     PqQ_NGDP*NGDP = Pq*Q;
+
 
 % REV = PqQ = 8%
 % COST = TAXq + Mq = 6% + 2% = 8%

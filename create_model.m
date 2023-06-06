@@ -67,16 +67,12 @@ m.beta = 0.95;
 
 m.chi_C = 0.30;
 m.chi_DLI = 0.50;
-m.nu = 0.05;
-m.nu0 = 0; % To be reverse-engineered
-
-
-% ----- Temporary -----
 m.nu = 0;
-
+m.nu0 = NaN;
 
 m.delta_Kd = 0.15;
 m.delta_Kh = 0.15;
+m.omega = 0.30;
 
 % Markups
 m.mu_CI = 1.25; % to be reverse-engineered 
@@ -123,6 +119,7 @@ m.xi_Pi = 2.5;
 % Steady State for Exogenous/External/Policy Variables
 m.ss_Aq = 1;
 m.ss_Pq_Pw = 1;
+m.ss_Pmq_Pw = 1;
 m.gamma_Mq = 0.25; % % gives PmqMq_NGDP = 0.02; if non-primary exporters disabled, use m.gamma_Mq = 0.29 in read_model
 
 % Autoregression Parameters
@@ -151,14 +148,18 @@ m.ss_N0z_Nz = 0.30;
 
 % Steady state for exogenous/external variables
 m.ss_Az = 1;
-m.ss_Pmz_Pmd = 1;
-m.ss_Pz_Pmz = 1;
+m.ss_Pmz_Pw = 1;
+m.ss_Pz_Pw = 1;
+m.ss_Zref_A = 1;
+m.Az1 = 1;
 
 % Dynamic adjustment parameters
-m.lambda_Z_ref = 0.7;
+
+m.rho_Zref = 0.5;
 m.lambda_Kz = 0.5;
 m.rho_Az = 0.5;
-m.xi_Z = 0.3;
+m.xi_Z = 0.2;
+
 
 % __Monetary policy__
 
@@ -225,14 +226,6 @@ m.rho_TAXls = 0.5;
 
 % __Labor__
 
-% Steady state parameters
-
-m.omega = 0.30;
-
-m.eta = 0;
-
-% Dynamic parameters
-
 m.rho_W = 0.4;
 
 
@@ -247,16 +240,28 @@ m.Pc = 1;
 m.gamma_Mz = 0.3;
 m.gamma_Nz = 0.40;
 m.ss_Az = 1.5;
-m.ss_Pz_Pmz = 1.5;
+m.ss_Pz_Pw = 1.5;
 
 m.J = 0.20;
 m.Mj = 0.20;
+m.Ad2 = 1;
 
+
+
+swap = string.empty(0, 2);
+
+m.Zref_Z = 1;
+swap = [swap; "Zref_Z", "ss_Zref_A"];
+
+m.Copt_Vopt_nu0 = 0;
+swap = [swap; "Copt_Vopt_nu0", "nu0"];
 
 m = steady( ...
     m ...
     , "fixLevel", ["A", "Pw_star", "Pc"] ...
     , "blocks", true ...
+    , "exogenize", swap(:, 1) ...
+    , "endogenize", swap(:, 2) ...
 );
 
 checkSteady(m, "equationSwitch", "steady");
@@ -264,8 +269,6 @@ m = solve(m);
 
 
 %% Reverse engineer parameters for steady-state ratios
-
-swap = string.empty(0, 2);
 
 % Net investment position
 m.NIP_NGDP = -0.30;
