@@ -1,12 +1,13 @@
+% Simulate fiscal expansion
 
 close all
 clear
 
 load mat/create_model.mat m
 
-m1 = m;
-
-m1.chi_DLI = 0.5;
+m1 = alter(m, 2);
+m1.chi_DLI = [0.5, 0];
+m1.omega = [0.3, 0];
 
 m1.lambda_Gg1 = 5;
 m1.lambda_Gg2 = 0.3;
@@ -57,5 +58,25 @@ s = simulate( ...
 );
 
 smc = databank.minusControl(m, s, d, "range", 0:40);
+
+
+%% Plot results
+
+close all
+
+ch = databank.Chartpack();
+ch.Range = 0:40;
+ch.PlotSettings = {"marker", "s"};
+ch.Round = 8;
+ch.AxesSettings = {"fontSize", 20};
+
+ch + ["Gg", "Ng", "Bg_NGDP", "DEF_NGDP"];
+ch + ["C", "Copt", "Chtm", "Id", "Kd", "Iz", "Kz"];
+ch + ["dPc", "Rg", "S", "W/Pc", "W*N/Pc"];
+
+draw(ch, smc);
+
+
+
 
 

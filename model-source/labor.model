@@ -20,6 +20,7 @@
 
     % Dynamic adjustment parameters
     "A/R Real wage" rho_W
+    eta
 
 
 !log-variables !all-but
@@ -30,13 +31,13 @@
 !equations
 
     "Flexible benchmark wage of OPT households"
-    Wopt_flex*(1 - TRlit) * LAMBDA = 1 ...
+    Wopt_flex*(1 - TRlit) * (0.0*LAMBDA + 1.0/(Pc*C*&Copt/&C)) = 1 ...
     !! Wopt_flex*(1 - ss_TRlit) * LAMBDA = 1;
 
     "OPT household wage"
     log(Wopt/Pc) = ...
-        + rho_W * log(ss_dA*Wopt{-1}/Pc{-1}) ...
-        + (1-rho_W) * (log(Wopt_flex{+4}/Pc{+4})-4*log(ss_dA)) ...
+        + rho_W * log(ss_dA * Wopt{-1}/Pc{-1}) ...
+        + (1-rho_W) * log(Wopt_flex/Pc) ...
     !! Wopt = Wopt_flex;
 
     "HTM household wage"
