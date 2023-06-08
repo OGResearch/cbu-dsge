@@ -65,9 +65,9 @@ m.beta = 0.95;
 
 % Households
 
-m.chi_C = 0.30;
+m.chi_C = 0;
 m.chi_DLI = 0.50;
-m.nu = 0;
+m.nu = 0;0.20;
 m.nu0 = NaN;
 
 m.delta_Kd = 0.15;
@@ -87,7 +87,7 @@ m.ss_N0d_Nd = 0.35;
 m.zeta_Rg0 = 0; % to be reverse-engineered 
 m.zeta_Rg1 = 0.10; 0.015;
 m.zeta_Rh0 = 0.05; % to be reverse-engineered 
-m.zeta_Rh1 = 0;0.1;0.2;
+m.zeta_Rh1 = 0.05;0.1;0.2;
 
 m.zeta_S = 0.5;
 
@@ -190,8 +190,9 @@ m.ss_PiIg_NGDP = 0.08;
 m.delta_Kg = 0.10;
 m.ss_Kg_A = 1;
 
-m.iota_kg = 0.1;
-m.iota_tf = 0.5;
+m.iota_Kg = 0.5;
+m.iota_TFgd = 0.5;
+m.iota_TFgz = 0.5;
 
 % Public investment fund
 m.ss_Bwf_NGDP = 0.10;
@@ -267,6 +268,7 @@ m = steady( ...
 checkSteady(m, "equationSwitch", "steady");
 m = solve(m);
 
+%save mat/create_model.mat m
 
 %% Reverse engineer parameters for steady-state ratios
 

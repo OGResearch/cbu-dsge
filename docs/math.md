@@ -1,9 +1,8 @@
 
 $$
+\newcommand{\fcy}{\mathrm{fcy}}
+\newcommand{\lcy}{\mathrm{lcy}}
 \newcommand{\M}[1]{\mathit{#1}}
-\newcommand{\Done}[1]{\mathit{D}^{1}_{#1}}
-\newcommand{\Dtwo}[1]{\mathit{D}^{2}_{#1}}
-\newcommand{\Dthree}[1]{\mathit{D}^{3}_{#1}}
 \newcommand{\muCI}{\mu_\mathit{CI}}
 \newcommand{\Pc}[1]{\mathit{Pc}_{\,#1}}
 \newcommand{\CC}[1]{\mathit{CC}_{\,#1}}
@@ -21,6 +20,7 @@ $$
 \newcommand{\Ih}[1]{\mathit{Ih}_{\,#1}}
 \newcommand{\Ig}[1]{\mathit{Ig}_{\,#1}}
 \newcommand{\Pkd}[1]{\mathit{Pkd}_{\,#1}}
+\newcommand{\Prkd}[1]{\mathit{Prkd}_{#1}}
 \newcommand{\AA}[1]{\mathit{AA}_{#1}}
 \newcommand{\AAd}[1]{\mathit{AAd}_{\,#1}}
 \newcommand{\Ad}[1]{\mathit{Ad}_{\,#1}}
@@ -37,8 +37,6 @@ $$
 \newcommand{\TRgd}[1]{\mathit{TRgd}_{\,#1}}
 \newcommand{\TFgd}[1]{\mathit{TFgd}_{\,#1}}
 \newcommand{\iotaKG}{\iota_{\mathit{KG}}}
-\newcommand{\Ztwo}[1]{Z^2_{#1}}
-\newcommand{\Zone}[1]{Z^1_{#1}}
 \newcommand{\gammaND}{{\gamma_{\mathit{ND}}}}
 \newcommand{\gammaMD}{{\gamma_{\mathit{MD}}}}
 \newcommand{\GammaMD}[1]{{\Gamma_{\mathit{MD},\,#1}}}
@@ -48,4 +46,22 @@ $$
 \newcommand{\gammaMZ}{{\gamma_{\mathit{MZ}}}}
 \newcommand{\ss}{\mathrm{ss}}
 \newcommand{\shock}[1]{\varepsilon_{#1,\,t}}
+%
+\newcommand{\three}{\mathrm{(3)}}
+\newcommand{\two}{\mathrm{(2)}}
+\newcommand{\one}{\mathrm{(1)}}
+\newcommand{\zero}{\mathrm{(0)}}
+%
+\newcommand{\PIEdn}[2]{\Pi d^{#1}_{#2}}
+\newcommand{\PIEdthree}[1]{\PIEdn{\three}{#1}}
+\newcommand{\Pdthree}[1]{\mathit{Pd}^\three_{#1}}
+%
+\newcommand{\Dn}[2]{\mathit{D}^{#1}_{#2}}
+\newcommand{\Done}[1]{\Dn{\one}{#1}}
+\newcommand{\Dtwo}[1]{\Dn{\two}{#1}}
+\newcommand{\Dthree}[1]{\Dn{\three}{#1}}
+%
+\newcommand{\Zn}[2]{Z^{#1}_{#2}}
+\newcommand{\Ztwo}[1]{\Zn{\two}{#1}}
+\newcommand{\Zone}[1]{\Zn{\one}{#1}}
 $$

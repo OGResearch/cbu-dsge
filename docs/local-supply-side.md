@@ -26,7 +26,14 @@ Combine
 to produce $\Dthree t$ under perfect competition condition
 
 $$
-\Dthree t = \left( \kkd{t} \right)^{1-\gammaND} \cdot \left( \AAd t \cdot \NNd t \right)^{\gammaND} 
+\Dthree t = \left( \kkd{t} \right)^{1-\gammaND} \cdot \left( \AAd t \cdot \NNd t \right)^{\gammaND}
+$$
+
+Profit function
+
+$$
+\PIEdthree t = \Pdthree t \cdot \Dthree t - W_t \cdot \left(\NOd t + \NNd t\right)
+- \Prkd t \cdot \kkd t
 $$
 
 ---
@@ -41,15 +48,13 @@ $$
 
 Motivation: short-run labor response to production
 
-Implications for profits
 
+First order optimality conditions
 $$
 \begin{gathered}
-\gamma \, Pd_t \cdot D_t = W_t \cdot \NNd t
+\gamma \cdot Pd_t \cdot \Dthree t = W_t \cdot \NNd t
 \\[20pt]
-\left(1-\gamma\right) \, Pd_t \cdot D_t = Prk_t \cdot kkd_t
-\\[20pt]
-{\Pi{}d}_t = Pd_t \cdot D_t - Prk_t \cdot \kkd t - W_t \cdot \NNd t - W_t \cdot \NOd t
+\left(1-\gamma\right) \cdot Pd_t \cdot \Dthree t = \Prkd t \cdot kkd_t
 \end{gathered}
 $$
 

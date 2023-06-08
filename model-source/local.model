@@ -13,6 +13,7 @@
     "Shadow price of OPT household budget" LAMBDA
     "Consumption of OPT households" Copt
     "Reference consumption to consumption of OPT households" Cref_Copt`x
+    %Cref
     "Private residential investment to GDP" PiIh_NGDP`x
 
     "Consumption of Hand-to-Mouth Households" Chtm
@@ -67,6 +68,7 @@
     "Nominal exchange rate" S
     "Nominal exchange rate, Y/Y" dS
 
+    Rw
     "Government local-currency debt rate" Rg
     "Government foreign-currency debt rate" Rg_star
     "Household local-currency interest rate" Rh
@@ -106,8 +108,9 @@
 
     "Share of remmittances received by HTM households" omega
 
-    "Efficiency of public infrastructure" iota_kg
-    "Efficiency of government support of local supply side" iota_tf
+    "Efficiency of public infrastructure" iota_Kg
+    "Efficiency of government support of local sector" iota_TFgd
+    "Efficiency of government support of nonprimary export" iota_TFgz
 
     "Monetary policy reaction to inflation" kappa_dPc
     "Monetary policy reaction to depreciation" kappa_dS
@@ -116,8 +119,6 @@
 
     "A/R Leontief share coefficients" rho_GAMMA
     "Calibration constant for Leontief shares in local production" Ad2
-
-    psi_dg
 
     % Steady-state parameters
     "Discount factor" beta
@@ -178,6 +179,7 @@
     AdjPi1 := xi_Pi*[ log(dPi{+1}) - log(dPi) ];
 
     % Current net worth effect
+    %NetWorthEff = ((Copt/Vopt - nu0)/(Pc*Copt));
     NetWorthEff = ((Copt/Vopt - nu0)/(Pc*Copt));
 
     % Scale constant for production function in local sector
@@ -194,19 +196,17 @@
         + nu*$NetWorthEff$;
 
     "Demand for consumption by OPT households"
-    LAMBDA*Pc*(Copt - Cref_Copt*Copt) = (1 - &Cref_Copt) ...
-    !! LAMBDA*Pc*Copt = 1;
+    LAMBDA*Pc*((Copt - Cref_Copt*Copt)) = 1 - chi_DLI;
 
     "Reference consumption of OPT households"
     Cref_Copt*Copt = chi_DLI*DLIopt + chi_C*ss_dA*Copt{-1} ...
     !! Cref_Copt = chi_DLI*DLIopt/Copt + chi_C;
 
     "Net worth of OPT households"
-    Pc*Vopt = (Pkd*(Kd + Kh) + Pkz*Kz + Bhb_NGDP*NGDP)/(1-omega);
-    % Pc*Vopt = (Pkd*(Kd + Kh)) / (1 - omega);
+    Pc*Vopt = (Pkd*(Kd + Kh) + Pkz*Kz - Bhb_NGDP*NGDP)/(1-omega);
 
     "Real current income of OPT households"
-    Pc*DLIopt = (WNopt_NGDP*(1 - TRlit) + TFgopt_NGDP)*NGDP;
+    Pc*DLIopt/NGDP = (WNopt_NGDP*(1 - TRlit) + TFgopt_NGDP + TFwopt_NGDP);
 
     "Calibration of net worth utility component"
     Copt_Vopt_nu0 = Copt/Vopt - nu0;
@@ -215,8 +215,8 @@
     % Supply of capital to local sector
 
     "Demand for investment in local sector"
-    Pkd = Pi*(1 + $AdjId0$ - beta*$AdjId1$ - iota_tf*TRgd) ...
-    !! Pkd = Pi*(1 - iota_tf*TRgd);
+    Pkd = Pi*(1 + $AdjId0$ - beta*$AdjId1$ - iota_TFgd*TRgd) ...
+    !! Pkd = Pi*(1 - iota_TFgd*TRgd);
 
     "Price of capital in local sector"
     LAMBDA*Pkd = ...
@@ -234,8 +234,8 @@
     Kz = (1 - delta_Kz) * Kz{-1} + Iz;
 
     "Replacement cost of capital in nonprimary export sector"
-    Pkz = Pi*(1 + $AdjIz0$ - beta*$AdjIz1$ - iota_tf*TRgz) ...
-    !! Pkz = Pi*(1 - iota_tf*TRgz);
+    Pkz = Pi*(1 + $AdjIz0$ - beta*$AdjIz1$ - iota_TFgz*TRgz) ...
+    !! Pkz = Pi*(1 - iota_TFgz*TRgz);
 
     "Price of capital in nonprimary export sector"
     LAMBDA*Pkz = ...
@@ -358,7 +358,7 @@
     !! A = ss_dA*A{-1};
 
     "Public infrastructure augmented productivity"
-    AA = A + iota_kg*Kg;
+    AA = A + iota_Kg*Kg;
 
     "Relative productivity in local sector"
     log(Ad) = rho_Ad*log(Ad{-1}) + (1-rho_Ad)*(log(ss_Ad) + shk_Ad) ...
@@ -398,13 +398,16 @@
 
     "Country and government foreign-currency debt rate"
     Rg_star = Rw_star * PREMg;
+    Rg = Rw * PREMg;
 
     "Parity condition between local and foreign currency debt rates"
-    Rg/Rg_star = (S{+1}/S) * (dS/&dS)^(-zeta_S) ...
-    !! Rg = Rg_star * dS;
+    Rw/Rw_star = (S{+1}/S) * (dS/&dS)^(-zeta_S) ...
+    !! Rw = Rw_star * dS;
 
     "Premium on household debt rate"
-    PREMh = exp(zeta_Rh0 + zeta_Rh1*Bhb_NGDP);
+    %PREMh = exp(zeta_Rh0 + zeta_Rh1*Bbw_NGDP);
+    %PREMh = exp(zeta_Rh0 - zeta_Rh1*NIP_NGDP);
+    PREMh = exp(zeta_Rh0);
 
     "Household debt rate"
     Rh = Rg * PREMh;

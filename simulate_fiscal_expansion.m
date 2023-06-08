@@ -6,8 +6,9 @@ clear
 load mat/create_model.mat m
 
 m1 = alter(m, 2);
-m1.chi_DLI = [0.5, 0];
-m1.omega = [0.3, 0];
+m1.nu = [0, 0.1];
+m1.chi_DLI = [0.5];
+m1.omega = [0.3];
 
 m1.lambda_Gg1 = 5;
 m1.lambda_Gg2 = 0.3;
@@ -40,12 +41,12 @@ m2 = solve(m2);
 %% Comaparative static
 
 t = table( ...
-    [m1, m2], ["steady-level", "compare-steady-level", "form", "description"] ...
+    [m1(1), m2(1)], ["steady-level", "compare-steady-level", "form", "description"] ...
     , "writeTable", "tables/fiscal-expansion.xlsx" ...
     , "round", 8 ...
 );
 
-disp(t);
+t(["Copt", "Kd"], :)
 
 
 %% Dynamic simulation
