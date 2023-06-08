@@ -67,7 +67,7 @@ m.beta = 0.95;
 
 m.chi_C = 0;
 m.chi_DLI = 0.50;
-m.nu = 0;0.20;
+m.nu = 0.10;
 m.nu0 = NaN;
 
 m.delta_Kd = 0.15;
