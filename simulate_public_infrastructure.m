@@ -5,6 +5,9 @@ clear
 
 load mat/create_model.mat m
 
+m = alter(m, 2);
+m.nu = [0, 0.10];
+
 m = steady( ...
     m ...
     , "fixLevel", ["A", "Pw_star", "Pc"] ...

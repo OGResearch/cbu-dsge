@@ -6,7 +6,7 @@ clear
 load mat/create_model.mat m
 
 m1 = alter(m, 2);
-m1.nu = [0, 0.1];
+m1.nu = [0, 0.10];
 m1.chi_DLI = [0.5];
 m1.omega = [0.3];
 

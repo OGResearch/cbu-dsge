@@ -9,6 +9,8 @@ load mat/create_model.mat m
 % #1: Baseline
 % #2: Higher government debt with crowding out
 % #3: Higher government debt without crowding out
+% #2: Higher government debt and public infrastructure with crowding out
+% #3: Higher government debt and public infrastructure without crowding out
 
 m = alter(m, 5);
 m.iota_Kg = 0.25;
