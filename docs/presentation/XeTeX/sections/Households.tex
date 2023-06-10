@@ -1,5 +1,5 @@
 \begin{frame}{What do households do?}
-
+  
   \begin{itemize}
     \item Households maximize lifetime expected utility of consumption and labor
     \item We assume two types of households 
@@ -9,55 +9,55 @@
     \end{itemize}
     \item A share of HTM households is denoted $\omega$
   \end{itemize}
-
+  
 \end{frame}
 
 \begin{frame}{Optimizing vs. HTM}
-
+  
   \begin{itemize}
     \item Optimizing households
     \begin{itemize}
-      \item Demand consumption and investment
+      \item Demand consumption and investment goods
       \item Supply labor to producers and government
       \item Accumulate and rent out capital to producers
-      \item Buy government debt, issue private debt
+      \item Issue debt, and pay interest
       \item Own producers and distributors
       \item Receive transfers, pay taxes
     \end{itemize}
     \item Hand-to-mouth households
     \begin{itemize}
-      \item Demand consumption
+      \item Demand consumption goods
       \item Supply labor to producers and government
-       \item Receive transfers, pay taxes
+      \item Receive transfers, pay taxes
     \end{itemize}
-      
+    
   \end{itemize}
- \end{frame}
+\end{frame}
 
 \begin{frame}{Aggregating OPT and HTM}
   \begin{itemize}
-   \item Model is derived from micro-foundations
-   \item We study behavior of each household separately
-   \item $C^\opt_t$ and $C^\htm_t$ represents real consumption per household in respective cohort, not in absolute values
-   \item Total consumption per household $C_t$ is an average
-\end{itemize}
-\vspace*{-2mm}
-   \begin{equation*}
-     C_t = \left(1-\omega\right)C_t^\opt+\omega\,C_t^\htm
+    \item Model is derived from micro-foundations
+    \item We study behavior of each household separately
+    \item $C^\opt_t$ and $C^\htm_t$ represents real consumption per household in respective cohort, not in absolute values
+    \item Total consumption per household $C_t$ is an average
+  \end{itemize}
+  \vspace*{-2mm}
+  \begin{equation*}
+    C_t = \left(1-\omega\right)C_t^\opt+\omega\,C_t^\htm
   \end{equation*}      
-
+  
 \end{frame}
 
 \begin{frame}{Technology}
   \begin{itemize}
-   \item We want to construct a model where all real variables follow the same underlying productivity/technology growth (Balanced Growth Path) so real rations do not change in long-term (Steady-State)
+    \item We want to construct a model where all real variables follow the same underlying productivity/technology growth (Balanced Growth Path) so real rations do not change in long-term (Steady-State)
     \item The growth of the trending overall technology $A_t$ is modeled by an AR(1) process 
-   \vspace{-3mm}
-  \begin{align*}
-    \log\left(\gr A\right)= & \rho_{\text{A}}\,\log\left(\gr A_{t-1}\right) + 
-    \left(1-\rho_{\text{A}}\right)\,\log\left(\sst{\gr A}\right)
-     \end{align*}
- \end{itemize}
+    \vspace{-3mm}
+    \begin{align*}
+      \log\left(\gr A\right)= & \rho_{\text{A}}\,\log\left(\gr A_{t-1}\right) + 
+      \left(1-\rho_{\text{A}}\right)\,\log\left(\sst{\gr A}\right)
+    \end{align*}
+  \end{itemize}
 \end{frame}
 
 \begin{frame}{Hand-to-mouth households}
@@ -65,182 +65,151 @@
     \item Since there's no saving and capital, the budget constraint is extremely simple
     \begin{align*}
       \Pc_t \, C^\htm_t & = \left(1 - \TRlit_t\right) W_t^\htm\, N^\htm_t \\
-                & +  \TFgh^{\htm}_t  + \TFwh^{\htm}_t
+      & +  \TFgh^{\htm}_t  + \TFwh^{\htm}_t
     \end{align*}
-  \item All real quantities in the budget constraint are again in per-capita units
-  \item \textcolor{ogr12}{We assume zero $TAXls^{\htm}$ as HTM cannot smooth it and private consumption would be unreasonably volatile}
- \end{itemize} 
+    \item All real quantities in the budget constraint are again in per-capita units
+    \item {We assume zero $TAXls^{\htm}$ as HTM cannot smooth it and private consumption would be unreasonably volatile}
+  \end{itemize} 
 \end{frame}
 
 \begin{frame}{Optimizing households}
-
+  
   \begin{itemize}
     \item Maximize lifetime expected utility subject to:
     \begin{itemize}
       \item Provide labor: receive wage
       \item Rent capital to producers: receive rent
-      \item Save in government LCY bonds: receive interest
-      \item Issue private FCY bonds: pay interest
+      \item Issue private debt: pay interest
       \item Own companies: receive net profit
-      \item Receive transfers (e.g. remittance inflow, government transfers)
-      \item Pay taxes (LIT, LS)
+      \item Receive transfers (e.g. remittance inflow, government transfers, payments from energy sector, investment support)
+      \item Pay taxes (Labor income tax, Lump-sum)
       \item Pay for consumption and investment goods
       \item Pay extra costs for changing investment level
     \end{itemize}
-
+    
   \end{itemize}
-
+  
 \end{frame}
-
 
 \begin{frame}{Maximize lifetime utility} 
   \vspace{-25mm}
-   \begin{align*}
-     & \qquad \qquad \qquad E_0 \sum_{t=0}^\infty \beta^t \, \mathcal{U}_t = \\
-     & E_0\sum_{t=0}^\infty
-       \expl{$\beta$}{subjective \\ time preference}{-95}{17mm}^t
-       \bigg[ 
-     \expl{$u_C \left( C^\opt_t \right)$}{utility \\ from consumption}{-75}{32mm} 
-     + \expl{$u_N \left(N_t^{\opt} \right)$}{disutility \\ from work}{-80}{15mm}
-     + \expl{\textcolor{ogr12}{$u_V \left( V^{\opt}_t \right)$}}{utility \\ from net worth}{-85}{28mm}
-     \bigg]
-   \end{align*}
- \end{frame}
- 
- \begin{frame}{Utility components}
+  \begin{align*}
+    & \qquad \qquad \qquad E_0 \sum_{t=0}^\infty \beta^t \, \mathcal{U}_t = \\
+    & E_0\sum_{t=0}^\infty
+    \expl{$\beta$}{subjective \\ time preference}{-95}{17mm}^t
+    \bigg[ 
+    \expl{$u_C \left( C^\opt_t \right)$}{utility \\ from consumption}{-75}{32mm} 
+    + \expl{$u_N \left(N_t^{\opt} \right)$}{disutility \\ from work}{-80}{15mm}
+    + \expl{{$u_V \left( V^{\opt}_t \right)$}}{utility \\ from net worth}{-85}{28mm}
+    \bigg]
+  \end{align*}
+\end{frame}
+
+\begin{frame}{Utility components}
   \vspace{-5mm}
   \small
-   \begin{align*}
-     u_C \left( C^\opt_t \right) & = \chi_0 \textcolor{ogr12}{\log} \left( C^\opt_t \textcolor{ogr12}{- \chi_{\DLI}\, \overline{\DLI}_t^{\, \opt}} - \chi_C \, \overline{C}^{\, \opt}_{t-1} dA_{ss} \right) \\
-     u_N \left(N_t^{\opt}\right) & =  - \theta \frac{1}{1+\eta}\left(N_t^{\opt}\right)^{\left(1+\eta\right)} \\
-     u_V \left(V^{\opt}_t\right) & =  \textcolor{ogr12}{\nu  \left[\log\left(V^{\opt}_t\right) - \nu_0\, \frac{V^{\opt}_t}{\overline{C}^{\, \opt}_t }\right]}
-   \end{align*} 
- \end{frame}
+  \begin{align*}
+    u_C \left( C^\opt_t \right) & = \chi_0 {\log} \left( C^\opt_t {- \chi_{\DLI}\, \overline{\DLI}_t^{\, \opt}} - \chi_C \, \overline{C}^{\, \opt}_{t-1} dA_{ss} \right) \\
+    u_N \left(N_t^{\opt}\right) & =  - \theta \frac{1}{1+\eta}\left(N_t^{\opt}\right)^{\left(1+\eta\right)} \\
+    u_V \left(V^{\opt}_t\right) & =  {\nu  \left[\log\left(V^{\opt}_t\right) - \nu_0\, \frac{V^{\opt}_t}{\overline{C}^{\, \opt}_t }\right]}
+  \end{align*} 
+\end{frame}
 
- 
- \begin{frame}{Reference consumption level}
-   \vspace{-5mm}
-   \begin{itemize}
-     \item Describes habit formation
-     \item Penalizes consumption shifts 
-     \item Households would like to keep at least a certain percentage of previous consumption typical across all households
-     \begin{itemize}
+
+\begin{frame}{Reference consumption level}
+  \vspace{-5mm}
+  \begin{itemize}
+    \item Describes habit formation
+    \item Penalizes consumption shifts 
+    \item Households would like to keep at least a certain percentage of previous consumption typical across all households
+    \begin{itemize}
       \item reference level $\overline{C}^{\, \opt}_{t-1}$
       \item reflecting e.g. a given social standard in the economy
       \item A particular household therefore does not optimize over the habit effect and it is considered exogenous (denoted with a "bar" above $C$)
       \item The percentage is given by $\chi_\cc$
-     \end{itemize}
-   \end{itemize} 
- 
- \end{frame}
- 
- 
- \startframecont
- 
- \begin{frame}{Real disposable labor income}
-   \begin{itemize}
-     \item Represents current income reference level
-     \item Makes consumption respond stronger to current income
-     \item Why? In real world
-     \begin{itemize}
-       \item Households cannot smooth consumption effectively as local financial market is still shallow
-       \item Even those who can smooth take current income as a reference level for their consumption (behavioral economics)
-     \end{itemize}
-     \item Key non-Ricardian and short-run crowding-in element
+    \end{itemize}
   \end{itemize} 
- \end{frame}
- 
- \begin{frame}{Real disp. labor income}
-   \begin{itemize}
+  
+\end{frame}
+
+
+\startframecont
+
+\begin{frame}{Real disposable labor income}
+  \begin{itemize}
+    \item Represents current income reference level
+    \item Makes consumption respond stronger to current income
+    \item Why? In real world
+    \begin{itemize}
+      \item Households cannot smooth consumption effectively as local financial market is still shallow
+      \item Even those who can smooth take current income as a reference level for their consumption (behavioral economics)
+    \end{itemize}
+    \item Key non-Ricardian and short-run crowding-in element
+  \end{itemize} 
+\end{frame}
+
+\begin{frame}{Real disp. labor income}
+  \begin{itemize}
     \item Deflated by consumption price index $P^\cc_t$
+    \item Only selected income flows included in the definition - those that are perceived as a part of fundamental income
     \item Labor income after tax $\ W_t^{\opt} N_t^{\opt}\left(1- \TRlit_t\right)$
     \item Transfers from abroad $\TFgw^{\opt}_t$
     \item Transfers from government $\TFgh^{\opt}_t$
   \end{itemize} 
-   \vspace{-5mm}
-   {\small
-   \begin{gather*}
-   \DLI_t^\opt  = \frac{1}{P^\cc_t}\,\left[W_t^{\opt} N_t^{\opt}\left(1- \TRlit_t\right) +\TFwh^{\opt}_t + \TFgh^{\opt}_t\right]
-   \end{gather*}
-   }%
- \end{frame}
- 
- \stopframecont
- 
- \startframecont  
- 
- \begin{frame}{Real net worth}
-   \begin{itemize}
-     \item Why? Introduced in literature as a short-cut for social status, inequality, precaution, myopia
-     \item Current holdings of government bonds perceived as a part of wealth (irrespective of the future tax burden associated)
-     \item Key non-Ricardian and long-run crowding-out element
+  \vspace{-5mm}
+  {\small
+  \begin{gather*}
+    \DLI_t^\opt  = \frac{1}{P^\cc_t}\,\left[W_t^{\opt} N_t^{\opt}\left(1- \TRlit_t\right) +\TFwh^{\opt}_t + \TFgh^{\opt}_t\right]
+  \end{gather*}
+  }%
+\end{frame}
+
+\stopframecont
+
+\startframecont  
+
+\begin{frame}{Real net worth}
+  \begin{itemize}
+    \item Why? Introduced in literature as a short-cut for social status, inequality, precaution, myopia
+    \item Current holdings of government bonds (through financial system) perceived as a part of wealth, irrespective of the future tax burden associated
+    \item Key non-Ricardian and long-run crowding-out element
   \end{itemize} 
- \end{frame}
- 
- \begin{frame}{Real net worth}
+\end{frame}
+
+\begin{frame}{Real net worth}
   \vspace{-10mm}
   \begin{itemize}
     \item Deflated by consumption price index $P^\cc_t$
     \item Physical capital own by households (denoted $\Kd_t$, $\Kz_t$ and $\Kh_t$ respectively)
-    \item Government bonds $\Bgh_t$ issued locally
-    \item FCY borrowings $\Bhw_t$ from the rest of the world (expressed in LCY)
+    \item Net borrowings of households $\Bhb_t$ from the financial sector (=banking sector, financial intermediaries)
     \small
     \begin{gather*}
-      P^\cc_t V_t^\opt  = \Pkd_t (\Kd_t^{\opt}+\Kh_t^{\opt})+ \Pkz_t \Kz_t^{\opt} +\Bgh_t^{\opt}-\Bhw_t^{\opt}
-   \end{gather*}
-   \end{itemize} 
- \end{frame}
- 
- \stopframecont
- 
- \begin{frame}{Income: LCY Bonds}
-   \small
-   \begin{itemize}
-    \item $\Rgh_{t}$ is gross nominal interest rate earned by households for holding government bonds
-    \item $\Rgh_{t} = 1.10$ means $10\%$ interest rate
-    \item Patient households  postpone consumption and buy government bonds through financial intermediaries, expecting that interest income increases future consumption
-    \item Interest received in period $t$ by households from LCY government bonds $\Bgh_{t}$ is 
-   \end{itemize} 
-   \vspace*{-2ex}
-   \begin{gather*}
-     Interest_t  = \left( \Rgh_{t-1}-1 \right) \Bgh_{t-1} 
-   \end{gather*}
- 
- \end{frame}
- 
- \begin{frame}{Payment: FCY Loan}
-   \small
-   \begin{itemize}
-   \item $\Rhw_t$ is gross nominal interest rate on FCY borrowing of households
-    \item Impatient households advance consumption by borrowing from abroad 
-    \item $\Bhw_t$ represents a stock of FCY household debt expressed as its LCY equivalent
-    \item Interest payment in period $t$ by households on their FCY borrowing (expressed in LCY equivalent)  
-   \end{itemize} 
-   \vspace*{-3ex}
-    \begin{gather*}
-     Interest_t = \left( \Rhw_{t-1}\frac{S_t}{S_{t-1}} -1 \right) \Bhw_{t-1} 
+      P^\cc_t V_t^\opt  = \Pkd_t (\Kd_t^{\opt}+\Kh_t^{\opt})+ \Pkz_t \Kz_t^{\opt} + \Bhb_t^{\opt}
     \end{gather*}
- \end{frame}
- 
- \begin{frame}{Income: Capital}
- 
- 
-   \begin{itemize}
-    \item $\PRkd_{t}$ and $\PRkz_{t}$ are rental prices of capital 
-     \begin{itemize}
-       \item Rent represents an earning from renting out one unit of capital for one period (a year)
-       \item Rent  motivates impatient households to postpone consumption and accumulate capital $\Kd$ and $\Kz$ in a view that future consumption will be higher
-     \end{itemize}
-    \item Change of capital stock requires time, so HH can rent only capital available earlier:
-    \begin{gather*}
-     Rent_t  = \PRkd_t\,\Kd_{t-1} + \PRkz_t\,\Kz_{t-1}
-    \end{gather*}
-   \end{itemize}
- 
- \end{frame}
- \startframecont
- 
- \begin{frame}{Capital accumulation}
+  \end{itemize} 
+\end{frame}
+
+\stopframecont
+
+\begin{frame}{Payment: Households' Debt}
+  \small
+  \begin{itemize}
+    \item $\Rh_{t}$ is gross nominal interest rate payed by households for local borrowings
+    \item $\Rh_{t} = 1.10$ means $10\%$ interest rate
+    \item Households issue private debt to maximize lifetime consumption by borrowing from financial intermediaries
+    \item Interest payed in period $t$ by households for local borrowings $\Bhb_{t}$ is 
+  \end{itemize} 
+  \vspace*{-2ex}
+  \begin{gather*}
+    Interest_t  = \left( \Rh_{t-1}-1 \right) \Bhb_{t-1} 
+  \end{gather*}
+  
+\end{frame}
+
+
+\startframecont
+
+\begin{frame}{Capital accumulation}
   \begin{itemize}
     \item Households own two types of production capital: used for domestic production and for non-primary export production
     \begin{itemize} 
@@ -252,7 +221,7 @@
 
 \begin{frame}{Capital accumulation}
   \begin{itemize}
-      \item $\Kd_t$ is the stock of capital \emph{at the end} of~period~$t$ that depreciates at a rate $\delta$
+    \item $\Kd_t$ is the stock of capital \emph{at the end} of~period~$t$ that depreciates at a rate $\delta$
     \item Therefore the capital stock available for production in the current period is $\Kd_{t-1}$
     \begin{itemize}
       \item It represents a constraint for HH as today's investment becomes productive and yields a return only tomorrow (law of motion)
@@ -266,63 +235,85 @@
 
 \begin{frame}{Capital accumulation}
   \vspace{3mm}
-   {\small
-     \begin{gather*}
-       \Xi^{\Id}_t =  \frac{1}{2}
-       \expl{$\xi_{\Id}$}{Adjustment cost size}{100}{14mm}
-       \,\overline{\Pi}_t\,\overline{\Id}_t\left(\log\left[ \left( \frac{\Id_t}{\sst{\gr A}\,\Id_{t-1}}\right)^{
-       \expl{$\varphi_{\Id}$}{Weight of investment}{60}{11mm}
-       }\,\left(\frac{\Id_t}{\Kd_{t-1}}\right)^{\left(1-\varphi_{\Id}\right)} \right] \right) ^2
-     \end{gather*}
-   }%
-    \vspace{-7mm}
-    \begin{itemize}
-     \item Changing investment and capital brings capital-investment adjustment cost
-     \item This cost is faced by individual households without having an aggregate effect
-     \item The larger the adjustment cost size $\xi_{\Id}$, the more persistent investment will be
-    \end{itemize}
-  \end{frame}
+  {\small
+  \begin{gather*}
+    \Xi^{\Id}_t =  \frac{1}{2}
+    \expl{$\xi_{\Id}$}{Adjustment cost size}{100}{14mm}
+    \,\overline{\Pi}_t\,\overline{\Id}_t\left(\log\left[ \left( \frac{\Id_t}{\sst{\gr A}\,\Id_{t-1}}\right)^{
+    \expl{$\varphi_{\Id}$}{Weight of investment}{60}{11mm}
+    }\,\left(\frac{\Id_t}{\Kd_{t-1}}\right)^{\left(1-\varphi_{\Id}\right)} \right] \right) ^2
+  \end{gather*}
+  }%
+  \vspace{-7mm}
+  \begin{itemize}
+    \item Changing investment and capital brings capital-investment adjustment cost
+    \item This cost is faced by individual households without having an aggregate effect
+    \item The larger the adjustment cost size $\xi_{\Id}$, the more persistent investment will be
+  \end{itemize}
+\end{frame}
+
+\stopframecont
+
+\begin{frame}{Income: Capital}
   
-  \stopframecont
+  
+  \begin{itemize}
+    \item $\PRkd_{t}$ and $\PRkz_{t}$ are rental prices of capital 
+    \begin{itemize}
+      \item Rent represents an earning from renting out one unit of capital for one period (a year)
+      \item Rent  motivates impatient households to postpone consumption and accumulate capital $\Kd$ and $\Kz$ in a view that future consumption will be higher
+    \end{itemize}
+    \item Change of capital stock requires time, so HH can rent only capital available earlier:
+    \begin{gather*}
+      Rent_t  = \PRkd_t\,\Kd_{t-1} + \PRkz_t\,\Kz_{t-1}
+    \end{gather*}
+  \end{itemize}
+  
+\end{frame}
 
- \stopframecont
-
- \begin{frame}{Profit revenues}
+\begin{frame}{Profit revenues}
   \begin{itemize}
     \item Optimizing households receive net profits from locally owned business
     \begin{itemize}
-      \item Profit is generated by local distributors $\PIEd_t$.
-      \item Profit is distributed on an aggregate level to all households and each individual household is too small to change the aggregate
+      \item Profit is generated by 
+      \begin{itemize}
+        \item local distributors and local producers $\PIEd_t$
+        \item non-primary exporters $\PIEz_t$ 
+        \item and by financial sector $\PIEb_t$
+      \end{itemize}
+      \item Profit is distributed on an aggregate level to all optimizing households and each individual household is too small to change the aggregate
     \end{itemize}
   \end{itemize}
 \end{frame}
- 
+
 
 \begin{frame}{Budget constraint $\mathcal{B}_t$}
   \vspace{-5mm}
   \small
   \begin{gather*}    
-    \Pc_t \, C^\opt_t + \Pii_t (\Id_t + \Iz_t +\Ih_t) + \Xi^{\Id}_t + \Xi^{\Iz}_t + \TAXls^{\opt}_t \\
-     + \Bgh_t - \Bhw_t \\ = \\
-     \Rgh_{t-1}\,\Bgh_{t-1} - S_t \, \Rhw_{t-1} \, \frac{\Bhw_{t-1}}{S_{t-1}}\\
+    \Pc_t \, C^\opt_t + \Pii_t (\Id_t + \Iz_t +\Ih_t) \\
+    + \Xi^{\Id}_t + \Xi^{\Iz}_t + \TAXls^{\opt}_t \\
+    + \Bhb_t \\ = \\
+    \Rh_{t-1}\,\Bhb_{t-1} \\
     + \left(1 - \TRlit_t\right) W_t\, N^\opt_t + \PRkd_t \, \Kd_{t-1} + \PRkz_t \, \Kz_{t-1} \\
-    +  \TFgh^{\opt}_t + \TFwh^{\opt}_t + \PIEd_t + \Xi_t^{\text{total}}
+    +  \TFgh^{\opt}_t + \TFwh^{\opt}_t + \TFgd^{\opt}_t + \TFgz^{\opt}_t \\
+    + \PIEd_t + \PIEz_t + \PIEb_t + \Xi_t^{\text{total}}
   \end{gather*}
 \end{frame}
 
 \begin{frame}{FOCs}
   \begin{itemize}
     {\small
-      \item The lifetime constrained optimization problem of the representative household 
+    \item The lifetime constrained optimization problem of the representative household 
     can be summarized as the following Lagrangian $\mathcal{L}_t$
-      \item Maximum lifetime utility $\mathcal{U}_t$ with budget constraint $\mathcal{B}_t$ is reached when the first derivation of Lagrangian equals zero, so called \emph{first order conditions}
+    \item Maximum lifetime utility $\mathcal{U}_t$ with budget constraint $\mathcal{B}_t$ is reached when the first derivation of Lagrangian equals zero, so called \emph{first order conditions}
     }%
-    \end{itemize}
-     \vspace{-5mm}
-   {\small
-   \begin{align*}
-      \mathcal{L}_t & = E\sum_{t=0}^\infty \beta^t \left[ \mathcal{U}_t - \Lambda^\opt_t \, \mathcal{B}_t \right] %\\ %\partial \mathcal{L}_t & = 0
-    \end{align*}
+  \end{itemize}
+  \vspace{-5mm}
+  {\small
+  \begin{align*}
+    \mathcal{L}_t & = E\sum_{t=0}^\infty \beta^t \left[ \mathcal{U}_t - \Lambda^\opt_t \, \mathcal{B}_t \right] %\\ %\partial \mathcal{L}_t & = 0
+  \end{align*}
   }%
 \end{frame}
 
@@ -332,8 +323,8 @@
   \begin{align*}
     \Lambda^\opt_t&\,P^\cc_t = \frac{\chi_0}{C^\opt_t - \chi_{\DLI}\,\DLI_t^\opt - \chi_\cc \,  C^\opt_{t-1}\,dA_{ss} } \\[5mm]
     % 1-\chi_{\DLI}\,\sst{\left[\frac{\DLI^\opt}{C^\opt}\right]} - \chi_\cc
-   &\chi_0 = 1 \text{ to keep steady-state effects of $DLI$, or } \\
-   &\chi_0 = 1-\chi_{\DLI}\,\sst{\left[\frac{\DLI^\opt}{C^\opt}\right]} - \chi_\cc
+    &\chi_0 = 1 \text{ to keep steady-state effects of $DLI$, or } \\
+    &\chi_0 = 1-\chi_{\DLI}\,\sst{\left[\frac{\DLI^\opt}{C^\opt}\right]} - \chi_\cc
   \end{align*}
   \begin{itemize}
     \item Shadow price of income $\Lambda^\opt_t$ is equal to the marginal utility of consumption
@@ -342,42 +333,102 @@
 \end{frame}
 
 
-   
-\begin{frame}{FOC: local bonds}
+
+\begin{frame}{FOC: local borrowings}
   \begin{gather*}
-     \expl{$\Lambda^\opt_t$}{Utility \\ loss today}{-140}{20mm} =
-     \expl{$\beta$}{Today's value of the\\extra utility}{140}{25mm}\,
-     \expl{$\Lambda^\opt_{t+1}$}{Effect on \\ tomorrow's utility}{-110}{15mm}\,
-     \expl{$\Rh_t$}{Extra nominal \\ income tomorrow}{75}{20mm} + 
-     \expl{$\nu\,\frac{\frac{C^\opt_t}{V_t}-\nu_0}{P^\cc_t\,{C^\opt_t}}$}{Wealth \\ effect}{-20}{25mm}
+    \expl{$\Lambda^\opt_t$}{Utility \\ loss today}{-140}{20mm} =
+    \expl{$\beta$}{Today's value of the\\extra utility}{140}{25mm}\,
+    \expl{$\Lambda^\opt_{t+1}$}{Effect on \\ tomorrow's utility}{-110}{15mm}\,
+    \expl{$\Rh_t$}{Extra nominal \\ income tomorrow}{75}{20mm} + 
+    \expl{$\nu\,\frac{\frac{C^\opt_t}{V_t}-\nu_0}{P^\cc_t\,{C^\opt_t}}$}{Wealth \\ effect}{-20}{25mm}
   \end{gather*}
   \vspace{10mm}
   \begin{itemize}
     \item The loss in utility of giving up some consumption and saving it is compensated by an extra consumption in the next period
-   \end{itemize}
-  \end{frame}
-  
- \begin{frame}{FOC: FCY loan}
+  \end{itemize}
+\end{frame}  
+
+
+\begin{frame}{FOC: investment}
+  \vspace{-5mm}
+  \begin{itemize}
+    \item Subject to investment in the local sector (same for non-primary export sector)
+    \begin{align*}
+      \small
+      \Lambda_t\,\Pkd_t &= \Lambda_t\,\Pii_t\,\Big(1 + \Xi^{\Id}_t\Big) \notag\\
+      & - \beta\,\Lambda_{t+1} \, \varphi_{\ii} \, \Pii_{t+1}\,\frac{\Id_{t+1}}{\Id_{t}} \, \Xi^{\Id}_{t+1}
+    \end{align*}
+    \item where the effect of the adjustment cost is:
+    \vspace{-5mm}
+    \begin{align*}
+      \small
+      \Xi^{\Id}_t &=  \xi_{\ii } \Big(\log\Id_t \notag\\
+      &-(1-\varphi_{\ii})\log\left((\sst{\gr A} + \delta -1) \, \Kd_{t-1}\right) \notag\\
+      &- \varphi_{\ii} \log \left( \sst{\gr A} \, \Id_{t-1}\right) \Big)
+    \end{align*}
+  \end{itemize}
+\end{frame}   
+
+\begin{frame}{FOC: capital}
+  \begin{itemize}
+    \item Subject to capital in the local sector (same for non-primary export sector)  
+  \end{itemize}
+  \small
+  \begin{align*}
+    \Lambda_t\,\Pkd_t &= \beta\,\Lambda_{t+1}\,\Big(\PRkd_{t+1} \notag \\
+    &+ \Pkd_{t+1}\left(1 - \delta\right) + \left(1-\varphi_{\ii}\right) \Pii_{t+1}\,\frac{\Id_{t+1}}{\Kd_{t}} \, \Xi^{\Id}_{t+1}\Big)
+  \end{align*}
+\end{frame}
+
+\startframecont
+\begin{frame}{Financial intermediaries}
+  \begin{itemize}
+    \item only financial intermediaries (banking sector) can buy government LCY bonds on the primary market $\Bgb_t$ 
+    \item households borrow from financial intermediaries $\Bhb_t$ (= borrowing net of deposits)
+    \item financial intermediaries issue foreign private debt $\Bbw_t$ to close its position
+    \item Budget constrain of financial intermediaries:
+    \vspace{-3mm}
+    \begin{align*}
+      \Bhb_t + \Bgb_t = \Bbw_t
+    \end{align*}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Financial intermediaries}
+  \begin{itemize}
+    \item Financial intermediaries generate profit $\PIEb$ which is distributed to optimizing households
+    \item Revaluation effect of servicing external private debt is transferred to optimizing households
+    \begin{align*}
+      \PIEb_t = & (\Rh_{t-1}-1) \, \Bhb_{t-1} \\
+      & + (\Rg_{t-1}-1) \, \Bgb_{t-1} \\
+      & - (\Rh^{\star}_{t-1}-1) \, \frac{S_t}{S_{t-1}} \, \Bbw_{t-1}
+    \end{align*}
+  \end{itemize}
+\end{frame}
+
+\stopframecont
+
+\begin{frame}{FOC: FCY loan}
   \begin{gather*}
-     \expl{$-\Lambda^\opt_t$}{Extra utility \\ today}{-125}{16mm} =
-     \expl{$\beta$}{Today's value of the\\ utility loss}{135}{23mm} \left( \,
-     \expl{$-\Lambda^\opt_{t+1}$}{Effect on \\ tomorrow's utility}{-110}{15mm}\,
-     \expl{$\Rhw_t \frac{S_{t+1}}{S_{t}}$}{Interest payment \\ tomorrow in LCY}{90}{20mm} \right)
-     \expl{$-\nu\,\frac{\frac{C^\opt_t}{V_t}-\nu_0}{P^\cc_t\,{C^\opt_t}}$}{Wealth \\ effect}{-90}{17mm}
+    \expl{$-\Lambda^\opt_t$}{Extra utility \\ today}{-125}{16mm} =
+    \expl{$\beta$}{Today's value of the\\ utility loss}{135}{23mm} \left( \,
+    \expl{$-\Lambda^\opt_{t+1}$}{Effect on \\ tomorrow's utility}{-110}{15mm}\,
+    \expl{$\Rh^{\star}_t \frac{S_{t+1}}{S_{t}}$}{Interest payment \\ tomorrow in LCY}{90}{20mm} \right)
+    \expl{$-\nu\,\frac{\frac{C^\opt_t}{V_t}-\nu_0}{P^\cc_t\,{C^\opt_t}}$}{Wealth \\ effect}{-90}{17mm}
   \end{gather*}
   \vspace{10mm}
   \begin{itemize}
     \item The extra utility today is compensated by lower consumption in the next period
-   \end{itemize}
-  \end{frame}  
-  
-  \begin{frame}{FOC: UIP}
-    \begin{itemize}
+  \end{itemize}
+\end{frame}  
+
+\begin{frame}{FOC: UIP}
+  \begin{itemize}
     \item The optimality condition for FCY loans simplifies to    
   \end{itemize}
   \vspace*{-3ex}
   \begin{align*}
-     \Lambda^\opt_t =\beta\Lambda^\opt_{t+1} \Rhw_t \frac{S_{t+1}}{S_t} + \nu\,\frac{\frac{C^\opt_t}{V_t}-\nu_0}{P^\cc_t\,{C^\opt_t}}
+    \Lambda^\opt_t =\beta\Lambda^\opt_{t+1} \Rh^{\star}_t \frac{S_{t+1}}{S_t} + \nu\,\frac{\frac{C^\opt_t}{V_t}-\nu_0}{P^\cc_t\,{C^\opt_t}}
   \end{align*}
   \vspace*{-2ex}
   \begin{itemize}
@@ -385,45 +436,32 @@
   \end{itemize}
   \vspace*{-2ex}
   \begin{align*}
-     Rh_t = \Rhw_t \, \frac{S_{t+1}}{S_t} 
+    \Rh_t = \Rh^{\star}_t \, \frac{S_{t+1}}{S_t} 
   \end{align*}
   \vspace*{-2ex}
   \begin{itemize}
     \item which is the Uncovered Interest Parity (UIP) condition
-   \end{itemize}
-  \end{frame}    
+  \end{itemize}
+\end{frame} 
 
-   
-  \begin{frame}{FOC: investment}
-   \vspace{-5mm}
-    \begin{itemize}
-   \item Subject to investment in the local and export production sector 
-     \begin{align}
-      \small
-      \Lambda_t\,\Pkd_t &= \Lambda_t\,\Pii_t\,\Big(1 + \Xi^{\Id}_t\Big) \notag\\
-      & - \beta\,\Lambda_{t+1} \, \varphi_{\ii} \, \Pii_{t+1}\,\frac{\Id_{t+1}}{\Id_{t}} \, \Xi^{\Id}_{t+1}
-       \end{align}
-     \item where the effect of the adjustment cost is:
-     \vspace{-5mm}
-     \begin{align}
-      \small
-      \Xi^{\Id}_t &=  \xi_{\ii } \Big(\log\Id_t \notag\\
-      &-(1-\varphi_{\ii})\log\left((\sst{\gr A} + \delta -1) \, \Kd_{t-1}\right) \notag\\
-       &- \varphi_{\ii} \log \left( \sst{\gr A} \, \Id_{t-1}\right) \Big)
-       \end{align}
-    \end{itemize}
-   \end{frame}   
 
-   
-  \begin{frame}{FOC: capital}
-    \begin{itemize}
-       \item Subject to capital in the local and export production sector  
-    \end{itemize}
-    \small
-     \begin{align}
-      \Lambda_t\,\Pkd_t &= \beta\,\Lambda_{t+1}\,\Big(\PRkd_{t+1} \notag \\
-      &+ \Pkd_{t+1}\left(1 - \delta\right) + \left(1-\varphi_{\ii}\right) \Pii_{t+1}\,\frac{\Id_{t+1}}{\Kd_{t}} \, \Xi^{\Id}_{t+1}\Big)
-     \end{align}
-   \end{frame}
- 
-   
+% \begin{frame}{Payment: FCY Loan}
+  %    \small
+  %    \begin{itemize}
+    %    \item $\Rh^{\star}_t$ is gross nominal interest rate on FCY borrowing of households
+    %     \item Impatient households advance consumption by borrowing from abroad 
+    %     \item $\Bhw_t$ represents a stock of FCY household debt expressed as its LCY equivalent
+    %     \item Interest payment in period $t$ by households on their FCY borrowing (expressed in LCY equivalent)  
+    %    \end{itemize} 
+    %    \vspace*{-3ex}
+    %     \begin{gather*}
+      %      Interest_t = \left( \Rh^{\star}_{t-1}\frac{S_t}{S_{t-1}} -1 \right) \Bhw_{t-1} 
+      %     \end{gather*}
+      %  \end{frame}
+      % - S_t \, \Rh^{\star}_{t-1} \, \frac{\Bhw_{t-1}}{S_{t-1}}\\
+      % \item Save in government LCY bonds: receive interest
+      % \item Issue private FCY bonds: pay interest
+      % \item FCY borrowings $\Bhw_t$ from the rest of the world (expressed in LCY)
+      % \item Government bonds $\Bgh_t$ issued locally
+      
+      
