@@ -1,0 +1,57 @@
+\begin{frame}{Structure}
+  
+  \begin{itemize}
+    \item Production of gas, electricity and utilities for local consumption
+    \item Output level $J$ is determined by the local production level $D$, as energy enters the production function of the local producers with Leontief technology
+    \item Output is sold to local producers for subsidized prices
+    \item Owner of the sector is the government with a share of foreign entities
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}{Price setting}
+  \begin{itemize}
+    \item Cost recovery price $\Pj0$ follows international price level
+    \small
+    \vspace*{-6mm}
+    \begin{gather*}
+      \log(\Pj0_t) = \log(\sst{\Pc} \, \Pj0_{t-1}) + \lambda_{\Pj0} \, \log \left( S_t \, \frac{\Pj0^\star_t}{\Pj0_t} \right) \\
+      \Pj0_t^\star = \sst{\sfrac{\Pj0}{Pw}}\, Pw_t^\star
+    \end{gather*}
+    \item Energies are sold to the local industries for final subsidized price $\Pj$ that reflects
+    \begin{itemize}
+      \item Cost recovery price $\Pj0$, Energy sector tax rate $\TRj$ and unit level of government subsidy $\sfrac{\TFgj}{J}$
+    \end{itemize}
+    \small
+    \vspace*{-4mm}
+    \begin{gather*}
+      \Pj_t = \Pj0*(1 + \TRj_t) - \frac{\TFgj_t}{J_t}
+    \end{gather*}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Value added}
+  \begin{itemize}
+    \item Based on cost-recovery prices
+    \begin{gather*}
+      \VAj = \Pj0 \, J - \Pmj \, \Mj
+    \end{gather*}
+    \item With imports added through Leontief technology
+    \begin{gather*}
+      \Mj = \gamma_{\Mj} \, J;
+    \end{gather*}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Transfers}
+  \begin{itemize}
+    \item Profit repatriation from energy sector to foreign owners
+    \begin{gather*}
+      \TFjw = \gamma_{\TFjw} \, \VAj
+    \end{gather*}
+    \item Transfers to optimizing households as a proxy for wages, capital rent, and profit
+    \begin{gather*}
+      \TFjh = \VAj - (\Pj0 \, J) \, TRj - \TFjw
+    \end{gather*}
+  \end{itemize}
+\end{frame}
